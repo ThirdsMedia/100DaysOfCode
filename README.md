@@ -18,21 +18,9 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 - To overcome my fear of front end development.
 - To create a fully functioning application and actually see a project through to completion. 
 
-  <!--
-  - [ ] Complete [FCC Front End Development Certification](https://www.freecodecamp.com/james-priest "FCC Profile") program
-  - [ ] Complete [Udemy The Web Developer Bootcamp](https://www.udemy.com/the-web-developer-bootcamp/ "The Web Developer Bootcamp by Colt Steele") certificate program
-  - [ ] Complete [Udemy JavaScript: Understanding the Weird Parts](https://www.udemy.com/understand-javascript "JavaScript: Understanding the Weird Parts by Anthony Alicia") certificate program
-  -->
-
-<!--
-- Considering...
-  - Maybe [Udacity's Front-End Web Developer Nanodegree](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001?utm_medium=referral&utm_campaign=api) program
-  - Maybe [Coding Dojo's Full Stack Developer Bootcamp](http://www.codingdojo.com/web-development-accelerators)
--->
 # Code Log
-<!--
 ## 1.
-### Day 1: January,10 2017 - Saturday
+### Day 1: February,2 2021 - Tuesday
 
 **Project:**
 
@@ -41,5 +29,3 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Thoughts:**
 
 **Link to Work:**
--->
-
