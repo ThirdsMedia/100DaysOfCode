@@ -9,14 +9,14 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 ## Goals
 
-- [] Code daily
-- [] Complete a fully functioning mobile application written in React. 
-- [] Get ThirdsMedia established in the Twitter development community. 
+- Code daily
+- Complete a fully functioning mobile application written in React. 
+- Get ThirdsMedia established in the Twitter development community. 
 
 ### DJ's personal goals for this project
 
-- [] To overcome my fear of front end development.
-- [] To create a fully functioning application and actually see a project through to completion. 
+- To overcome my fear of front end development.
+- To create a fully functioning application and actually see a project through to completion. 
 
   <!--
   - [ ] Complete [FCC Front End Development Certification](https://www.freecodecamp.com/james-priest "FCC Profile") program
