@@ -25,5 +25,5 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Thoughts:** I could definitely improve my dexterity with Sublime and keybindings. Also, I. HATE. CSS. This is definitely where I will struggle the most. 
 
-**Link to work:** [React App](https://github.com/ThirdsMedia/100DaysOfCode)
+**Link to work:** [React App](https://github.com/ThirdsMedia/100DaysOfCode/tree/main/src)
 
