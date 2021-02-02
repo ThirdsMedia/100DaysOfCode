@@ -19,13 +19,11 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 - To create a fully functioning application and actually see a project through to completion. 
 
 # Code Log
-## 1.
-### Day 1: February,2 2021 - Tuesday
+### Day 1: February, 2 2021 - Tuesday
 
-**Project:**
+**Today's Progress**: Set up React project. Started creating a basic dummy list of items. 
 
-**Progress:**
+**Thoughts:** I could definitely improve my dexterity with Sublime and keybindings. Also, I. HATE. CSS. This is definitely where I will struggle the most. 
 
-**Thoughts:**
+**Link to work:** [React App](https://github.com/ThirdsMedia/100DaysOfCode)
 
-**Link to Work:**
