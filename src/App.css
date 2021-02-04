@@ -28,6 +28,84 @@
   color: #61dafb;
 }
 
+/*
+ * Text Inputs
+ */
+
+.SearchInput {
+  border-radius: 60px;
+  border-color: #00FF3C;
+  width: 60%;
+  margin: 50px 0;
+  padding: 15px 10px;
+  box-sizing: border-box;
+}
+
+.ItemInput {
+  border-radius: 5px;
+  border: none;
+  width: 400px;
+  margin-bottom: 40px;
+  margin-left: 5px;
+  padding: 15px 10px;
+  box-sizing: border-box;
+}
+
+.NumericInput {
+  border-radius: 5px;
+  border: none;
+  width: 75px;
+  margin-bottom: 40px;
+  margin-left: 7px;
+  margin-right: 7px;
+  padding: 15px 10px;
+  box-sizing: border-box;
+}
+
+.FormInput {
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid;
+  border-color: #00FF3C;
+  margin-bottom: 40px;
+  margin-left: 5px;
+  width: 500px;
+  padding: 15px 10px;
+}
+
+/*
+ * Buttons
+ */
+
+.InputButton {
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  color: white;
+  background-color: #00ff3c;
+  width: 60px;
+  margin-bottom: 40px;
+  padding: 15px 10px;
+}
+
+.InputButton:hover {
+  background-color: white;
+  color: #00FF3c;
+}
+
+/*
+ * Containers
+ */
+
+.InputDiv {
+  text-align: center;
+}
+
+.FormDiv {
+  display: flex;
+  flex-direction: row;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

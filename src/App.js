@@ -1,5 +1,5 @@
 import './App.css';
-import CocktailList from './CocktailList';
+import ItemList from './ItemList';
 
 // This is simulating a database. Eventually, this will come from firebase or a custom backend
 const exampleData = [
@@ -21,18 +21,88 @@ const exampleData = [
   },
 ]
 
+const SearchInput = () => {
+  return (
+    <div className="InputDiv">
+    <input 
+      className="SearchInput"
+      type="text" 
+      onChange={console.log("test")} 
+    />
+    </div>
+  )
+}
+
+const ItemInput = () => {
+  return (
+    <div className="InputDiv">
+    <input 
+      className="ItemInput"
+      type="text" 
+      onChange={console.log("test")} 
+    />
+    <input
+      className="NumericInput"
+      type="text"
+    />
+    <AddItemButton />
+    </div>
+  )
+}
+
+const FormInput = () => {
+  return (
+    <div className="FormDiv">
+    <p>Name</p>
+    <input
+      className="FormInput"
+      type="text"
+      onChange={console.log("test")}
+    />
+    <input
+      className="FormInput"
+      type="text"
+      onChange={console.log("test")}
+    />
+    </div>
+  )
+}
+
+const AddItemButton = () => {
+    return <button className="InputButton">+</button>
+}
+
 /*
- * Completed Day 1. On day #2 you should figure out how to style the list better, and perhaps make each cocktail button clickable. 
- * This may mean you'll need to figure out navigation. 
- */
+const Button2 = () => {
+
+}
+
+const Header = () => {
+}
+*/
 
 function App() {
   return(
-    <div className="tc">
-      <h1>Cocktail App</h1>
-      <div>
-        <CocktailList data={exampleData} />
-      </div>
+    <div className="App">
+      <h1>App Header</h1>
+        {/* This is one container for the search box plus the list it searches from */}
+        <h2>Search and Items Page</h2>
+        <div>
+          <SearchInput />
+          <ItemList data={exampleData} />
+        </div>
+        {/* This is an example of a page with multiple item input forms */}
+        <h2>Items Input Section</h2>
+        <div>
+          <ItemInput />
+          <ItemInput />
+        </div>
+
+        {/* This is supposed to be an example of a registration or login form */}
+        <h2>Registration/Login Form</h2>
+        <div className="FormDiv">
+          <FormInput />
+        </div>
     </div>
   );
 }

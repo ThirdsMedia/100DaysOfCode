@@ -11,6 +11,9 @@
 # production
 /build
 
+# live coding videos
+/live_coding
+
 # misc
 .DS_Store
 .env.local
