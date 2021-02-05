@@ -5,7 +5,7 @@ import { faCocktail } from '@fortawesome/free-solid-svg-icons';
 // The individual data object component
 export default function Item({ item }) {
   return (
-    <div className="ba pa2 ma2">
+    <div className="Item">
       <FontAwesomeIcon icon={faCocktail} />
       <div>{item.name}</div>
     </div>

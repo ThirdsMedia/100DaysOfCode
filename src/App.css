@@ -2,32 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 /*
  * Text Inputs
  */
@@ -62,12 +36,12 @@
   box-sizing: border-box;
 }
 
-.FormInput {
+.Form {
   border-radius: 5px;
   border: none;
   border-bottom: 1px solid;
   border-color: #00FF3C;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   margin-left: 5px;
   width: 500px;
   padding: 15px 10px;
@@ -97,20 +71,40 @@
  * Containers
  */
 
+.SearchDiv {
+  text-align: center;
+}
+
 .InputDiv {
   text-align: center;
 }
 
 .FormDiv {
-  display: flex;
-  flex-direction: row;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/*
+ * Lists and List items
+ */
+
+.ItemList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Item {
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.4);
+  transition: transform .2s;
+  margin: 10px;
+  padding: 15px;
+  background-color: white;
+}
+
+.Item:hover {
+  transform: scale(1.1);
 }
