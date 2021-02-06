@@ -1,5 +1,4 @@
 import './App.css';
-import ItemList from './ItemList';
 import Form from './Form';
 import Search from './Search';
 import ItemInput from './ItemInput';
