@@ -37,7 +37,6 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [React App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day2)
 
-
 ### Day 3: February, 5 2021 - Thursday
 
 **Today's Progress**: More CSS. More googling. More fumbling. The main file was getting messy so I finally separated most of the components into separate files.
@@ -47,4 +46,15 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** The amount of hours per Earth day are less then they should be. 
 
 **Link to work:** [React App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day3/src)
+
+
+### Day 4: February, 6 2021 - Technically Saturday...
+
+**Today's Progress**: Learned about Material UI and where to look for all the components: https://material-ui.com/getting-started/installation/
+
+**Thoughts:** Sleepy. 
+
+**Issues:** Sleepy.
+
+**Link to work:** [React App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day4/src)
 
