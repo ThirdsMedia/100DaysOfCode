@@ -20,6 +20,7 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 # Code Log
 ### Day 1: February, 2 2021 - Tuesday
+<<<<<<< HEAD
 
 **Today's Progress**: Set up React project. Started creating a basic dummy list of items. 
 
@@ -36,4 +37,12 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** Nothing too glaring. Just need to get better at CSS. 
 
 **Link to work:** [React App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day2)
+=======
+
+**Today's Progress**: Set up React project. Started creating a basic dummy list of items. 
+
+**Thoughts:** I could definitely improve my dexterity with Sublime and keybindings. Also, I. HATE. CSS. This is definitely where I will struggle the most. 
+
+**Link to work:** [React App](https://github.com/ThirdsMedia/100DaysOfCode/tree/main/src)
+>>>>>>> 8678e1deff231f1f2ef6a4d7677f6184cf824688
 
