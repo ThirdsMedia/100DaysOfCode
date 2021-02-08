@@ -1,5 +1,7 @@
 import React from 'react';
+import Copyright from './Copyright';
 
+import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -7,6 +9,8 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+
+/* Styles */
 import { 
   withStyles, 
   makeStyles, 
@@ -30,7 +34,7 @@ const SubmitButton = withStyles((theme) => ({
 
 // For general styling of regular elements such as <div> etc...
 const useStyles = makeStyles((theme) => ({
-  page: {
+  main: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -42,76 +46,65 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Copyright() {
-  return (
-        <Link href="https://thirdsmedia.com" color="primary" variant="body2">
-          ThirdsMedia
-        </Link>
-  );
-}
-
 export default function SignUp() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="sm">
-      <div className={classes.page}>
-        <Typography component="h1" variant="h5" color="textPrimary">
-          Sign In
-        </Typography>
-        <TextField
-          id="name"
-          label="Name"
-          margin="normal"
-          variant="outlined"
-          required
-          fullWidth
-          InputProps={{
-            className: classes.textField
-          }}
-        />
-        <TextField
-          id="email"
-          label="Email"
-          margin="normal"
-          variant="outlined"
-          required
-          fullWidth
-          InputProps={{
-            className: classes.textField
-          }}
-        />
-        <TextField
-          id="password"
-          label="Password"
-          margin="normal"
-          variant="outlined"
-          type="password"
-          required
-          fullWidth
-          InputProps={{
-            className: classes.textField
-          }}
-        />
-        <SubmitButton 
-          type="submit"
-          color="primary"
-          fullWidth
-          variant="contained"
-        >
-          Create Account
-        </SubmitButton>
-        <Grid 
-          container
-          justify="space-around"
-        >
-          <Grid item>
-            <Link href="#" variant="body4">
-              Already have an account? Sign In
-            </Link>
-          </Grid>
+    <Container className={classes.main} component="main" maxWidth="sm">
+      <Avatar />
+      <Typography component="h1" variant="h5" color="textPrimary">
+        Sign Up
+      </Typography>
+      <TextField
+        id="name"
+        label="Name"
+        margin="normal"
+        required
+        fullWidth
+        InputProps={{
+          className: classes.textField
+        }}
+      />
+      <TextField
+        id="email"
+        label="Email"
+        margin="normal"
+        required
+        fullWidth
+        InputProps={{
+          className: classes.textField
+        }}
+      />
+      <TextField
+        id="password"
+        label="Password"
+        margin="normal"
+        type="password"
+        required
+        fullWidth
+        InputProps={{
+          className: classes.textField
+        }}
+      />
+      <SubmitButton 
+        type="submit"
+        color="primary"
+        fullWidth
+        variant="contained"
+      >
+        Create Account
+      </SubmitButton>
+      <Grid 
+        container
+        justify="space-around"
+      >
+        <Grid item>
+          <Link href="#" variant="body4">
+            Already have an account? Sign In
+          </Link>
         </Grid>
-      </div>
+      </Grid>
+      <Copyright />
     </Container>
   );
 }
