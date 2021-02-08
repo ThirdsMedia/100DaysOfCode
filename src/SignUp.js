@@ -1,12 +1,18 @@
 import React from 'react';
 
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import { withStyles, makeStyles } from '@material-ui/core/styles'; // inline CSS API
+import { 
+  withStyles, 
+  makeStyles, 
+  createMuiTheme, 
+  ThemeProvider 
+} from '@material-ui/core/styles'; // inline CSS API
 import { pink, lightGreen } from '@material-ui/core/colors';
 
 // Custom button
@@ -33,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     padding: 10,
     borderRadius: 15,
-    borderColor: 'white',
   },
 }));
 
@@ -51,6 +56,9 @@ export default function SignUp() {
   return (
     <Container component="main" maxWidth="sm">
       <div className={classes.page}>
+        <Typography component="h1" variant="h5" color="textPrimary">
+          Sign In
+        </Typography>
         <TextField
           id="name"
           label="Name"
