@@ -1,16 +1,13 @@
-import Form from './Form';
-//import Search from './Search';
-//import ItemInput from './ItemInput';
+import React from 'react';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
-
-function App() {
-  return(
-    <div>
-      <h1 className='tc'>App Header</h1>
-      <Form />
-    </div>
-  );
+export default function App() {
+  return (
+		<div>
+			<SignIn />
+			<SignUp />
+		</div>
+	)
 }
-
-export default App;
 
