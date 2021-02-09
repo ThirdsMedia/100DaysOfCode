@@ -1,36 +1,47 @@
 import React from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-
-/* 
- * Upon starting day seven, delete all this below before you start the video
- * Then code it once you start the video, so you can see how this should be done
- * Don't forget to replace the <div> block in App() with <ThemeProvider theme={thene}>
- *
- 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightGreen } from '@material-ui/core/colors';
-import {
-	createMuiTheme,
-	ThemeProvider
-} from '@material-ui/core/styles';
 
-// theme colors
+/* Figure out how to pass this down to the rest of the app without using makeStyles in individual files */
 const theme = createMuiTheme({
-  palette: {
-    primary: lightGreen,
-	type: 'dark',
-  },
-}); 
+	palette: {
+		primary: {
+			main: lightGreen[500],
+		},
+		type: 'dark',
+	},
+/*  	paper: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		marginTop: theme.spacing(6),
+	},
+	textField: {
+		padding: 10,
+	},
+	submitButton: {
+		color: 'white',
+		margin: theme.spacing(5),
+		fontWeight: 'bold',
+		borderRadius: 50,
+		backgroundColor: lightGreen[500],
+		'&:hover': {
+			backgroundColor: lightGreen[700],
+		},
+  	},
 */
-
-
+})
 
 export default function App() {
   return (
-		<div>
-			<SignIn />
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
 			<SignUp />
-		</div>
+			<SignIn />
+		</ThemeProvider>
 	)
 }
 
