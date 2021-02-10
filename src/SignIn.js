@@ -9,15 +9,14 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles'; // inline CSS API
+import { makeStyles } from '@material-ui/core/styles';
 import { lightGreen } from '@material-ui/core/colors';
 
-// For general styling of regular elements such as <div> etc...
-const useStyles = makeStyles((theme) => ({
-  main: {
+const useStyles = makeStyles(theme => ({
+  paper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -25,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     padding: 10,
-    borderRadius: 10,
   },
   submitButton: {
     color: 'white',
@@ -37,13 +35,13 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: lightGreen[700],
     },
   },
-}));
+}))
 
 export default function SignIn() {
   const classes = useStyles();
 
   return (
-    <Container className={classes.main} component="main" maxWidth="sm">
+    <Container className={classes.paper} component="main" maxWidth="sm">
       <Avatar />
       <Typography component="h1" variant="h5">
         Sign In

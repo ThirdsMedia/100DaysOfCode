@@ -1,35 +1,27 @@
 import React from 'react';
 import ItemList from './ItemList';
+import exampleDatabase from './exampleDatabase';
 
-const exampleData = [
-  {
-    name: "test",
-    date: "02/02/21",
-    creator: "Darth Vader",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "south side",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-]
+/* Material UI Core */
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { lightGreen } from '@material-ui/core/colors';
+
+/* 
+ * I've added some imports from Material UI so I know what to work on next time.
+ * I'm spent....
+ */
 
 export default function Search() {
   return (
-    <div className="SearchDiv">
+    <div>
    		<h2>Search and Items Page</h2>
-    	<input 
-      		className="SearchInput"
-      		type="text" 
-      		onChange={console.log("test")} 
-    	/>
-          <ItemList data={exampleData} />
-	</div>
-  )
+      <input type="text" />
+          <ItemList data={exampleDatabase} />
+    </div>
+  );
 }

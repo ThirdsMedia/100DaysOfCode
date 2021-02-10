@@ -2,20 +2,25 @@ import React from 'react';
 import Copyright from './Copyright';
 
 /* Material UI Core */
-import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles'; // inline CSS API
+import { makeStyles } from '@material-ui/core/styles';
 import { lightGreen } from '@material-ui/core/colors';
 
-// For general styling of regular elements such as <div> etc...
-const useStyles = makeStyles((theme) => ({
-  main: {
+/* 
+ * For now, I'll just stick with this until I figure out something better
+ * Even if I figured this problem out, it may be compounded once I start creating new pages with more styling
+ * Gotta be a better way
+ */
+
+const useStyles = makeStyles(theme => ({
+  paper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -34,13 +39,13 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: lightGreen[700],
     },
   },
-}));
+}))
 
 export default function SignUp() {
   const classes = useStyles();
 
   return (
-    <Container className={classes.main} component="main" maxWidth="sm">
+    <Container className={classes.paper} component="main" maxWidth="sm">
       <Avatar />
       <Typography component="h1" variant="h5" color="textPrimary">
         Sign Up
