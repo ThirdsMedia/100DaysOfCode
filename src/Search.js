@@ -1,27 +1,67 @@
 import React from 'react';
-import ItemList from './ItemList';
-import exampleDatabase from './exampleDatabase';
+import MainBar from './MainBar';
 
 /* Material UI Core */
 import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
-import { lightGreen } from '@material-ui/core/colors';
 
-/* 
- * I've added some imports from Material UI so I know what to work on next time.
- * I'm spent....
- */
+/* Material UI Icons */
+import SearchIcon from '@material-ui/icons/Search';
+
+const useStyles = makeStyles(theme => ({
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: theme.spacing(6),
+  },
+  searchBox: {
+    marginTop: 10,
+    borderRadius: 50,
+    width: 700,
+  },
+}));
 
 export default function Search() {
+  const classes = useStyles();
+
   return (
-    <div>
-   		<h2>Search and Items Page</h2>
-      <input type="text" />
-          <ItemList data={exampleDatabase} />
-    </div>
+    <Container className={classes.paper} component="main" maxWidth="lg">
+      <MainBar />
+      <Box component="body" mt={4}>
+        <Typography component="h1" variant="h5" align="center">
+          Search
+        </Typography>
+        <TextField 
+          id="search"
+          variant="outlined"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />              
+              </InputAdornment>
+            ),
+            className: classes.searchBox
+          }}
+        />
+      </Box>
+        {
+          /*
+          * Eventually, this will most likely become multiple cards in some sort of grid. 
+          * I'm sure I'd be moving this grid into a separate file to become the Card list of sorts. 
+          */
+        }
+      <Card variant="outlined">
+        <CardContent>
+          Stuff
+        </CardContent>
+      </Card>
+    </Container>
   );
 }

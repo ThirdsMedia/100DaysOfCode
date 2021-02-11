@@ -1,6 +1,6 @@
 import React from 'react';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+//import SignIn from './SignIn';
+//import SignUp from './SignUp';
 import Search from './Search';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -19,7 +19,6 @@ export default function App() {
   return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<SignUp />
 			<Search />
 		</ThemeProvider>
 	)
