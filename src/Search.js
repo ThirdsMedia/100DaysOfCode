@@ -1,14 +1,14 @@
 import React from 'react';
 import MainBar from './MainBar';
+import Header from './Header';
+import CardList from './CardList';
+import exampleDatabase from './exampleDatabase';
 
 /* Material UI Core */
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 
 /* Material UI Icons */
@@ -22,9 +22,12 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(6),
   },
   searchBox: {
-    marginTop: 10,
+    margin: 20,
     borderRadius: 50,
     width: 700,
+  },
+  logo: {
+    marginTop: theme.spacing(3),
   },
 }));
 
@@ -34,10 +37,8 @@ export default function Search() {
   return (
     <Container className={classes.paper} component="main" maxWidth="lg">
       <MainBar />
+      <Header />
       <Box component="body" mt={4}>
-        <Typography component="h1" variant="h5" align="center">
-          Search
-        </Typography>
         <TextField 
           id="search"
           variant="outlined"
@@ -51,17 +52,7 @@ export default function Search() {
           }}
         />
       </Box>
-        {
-          /*
-          * Eventually, this will most likely become multiple cards in some sort of grid. 
-          * I'm sure I'd be moving this grid into a separate file to become the Card list of sorts. 
-          */
-        }
-      <Card variant="outlined">
-        <CardContent>
-          Stuff
-        </CardContent>
-      </Card>
+      <CardList data={exampleDatabase} />    
     </Container>
   );
 }
