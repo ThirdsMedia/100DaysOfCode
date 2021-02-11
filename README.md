@@ -108,3 +108,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Search page and app bar](https://github.com/ThirdsMedia/100DaysOfCode/tree/day9/src)
 
+### Day 10: February, 11 2021 - Thursday 
+
+**Today's Progress**: Created a CardList and CardItem component and separated them into files. Then I added them to the Search component page. I also created a Header file as well. 
+
+**Thoughts:** Coding during the day feels much different then coding at 2 in the morning. I am still flowing through the code pretty well, though I'm not 100% sure I'm using the <Box /> component correctly. I believe I understand it's purpose but I wonder if I'm using it too much, or in arbitrary places. Looking forward to having a more free evening after work. 
+
+**Issues:** Couldn't get the Avatar logo and the Typography header to align right. They are both centered, just not centered together. 
+
+**Link to work:** [Search page and app bar](https://github.com/ThirdsMedia/100DaysOfCode/tree/day10/src)
+
