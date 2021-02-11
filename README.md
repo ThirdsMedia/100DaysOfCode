@@ -98,3 +98,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Beginning the Search page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day8/src)
 
+### Day 9: February, 11 2021 - Wednesday night/Thursday morning
+
+**Today's Progress**: Started on the search page. Created a basic app bar with a hamburger icon. I also created a nice looking search bar with an adornment icon. To finish off I added a Card component underneath the search bar with some text in it as a placeholder for tommorrow. 
+
+**Thoughts:** Today felt rather productive. I also didn't have to google as much and instead spent more time looking through the Material UI API then I did looking for snippets on Stack Overflow. It felt good to just flow and not run into an real issues. Just spent the time coding steadily. 
+
+**Issues:** I miss sneaking out at night to go find trouble over the train tracks. Cheers Jeff. 
+
+**Link to work:** [Search page and app bar](https://github.com/ThirdsMedia/100DaysOfCode/tree/day9/src)
+
