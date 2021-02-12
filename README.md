@@ -118,3 +118,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Search page and app bar](https://github.com/ThirdsMedia/100DaysOfCode/tree/day10/src)
 
+### Day 11: February, 12 2021 - Friday 
+
+**Today's Progress**: Woof. Create an alphabet-based side navigation panelusing Grid containers. Also got rid of the <Header /> component and moved the top logo into <MainBar />. 
+
+**Thoughts:** Had fun with this one because I had absolutely no clue how to create a side panel that goes horizontal and is independent of the main Container. Did need to do some googling, but also spent time with trial-and-error which was fun. 
+
+**Issues:** Couldn't figure out how to get the side nav to fit the screen. Some of it goes beyond the bottom of the fold and since it's in fixed position I can't see the last letters. 
+
+**Link to work:** [Search page and SideNav](https://github.com/ThirdsMedia/100DaysOfCode/tree/day11/src)
+
