@@ -23,18 +23,18 @@ export default function CardItem({ item }) {
 	const classes = useStyles();
 
 	return (
-      <Card className={classes.card}>
-		<CardActionArea>
-			<CardMedia
-				className={classes.media}
-				image="./logo192.png"
-				title="MoonBoots"
-			/>
-			<CardContent className={classes.text}>
-				{item.name}
-			</CardContent>
-		</CardActionArea>
-      </Card>
+   	<Card className={classes.card}>
+			<CardActionArea>
+				<CardMedia
+					className={classes.media}
+					image="./logo192.png"
+					title="MoonBoots"
+				/>
+				<CardContent className={classes.text}>
+					{item.name}
+				</CardContent>
+			</CardActionArea>
+    </Card>
 	);
 }
 
