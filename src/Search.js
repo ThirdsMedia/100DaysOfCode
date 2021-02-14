@@ -19,20 +19,13 @@ const useStyles = makeStyles(theme => ({
   paper: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     marginTop: theme.spacing(6),
-  },
-  searchBox: {
-    margin: 20,
-    borderRadius: 50,
-    width: 700,
   },
 }));
 
 /*
  * Ok, done for now. To do next:
  *  - Center the Logo in the MainBar component
- *  - Get the search input to be fixed as well
  *  - Make the SideNav fit the screen so you can see all the way to Z
  */
 
@@ -40,30 +33,13 @@ export default function Search() {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.paper}>
-    <Grid container>
-      <MainBar />
-      <SideNav />
-    </Grid>
-      <Grid container>
-        <Container className={classes.paper} component="main" maxWidth="lg">
-
-          <Box component="body" mt={4}>
-            <TextField 
-              id="search"
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />              
-                  </InputAdornment>
-                ),
-                className: classes.searchBox
-              }}
-            />
-          </Box>
-          <CardList data={exampleDatabase} />    
-        </Container>
+    <Grid container spacing={0}>
+      <Grid container spacing={0}>
+        <MainBar />
+        <SideNav />
+      </Grid>
+      <Grid container spacing={0}>
+        <CardList data={exampleDatabase} />    
       </Grid>
     </Grid>
   );
