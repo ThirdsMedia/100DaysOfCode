@@ -128,3 +128,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Search page and SideNav](https://github.com/ThirdsMedia/100DaysOfCode/tree/day11/src)
 
+### Day 12: February, 14 2021 - Sunday
+
+**Today's Progress**: Nothing. Tried different Grid patterns but pretty much made everything worse. 
+
+**Thoughts:** Hated this hour. Didn't get anything done, felt lost, and scrambled around the internet looking for answers to questions I didn't know how to ask properly. Almost feel like I should revert back a day and keep editing that code instead. 
+
+**Issues:** Can't figure out how to space or center anything in Grid properly. My containers are going off the page. Can't get anything aligned right in the AppBar. Can't even figure out what the hex color code is for the dark theme in createMuiTheme....
+
+**Link to work:** [Epic failure](https://github.com/ThirdsMedia/100DaysOfCode/tree/day12/src)
+
