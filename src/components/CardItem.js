@@ -8,7 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
 	card: {
 		borderRadius: 10,
-		width: 120,
+		width: 175,
+		height: 200,
 		textAlign: 'center',
 	},
 	media: {

@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   	sideNav: {
 		justifyContent: 'flex-end',
 		position: 'fixed',
-		marginTop: 45,
+		marginTop: 50,
 		fontWeight: 'bold',
 		/* but how to make it fit the screen */
 	},
