@@ -138,3 +138,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Epic failure](https://github.com/ThirdsMedia/100DaysOfCode/tree/day12/src)
 
+### Day 13: February, 14 2021 - Sunday
+
+**Today's Progress**: Fixed much of the spacing, positioning, sizing, and organization. Temporarily got rid of the SideNav component until I actually need it.
+
+**Thoughts:** It's important to take a step back, go for a walk, read, nap, whatever. I was feeling rather frustrated earlier and resorted to frantically googling for solutions without understanding what the problem was. The problem was that I wasn't considering where and how I'd use the components such as a custom <Search /> component, etc. Once I came back to the issue I realized a). My project's organization was starting to get convoluted, and b). I wasn't using the <Grid /> component properly. Come to think of it I still might not be....
+
+**Issues:** Still haven't figured out how to use Grid quite right. I need to get the <MainBar /> component and the list of <CardItem /> components to automatically be spaced properly, so if I enable the <Search /> component in the <MainBar /> it won't overlap the list of <CardItem /> components, and instead push it out of the way like a proper grid should. 
+
+**Link to work:** [Product List](https://github.com/ThirdsMedia/100DaysOfCode/tree/day13/src)
+
