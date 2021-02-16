@@ -148,3 +148,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Product List](https://github.com/ThirdsMedia/100DaysOfCode/tree/day13/src)
 
+### Day 14: February, 15 2021 - Monday
+
+**Today's Progress**: Not as much as I'd hoped. I spaced the ProductList containers better, but never figured out why the pictures aren't showing up in CardMedia. 
+
+**Thoughts:** Meh. Tired today. I think I'm beginning to understand how to manipulate containers and grids better, but I haven't understood enough to know what I understand.... if that makes sense. I'll get there. I need to make sure not to get caught on one thing for too long. It's ok to move on without fully understanding. Perhaps I'll learn things elsewhere that I can apply retrospectively.
+
+**Issues:** Failed to figure out why the image src isn't loading in CardMedia even though it was before. Once I figure that out I can move on to styling the CardItem components better, and then the frontend for the ProductList will be done. 
+
+**Link to work:** [Product List](https://github.com/ThirdsMedia/100DaysOfCode/tree/day14/src)
+
