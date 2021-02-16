@@ -8,19 +8,24 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
 	card: {
 		borderRadius: 10,
-		width: 175,
-		height: 200,
+		width: 250,
+		height: 275,
 		textAlign: 'center',
 	},
 	media: {
-		height: 100,
+		height: 175,
+		width: '100%',
 	},
 	text: {
 		fontWeight: 'bold',
 	}
 });
 
-export default function CardItem({ item }) {
+/* 
+ * Fix images still....
+ */
+
+export default function CardItem({ card }) {
 	const classes = useStyles();
 
 	return (
@@ -28,11 +33,11 @@ export default function CardItem({ item }) {
 			<CardActionArea>
 				<CardMedia
 					className={classes.media}
-					image="./logo192.png"
+					image={require("./logo192.png")}
 					title="MoonBoots"
 				/>
 				<CardContent className={classes.text}>
-					{item.name}
+					{card.name}
 				</CardContent>
 			</CardActionArea>
     </Card>
