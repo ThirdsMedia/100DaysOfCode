@@ -158,3 +158,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Product List](https://github.com/ThirdsMedia/100DaysOfCode/tree/day14/src)
 
+### Day 15: February, 16 2021 - Tuesday
+
+**Today's Progress**: Took a break from the project I was working around to mess around on an example Landing page with React and Material UI. Followed along in a video just to get a bit more practice in Material UI and general design stuff. 
+
+**Thoughts:** I'm still very slow at designing stuff. I'm hoping that spending another week or so on this will help me speed up a bit. It's hard to not feel like I'm running out of time. In five days I'll only be a fifth of the way done so I still have plenty of time to turn this into a fully working app. 
+
+**Issues:** Nothing really. Just having func
+
+**Link to work:** [Example Landing Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day15/src)
+
