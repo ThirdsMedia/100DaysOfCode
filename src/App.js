@@ -1,27 +1,27 @@
 import React from 'react';
-//import SignIn from './SignIn';
-//import SignUp from './SignUp';
-import ProductList from './ProductList';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { lightGreen } from '@material-ui/core/colors';
+import Header from './Header';
+import { CssBaseline } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: lightGreen[500],
-			background: '#303030',
-		},
-		type: 'dark',
-	},
-})
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "100vh",
+    backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/darkroad.jpeg'})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+},
+}));
 
-export default function App() {
+function App() {
+  const classes = useStyles();
+
   return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<ProductList />
-		</ThemeProvider>
-	)
+    <div className={classes.root}>
+      <CssBaseline />
+      <Header />
+    </div>
+  );
 }
 
+export default App;
+ 
