@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import CallToAction from './CallToAction';
 import { CssBaseline } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -19,6 +20,7 @@ function App() {
     <div className={classes.root}>
       <CssBaseline />
       <Header />
+      <CallToAction />
     </div>
   );
 }
