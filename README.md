@@ -168,3 +168,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Example Landing Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day15/src)
 
+### Day 16: February, 16 2021 - Wednesday
+
+**Today's Progress**: Extended my break to continue the landing page practice. Learned some more about styling and transitions. 
+
+**Thoughts:** It's amazing how coding a long with a 30 minute video actually ends up taking hours. Also, I'm starting to realize that it's ok to copy-paste a snippet of code such as a <Card /> design you like or some component that you want in your App and just edit it to fit your needs. I too frequently have the mentality of a back end developer. 
+
+**Issues:** Again, not much. 
+
+**Link to work:** [Example Landing Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day16/src)
+
