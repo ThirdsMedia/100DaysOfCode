@@ -11,7 +11,7 @@ const info = [
 	{
 		id: 1,
 		title: "Path No. 2",
-	  desc: "This is one path where you find forest houses and get killed brutally by mutant retards",
+	  desc: "This is one path where you find forest houses and get killed brutally by mutants",
 		image: process.env.PUBLIC_URL + "/assets/forest-houses.jpg",
 		direction: 'right',
 	}

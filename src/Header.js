@@ -7,6 +7,7 @@ import {
 	Container,
 	Collapse
 } from '@material-ui/core';
+import { Link as Scroll } from 'react-scroll'
 
 /* Styles */
 import SortIcon from '@material-ui/icons/Sort';
@@ -62,7 +63,7 @@ export default function Header() {
 	});
 
 	return (
-		<main className={classes.root}>
+		<main className={classes.root} id="header">
 			<AppBar className={classes.appBar} elevation={0}>
 				<Toolbar className={classes.appBarWrapper}>
 					<Typography className={classes.header} component="h1" variant="h3">
@@ -81,9 +82,11 @@ export default function Header() {
 						Welcome to<br/>
 						The <span className={classes.colorText}>Road.</span>
 					</Typography>
-					<IconButton>
-						<ExpandMoreIcon className={classes.goDown} />
-					</IconButton>
+					<Scroll to="call-to-action" smooth="true">
+						<IconButton>
+							<ExpandMoreIcon className={classes.goDown} />
+						</IconButton>
+					</Scroll>
 				</div>
 			</Collapse>
 		</main>				
