@@ -178,3 +178,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Example Landing Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day16/src)
 
+### Day 17: February, 18 2021 - Thursday
+
+**Today's Progress**: Took some time to learn how to use window.addEventListener and window.pageYOffset in order to animate Collapse when scrolling. 
+
+**Thoughts:** I've been very successful so far, but I find that right around two weeks is when I started loosing some steam. Taking a break from the main app was helpful, but it still feels harder to get started then it did on the first week. I suppose that's normal.
+
+**Issues:** Getting images to load was harder then I thought. Turns out you have to import your image, and you can't just pass it to a src="" element without importing it first. require() didn't seem to work either. 
+
+**Link to work:** [Example Landing Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day17/src)
+
