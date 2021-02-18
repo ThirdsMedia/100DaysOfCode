@@ -21,19 +21,22 @@ const useStyles = makeStyles({
 	}
 });
 
+const imageUrl = `require(${process.env.PUBLIC_URL + '/public/assets/logo192.png'})` 
+
 /* 
  * Fix images still....
  */
 
 export default function CardItem({ card }) {
 	const classes = useStyles();
+	console.log(imageUrl)
 
 	return (
    	<Card className={classes.card}>
 			<CardActionArea>
 				<CardMedia
 					className={classes.media}
-					image={require("./logo192.png")}
+					image='./logo192.png'
 					title="MoonBoots"
 				/>
 				<CardContent className={classes.text}>

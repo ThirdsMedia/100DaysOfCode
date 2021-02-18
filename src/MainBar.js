@@ -8,6 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
+import tmImage from './ThirdsMediaSmall.png';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -15,10 +16,11 @@ const useStyles = makeStyles(theme => ({
    // boxShadow: 'none',
 	},
   logo: {
-    height: theme.spacing(6),
-    width: theme.spacing(6),
+    height: theme.spacing(12),
+    width: theme.spacing(15),
   },
 }));
+
 
 export default function MainBar({ hasSearchInput }) {
   const classes = useStyles();
@@ -33,16 +35,16 @@ export default function MainBar({ hasSearchInput }) {
             </IconButton>
           </Grid>
           <Grid container justify='center'>
-            <Avatar className={classes.logo} src='./logo192.png' /> 
+            <Avatar className={classes.logo} src={tmImage} />
           </Grid>
-          {
+          {/*
             hasSearchInput 
               ?
                 <Grid container justify='center'>
                   <Search />    
                 </Grid>
               : false
-          }
+          */}
         </Grid>
       </Toolbar>
     </AppBar>

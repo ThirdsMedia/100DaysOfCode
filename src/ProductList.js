@@ -1,5 +1,5 @@
 import React from 'react';
-import MainBar from './components/MainBar';
+import MainBar from './MainBar';
 import CardItem from './CardItem';
 import exampleDatabase from './exampleDatabase';
 
