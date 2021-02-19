@@ -12,7 +12,6 @@ const useStyles = makeStyles({
 			fontWeight: 'bold',
 			backgroundColor: 'green',
 			width: 30,
-		/* but how to make it fit the screen */
 	},
 })
 

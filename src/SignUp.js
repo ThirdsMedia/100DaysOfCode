@@ -2,21 +2,17 @@ import React from 'react';
 import Copyright from './Copyright';
 
 /* Material UI Core */
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+import {
+  Container,
+  Avatar,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  Link 
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { lightGreen } from '@material-ui/core/colors';
-
-/* 
- * For now, I'll just stick with this until I figure out something better
- * Even if I figured this problem out, it may be compounded once I start creating new pages with more styling
- * Gotta be a better way
- */
 
 const useStyles = makeStyles(theme => ({
   paper: {

@@ -1,9 +1,12 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import {
+	Card,
+	CardActionArea,
+	CardContent,
+	CardMedia,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import imageUrl from './assets/logo192.png';
 
 const useStyles = makeStyles({
 	card: {
@@ -21,12 +24,6 @@ const useStyles = makeStyles({
 	}
 });
 
-const imageUrl = `require(${process.env.PUBLIC_URL + '/public/assets/logo192.png'})` 
-
-/* 
- * Fix images still....
- */
-
 export default function CardItem({ card }) {
 	const classes = useStyles();
 	console.log(imageUrl)
@@ -36,7 +33,7 @@ export default function CardItem({ card }) {
 			<CardActionArea>
 				<CardMedia
 					className={classes.media}
-					image='./logo192.png'
+					image={imageUrl}
 					title="MoonBoots"
 				/>
 				<CardContent className={classes.text}>

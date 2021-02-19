@@ -1,8 +1,10 @@
 import React from 'react';
 
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import {
+	Box,
+	Typography,
+	Link
+} from '@material-ui/core';
 
 export default function Copyright() {
   return (
