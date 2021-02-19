@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Search from './Search';
 
 import {
   AppBar,
   Toolbar,
-  Grid,
   Avatar,
   IconButton,
+  Menu,
+  MenuItem
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 /* Style and image */
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,32 +18,34 @@ import tmImage from './assets/ThirdsMediaSmall.png';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
+    flexGrow: 1,
     backgroundColor: theme.palette.primary.background,
-	},
+  },
+  menuButton: {
+    color: theme.palette.primary.main,
+  },
   logo: {
-    height: theme.spacing(12),
-    width: theme.spacing(15),
+    height: theme.spacing(7),
+    width: theme.spacing(10),
   },
 }));
 
-
-export default function MainBar({ hasSearchInput }) {
+export default function MainBar({ hasLogo }) {
   const classes = useStyles();
 
   return (
-    <AppBar className={classes.appBar}>
+    <AppBar position="static" className={classes.appBar}>
       <Toolbar>
-        <Grid container>
-          <Grid container>
-            <IconButton edge="start" color="primary">
-              <MenuIcon />
-            </IconButton>
-          </Grid>
-          <Grid container justify='center'>
+        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <MenuIcon />
+        </IconButton>
+        {
+          hasLogo ?
             <Avatar className={classes.logo} src={tmImage} />
-          </Grid>
-        </Grid>
+          : false
+        }
       </Toolbar>
     </AppBar>
   );
 }
+
