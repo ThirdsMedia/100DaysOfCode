@@ -188,3 +188,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Example Landing Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day17/src)
 
+### Day 18: February, 19 2021 - Friday
+
+**Today's Progress**: Create a Profile page and started the makings of an EditProfile component. Added a QRCode component which redirects to https://thirdsmedia.com.
+
+**Thoughts:** Had fun today, despite distractions. Once I've gotten everything looking good for the Profile and EditProfile components I'm going to either create the Favorites page, or edit the Landing page I created a few days ago to fit this current project and then start on Navigation so I can wire these together. 
+
+**Issues:** Getting distracted by everything. I created a Profile.js to start the profile page and immediately started tweaking the MainBar component, then realized I don't even need that right now so I removed it from Profile.js. I spent a half hour doing this. Need to focus more. 
+
+**Link to work:** [Profile Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day18/src)
+
