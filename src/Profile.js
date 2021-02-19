@@ -1,13 +1,13 @@
 import React from 'react';
 import MainBar from './MainBar';
-import ProfilePic from './assets/dj-pct.jpg';
+import QRCode from './QRCode';
 import {
 	Grid,
 	Avatar,
 	Container,
 	Typography,
 } from '@material-ui/core';
-import CropFreeIcon from '@material-ui/icons/CropFree';
+import ProfilePic from './assets/dj-pct.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -65,7 +65,6 @@ function EditProfile({ profileData }) {
 	);
 }
 
-// Alright time for a break
 export default function Profile({ profileData }) {
 	const classes = useStyles();
 
@@ -77,7 +76,7 @@ export default function Profile({ profileData }) {
 					<Typography component="h1" variant="h3" className={classes.info}>
 						{profileData.name}
 					</Typography>
-					<CropFreeIcon fontSize="large"/>
+					<QRCode />
 				</Container>
 			</div>
 			<EditProfile profileData={profileData} />
