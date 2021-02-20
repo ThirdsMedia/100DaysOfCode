@@ -198,3 +198,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Profile Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day18/src)
 
+### Day 19: February, 20 2021 - Saturday
+
+**Today's Progress**: Continued on the Profile page to add some more info, an Edit Profile button (which does nothing so far) and some other styling and layout stuff. Also separated the EditProfile button. This is where the Edit Profile button will navigate to.
+
+**Thoughts:** I don't know if I'm not doing research properly, but I sort of feel like I'm still flailing when it comes to layout stuff. Container, Box, Grid, div... Not 100% sure when to use what. I tend to just try stuff and see what happens on the screen. Also, today is actually Saturday, and I'm doing Saturday at 2 am, instead of counting this as yesterday since I already did Friday on Friday.... Confusing I know. I'm tired as fuck.
+
+**Issues:** Not understanding layouts properly. 
+
+**Link to work:** [Profile Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day19/src)
+
