@@ -4,10 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	qrCode: {
+		display: 'flex',
 		backgroundColor: theme.palette.primary.main,
 		height: 200,
 		width: 200,
 		borderRadius: 5,
+		margin: 15,
 	},
 }));
 
@@ -20,7 +22,7 @@ export default function QRCode() {
 				style={{
 					height: 200,
 					width: 200,
-					padding: 5
+					padding: 5,
 				}}
 				src={QRCodeImage} 
 				alt="QRCode" 

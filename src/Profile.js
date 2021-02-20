@@ -2,10 +2,11 @@ import React from 'react';
 import MainBar from './MainBar';
 import QRCode from './QRCode';
 import {
-	Grid,
 	Avatar,
 	Container,
+	Box,
 	Typography,
+	Button,
 } from '@material-ui/core';
 import ProfilePic from './assets/dj-pct.jpg';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,28 +14,36 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
 	container: {
 		display: 'flex',
-		margin: 25,
 		padding: 20,
-		borderRadius: 25,
-		backgroundColor: theme.palette.secondary.main,
+		width: '100%',
+		backgroundColor: '#202020', // ok so that color looks way better anyway
 	},
-	profileMain: {
+	container2: {
 		display: 'flex',
-		flexDirection: 'column',
+		justifyContent: 'center',
 	},
 	info: {
 		display: 'flex',
 		flexDirection: 'column',
 		fontFamily: 'Nunito',
-		margin: 25
+		margin: 25,
+		backgroundColor: '#303030', // this is just for testing purposes
+		borderRadius: 15,
 	},
-	bio: {
-		color: theme.palette.primary.main,
-	},
-	editProfile: {
-		display: 'flex',
-		flexDirection: 'column',
+	title: {
 		fontFamily: 'Nunito',
+	},
+	profileText: {
+		color: theme.palette.primary.main,
+		fontFamily: 'Nunito',
+		marginBottom: 25,
+	},
+	editButton: {
+		borderRadius: 50,
+		height: 37,
+		width: 160,
+		fontFamily: 'Nunito',
+		textTransform: 'none',
 	},
 	profilePic: {
 		height: theme.spacing(26),
@@ -42,28 +51,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-function EditProfile({ profileData }) {
-	const classes = useStyles();
-
-	return (
-		<Container>
-			<Grid container className={classes.editProfile}>
-				<Grid item>
-					Name: {profileData.name}
-				</Grid>
-				<Grid item>
-					Occuption: {profileData.occupation}
-				</Grid>
-				<Grid item>
-					Employer: {profileData.employer}
-				</Grid>
-				<Grid item className={classes.bio}>
-					{profileData.bio}
-				</Grid>
-			</Grid>
-		</Container>
-	);
-}
+// Alright that's it for now. Gotta work a 16 hour shift in 7 hours
 
 export default function Profile({ profileData }) {
 	const classes = useStyles();
@@ -72,14 +60,22 @@ export default function Profile({ profileData }) {
 		<main>
 			<div className={classes.container}>
 				<Avatar className={classes.profilePic} src={ProfilePic} />
-				<Container className={classes.profileMain}>
-					<Typography component="h1" variant="h3" className={classes.info}>
+				<Container className={classes.info}>
+					<Typography component="h1" variant="h3" className={classes.title}>
 						{profileData.name}
 					</Typography>
-					<QRCode />
+					<Typography component="subtitle1" className={classes.profileText}>
+						{profileData.occupation}
+					</Typography>
+					{profileData.bio}
 				</Container>
+				<Button variant="outlined" color="primary" className={classes.editButton}>
+					Edit Profile
+				</Button>
 			</div>
-			<EditProfile profileData={profileData} />
+			<Container component="main" className={classes.container2}>
+				<QRCode />
+			</Container>
 		</main>
 	);
 }
