@@ -208,3 +208,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Profile Page](https://github.com/ThirdsMedia/100DaysOfCode/tree/day19/src)
 
+### Day 20: February, 21 2021 - Sunday
+
+**Today's Progress**: Practically completed the Profile component. Added a Tabs area below, added Breadcrumb links to Social media, finished the layout and styling as far as I can tell. 
+
+**Thoughts:** Something of a slow start there but I guess that's what a 16 hour shift the day before will do to your Sunday. I think next I need to work on the EditProfile component, then the CardList and individual Cards. Then start working on Navigation to begin to tie everything together. Getting exciting now. 
+
+**Issues:** Brain fog. 
+
+**Link to work:** [Component](https://github.com/ThirdsMedia/100DaysOfCode/tree/day20/src)
+
