@@ -18,14 +18,18 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
 		flexDirection: 'column',
-    margin: 25
-	},
+    padding: 25,
+    backgroundColor: theme.palette.primary.background
+  },
   avatar: {
     height: theme.spacing(26),
     width: theme.spacing(26),
   },
   field: {
     marginBottom: 15
+  },
+  switch: {
+    margin: 20
   },
   button: {
     borderRadius: 37
@@ -36,22 +40,23 @@ export default function EditProfile({ profileData }) {
 	const classes = useStyles();
 
 	return (
-    <div>
-      <div style={{display:'flex', justifyContent: 'center'}}>
-      <IconButton>
-        <Avatar className={classes.avatar} src={ProfilePic} />
-      </IconButton>
-      <FormControlLabel
-        control={
-          <Switch
-            name="checkedB"
-            color="secondary"
-          />
-        }
-        label="Dark Theme"
-      />
-      </div>
-      <div className={classes.root}>
+    <div className={classes.root}>
+      <Container>
+        <IconButton>
+          <Avatar className={classes.avatar} src={ProfilePic} />
+        </IconButton>
+      </Container>
+      <Container>
+        <FormControlLabel
+          control={
+            <Switch
+              name="checkedB"
+              color="secondary"
+            />
+          }
+          label="Dark Theme"
+          className={classes.switch}
+        />
         <form className={classes.form}>
           <TextField 
             id="fname" 
@@ -118,7 +123,7 @@ export default function EditProfile({ profileData }) {
             </Button>
           </Grid>
         </Grid>
-      </div>
+      </Container>
     </div>
 	);
 }
