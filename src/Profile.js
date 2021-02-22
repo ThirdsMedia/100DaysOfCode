@@ -1,6 +1,6 @@
 import React, { useState }  from 'react';
 import MainBar from './MainBar';
-import CardItem from './CardItem';
+import CardList from './CardList';
 import QRCode from './QRCode';
 import ProfilePic from './assets/dj-pct.jpg';
 import exampleDatabase from './static/exampleDatabase';
@@ -20,6 +20,7 @@ import {
 import LinkIcon from '@material-ui/icons/Link';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -40,15 +41,16 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 15,
   },
   editButton: {
-    borderRadius: 50,
+    borderRadius: 37,
     height: 37,
-    width: 160,
+    width: 200,
     fontFamily: 'Nunito',
     textTransform: 'none',
   },
   navBar: {
     backgroundColor: '#202020',
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
+    borderRadius: 5,
   },
   profilePic: {
     height: theme.spacing(26),
@@ -60,11 +62,17 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     display: 'flex',
+    color: theme.palette.secondary.main
+  },
+  tabPanel: {
+    display: 'flex',
+    justifyContent: 'center',
   },
 }));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  const classes = useStyles();
 
   return (
     <div
@@ -75,7 +83,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box style={{display: 'flex', justifyContent: 'center'}} p={3}>
+        <Box className={classes.tabPanel} p={3}>
           {children}
         </Box>
       )}
@@ -111,7 +119,7 @@ export default function Profile({ profileData }) {
         <Avatar className={classes.profilePic} src={ProfilePic} />
         <Container className={classes.info}>
           <Typography component="h1" variant="h3" style={{fontFamily: 'Nunito'}}>
-            {profileData.name}
+            {profileData.fname} {profileData.lname}
           </Typography>
           <span style={{color: '#d0d0d0'}}>{profileData.username}</span>
           <Breadcrumbs className={classes.breadcrumbs}>
@@ -129,7 +137,12 @@ export default function Profile({ profileData }) {
             {profileData.bio}
           </Typography>
         </Container>
-        <Button variant="outlined" color="primary" className={classes.editButton}>
+        <Button 
+          variant="outlined" 
+          color="primary" 
+          className={classes.editButton}
+          startIcon={<EditIcon />}
+        >
           Edit Profile
         </Button>
       </Container>
@@ -141,26 +154,16 @@ export default function Profile({ profileData }) {
           variant="fullWidth" 
           aria-label="simple tabs example"
         >
-          <Tab label="Info" {...a11yProps(0)} />
-          <Tab label="Favorites" {...a11yProps(1)} />
-          <Tab label="QR Code" {...a11yProps(2)} />
+          <Tab disableRipple label="Info" {...a11yProps(0)} />
+          <Tab disableRipple label="Favorites" {...a11yProps(1)} />
+          <Tab disableRipple label="QR Code" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Info
+        Figure out what goes here, or just get rid of it. Maybe this is where edit profile goes
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Grid container spacing={4} alignItems='center'>
-        {
-          exampleDatabase.map((card) => {
-            return (
-              <Grid item>
-                <CardItem card={card} />
-              </Grid>
-            );
-          })
-        }
-        </Grid>
+        <CardList data={exampleDatabase} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <QRCode />       
