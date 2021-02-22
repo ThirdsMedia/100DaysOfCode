@@ -218,3 +218,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Component](https://github.com/ThirdsMedia/100DaysOfCode/tree/day20/src)
 
+### Day 21: February, 22 2021 - Monday
+
+**Today's Progress**: Started and almost finished the EditProfile component. Well, the style and layout portions. Still no logic in any of these yet. 
+
+**Thoughts:** Was super sleepy but managed to pick up momentum part way through this. I also noticed that I tend to do my best work after my timer for the hour goes off and I "finish" and commit everything. Then I get an itch to tweak a few more things and end up doing another whole hour without screen recording it lol. Can't say anything super specific that I learned. Mostly still just getting comfortable/picking up speed with Material UI and it's components. It's technically Monday but it's still Sunday for me because I haven't gone to sleep yet. Just getting it done early since tommorrow is another double shift. 
+
+**Issues:** Still need to figure out how to either edit MuiThemes to pass to ThemeProvider better. I know it isn't hard, but I have it set to type: 'dark' right now and I want the background colors to be darker
+
+**Link to work:** [EditProfile Component](https://github.com/ThirdsMedia/100DaysOfCode/tree/day21/src)
+
