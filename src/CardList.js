@@ -5,9 +5,8 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  Container
+  Typography,
 } from '@material-ui/core';
-import imageUrl from './assets/logo192.png';
 import cocktailImage from './assets/cocktail.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -17,16 +16,19 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   card: {
-    borderRadius: 10, 
-    width: 250, 
-    height: 250, 
+    background: 'rgba(0,0,0,0.3)',
     textAlign: 'center',
+    borderRadius: 10, 
+    minWidth: 320,
+    maxWidth: 345,
   },
   cardMedia: {
-    height: 205,
+    height: 210,
   },
-  cardText: {
-    backgroundColor: 'rgba (0,0,0,0.5)',
+  content: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 }));
 
@@ -38,16 +40,29 @@ export default function CardList({ data }) {
     {
       data.map((card) => {
         return (
-          <Grid item>
+          <Grid key={card.id} item>
             <Card raised className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.cardMedia}
-                image={cocktailImage}
-                title="MoonBoots"
+              <CardActionArea>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image={cocktailImage}
+                  title="MoonBoots"
                 />
-                <CardContent className={classes.cardText}>
-                  {card.name}
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {card.name}
+                  </Typography>
+                  <div className={classes.content}>
+                  {
+                    card.ingredients.map((item) => {
+                      return (
+                        <Typography variant="body2" color="textSecondary" component="p" style={{margin: 2}}>
+                          {item.name}{' '}
+                        </Typography>
+                      );
+                    })
+                  }
+                  </div>
                 </CardContent>
               </CardActionArea>
             </Card>

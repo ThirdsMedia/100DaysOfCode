@@ -1,138 +1,181 @@
 const exampleDatabase = [
   {
-    name: "Test 1",
+    id: 0,
+    name: "South Side",
     date: "02/02/21",
     creator: "Darth Vader",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
+    ingredients: [
+      {
+        amount: '2',
+        name: 'Gin',
+        unit: 'oz',
+      },
+      {
+        amount: '5',
+        name: 'Mint',
+        unit: '',
+      },
+      {
+        amount: '.75',
+        name: 'Lemon',
+        unit: 'oz',
+      },
+      {
+        amount: '.75',
+        name: 'simple syrup',
+        unit: 'oz',
+      }
+    ],
     instructions: "Shake for 10 seconds.",
     description: "very good",
   },
   {
-    name: "Test 2",
+    id: 1,
+    name: "South Side",
     date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
+    creator: "Darth Vader",
+    ingredients: [
+      {
+        amount: '2',
+        name: 'Gin',
+        unit: 'oz',
+      },
+      {
+        amount: '5',
+        name: 'Mint',
+        unit: '',
+      },
+      {
+        amount: '.75',
+        name: 'Lemon',
+        unit: 'oz',
+      },
+      {
+        amount: '.75',
+        name: 'simple syrup',
+        unit: 'oz',
+      }
+    ],
     instructions: "Shake for 10 seconds.",
     description: "very good",
   },
   {
-    name: "Test 2",
+    id: 2,
+    name: "South Side",
     date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
+    creator: "Darth Vader",
+    ingredients: [
+      {
+        amount: '2',
+        name: 'Gin',
+        unit: 'oz',
+      },
+      {
+        amount: '5',
+        name: 'Mint',
+        unit: '',
+      },
+      {
+        amount: '.75',
+        name: 'Lemon',
+        unit: 'oz',
+      },
+      {
+        amount: '.75',
+        name: 'simple syrup',
+        unit: 'oz',
+      }
+    ],
     instructions: "Shake for 10 seconds.",
     description: "very good",
   },
   {
-    name: "Test 2",
+    id: 3,
+    name: "South Side",
     date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
+    creator: "Darth Vader",
+    ingredients: [
+      {
+        amount: '2',
+        name: 'Gin',
+        unit: 'oz',
+      },
+      {
+        amount: '5',
+        name: 'Mint',
+        unit: '',
+      },
+      {
+        amount: '.75',
+        name: 'Lemon',
+        unit: 'oz',
+      },
+      {
+        amount: '.75',
+        name: 'simple syrup',
+        unit: 'oz',
+      }
+    ],
     instructions: "Shake for 10 seconds.",
     description: "very good",
   },
   {
-    name: "Test 2",
+    id: 4,
+    name: "South Side",
     date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
+    creator: "Darth Vader",
+    ingredients: [
+      {
+        amount: '2',
+        name: 'Gin',
+        unit: 'oz',
+      },
+      {
+        amount: '5',
+        name: 'Mint',
+        unit: '',
+      },
+      {
+        amount: '.75',
+        name: 'Lemon',
+        unit: 'oz',
+      },
+      {
+        amount: '.75',
+        name: 'simple syrup',
+        unit: 'oz',
+      }
+    ],
     instructions: "Shake for 10 seconds.",
     description: "very good",
   },
   {
-    name: "Test 2",
+    id: 5,
+    name: "South Side",
     date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
-    instructions: "Shake for 10 seconds.",
-    description: "very good",
-  },
-  {
-    name: "Test 2",
-    date: "02/02/21",
-    creator: "Jar Jar",
-    ingredients: {},
+    creator: "Darth Vader",
+    ingredients: [
+      {
+        amount: '2',
+        name: 'Gin',
+        unit: 'oz',
+      },
+      {
+        amount: '5',
+        name: 'Mint',
+        unit: '',
+      },
+      {
+        amount: '.75',
+        name: 'Lemon',
+        unit: 'oz',
+      },
+      {
+        amount: '.75',
+        name: 'simple syrup',
+        unit: 'oz'
+      }
+    ],
     instructions: "Shake for 10 seconds.",
     description: "very good",
   },

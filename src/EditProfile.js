@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-	Container,
+  Container,
   Avatar,
   IconButton,
   Button,
@@ -17,9 +17,13 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-		flexDirection: 'column',
+    flexDirection: 'column',
     padding: 25,
     backgroundColor: theme.palette.primary.background
+  },
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
   },
   avatar: {
     height: theme.spacing(26),
@@ -37,11 +41,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function EditProfile({ profileData }) {
-	const classes = useStyles();
+  const classes = useStyles();
 
-	return (
+  return (
     <div className={classes.root}>
-      <Container>
+      <Container className={classes.container}>
         <IconButton>
           <Avatar className={classes.avatar} src={ProfilePic} />
         </IconButton>
@@ -125,5 +129,6 @@ export default function EditProfile({ profileData }) {
         </Grid>
       </Container>
     </div>
-	);
+  );
 }
+
