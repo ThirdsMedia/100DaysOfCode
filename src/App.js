@@ -1,6 +1,7 @@
 import React from 'react';
 import Profile from './Profile';
 import EditProfile from './EditProfile';
+import exampleDatabase from './static/exampleDatabase';
 import profileData from './static/profileData';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -26,7 +27,7 @@ export default function App() {
   return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-      <EditProfile profileData={profileData} />
+      <Products data={exampleDatabase} />
 		</ThemeProvider>
 	)
 }

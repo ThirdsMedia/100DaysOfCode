@@ -1,22 +1,35 @@
 import React from 'react';
 import MainBar from './MainBar';
+import Search from './Search';
 import CardList from './CardList';
 import {
   Container,
-  Box,
   Grid
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default function ProductList() {
+const useStyles = makeStyles(theme => ({
+  appBar: {
+    position: 'sticky',
+    top: 0,
+    backgroundColor: theme.palette.primary.background,
+    zIndex: 1,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+}));
+
+export default function Products({ data }) {
+  const classes = useStyles();
+
   return (
-    <>
-      <MainBar hasSearchInput />
-        <Container component="main" maxWidth="lg">
-          <Box mt={26}>
-            <CardList />
-          </Box>
-        </Container>
-    </>
+    <div>
+      <div className={classes.appBar}>
+        <MainBar hasLogo />
+        <Search />
+      </div>
+      <CardList data={data} />
+    </div>
   );
 }
 

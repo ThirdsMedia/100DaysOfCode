@@ -8,12 +8,25 @@ import {
   Container
 } from '@material-ui/core';
 import imageUrl from './assets/logo192.png';
+import cocktailImage from './assets/cocktail.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flex: 'center',
     justifyContent: 'center',
+  },
+  card: {
+    borderRadius: 10, 
+    width: 250, 
+    height: 250, 
+    textAlign: 'center',
+  },
+  cardMedia: {
+    height: 205,
+  },
+  cardText: {
+    backgroundColor: 'rgba (0,0,0,0.5)',
   },
 }));
 
@@ -26,19 +39,14 @@ export default function CardList({ data }) {
       data.map((card) => {
         return (
           <Grid item>
-            <Card raised style={{
-              borderRadius: 10, 
-              width: 250, 
-              height: 250, 
-              textAlign: 'center'
-            }}>
+            <Card raised className={classes.card}>
             <CardActionArea>
               <CardMedia
-                style={{height: 205}}
-                image={imageUrl}
+                className={classes.cardMedia}
+                image={cocktailImage}
                 title="MoonBoots"
                 />
-                <CardContent className={classes.text}>
+                <CardContent className={classes.cardText}>
                   {card.name}
                 </CardContent>
               </CardActionArea>

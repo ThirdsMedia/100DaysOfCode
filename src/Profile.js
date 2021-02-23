@@ -146,7 +146,7 @@ export default function Profile({ profileData }) {
           Edit Profile
         </Button>
       </Container>
-      <AppBar position="static" className={classes.navBar}>
+      <AppBar position="sticky" className={classes.navBar}>
         <Tabs 
           value={value}
           indicatorColor="primary"

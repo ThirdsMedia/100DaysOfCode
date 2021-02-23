@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     flexGrow: 1,
     backgroundColor: theme.palette.primary.background,
+    boxShadow: 'none',
   },
   menuButton: {
     color: theme.palette.primary.main,
@@ -34,7 +35,7 @@ export default function MainBar({ hasLogo }) {
   const classes = useStyles();
 
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="sticky" className={classes.appBar}>
       <Toolbar>
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
           <MenuIcon />
