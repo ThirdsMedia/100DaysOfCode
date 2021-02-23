@@ -228,3 +228,13 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [EditProfile Component](https://github.com/ThirdsMedia/100DaysOfCode/tree/day21/src)
 
+### Day 22: February, 23 2021 - Tuesday
+
+**Today's Progress**: Made a bunch of little style touches on the EditProfile, Profile, CardList, and Products components. Got the Card items looking better and sized better. Learned about the importance of zIndex: 1, position: 'sticky', and why the latter won't work without top: 0 in CSS. Solved a lot of problems with that little bit of knowledge.
+
+**Thoughts:** Had a hard time getting started but as usual found a flow state. I learned about why postion: 'sticky' didn't seem to do anything before. It requires top: 0, as well otherwise it does nothing. To use position: 'sticky' you need to give it coordinates of some sort, so if I wanted to have it stick somewhere besides the type I'd have to look into what coordinates it takes. At this point I'm starting to get close to having the major components all designed. As far as I can tell I have to design the component you navigate to once you click on a card from the list, the Build component, and I need to fix up the Landing page and import it into this project. Then I need to work on navigation and the Drawer navigator. Once all that is complete I just need to actually implement all the code logic, link to a database such as Firebase, and make the final touches. 
+
+**Issues:** I need to figure out how to separate the card.ingredients.name objects by comma, while leaving the last comma off. Shouldn't be too hard just requires a bit of logic. 
+
+**Link to work:** [Products Component](https://github.com/ThirdsMedia/100DaysOfCode/tree/day22/src)
+
