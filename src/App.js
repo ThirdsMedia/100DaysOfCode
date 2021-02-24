@@ -6,6 +6,7 @@ import profileData from './static/profileData';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Products from './Products';
+import ItemSheet from './ItemSheet';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightGreen, pink } from '@material-ui/core/colors';
@@ -27,7 +28,7 @@ export default function App() {
   return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-      <Products data={exampleDatabase} />
+      <ItemSheet item={exampleDatabase[0]} />
 		</ThemeProvider>
 	)
 }

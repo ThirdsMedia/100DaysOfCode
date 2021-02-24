@@ -38,6 +38,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function CardList({ data }) {
   const classes = useStyles();
+  console.log(process.env.PUBLIC_URL + '/assets/')
 
   return (
     <Container>
@@ -67,6 +68,7 @@ export default function CardList({ data }) {
                       card.ingredients.map((item) => {
                         return (
                           <Typography 
+                            key={item.id}
                             variant="body2" 
                             color="textSecondary" 
                             component="p" 
