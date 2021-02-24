@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Container,
   Grid,
   Card,
   CardActionArea,
@@ -30,46 +31,60 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  text: {
+    fontFamily: 'Nunito',
+  },
 }));
 
 export default function CardList({ data }) {
   const classes = useStyles();
 
   return (
-    <Grid container spacing={4} className={classes.root}>
-    {
-      data.map((card) => {
-        return (
-          <Grid key={card.id} item>
-            <Card raised className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.cardMedia}
-                  image={cocktailImage}
-                  title="MoonBoots"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {card.name}
-                  </Typography>
-                  <div className={classes.content}>
-                  {
-                    card.ingredients.map((item) => {
-                      return (
-                        <Typography variant="body2" color="textSecondary" component="p" style={{margin: 2}}>
-                          {item.name}{' '}
-                        </Typography>
-                      );
-                    })
-                  }
-                  </div>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        )
-      })
-    }
-    </Grid>
+    <Container>
+      <Grid container spacing={4} className={classes.root}>
+      {
+        data.map((card) => {
+          return (
+            <Grid key={card.id} item>
+              <Card raised className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={cocktailImage}
+                    title="MoonBoots"
+                  />
+                  <CardContent>
+                    <Typography 
+                      gutterBottom 
+                      variant="h5" 
+                      component="h2"
+                      className={classes.text}
+                    >
+                      {card.name}
+                    </Typography>
+                    <div className={classes.content}>
+                    {
+                      card.ingredients.map((item) => {
+                        return (
+                          <Typography 
+                            variant="body2" 
+                            color="textSecondary" 
+                            component="p" 
+                          >
+                            {item.name}
+                          </Typography>
+                        );
+                      })
+                    }
+                    </div>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          )
+        })
+      }
+      </Grid>
+    </Container>
   );
 }
