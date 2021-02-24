@@ -238,3 +238,25 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Products Component](https://github.com/ThirdsMedia/100DaysOfCode/tree/day22/src)
 
+### Day 23: February, 23 2021 - Wednesday
+
+**Today's Progress**: Started on an ItemSheet component. This is the component that would get navigated to when clicking on a Card in the CardList component. Still need to get all the data displayed but the overall layout is looking ok. Learned a bit about process.env.PUBLIC_URL and how to use it to include urls for images. 
+
+**Thoughts:** Did quite a bit of googling. Overall though I still think I'm getting faster at creating new components and shaping them into what I want them to be. Though I still tend to just flail/google/refer to old code when trying to figure out how CSS stuff works. 
+
+**To Do:**
+* Fix images
+	* Move the assets folder in 100DaysOfCode/public. 
+	* Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+* Finish individual components
+	* Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	* Finish the ItemSheet component
+	* Create a Contact component
+* Start implementing Navigation to wire everything together
+* Make any final style touches and clean up the project structure
+* Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Still haven't gained a strong understanding of flexbox. Probably because I'm not trying. Most other CSS stuff is trivial but figuring out when to use what for centering or moving things to certain portions of the screen is still a weakness of mine. 
+
+**Link to work:** [ItemSheet](https://github.com/ThirdsMedia/100DaysOfCode/tree/day23/src)
+
