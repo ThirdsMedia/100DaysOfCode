@@ -270,16 +270,16 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 - [ ] Fix images
 	- [ ] Move the assets folder in 100DaysOfCode/public. 
 	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
--[ ] Finish individual components
+- [ ] Finish individual components
 	- [ ] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
 	- [x] Finish the ItemSheet component
 	- [ ] Create a Contact component
 	- [ ] About component
-- [ ] The Build form (which facilitates entering data to the database)
-	- [ ] Information component
-	- [ ] Ingredients component
-	- [ ] Instructions component
-	- [ ] Camera/CameraRoll to choose or take a picture of the item you are building
+	- [ ] The Build form (which facilitates entering data to the database)
+		- [ ] Information component
+		- [ ] Ingredients component
+		- [ ] Instructions component
+		- [ ] Camera/CameraRoll to choose or take a picture of the item you are building
 - [ ] Start implementing Navigation 
 	[ ] Navigation drawer
 	[ ] Wire all component together
