@@ -238,7 +238,7 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Products Component](https://github.com/ThirdsMedia/100DaysOfCode/tree/day22/src)
 
-### Day 23: February, 23 2021 - Wednesday
+### Day 23: February, 24 2021 - Wednesday
 
 **Today's Progress**: Started on an ItemSheet component. This is the component that would get navigated to when clicking on a Card in the CardList component. Still need to get all the data displayed but the overall layout is looking ok. Learned a bit about process.env.PUBLIC_URL and how to use it to include urls for images. 
 
@@ -259,4 +259,34 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** Still haven't gained a strong understanding of flexbox. Probably because I'm not trying. Most other CSS stuff is trivial but figuring out when to use what for centering or moving things to certain portions of the screen is still a weakness of mine. 
 
 **Link to work:** [ItemSheet](https://github.com/ThirdsMedia/100DaysOfCode/tree/day23/src)
+
+### Day 24: February, 25 2021 - Thursday
+
+**Today's Progress**: Finished the ItemSheet component (the design portion). Added a QRCode toggler using useState. 
+
+**Thoughts:** Awesome flow-state coding day. Just hammered away at the ItemSheet component until it was done without really any hitches. One thing I've learned about myself: I tend to underestimate what is left to be done in a project. Maybe it's because I only look at the larger portions without really thinking about the smaller details. For example, I missed a few things in the To Do list below because my brain didn't log them as significant, and thus assumes they will just be done without thinking about how. I imagine after doing more of these projects I'll develop a more detail-oriented way of thinking. 
+
+**Front-end To Do:**
+[] Fix images
+	[] Move the assets folder in 100DaysOfCode/public. 
+	[] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+* Finish individual components
+	[] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	[x] Finish the ItemSheet component
+	[] Create a Contact component
+	[] About component
+	[] The Build form (which facilitates entering data to the database)
+		[] Information component
+		[] Ingredients component
+		[] Instructions component
+		[] Camera/CameraRoll to choose or take a picture of the item you are building
+[] Start implementing Navigation 
+	[] Navigation drawer
+	[] Wire all component together
+[] Make any final style touches and clean up the project structure
+[] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Can't figure out how to space or move items to the other side of the AppBar component. Time moves too fast. General anxiety.
+
+**Link to work:** [ItemSheet](https://github.com/ThirdsMedia/100DaysOfCode/tree/day24/src)
 
