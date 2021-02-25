@@ -267,19 +267,19 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Thoughts:** Awesome flow-state coding day. Just hammered away at the ItemSheet component until it was done without really any hitches. One thing I've learned about myself: I tend to underestimate what is left to be done in a project. Maybe it's because I only look at the larger portions without really thinking about the smaller details. For example, I missed a few things in the To Do list below because my brain didn't log them as significant, and thus assumes they will just be done without thinking about how. I imagine after doing more of these projects I'll develop a more detail-oriented way of thinking. 
 
 **Front-end To Do:**
-[] Fix images
-	[] Move the assets folder in 100DaysOfCode/public. 
-	[] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
-* Finish individual components
-	[] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
-	[x] Finish the ItemSheet component
-	[] Create a Contact component
-	[] About component
-	[] The Build form (which facilitates entering data to the database)
-		[] Information component
-		[] Ingredients component
-		[] Instructions component
-		[] Camera/CameraRoll to choose or take a picture of the item you are building
+- [] Fix images
+	- [] Move the assets folder in 100DaysOfCode/public. 
+	- [] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+-[] Finish individual components
+	- [] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [] Create a Contact component
+	- [] About component
+- [] The Build form (which facilitates entering data to the database)
+	- [] Information component
+	- [] Ingredients component
+	- [] Instructions component
+	- [] Camera/CameraRoll to choose or take a picture of the item you are building
 [] Start implementing Navigation 
 	[] Navigation drawer
 	[] Wire all component together
