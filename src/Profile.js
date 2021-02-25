@@ -1,5 +1,4 @@
 import React, { useState }  from 'react';
-import MainBar from './MainBar';
 import CardList from './CardList';
 import QRCode from './QRCode';
 import ProfilePic from './assets/dj-pct.jpg';
@@ -9,7 +8,6 @@ import {
   Avatar,
   Container,
   Box,
-  Grid,
   Link,
   Typography,
   Button,

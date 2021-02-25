@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import Search from './Search';
-
+import React from 'react';
 import {
   AppBar,
   Toolbar,
   Avatar,
   IconButton,
-  Menu,
-  MenuItem
+//  Menu,
+//  MenuItem
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+//import AccountCircle from '@material-ui/icons/AccountCircle';
 
 /* Style and image */
 import { makeStyles } from '@material-ui/core/styles';
