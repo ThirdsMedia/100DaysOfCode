@@ -281,8 +281,8 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 		- [ ] Instructions component
 		- [ ] Camera/CameraRoll to choose or take a picture of the item you are building
 - [ ] Start implementing Navigation 
-	[ ] Navigation drawer
-	[ ] Wire all component together
+	- [ ] Navigation drawer
+	- [ ] Wire all component together
 - [ ] Make any final style touches and clean up the project structure
 - [ ] Re-deploy on gh-pages. The front-end should be complete
 
