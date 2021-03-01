@@ -3,9 +3,10 @@ import React from 'react';
 //import EditProfile from './EditProfile';
 import exampleDatabase from './static/exampleDatabase';
 //import profileData from './static/profileData';
-//import SignIn from './SignIn';
+import SignIn from './SignIn';
 //import SignUp from './SignUp';
 //import Products from './Products';
+import LandingPage from './LandingPage/LandingPage';
 import ItemSheet from './ItemSheet';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -28,7 +29,7 @@ export default function App() {
   return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-      <ItemSheet item={exampleDatabase[0]} />
+      <SignIn />
 		</ThemeProvider>
 	)
 }

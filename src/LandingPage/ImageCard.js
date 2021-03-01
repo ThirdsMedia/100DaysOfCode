@@ -14,6 +14,7 @@ import {
 const useStyles = makeStyles({
   root: {
     maxWidth: 645,
+    minWidth: 550,
     background: 'rgba(0,0,0,0.5)',
     margin: '20px',
   },
@@ -48,7 +49,7 @@ export default function ImageCard({ info, isAnimated}) {
           <CardMedia
             className={classes.media}
             image={info.image}
-            title="Contemplative Reptile"
+            title="Navigate"
           />
           <CardContent>
             <Typography 
@@ -57,7 +58,7 @@ export default function ImageCard({ info, isAnimated}) {
               component="h1" 
               className={classes.title}
             >
-              Path No. 1
+              {info.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraph}>
               {info.desc}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
 	AppBar, 
+  Menu,
+  MenuItem,
 	IconButton,
 	Toolbar,
 	Typography,
@@ -14,7 +16,7 @@ import SortIcon from '@material-ui/icons/Sort';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	root: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -47,31 +49,52 @@ const useStyles = makeStyles({
 		fontSize: '4.5rem'
 	},
 	colorText: {
-		color: "#ff4081"
+    color: theme.palette.primary.main
 	},
 	goDown: {
-		color: '#ff4081',
+    color: theme.palette.primary.main,
 		fontSize: '4rem',
 	},
-})
+}));
 
 export default function Header() {
 	const classes = useStyles();
 	const [checked, setChecked] = useState(false)
+  const [menuOpened, setMenuOpened] = useState(false)
 	useEffect(() => {
 		setChecked(true)
 	});
+
+  const handleMenu = (event) => {
+    setMenuOpened(event.currentTarget)
+  }
+
+  const menuClose = () => {
+    setMenuOpened(false)
+  }
 
 	return (
 		<main className={classes.root} id="header">
 			<AppBar className={classes.appBar} elevation={0}>
 				<Toolbar className={classes.appBarWrapper}>
-					<Typography className={classes.header} component="h1" variant="h3">
-						The<span className={classes.colorText}>Road.</span>
-					</Typography>
-					<IconButton>
+          <IconButton onClick={handleMenu}>
 						<SortIcon className={classes.icon} />
 					</IconButton>
+          <Menu
+            id="home-menu"
+            keepMounted
+            anchorEl={menuOpened}
+            open={Boolean(menuOpened)}
+            onClose={menuClose}
+          >
+            <MenuItem>Profile</MenuItem>
+            <MenuItem>About</MenuItem>
+            <MenuItem>Contact Us</MenuItem>
+            <MenuItem>Logout</MenuItem>
+          </Menu>
+          <Typography className={classes.header} component="h1" variant="h3">
+            Thirds<span className={classes.colorText}>Media</span>
+          </Typography>
 				</Toolbar>
 			</AppBar>
 			<Collapse appear in={checked} { 
@@ -80,7 +103,7 @@ export default function Header() {
 				<div className={classes.container}>
 					<Typography className={classes.title} component="h1" variant="h2">
 						Welcome to<br/>
-						The <span className={classes.colorText}>Road.</span>
+            The <span className={classes.colorText}>JADE </span>App
 					</Typography>
 					<Scroll to="call-to-action" smooth="true">
 						<IconButton>
