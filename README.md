@@ -290,3 +290,34 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [ItemSheet](https://github.com/ThirdsMedia/100DaysOfCode/tree/day24/src)
 
+### Day 25: February, 28 2021 - Sunday
+
+**Today's Progress**: Incorporated and re-styled the LandingPage component from day16. 
+
+**Thoughts:** Oops! Missed a few days. Life happens I guess. I integrated the landing page and made it fit the App's theme. Not much else except did some research on the best way to navigate in React. I'm wondering how weird things will get when I use React Web navigation and then try to convert it to a mobile app in Capacitor. We shall see I suppose...
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] About component
+	- [ ] The Build form (which facilitates entering data to the database)
+		- [ ] Information component
+		- [ ] Ingredients component
+		- [ ] Instructions component
+		- [ ] Camera/CameraRoll to choose or take a picture of the item you are building
+- [ ] Start implementing Navigation 
+	- [ ] Navigation drawer
+	- [ ] Wire all component together
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Unsure of the right way to implement navigation in React web, even though the rest of this project is supposed to be converted to React Native anyway. 
+
+**Link to work:** [Current](https://github.com/ThirdsMedia/100DaysOfCode/tree/day25/src)
+
+
