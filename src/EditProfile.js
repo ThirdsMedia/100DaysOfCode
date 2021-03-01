@@ -112,6 +112,7 @@ export default function EditProfile({ profileData }) {
               variant="outlined"
               className={classes.button}
               startIcon={<SaveIcon />}
+              href="/profile"
             >
               Update Profile
             </Button>
@@ -122,6 +123,7 @@ export default function EditProfile({ profileData }) {
               variant="outlined"
               className={classes.button}
               startIcon={<DeleteIcon />}
+              href="/profile"
             >
               Cancel
             </Button>

@@ -50,6 +50,7 @@ export default function ImageCard({ info, isAnimated}) {
             className={classes.media}
             image={info.image}
             title="Navigate"
+            href="/products"
           />
           <CardContent>
             <Typography 

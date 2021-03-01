@@ -90,7 +90,7 @@ export default function SignUp() {
         justify="space-around"
       >
         <Grid item>
-          <Link href="#" variant="body4">
+          <Link href="/signin" variant="body4">
             Already have an account? Sign In
           </Link>
         </Grid>

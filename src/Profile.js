@@ -140,6 +140,7 @@ export default function Profile({ profileData }) {
           color="primary" 
           className={classes.editButton}
           startIcon={<EditIcon />}
+          href="/editprofile"
         >
           Edit Profile
         </Button>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Copyright from './Copyright';
+import tmImage from './assets/ThirdsMediaSmall.png';
 
 /* Material UI Core */
 import {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(6),
   },
   textField: {
-    padding: 10,
+    borderRadius: 37,
   },
   submitButton: {
     color: 'white',
@@ -35,6 +36,10 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: lightGreen[700],
     },
+    logo: {
+      height: theme.spacing(10),
+      width: theme.spacing(10),
+    },
   },
 }))
 
@@ -43,7 +48,7 @@ export default function SignIn() {
 
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">
-      <Avatar />
+      <Avatar className={classes.logo} src={tmImage} />
       <Typography component="h1" variant="h5">
         Sign In
       </Typography>
@@ -53,6 +58,7 @@ export default function SignIn() {
         margin="normal"
         required
         fullWidth
+        variant="outlined"
         InputProps={{
           className: classes.textField
         }}
@@ -64,6 +70,7 @@ export default function SignIn() {
         type="password"
         required
         fullWidth
+        variant="outlined"
         InputProps={{
           className: classes.textField
         }}
@@ -80,6 +87,7 @@ export default function SignIn() {
         color="primary"
         fullWidth
         variant="contained"
+        href="/"
       >
         Sign In
       </Button>
@@ -88,12 +96,12 @@ export default function SignIn() {
         justify="space-around"
       >
         <Grid item>
-          <Link href="#" variant="body4">
+          <Link variant="body4">
             Forgot password?
           </Link>
         </Grid>
         <Grid item>
-          <Link href="#" variant="body4">
+          <Link href="/signup" variant="body4">
             Sign Up
           </Link>
         </Grid>
