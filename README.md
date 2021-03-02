@@ -350,4 +350,35 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Current](https://github.com/ThirdsMedia/100DaysOfCode/tree/day26/src)
 
+### Day 27: March 1, 2021 - Monday
+
+**Today's Progress**: Re-styled the MainBar component and removed the Search component. It was small enough to just add straight into the Products component. Began the Create component as well.
+
+**Thoughts:** I'm still behind, so I have to do 2 hours tommorrow to catch up. No big deal though because I actually have a day off this week. This project keeps becoming bigger as I chip away at the to do list. Also, I changed my mind and decided that the Create form should have everything on one page only, except for the Camera component. 
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A forgot password component
+	- [ ] About component
+	- [ ] The Build form (which facilitates entering data to the database)
+		- [ ] Create component
+		- [ ] Camera/CameraRoll to choose or take a picture of the item you are building
+		- [ ] Review component
+- [ ] Start implementing Navigation 
+	- [ ] Navigation drawer
+	- [x] Wire all component together
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Sleepy. Also the background image resizes after the page loads. Also, um... hmmm...
+
+**Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day27/src)
+
+
 
