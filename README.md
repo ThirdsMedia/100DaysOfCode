@@ -380,5 +380,35 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day27/src)
 
+### Day 27: March 1, 2021 - Monday
 
+**Today's Progress**: Added a Stepper component to the Create form. Renamed it to Wizard and added it into a separate folder. Added InfoOutlined Icon to the MainBar. 
 
+**Thoughts:** Met with the ThirdsMedia team to discuss how best to structure this build form. This form will need to handle a lot of semi-complex data structures, and will need to make calls to external APIs in order to facillitate data entry for users. Since the volume of potential information to be added to this form is so high it needs to refer to data that is (hopefully) public or accessible via certain APIs to help with autofilling information. The CreationWizard is by far the most important and complex piece of this App. 
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] The CreationWizard 
+		- [ ] Wizard (where the Stepper is)
+		- [ ] BasicInfo
+		- [ ] BaseSpirit and Ingredients
+		- [ ] Instructions
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Start implementing Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Figuring out how to organize the spacing for the forms. 
+
+**Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day28/src)
