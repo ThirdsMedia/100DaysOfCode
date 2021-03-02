@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import MainBar from '../MainBar';
 import { 
 	AppBar, 
   Menu,
@@ -18,18 +19,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: '100vh'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
 	},
 	appBar: {
 		background: 'none',
 	},
-	appBarWrapper: {
-		width: "80%",
-		margin: "0 auto"
-	},
+  appBarWrapper: {
+    width: "80%",
+    margin: "0 auto"
+  },
 	container: {
 		textAlign: 'center',
 	},
@@ -37,20 +38,20 @@ const useStyles = makeStyles(theme => ({
 		color: "#fff",
 		fontSize: "2rem"
 	},
-	header: {
-		flexGrow: "1",
-		fontFamily: "Nunito",
-		color: '#fff'
-	},
+  header: {
+    flexGrow: "1",
+    fontFamily: "Nunito",
+    color: '#fff'
+  },
 	title: {
 		flexGrow: "1",
 		fontFamily: "Nunito",
 		color: '#fff',
 		fontSize: '4.5rem'
 	},
-	colorText: {
+  colorText: {
     color: theme.palette.primary.main
-	},
+  },
 	goDown: {
     color: theme.palette.primary.main,
 		fontSize: '4rem',
@@ -60,43 +61,22 @@ const useStyles = makeStyles(theme => ({
 export default function Header() {
 	const classes = useStyles();
 	const [checked, setChecked] = useState(false)
-  const [menuOpened, setMenuOpened] = useState(false)
 	useEffect(() => {
 		setChecked(true)
 	});
 
-  const handleMenu = (event) => {
-    setMenuOpened(event.currentTarget)
-  }
-
-  const menuClose = () => {
-    setMenuOpened(false)
-  }
-
 	return (
 		<main className={classes.root} id="header">
-			<AppBar className={classes.appBar} elevation={0}>
-				<Toolbar className={classes.appBarWrapper}>
-          <IconButton onClick={handleMenu}>
-						<SortIcon className={classes.icon} />
-					</IconButton>
-          <Menu
-            id="home-menu"
-            keepMounted
-            anchorEl={menuOpened}
-            open={Boolean(menuOpened)}
-            onClose={menuClose}
-          >
-            <MenuItem>Profile</MenuItem>
-            <MenuItem>About</MenuItem>
-            <MenuItem>Contact Us</MenuItem>
-            <MenuItem>Logout</MenuItem>
-          </Menu>
+      <AppBar className={classes.appBar} elevation={0}>
+        <Toolbar className={classes.appBarWrapper}>
+          <IconButton>
+            <SortIcon className={classes.icon} />
+          </IconButton>
           <Typography className={classes.header} component="h1" variant="h3">
             Thirds<span className={classes.colorText}>Media</span>
           </Typography>
-				</Toolbar>
-			</AppBar>
+        </Toolbar>
+      </AppBar>
 			<Collapse appear in={checked} { 
 				... checked ? { timeout: 1000 } : {}
 			}>

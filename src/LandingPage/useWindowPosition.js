@@ -11,7 +11,7 @@ export default function useWindowPosition(id) {
 			// then, once window.document.getElementById("header").offsetHeight * 0.7 is less then the pageYOffset
 			// the animation becomes true
 			// So once the height of a certain element is higher then the pages YOffset, run the animation.
-			console.log("window.pageYOffset", window.pageYOffset, (offSetHeight * 0.7))
+      console.log("window.pageYOffset", window.pageYOffset, (offSetHeight * 0.7))
 			// that's when the animation should kick off
 			if (window.pageYOffset > offSetHeight * 0.7) {
 				setAnimation(true);
