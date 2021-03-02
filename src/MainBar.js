@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SortIcon from '@material-ui/icons/Sort';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 /* Style and image */
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MainBar() {
+export default function MainBar({ hasInfoIcon }) {
   const classes = useStyles();
 
   return (
@@ -62,6 +63,13 @@ export default function MainBar() {
           <Typography className={classes.header} component="h1" variant="h3">
             Thirds<span className={classes.colorText}>Media</span>
           </Typography>
+          {
+            hasInfoIcon ?
+                <IconButton>
+                  <InfoOutlinedIcon />
+                </IconButton>
+            : false
+          }
         </Toolbar>
       </AppBar>
     </div>
