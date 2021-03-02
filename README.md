@@ -380,7 +380,7 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day27/src)
 
-### Day 27: March 1, 2021 - Monday
+### Day 28: March 2, 2021 - Tuesday
 
 **Today's Progress**: Added a Stepper component to the Create form. Renamed it to Wizard and added it into a separate folder. Added InfoOutlined Icon to the MainBar. 
 
