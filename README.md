@@ -412,3 +412,36 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** Figuring out how to organize the spacing for the forms. 
 
 **Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day28/src)
+
+### Day 29: March 2, 2021 - Tuesday
+
+**Today's Progress**: Fixed up the stepper so the individual Form components are displayed next to the steps. Fixed the styling of the Stepper. Added a Scroll component to have it scroll down the page with the Stepper. Isn't fully working yet. Also added functionality to the InfoOutlined Icon so that when you click it an overlapping Container pops up with help text describing how to use the form. Still needs styling work. 
+
+**Thoughts:** That was fun. Some of the most action-heavy stuff I've created thus far. I'm wondering if this will still transition to a mobile app well or not...
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] The CreationWizard 
+		- [ ] Wizard (where the Stepper is)
+		- [ ] BasicInfo
+		- [ ] BaseSpirit and Ingredients
+		- [ ] Instructions
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Start implementing Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Getting the page to scroll with the Stepper isn't working exactly as specified. 
+
+**Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day29/src)
