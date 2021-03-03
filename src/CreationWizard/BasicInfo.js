@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
     padding: 20,
     borderRadius: 17,
     fontFamily: 'Nunito',
-    marginTop: 50,
   },
   textInput: {
     borderRadius: 37,

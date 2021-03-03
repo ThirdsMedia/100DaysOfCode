@@ -2,23 +2,18 @@ import React from 'react';
 import {
   AppBar,
   Toolbar,
-  Avatar,
   IconButton,
   Typography,  
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import SortIcon from '@material-ui/icons/Sort';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-
-/* Style and image */
 import { makeStyles } from '@material-ui/core/styles';
-import tmImage from './assets/ThirdsMediaSmall.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
   },
   appBar: {
     flexGrow: 1,
@@ -41,13 +36,6 @@ const useStyles = makeStyles(theme => ({
   colorText: {
     color: theme.palette.secondary.main,    
   },
-  menuButton: {
-    color: theme.palette.primary.main,
-  },
-  logo: {
-    height: theme.spacing(7),
-    width: theme.spacing(10),
-  },
 }));
 
 export default function MainBar({ hasInfoIcon }) {
@@ -63,13 +51,6 @@ export default function MainBar({ hasInfoIcon }) {
           <Typography className={classes.header} component="h1" variant="h3">
             Thirds<span className={classes.colorText}>Media</span>
           </Typography>
-          {
-            hasInfoIcon ?
-                <IconButton>
-                  <InfoOutlinedIcon />
-                </IconButton>
-            : false
-          }
         </Toolbar>
       </AppBar>
     </div>

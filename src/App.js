@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import Profile from './Profile';
 import EditProfile from './EditProfile';
 import exampleDatabase from './static/exampleDatabase';

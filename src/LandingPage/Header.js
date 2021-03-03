@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import MainBar from '../MainBar';
 import { 
 	AppBar, 
-  Menu,
-  MenuItem,
 	IconButton,
 	Toolbar,
 	Typography,
-	Container,
 	Collapse
 } from '@material-ui/core';
 import { Link as Scroll } from 'react-scroll'
@@ -63,7 +59,7 @@ export default function Header() {
 	const [checked, setChecked] = useState(false)
 	useEffect(() => {
 		setChecked(true)
-	});
+  }, []);
 
 	return (
 		<main className={classes.root} id="header">
