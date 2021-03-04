@@ -1,5 +1,5 @@
 import React from 'react';
-import MainBar from './MainBar';
+import MainBar from '../Helpers/MainBar';
 import CardList from './CardList';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';

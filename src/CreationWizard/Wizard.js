@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MainBar from '../MainBar';
+import MainBar from '../Helpers/MainBar';
 import BasicInfo from './BasicInfo';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
@@ -31,6 +31,15 @@ const useStyles = makeStyles(theme => ({
   infoButton: {
     float: 'right',
   },
+  button: {
+    borderRadius: 37,
+    width: 250
+  },
+  buttonDiv: {
+    flex: 1,
+    margin: 25,
+    textAlign: 'center',
+  },
 }));
 
 function getStepContent(step) {
@@ -53,6 +62,7 @@ export default function Create() {
   const steps = ['Basic Information', 'Base Spirit', 'Ingredients', 'Instructions'];
   const [checked, setChecked] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [readyForReview, setReadyForReview] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   
   useEffect(() => {
@@ -68,7 +78,14 @@ export default function Create() {
   }
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    // make sure that when you hit the next button it doesn't keep going forever
+    if (activeStep < steps.length) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    } 
+  }
+
+  const handleReview = () => {
+    setReadyForReview(true)
   }
 
   return (
@@ -79,10 +96,7 @@ export default function Create() {
       }>
         {/* Ths is essentially the AppBar containing the up, down, and info icons */}
         <div className={classes.stepNav}>
-          <IconButton
-            disabled={activeStep === 0}
-            onClick={handleBack}
-          >
+          <IconButton disabled={activeStep === 0} onClick={handleBack}>
             <ExpandLessIcon />
           </IconButton>
           <Scroll to={`step-${activeStep}`} smooth="true">
@@ -92,8 +106,9 @@ export default function Create() {
               onClick={handleNext}
             >
               {
+                // If you're on the last step then display the CheckCircle instead of the ExpandMore
                 activeStep === steps.length - 1
-                  ? <CheckCircleIcon />
+                  ? <CheckCircleIcon onClick={handleReview} />
                   : <ExpandMoreIcon />
               }
             </IconButton>
@@ -104,7 +119,7 @@ export default function Create() {
               ? <IconButton className={classes.infoButton} onClick={handleHelp}>
                   <InfoOutlinedIcon />
                 </IconButton>
-              : <Button>Next</Button>
+              : false
           }
         </div>
         { 
@@ -128,6 +143,21 @@ export default function Create() {
           }
         </Stepper>
       </Collapse>
+      <div className={classes.buttonDiv}>
+      {
+        // Once all steps are completed then display the Review button
+        readyForReview && activeStep >= steps.length
+        ? <Button
+            className={classes.button}
+            variant="outlined"
+            color="primary"
+            onClick={() => console.log("Went to next")}
+          >
+            Review
+          </Button>
+        : false
+      }
+      </div>
     </main>
   );
 }

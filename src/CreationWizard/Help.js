@@ -41,14 +41,20 @@ export default function Help({ step }) {
   }
 
   return (
-    <Container maxWidth="lg" className={classes.helpContainer}>
-      <Typography 
-        component="p" 
-        className={classes.helpText} 
-        color="textSecondary"
-      >
-        { steps() }
-      </Typography>
-    </Container>
+    <div>
+    {
+      step <= 3
+      ? <Container maxWidth="lg" className={classes.helpContainer}>
+          <Typography 
+            component="p" 
+            className={classes.helpText} 
+            color="textSecondary"
+          >
+            { steps() }
+          </Typography>
+        </Container>
+      : false
+    }
+    </div>
   );
 }

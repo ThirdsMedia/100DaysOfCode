@@ -1,5 +1,5 @@
 import React from 'react';
-import Copyright from '../Copyright';
+import Copyright from '../Helpers/Copyright';
 
 /* Material UI Core */
 import {

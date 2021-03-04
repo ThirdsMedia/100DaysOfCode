@@ -8,7 +8,7 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
-import cocktailImage from './assets/cocktail.jpg';
+import cocktailImage from '../assets/cocktail.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({

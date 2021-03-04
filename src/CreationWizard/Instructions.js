@@ -11,16 +11,17 @@ const useStyles = makeStyles(theme => ({
   formContainer: {
     display: 'flex',
     flexDirection: 'column',
+    textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0.3)',
     padding: 20,
-    borderRadius: 17,
     fontFamily: 'Nunito',
   },
   button: {
     width: 250
   },
-  longInput: {
-    borderRadius: 37,
+  buttonDiv: {
+    paddingTop: 20,
+    textAlign: 'center',
   },
 }));
 
@@ -30,25 +31,25 @@ export default function Ingredients() {
   return (
     <Container maxWidth="md" className={classes.formContainer}>
       <TextField 
-        id='base-spirit'
-        label='Name'
+        id='instructions'
+        label='Instructions'
         variant='outlined'
         margin='normal'
         multiline
         rows='5'
-        InputProps={{
-          className: classes.longInput
-        }}
+        maxRows='10'
       />
-      <Button
-        className={classes.button}
-        variant="outlined"
-        color="secondary"
-        size='small'
-        startIcon={<AddAPhotoIcon />}
-      >
-        Choose Image
-      </Button>
+      <div className={classes.buttonDiv}>
+        <Button
+          className={classes.button}
+          variant="outlined"
+          color="secondary"
+          size='small'
+          startIcon={<AddAPhotoIcon />}
+        >
+          Choose Image
+        </Button>
+      </div>
     </Container>
   );
 }

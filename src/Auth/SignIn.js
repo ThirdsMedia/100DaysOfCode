@@ -1,5 +1,5 @@
 import React from 'react';
-import Copyright from '../Copyright';
+import Copyright from '../Helpers/Copyright';
 import tmImage from '../assets/ThirdsMediaSmall.png';
 
 /* Material UI Core */

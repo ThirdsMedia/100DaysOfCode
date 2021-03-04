@@ -1,5 +1,5 @@
 import React from 'react';
-import QRCodeImage from './assets/test.png';
+import QRCodeImage from '../assets/test.png';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({

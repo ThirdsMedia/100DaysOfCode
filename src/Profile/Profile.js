@@ -1,6 +1,6 @@
 import React, { useState }  from 'react';
-import CardList from '../CardList';
-import QRCode from '../QRCode';
+import CardList from '../Products/CardList';
+import QRCode from '../Helpers/QRCode';
 import ProfilePic from '../assets/dj-pct.jpg';
 import exampleDatabase from '../static/exampleDatabase';
 import {
