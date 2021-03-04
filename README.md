@@ -463,7 +463,7 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 	- [ ] A ForgotPassword component
 	- [ ] About component
 	- [ ] The CreationWizard 
-		- [x] Wizard (where the Stepper is)
+		- [] Wizard (where the Stepper is)
 		- [x] BasicInfo
 		- [ ] BaseSpirit and Ingredients
 		- [ ] Instructions
@@ -478,3 +478,36 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** Procrastination and de-motivation. Unsure of which thing to tackle next.
 
 **Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day30/src)
+
+### Day 31: March 4, 2021 - Thursday
+
+**Today's Progress**: Finished the workflow of CreationWizard. Fixed small design bugs. Added Grid layouts. Cleaned up styling.
+
+**Thoughts:** Strangely productive for just having heard some pretty serious news unrelated to this project. Nailed down most of the UI functionality for the CreationWizard. Love to type more but gotta run.
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [ ] BaseSpirit and Ingredients
+		- [ ] Instructions
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Start implementing Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** IRL probs
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day31/src)
