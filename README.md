@@ -445,3 +445,36 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** Getting the page to scroll with the Stepper isn't working exactly as specified. 
 
 **Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day29/src)
+
+### Day 30: March 4, 2021 - Thursday
+
+**Today's Progress**: Added all the forms into the CreationWizard and reorganized the project's directory structure. 
+
+**Thoughts:** I really need to stop procrastinating emulating this app in Android Studio. I'd hate to get further and realize that I need to rewrite a bunch of code. Also, I can feel this mountain getting a bit steeper. I knew this would come and that it wouldn't be all smooth easy sailing, and now here we are on day 30. It's becoming easier to want to put off coding for a day. It's becoming harder to decide which piece of code to write next. I'm naturally moving into a phase where I can't just create visual components anymore and I need to start thinking about flow and user interaction, and how I will implement the backend to work with the frontend components I've created. I'm sure this is normal.
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [ ] BaseSpirit and Ingredients
+		- [ ] Instructions
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Start implementing Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Procrastination and de-motivation. Unsure of which thing to tackle next.
+
+**Link to work:** [Create](https://github.com/ThirdsMedia/100DaysOfCode/tree/day30/src)
