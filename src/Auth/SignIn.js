@@ -1,6 +1,6 @@
 import React from 'react';
-import Copyright from './Copyright';
-import tmImage from './assets/ThirdsMediaSmall.png';
+import Copyright from '../Copyright';
+import tmImage from '../assets/ThirdsMediaSmall.png';
 
 /* Material UI Core */
 import {

@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   Grid,
 } from '@material-ui/core';
-import ProfilePic from './assets/dj-pct.jpg';
+import ProfilePic from '../assets/dj-pct.jpg';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core';

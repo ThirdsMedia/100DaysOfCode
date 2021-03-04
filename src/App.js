@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import Profile from './Profile';
-import EditProfile from './EditProfile';
+import Profile from './Profile/Profile';
+import EditProfile from './Profile/EditProfile';
 import exampleDatabase from './static/exampleDatabase';
 import profileData from './static/profileData';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignIn from './Auth/SignIn';
+import SignUp from './Auth/SignUp';
 import Wizard from './CreationWizard/Wizard';
 import Products from './Products';
 import LandingPage from './LandingPage/LandingPage';
