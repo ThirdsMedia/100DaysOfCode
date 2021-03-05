@@ -511,3 +511,36 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** IRL probs
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day31/src)
+
+### Day 32: March 5, 2021 - Friday
+
+**Today's Progress**: Figured out how to style the Ingredients Component. Added a Slider for finer control and cleaner interface. 
+
+**Thoughts:** Way to go me! I just fixed a UI issue that I've had when it comes to this form forever. Thank you Slider component for making life amazing! I'm almost done designing the CreationWizard, however my guess is that the hardest part is yet to come. Once I add functionality to the + Icon I wonder what sort of issues will arise with saving the data to an object in the backend. No need to worry about it now I guess. Next I need to wire in the Review component and fix the Help text boxes so they are centered and don't look like shite. Also maybe add a Glass and Method TextField in the Instructions component, but I'm not sure on that yet. 
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [ ] Instructions
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Nothing. I'm awesome. 
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day32/src)
