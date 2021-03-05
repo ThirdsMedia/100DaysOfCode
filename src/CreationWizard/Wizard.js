@@ -100,7 +100,7 @@ export default function Create() {
           </Scroll>
           {
             // If you're at the end of your stepper then stop showing the help icon
-            activeStep <= steps.length - 1
+            activeStep === steps.length - 1
               ? <IconButton className={classes.infoButton} onClick={handleHelp}>
                   <InfoOutlinedIcon />
                 </IconButton>
