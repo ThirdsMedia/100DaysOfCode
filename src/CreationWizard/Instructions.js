@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Ingredients() {
+export default function Instructions() {
   const classes = useStyles();
 
   return (

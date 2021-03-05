@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MainBar from '../Helpers/MainBar';
 import BasicInfo from './BasicInfo';
+import BaseSpirit from './BaseSpirit';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import Help from './Help';
@@ -47,9 +48,9 @@ function getStepContent(step) {
     case 0:
       return <BasicInfo />
     case 1:
-      return <Ingredients />
+      return <BaseSpirit />
     case 2:
-      return <BasicInfo />
+      return <Ingredients />
     case 3: 
       return <Instructions />
     default:
@@ -107,7 +108,7 @@ export default function Create() {
             >
               {
                 // If you're on the last step then display the CheckCircle instead of the ExpandMore
-                activeStep === steps.length - 1
+                activeStep >= steps.length - 1
                   ? <CheckCircleIcon onClick={handleReview} />
                   : <ExpandMoreIcon />
               }

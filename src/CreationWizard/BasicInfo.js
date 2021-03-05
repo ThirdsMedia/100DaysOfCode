@@ -21,7 +21,7 @@ export default function BasicInfo() {
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
       <Grid container spacing={1}>
-        <Grid item xs="6">
+        <Grid item xs>
           <TextField 
             id='name'
             label='Name'
@@ -37,7 +37,7 @@ export default function BasicInfo() {
             fullWidth
           />
         </Grid>
-        <Grid item xs="6">
+        <Grid item xs>
           <TextField 
             id='location'
             label='Location'
