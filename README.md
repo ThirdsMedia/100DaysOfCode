@@ -544,3 +544,36 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** Nothing. I'm awesome. 
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day32/src)
+
+### Day 33: March 6, 2021 - Saturday
+
+**Today's Progress**: Not much. Styled the Help box a bit. Needs more work. Refer to this resource for styling the Box: https://material-ui.com/system/basics/#all-inclusive
+
+**Thoughts:** Can't focus. Too tired. Major brain fog and all that. At least I found that resource above which should get me through styling the Help text box. That's all....
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [ ] Instructions
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Everything. I suck.
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day33/src)
