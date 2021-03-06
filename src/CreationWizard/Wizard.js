@@ -152,6 +152,7 @@ export default function Create() {
             className={classes.button}
             variant="outlined"
             color="primary"
+            href="/cocktail"
             onClick={() => console.log("Went to next")}
           >
             Review

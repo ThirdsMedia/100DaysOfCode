@@ -1,24 +1,17 @@
 import React from 'react';
 import helpText from '../static/helpText';
 import {
-  Container,
+  Box,
   Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   helpContainer: {
-    backgroundColor: 'rgba(0,0,0,2)',
-    zIndex: 1,
-    minHeight: '80vh',
+    zIndex: 2,
+    minHeight: '40vh',
     position: 'fixed',
-    borderRadius: 37,
-  },
-  helpText: {
-    fontFamily: 'Nunito',
-    textAlign: 'center',
-    padding: 10,
-    margin: 10,
+    padding: 20,
   },
 }));
 
@@ -44,15 +37,23 @@ export default function Help({ step }) {
     <div>
     {
       step <= 3
-      ? <Container maxWidth="lg" className={classes.helpContainer}>
+      ? <Box 
+          display="flex"
+          flexWrap="wrap"
+          border={1} 
+          boxShadow={1}
+          borderColor="primary.main" 
+          bgcolor="#505050"
+          borderRadius={37}
+          className={classes.helpContainer}
+        >
           <Typography 
             component="p" 
-            className={classes.helpText} 
             color="textSecondary"
           >
             { steps() }
           </Typography>
-        </Container>
+        </Box>
       : false
     }
     </div>

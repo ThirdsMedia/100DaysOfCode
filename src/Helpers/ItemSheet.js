@@ -4,6 +4,7 @@ import {
   Box,
   Container,
   IconButton,
+  Button,
   AppBar,
   Toolbar,
   Typography,
@@ -46,6 +47,7 @@ const useStyles = makeStyles(theme => ({
   qrButton: {
     borderRadius: 37,
     textTransform: 'none',
+    float: 'right',
   },
   qrContainer: {
     display: 'flex',
@@ -63,9 +65,18 @@ const useStyles = makeStyles(theme => ({
   divider: {
     margin: 10
   },
+  button: {
+    borderRadius: 37,
+    width: 450,
+  },
+  buttonDiv: {
+    flex: 1,
+    textAlign: 'center',
+    margin: 25,
+  },
 }));
 
-export default function ItemSheet({ item }) {
+export default function ItemSheet({ item, isPreview }) {
   const classes = useStyles();
   const [showQRCode, setShowQRCode] = useState(false);
   const handleQRCode = () => setShowQRCode(!showQRCode);
@@ -85,7 +96,7 @@ export default function ItemSheet({ item }) {
             <IconButton color="secondary">
               <FavoriteIcon />
             </IconButton>
-            <IconButton onClick={() => handleQRCode()}color="primary">
+            <IconButton onClick={handleQRCode} color="primary">
               <CropFreeIcon />
             </IconButton>
             <Scroll to='drink-image' smooth='true'>
@@ -124,6 +135,19 @@ export default function ItemSheet({ item }) {
           <Divider variant="middle" className={classes.divider} />
           <Typography>{item.instructions}</Typography>
         </Box>
+        <div className={classes.buttonDiv}>
+        {
+          isPreview
+          ? <Button
+              className={classes.button}
+              variant="outlined"
+              color="primary"
+            >
+              Publish
+            </Button>
+          : false
+        }
+        </div>
       </div>
     </div>
   );

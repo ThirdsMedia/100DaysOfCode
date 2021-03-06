@@ -22,6 +22,7 @@ const theme = createMuiTheme({
 		},
 		secondary: {
       main: pink[500],
+      background: '#505050',
 		},
 		type: 'dark',
 	},
@@ -39,7 +40,7 @@ export default function App() {
         <Route path="/products" render={() => <Products data={exampleDatabase} />} />
         <Route path="/profile" render={() => <Profile profileData={profileData} />} />
         <Route path="/editprofile" render={() => <EditProfile profileData={profileData} />} />
-        <Route path="/cocktail" render={() => <ItemSheet item={exampleDatabase[0]} />} />
+        <Route path="/cocktail" render={() => <ItemSheet item={exampleDatabase[0]} isPreview />} />
       </Router>
 		</ThemeProvider>
 	)
