@@ -1,6 +1,6 @@
 import React from 'react';
 import ImageCard from './ImageCard';
-import places from './places';
+import homeNav from '../static/homeNav';
 import useWindowPosition from './useWindowPosition';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -22,8 +22,8 @@ export default function CallToAction() {
 
 	return (
 		<div className={classes.root} id="call-to-action">
-			<ImageCard info={places[0]} isAnimated={isAnimated} />
-			<ImageCard info={places[1]} isAnimated={isAnimated} />
+      <ImageCard info={homeNav[0]} isAnimated={isAnimated} />
+      <ImageCard info={homeNav[1]} isAnimated={isAnimated} />
 		</div>
 	);
 }

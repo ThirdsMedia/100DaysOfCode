@@ -5,7 +5,6 @@ import {
   Link,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   Typography
@@ -44,7 +43,7 @@ export default function ImageCard({ info, isAnimated}) {
     <Collapse appear in={isAnimated} {
       ... isAnimated ? { timeout: 1000 } : {}
     }>
-      <Link href="/create">
+      <Link href={info.location}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
