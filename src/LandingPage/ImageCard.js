@@ -2,8 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
   Collapse,
+  Link,
   Card,
   CardActionArea,
+  CardActions,
   CardContent,
   CardMedia,
   Typography
@@ -42,6 +44,7 @@ export default function ImageCard({ info, isAnimated}) {
     <Collapse appear in={isAnimated} {
       ... isAnimated ? { timeout: 1000 } : {}
     }>
+      <Link href="/create">
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
@@ -65,6 +68,7 @@ export default function ImageCard({ info, isAnimated}) {
           </CardContent>
         </CardActionArea>
       </Card>
+      </Link>
     </Collapse>
   );
 }

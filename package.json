@@ -1,9 +1,12 @@
 {
   "name": "100daysofcode",
-  "homepage": "https://ThirdsMedia.github.io/100DaysOfCode",
+  "homepage": "https://ThirdsMedia.github.io/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@capacitor/android": "^2.4.7",
+    "@capacitor/cli": "^2.4.7",
+    "@capacitor/core": "^2.4.7",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@react-navigation/native": "^5.9.3",

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import MetricSelector from '../Helpers/MetricSelector';
+import ImperialSelector from '../Helpers/ImperialSelector';
 import {
   Container,
   TextField,
   Grid,
   FormControlLabel,
-  Typography,
-  Slider,
   Checkbox,
   IconButton,
 } from '@material-ui/core';
@@ -28,46 +28,6 @@ const useStyles = makeStyles(theme => ({
     minWidth: 120,
   },
 }));
-
-function MetricSelector() {
-  return (
-    <div>
-      <Typography id="discrete-slider" gutterBottom>
-        Milliliters
-      </Typography>
-      <Slider
-        defaultValue={15}
-        //getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        step={5}
-        marks
-        min={5}
-        max={60}
-      />
-    </div>
-  );
-}
-
-function ImperialSelector() {
-  return (
-    <div>
-      <Typography id="discrete-slider" gutterBottom>
-        Ounces
-      </Typography>
-      <Slider
-        defaultValue={1}
-        //getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        step={0.25}
-        marks
-        min={0.25}
-        max={6}
-      />
-    </div>
-  );
-}
 
 export default function Ingredients() {
   const classes = useStyles();

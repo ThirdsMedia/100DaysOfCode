@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">jade</string>
+    <string name="title_activity_main">jade</string>
+    <string name="package_name">io.ionic.jade</string>
+    <string name="custom_url_scheme">io.ionic.jade</string>
+</resources>
