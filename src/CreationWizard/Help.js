@@ -7,6 +7,10 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
   helpContainer: {
     zIndex: 2,
     minHeight: '40vh',
@@ -34,7 +38,7 @@ export default function Help({ step }) {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
     {
       step <= 3
       ? <Box 

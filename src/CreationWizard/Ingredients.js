@@ -8,6 +8,8 @@ import {
   FormControlLabel,
   Checkbox,
   IconButton,
+  Button,
+  Switch,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddBoxIcon from '@material-ui/icons/AddBox';
@@ -27,7 +29,66 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2),
     minWidth: 120,
   },
+  nextButton: {
+    width: 250,
+    marginTop: 20,
+    borderRadius: 37,
+  },
 }));
+
+function IngredientInput({ isMetric }) {
+  const classes = useStyles();
+  const [isUnitIngredient, setIsUnitIngredient] = useState(true);
+
+  const handleIsUnitIngredient = () => {
+    setIsUnitIngredient(!isUnitIngredient)
+  }
+
+  return (
+    <div>
+      <Grid container alignItems="center" spacing={10}>
+        <Grid item xs>
+          <TextField 
+            id='ingredient'
+            label='Ingredient'
+            variant='outlined'
+            margin='normal'
+            InputProps={{
+              className: classes.input
+            }}
+          />
+        </Grid>
+        <Grid item xs>
+          <FormControlLabel
+            control={
+              <Switch
+                name="recipe-type"
+                color="secondary"
+                onChange={handleIsUnitIngredient}
+              />
+            }
+            label="Has Unit?"
+          />
+        </Grid>
+        <Grid item xs>
+          <IconButton color="primary">
+            <AddBoxIcon fontSize="large"/>
+          </IconButton>
+        </Grid>
+      </Grid>
+      {
+        isUnitIngredient 
+          ? (
+            isMetric
+              ? <MetricSelector />
+              : <ImperialSelector />
+          )
+          : false
+      }
+
+    </div>
+  );
+}
 
 export default function Ingredients() {
   const classes = useStyles();
@@ -44,29 +105,14 @@ export default function Ingredients() {
         label="Metric"
         onChange={handleIsMetric}
       />
-      <Grid container alignItems="center">
-        <Grid item xs>
-          <TextField 
-            id='ingredient'
-            label='Ingredient'
-            variant='outlined'
-            margin='normal'
-            InputProps={{
-              className: classes.input
-            }}
-          />
-        </Grid>
-        <Grid item xl>
-          <IconButton color="primary">
-            <AddBoxIcon fontSize="large"/>
-          </IconButton>
-        </Grid>
-      </Grid>
-      {
-        isMetric
-          ? <MetricSelector />
-          : <ImperialSelector />
-      }
+      <IngredientInput isMetric={isMetric} />
+      <Button
+        variant="outlined"
+        color="primary"
+        className={classes.nextButton}
+      >
+        Next
+      </Button>
     </Container>
   );
 }
