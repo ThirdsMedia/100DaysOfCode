@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/100DaysOfCode/static/css/main.902617e9.chunk.css",
+    "main.js": "/100DaysOfCode/static/js/main.1d777a77.chunk.js",
+    "main.js.map": "/100DaysOfCode/static/js/main.1d777a77.chunk.js.map",
+    "runtime-main.js": "/100DaysOfCode/static/js/runtime-main.2c5b0bb3.js",
+    "runtime-main.js.map": "/100DaysOfCode/static/js/runtime-main.2c5b0bb3.js.map",
+    "static/js/2.4c7c0079.chunk.js": "/100DaysOfCode/static/js/2.4c7c0079.chunk.js",
+    "static/js/2.4c7c0079.chunk.js.map": "/100DaysOfCode/static/js/2.4c7c0079.chunk.js.map",
+    "index.html": "/100DaysOfCode/index.html",
+    "static/css/main.902617e9.chunk.css.map": "/100DaysOfCode/static/css/main.902617e9.chunk.css.map",
+    "static/js/2.4c7c0079.chunk.js.LICENSE.txt": "/100DaysOfCode/static/js/2.4c7c0079.chunk.js.LICENSE.txt",
+    "static/media/ThirdsMediaSmall.4978acf5.png": "/100DaysOfCode/static/media/ThirdsMediaSmall.4978acf5.png",
+    "static/media/cocktail.ecadf338.jpg": "/100DaysOfCode/static/media/cocktail.ecadf338.jpg",
+    "static/media/dj-pct.fc85f38f.jpg": "/100DaysOfCode/static/media/dj-pct.fc85f38f.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2c5b0bb3.js",
+    "static/js/2.4c7c0079.chunk.js",
+    "static/css/main.902617e9.chunk.css",
+    "static/js/main.1d777a77.chunk.js"
+  ]
+}

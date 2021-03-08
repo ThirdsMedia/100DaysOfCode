@@ -577,3 +577,40 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** Everything. I suck.
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day33/src)
+
+### Day 34: March 8, 2021 - Monday
+
+**Today's Progress**: Tested app in capacitor. Added functionality to the Instructions and BaseSpirit component in CreationWizard.
+
+**Thoughts:** This was a good jump back in after skipping a day on Sunday. I still need to do another hour today to make up lost time. I also still need to add some navigation stuff to the LandingPage so I can actually navigate to important components in Capacitor.
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] LandingPage
+		- [ ] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Failed to show the app in Capacitor. 
+
+**Solutions:** Need to make the ImageCards clickable on the LandingPage, and then re-build the project before trying Capacitor again.
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day34/src)
