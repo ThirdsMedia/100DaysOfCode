@@ -614,3 +614,41 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Need to make the ImageCards clickable on the LandingPage, and then re-build the project before trying Capacitor again.
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day34/src)
+
+### Day 35: March 8, 2021 - Monday
+
+**Today's Progress**: Successfully got the App to work in AndroidStudio with Capacitor. Separated IngredientInput component from the Ingredients component for readability and portability. Added Switch to toggle whether or not the IngredientInput has a unit measurement. 
+
+**Thoughts:** The app isn't perfect on mobile. It seems like anywhere I specify width manually messes up the page on mobile. Which also means anywhere I use Container does the same thing so I may have to avoid that component and do other things slightly more manually. 
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] LandingPage
+		- [ ] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** A lot of the Buttons that use state don't change their state right away and I have to click them many times before it works, which is really weird.
+
+**Solutions:** Not sure yet, must have something to do with all the conditionals. 
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day35/src)
