@@ -652,3 +652,43 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Not sure yet, must have something to do with all the conditionals. 
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day35/src)
+
+### Day 36: March 9, 2021 - Tuesday
+
+**Today's Progress**: Added logic to add additional inputs to the Ingredients component. Added a secondary ExpandMoreIcon to the Wizard component.
+
+**Thoughts:** Things are starting to get hairy. Adding the above functionality makes the scrolling not perfect (which is a minor issue and should be fine on mobile), but also it adds a huge layer of complexity. Pushing data into an object (one that gets created once the Wizard begins) shouldn't be too much of an issue. Once you get to the review stage you can then populate the ItemSheet component with the data. I think the issues will come about when you have to backtrack on the CreationWizard and the Stepper wipes the whole component clean. I'm sure there's a simple fix to that though. 
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] LandingPage
+		- [ ] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] Add a Step at the beginning of the Stepper which asks you if you are building a Cocktail or a Mix/Syrup/Infusion. Then based on your response it decides what the next steps will be. 
+		- [ ] Instead of having a button in the Instructions component to help you select a picture just change the review ItemSheet to have a blank photo instead of the current one behind the ExpandMoreIcon. Don't allow anything to continue until a picture is selected and then display the rest of the ItemSheet
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Too many thoughts about different ways the Wizard could flow.
+
+**Solutions:** Spend some time picturing how you'd want to use the Wizard. Also, remember that this is a 100DaysOfCode challenge and if the Wizard isn't perfect you should move on to other more menial tasks and components to get them out of the way. You can always come back later or just get everything else done and move on to the Backend. There's still a lot to do. 
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day36/src)
