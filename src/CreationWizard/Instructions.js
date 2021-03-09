@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Container,
-  Grid,
   TextField,
   Button,
   Select,
@@ -29,7 +28,6 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 425,
   },
 }));
 
@@ -58,46 +56,40 @@ export default function Instructions() {
 
   return (
     <Container maxWidth="md" className={classes.formContainer}>
-      <Grid container>
-        <Grid item xs>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="age-native-simple">Build Method</InputLabel>
-            <Select
-              native
-              inputProps={{
-                name: 'method',
-                id: 'method-native',
-              }}
-            >
-              <option aria-label="None" value="" />
-              {
-                methods.map((method) => {
-                  return <option value={method}>{method}</option>
-                })
-              }
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="age-native-simple">Glassware</InputLabel>
-            <Select
-              native
-              inputProps={{
-                name: 'glass',
-                id: 'glass-native',
-              }}
-            >
-              <option aria-label="None" value="" />
-              {
-                glassware.map((glass) => {
-                  return <option value={"Whip Shake"}>{glass}</option>
-                })
-              }
-            </Select>
-          </FormControl>
-        </Grid>
-      </Grid>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="age-native-simple">Build Method</InputLabel>
+        <Select
+          native
+          inputProps={{
+            name: 'method',
+            id: 'method-native',
+          }}
+        >
+          <option aria-label="None" value="" />
+          {
+            methods.map((method) => {
+              return <option value={method}>{method}</option>
+            })
+          }
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="age-native-simple">Glassware</InputLabel>
+        <Select
+          native
+          inputProps={{
+            name: 'glass',
+            id: 'glass-native',
+          }}
+        >
+          <option aria-label="None" value="" />
+          {
+            glassware.map((glass) => {
+              return <option value={"Whip Shake"}>{glass}</option>
+            })
+          }
+        </Select>
+      </FormControl>
       <TextField 
         id='instructions'
         label='Instructions'

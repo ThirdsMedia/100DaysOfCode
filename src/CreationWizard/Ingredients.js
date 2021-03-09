@@ -8,7 +8,6 @@ import {
   FormControlLabel,
   Checkbox,
   IconButton,
-  Button,
   Switch,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,11 +27,6 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(2),
     minWidth: 120,
-  },
-  nextButton: {
-    width: 250,
-    marginTop: 20,
-    borderRadius: 37,
   },
 }));
 
@@ -70,11 +64,6 @@ function IngredientInput({ isMetric }) {
             label="Has Unit?"
           />
         </Grid>
-        <Grid item xs>
-          <IconButton color="primary">
-            <AddBoxIcon fontSize="large"/>
-          </IconButton>
-        </Grid>
       </Grid>
       {
         isUnitIngredient 
@@ -85,7 +74,6 @@ function IngredientInput({ isMetric }) {
           )
           : false
       }
-
     </div>
   );
 }
@@ -93,9 +81,19 @@ function IngredientInput({ isMetric }) {
 export default function Ingredients() {
   const classes = useStyles();
   const [isMetric, setIsMetric] = useState(false);
+  const newInput = {
+    'amount': '',
+    'name': '',
+    'unit': '',
+  };
+  const [inputs, setInputs] = useState([{...newInput}]);
 
   const handleIsMetric = () => {
     setIsMetric(!isMetric)
+  }
+
+  const addNewInput = () => {
+    setInputs([...inputs, {...newInput}])
   }
 
   return (
@@ -105,14 +103,14 @@ export default function Ingredients() {
         label="Metric"
         onChange={handleIsMetric}
       />
-      <IngredientInput isMetric={isMetric} />
-      <Button
-        variant="outlined"
-        color="primary"
-        className={classes.nextButton}
-      >
-        Next
-      </Button>
+      {
+        inputs.map((input) => { 
+          return <IngredientInput isMetric={isMetric} />
+        })
+      }
+      <IconButton onClick={addNewInput} color="primary">
+        <AddBoxIcon fontSize="large"/>
+      </IconButton>
     </Container>
   );
 }

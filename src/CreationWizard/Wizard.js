@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// You may need to refer to this: https://stackoverflow.com/questions/61215349/material-ui-stepper-not-keeping-state-when-move-next-or-back
 function getStepContent(step) {
   switch (step) {
     case 0:
@@ -79,7 +80,9 @@ export default function Create() {
   }
 
   const handleNext = () => {
-    // make sure that when you hit the next button it doesn't keep going forever
+    // This should also be pushing the entered data into the object
+    // This could get complicated. I'll need to give each input a unique ID so that if I backtrack I can have it update
+    // The unique item you'd want to change otherwise stuff could get messy
     if (activeStep < steps.length) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1)
     } 
@@ -95,7 +98,7 @@ export default function Create() {
       <Collapse appear in={checked} {
         ... checked ? { timeout: 1000 } : {}
       }>
-        {/* Ths is essentially the AppBar containing the up, down, and info icons */}
+        {/* This div is essentially the AppBar containing the up, down, and info icons */}
         <div className={classes.stepNav}>
           <IconButton disabled={activeStep === 0} onClick={handleBack}>
             <ExpandLessIcon />
@@ -138,6 +141,15 @@ export default function Create() {
                 <StepLabel>{label}</StepLabel>
                 <StepContent>
                   <Typography>{getStepContent(index)}</Typography>
+                  {
+                    // Stop showing the secondary ExpandMoreIcon if you've reached the Instructions step
+                    // Also, this ExpandMoreIcon should push data to the recipe object array
+                    index < steps.length - 1
+                      ? <IconButton color="primary">
+                          <ExpandMoreIcon onClick={handleNext} fontSize="large" />
+                        </IconButton>
+                      : false
+                  }
                 </StepContent>
               </Step>
             ))
@@ -148,16 +160,16 @@ export default function Create() {
       {
         // Once all steps are completed then display the Review button
         readyForReview && activeStep >= steps.length
-        ? <Button
-            className={classes.button}
-            variant="outlined"
-            color="primary"
-            href="/cocktail"
-            onClick={() => console.log("Went to next")}
-          >
-            Review
-          </Button>
-        : false
+          ? <Button
+              className={classes.button}
+              variant="outlined"
+              color="primary"
+              href="/cocktail"
+              onClick={() => console.log("Went to next")}
+            >
+              Review
+            </Button>
+          : false
       }
       </div>
     </main>
