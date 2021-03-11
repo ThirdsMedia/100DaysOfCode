@@ -732,3 +732,42 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** I separated stuff into different functions, but now the state variables are being passed around everywhere. I think I need a break so I can come back fresh.
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day37/src)
+
+### Day 38: March 11, 2021 - Thursday
+
+**Today's Progress**: Removed the option that was added on Day 37. Way too much conditional logic and other code mess. 
+
+**Thoughts:** Well I guess sometimes you just do the wrong thing. I completely removed the feature from yesterday as it added WAY too much repetetive code and all kinds of state variables being passed around. I can add that feature later if it becomes necessary, but I'm sure there is a better way to implement that functionality.
+
+**Front-end To Do:**
+- [ ] Fix images
+	- [ ] Move the assets folder in 100DaysOfCode/public. 
+	- [ ] Go through all components and remove Image imports and replace them with absolute urls like in LandingPage/Header and ItemSheet. 
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [ ] Create a Contact component
+	- [ ] A ForgotPassword component
+	- [ ] About component
+	- [ ] LandingPage
+		- [ ] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] Instead of having a button in the Instructions component to help you select a picture just change the review ItemSheet to have a blank photo instead of the current one behind the ExpandMoreIcon. Don't allow anything to continue until a picture is selected and then display the rest of the ItemSheet
+		- [ ] CameraRoll to choose a picture
+		- [ ] Review component
+- [ ] Navigation 
+	- [ ] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Completely backtracked from yesterday.
+
+**Solutions:** Put more thought into what you NEED to implement right now vs. what you don't. There is only 60 days left. 
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day38/src)
