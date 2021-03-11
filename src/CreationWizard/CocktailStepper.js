@@ -10,10 +10,7 @@ import {
   StepLabel,
   StepContent,
   Typography,
-  IconButton,
 } from '@material-ui/core';
-import { Link as Scroll } from 'react-scroll';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // You may need to refer to this: https://stackoverflow.com/questions/61215349/material-ui-stepper-not-keeping-state-when-move-next-or-back
 function renderStep(step) {
@@ -31,7 +28,7 @@ function renderStep(step) {
   }
 }
 
-export default function CocktailStepper({ steps, activeStep, handleNext }) {
+export default function CocktailStepper({ steps, activeStep, handleNext, handleReview }) {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -49,16 +46,6 @@ export default function CocktailStepper({ steps, activeStep, handleNext }) {
             <StepLabel>{label}</StepLabel>
             <StepContent id={`step-${activeStep}`}>
               <Typography>{renderStep(index)}</Typography>
-              {
-                // Stop showing the secondary ExpandMoreIcon if you've reached the Instructions step
-                index < steps.length - 1
-                  ? <Scroll to={`step-${activeStep}`} smooth="true">
-                      <IconButton color="primary">
-                        <ExpandMoreIcon onClick={handleNext} fontSize="large" />
-                      </IconButton>
-                    </Scroll>
-                  : false
-              }
             </StepContent>
           </Step>
         ))

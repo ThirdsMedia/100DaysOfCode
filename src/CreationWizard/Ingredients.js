@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2),
     minWidth: 120,
   },
+  nextItem: {
+    textAlign: 'center',
+  },
 }));
 
 function IngredientInput({ isMetric }) {
@@ -94,6 +97,7 @@ export default function Ingredients() {
 
   const addNewInput = () => {
     setInputs([...inputs, {...newInput}])
+    console.log(window.pageYOffset)
   }
 
   return (
@@ -104,13 +108,15 @@ export default function Ingredients() {
         onChange={handleIsMetric}
       />
       {
-        inputs.map((input) => { 
-          return <IngredientInput isMetric={isMetric} />
+        inputs.map((input, id) => { 
+          return <IngredientInput key={`ingredient-${id}`} isMetric={isMetric} />
         })
       }
-      <IconButton onClick={addNewInput} color="primary">
-        <AddBoxIcon fontSize="large"/>
-      </IconButton>
+      <div className={classes.nextItem}>
+        <IconButton onClick={addNewInput} color="primary">
+          <AddBoxIcon fontSize="large"/>
+        </IconButton>
+      </div>
     </Container>
   );
 }

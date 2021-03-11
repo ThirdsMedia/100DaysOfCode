@@ -2,25 +2,25 @@ import React, { useState } from 'react';
 import MainBar from '../Helpers/MainBar';
 import Help from './Help';
 import CocktailStepper from './CocktailStepper';
+import Next from './Next';
 import {
   AppBar,
   Toolbar,
   IconButton,
   Button,
 } from '@material-ui/core';
-import { Link as Scroll } from 'react-scroll';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     backgroundColor: theme.palette.background.main,
+    display: 'flex',
   },
   infoButton: {
     float: 'right',
+    textAlign: 'flex-end',
   },
   button: {
     borderRadius: 37,
@@ -78,31 +78,23 @@ export default function Wizard() {
         className={classes.appBar}
       >
         <Toolbar>
-        <IconButton disabled={activeStep === 0} onClick={handleBack}>
-          <ExpandLessIcon />
-        </IconButton>
-        <Scroll to={`step-${activeStep}`} smooth="true">
-          <IconButton
-            variant="contained"
-            color="primary"
-            onClick={handleNext}
-          >
-            {
-              /* If you're on the last step then display the CheckCircle instead of the ExpandMore */
-              activeStep >= steps.length - 1
-                ? <CheckCircleIcon onClick={handleReview} />
-                : <ExpandMoreIcon />
-            }
+          <IconButton disabled={activeStep === 0} onClick={handleBack}>
+            <ExpandLessIcon />
           </IconButton>
-        </Scroll>
-        {
-          /* If you're at the end of your stepper then stop showing the help icon */
-          activeStep <= steps.length - 1
-            ? <IconButton className={classes.infoButton} onClick={handleHelp}>
-                <InfoOutlinedIcon />
-              </IconButton>
-            : false
-        }
+          <Next
+            activeStep={activeStep}
+            steps={steps}
+            handleNext={handleNext}
+            handleReview={handleReview}
+           />
+          {
+            /* If you're at the end of your stepper then stop showing the help icon */
+            activeStep <= steps.length - 1
+              ? <IconButton className={classes.infoButton} onClick={handleHelp}>
+                  <InfoOutlinedIcon />
+                </IconButton>
+              : false
+          }
         </Toolbar>
       </AppBar>
       <div>
@@ -118,7 +110,7 @@ export default function Wizard() {
       <div className={classes.buttonDiv}>
       {
         /* Once all steps are completed then display the Review button */
-        readyForReview && activeStep >= steps.length
+        readyForReview && activeStep > steps.length - 1
           ? <Button
               className={classes.button}
               variant="outlined"
