@@ -85,7 +85,7 @@ export default function Instructions() {
           <option aria-label="None" value="" />
           {
             glassware.map((glass) => {
-              return <option value={"Whip Shake"}>{glass}</option>
+              return <option value={glass}>{glass}</option>
             })
           }
         </Select>
