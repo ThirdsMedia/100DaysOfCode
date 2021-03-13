@@ -848,5 +848,5 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Solutions:** Do some more research, look at more examples.
 
-**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day40/src/Navigation)
+**Link to work:** [Drawer Navigator](https://github.com/ThirdsMedia/100DaysOfCode/tree/day40/src/Navigation)
 
