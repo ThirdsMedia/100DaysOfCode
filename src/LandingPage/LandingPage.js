@@ -1,4 +1,5 @@
 import React from 'react';
+import MainBar from '../Helpers/MainBar';
 import Header from './Header';
 import CallToAction from './CallToAction';
 import { CssBaseline } from '@material-ui/core';
@@ -13,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
 },
 }));
 
-
 export default function LandingPage() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <MainBar />
       <Header />
       <CallToAction />
     </div>

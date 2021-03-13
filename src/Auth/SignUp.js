@@ -7,6 +7,8 @@ import {
   Avatar,
   Typography,
   TextField,
+  FormControlLabel,
+  Checkbox,
   Button,
   Grid,
   Link 
@@ -22,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(6),
   },
   textField: {
-    padding: 10,
+    borderRadius: 37,
   },
   submitButton: {
     color: 'white',
@@ -51,6 +53,7 @@ export default function SignUp() {
         margin="normal"
         required
         fullWidth
+        variant="outlined"
         InputProps={{
           className: classes.textField
         }}
@@ -61,6 +64,7 @@ export default function SignUp() {
         margin="normal"
         required
         fullWidth
+        variant="outlined"
         InputProps={{
           className: classes.textField
         }}
@@ -70,6 +74,7 @@ export default function SignUp() {
         label="Password"
         margin="normal"
         type="password"
+        variant="outlined"
         required
         fullWidth
         InputProps={{
@@ -87,8 +92,15 @@ export default function SignUp() {
       </Button>
       <Grid 
         container
-        justify="space-around"
+        justify="center"
+        alignItems="center"
       >
+        <Grid item>
+           <FormControlLabel
+            control={<Checkbox color="secondary" id="remember" size="small" />}
+            label="Receive notifications via text"
+          />
+        </Grid>
         <Grid item>
           <Link href="/signin" variant="body4">
             Already have an account? Sign In

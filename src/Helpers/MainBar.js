@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AppDrawer from '../Navigation/AppDrawer';
 import {
   AppBar,
   Toolbar,
@@ -17,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     flexGrow: 1,
-    background: 'none',
+    background: 'transparent',
     boxShadow: 'none',
   },
   appBarWrapper: {
@@ -38,14 +39,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MainBar({ hasInfoIcon }) {
+export default function MainBar({ color }) {
   const classes = useStyles();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleDrawer = () => {
+    setIsOpen(!isOpen)
+  }
 
   return (
     <div className={classes.root}>
-      <AppBar position="sticky" className={classes.appBar} elevation={0}>
+      <AppDrawer isOpen={isOpen} handleDrawer={handleDrawer} />
+      <AppBar 
+        position="sticky" 
+        className={classes.appBar} 
+        elevation={0}
+      >
         <Toolbar className={classes.appBarWrapper}>
-          <IconButton>
+          <IconButton onClick={handleDrawer}>
             <SortIcon className={classes.icon} />
           </IconButton>
           <Typography className={classes.header} component="h1" variant="h3">

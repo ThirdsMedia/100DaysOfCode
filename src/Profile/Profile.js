@@ -112,7 +112,6 @@ export default function Profile({ profileData }) {
 
   return (
     <div>
-      {/* profile container */}
       <Container maxWidth="xl" className={classes.container}>
         <Avatar className={classes.profilePic} src={ProfilePic} />
         <Container className={classes.info}>
