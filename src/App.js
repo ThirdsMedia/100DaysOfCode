@@ -15,37 +15,38 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightGreen, pink } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: lightGreen[500],
+  palette: {
+    primary: {
+      main: lightGreen[500],
       background: '#202020',
-		},
-		secondary: {
+    },
+    secondary: {
       main: pink[500],
       background: '#505050',
-		},
+    },
     background: {
       main: '#303030',
     },
-		type: 'dark',
-	},
+    type: 'dark',
+  },
 })
 
 export default function App() {
   return (
-		<ThemeProvider theme={theme}>
+    <ThemeProvider>
       <CssBaseline />
       <Router>
         <Route path="/" exact component={LandingPage} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/create" component={Wizard} />
-        <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
+        <Route path="/ucts" render={() => <Products data={exampleDatabase} />} />
         <Route path="/profile" render={() => <Profile profileData={profileData} />} />
         <Route path="/editprofile" render={() => <EditProfile profileData={profileData} />} />
         <Route path="/cocktail" render={() => <ItemSheet item={exampleDatabase[0]} isPreview />} />
       </Router>
-		</ThemeProvider>
-	)
+    </ThemeProvider>
+  )
 }
+
 
