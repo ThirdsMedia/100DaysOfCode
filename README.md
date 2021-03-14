@@ -811,11 +811,11 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Beacon Server](https://github.com/djIsLucid/Beacon)
 
-### Day 40: March 13, 2021 - Saturday
+### Day 41: March 14, 2021 - Sunday
 
-**Today's Progress**: Implemented a Drawer navigator to tie the whole application together.
+**Today's Progress**: Added an Avatar section to the AppDrawer. Changed the InfoIcon button in the CreationWizard to be a right Drawer. 
 
-**Thoughts:** It's getting exciting now. My guess is that I'll be able to finish designing the front end in the next ten days which makes it an even 50/50 split for frontend and backend. Seems perfect.
+**Thoughts:** The InfoDrawer idea I think is way better and can be implemented anywhere in the App where there is an info button. I can't figure out how to get long text to wrap inside of the Drawer (or anywhere) for that matter. I don't get why. Maybe it's because I'm sourcing the text from somewhere else so it's outside of the styling? I don't know. 
 
 **Front-end To Do:**
 - [ ] Fix images
@@ -844,9 +844,9 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 - [ ] Make any final style touches and clean up the project structure
 - [ ] Re-deploy on gh-pages. The front-end should be complete
 
-**Issues:** I'm not 100% sure I've implemented the cleanest way to use this application. Instead of sprinkling hrefs everywhere to navigate around it may make more sense to have the Drawer navigator be located right in App.js and have it render components. This way it's following the single page application principles that React is known for. 
+**Issues:** Can't get text wrapping to work inside the Help component. 
 
-**Solutions:** Do some more research, look at more examples.
+**Solutions:** Look more closely at it to see if it's just a styling issue. Check out the ItemSheet component to see if there is some style thing that makes it work there but not in the InfoDrawer. Google. Punch things. Whine. 
 
-**Link to work:** [Drawer Navigator](https://github.com/ThirdsMedia/100DaysOfCode/tree/day40/src/Navigation)
+**Link to work:** [InfoDrawer](https://github.com/ThirdsMedia/100DaysOfCode/tree/day41/src/CreationWizard)
 
