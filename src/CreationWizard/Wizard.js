@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MainBar from '../Helpers/MainBar';
-import Help from './Help';
+import InfoDrawer from './InfoDrawer';
 import CocktailStepper from './CocktailStepper';
 import Next from './Next';
 import {
@@ -43,11 +43,11 @@ export default function Wizard() {
   const classes = useStyles();
   const steps = ['Basic Information', 'Base Spirit', 'Ingredients', 'Instructions'];
   const [activeStep, setActiveStep] = useState(0);
-  const [showHelp, setShowHelp] = useState(false);
   const [readyForReview, setReadyForReview] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleHelp = () => {
-    setShowHelp(!showHelp)
+  const handleDrawer = () => {
+    setIsOpen(!isOpen)
   }
 
   const handleBack = () => {
@@ -90,7 +90,7 @@ export default function Wizard() {
           {
             /* If you're at the end of your stepper then stop showing the help icon */
             activeStep <= steps.length - 1
-              ? <IconButton className={classes.infoButton} onClick={handleHelp}>
+              ? <IconButton className={classes.infoButton} onClick={handleDrawer}>
                   <InfoOutlinedIcon />
                 </IconButton>
               : false
@@ -98,9 +98,11 @@ export default function Wizard() {
         </Toolbar>
       </AppBar>
       <div>
-        { 
-          showHelp ? <Help step={activeStep} /> : false 
-        }
+        <InfoDrawer 
+          step={activeStep} 
+          isOpen={isOpen}
+          handleDrawer={handleDrawer}
+        /> 
         <CocktailStepper 
           steps={steps} 
           activeStep={activeStep} 
@@ -110,7 +112,7 @@ export default function Wizard() {
       <div className={classes.buttonDiv}>
       {
         /* Once all steps are completed then display the Review button */
-        readyForReview && activeStep > steps.length - 1
+        readyForReview && activeStep <= steps.length - 1
           ? <Button
               className={classes.button}
               variant="outlined"

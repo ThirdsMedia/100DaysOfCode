@@ -1,6 +1,11 @@
 import React from 'react';
+import profileData from '../static/profileData';
 import {
+  Avatar,
   Drawer,
+  Grid,
+  IconButton,
+  Typography,
   Link,
   List,
   ListItem,
@@ -15,10 +20,17 @@ import LocalBarIcon from '@material-ui/icons/LocalBar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 5,
     minWidth: 200,
+  },
+  avatar: {
+    padding: 10,
+  },
+  title: {
+    fontFamily: 'Nunito',
   },
 }));
 
@@ -33,8 +45,25 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
       variant='temporary'
     >
       <div className={classes.root}>
+        <Grid container className={classes.avatar}>
+          <Grid item>
+            <IconButton href="/profile">
+              <Avatar src={profileData.picture} />  
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <Typography variant="h6" className={classes.title}>
+              {profileData.fname+' '}
+              {profileData.lname}
+            </Typography>
+            <Typography variant="caption" color="textSecondary" className={classes.title}>
+              {profileData.username}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Divider />
         <List component='nav'>
-          <Link href='/' to='/'>
+          <Link href='/' color='inherit'>
             <ListItem button>
               <ListItemIcon>
                 <HomeIcon /> 
@@ -42,7 +71,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
               <ListItemText primary="Home" />
             </ListItem>
           </Link>
-          <Link href='/profile' to='/profile'>
+          <Link href='/profile' color='inherit'>
             <ListItem button>
               <ListItemIcon>
                 <AccountCircleIcon /> 
@@ -50,7 +79,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
               <ListItemText primary="Profile" />
             </ListItem>
           </Link>
-          <Link href='/discover' to='/disover'>
+          <Link href='/discover' color='inherit'>
             <ListItem button>
               <ListItemIcon>
                 <SearchIcon /> 
@@ -58,7 +87,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
               <ListItemText primary="Discover" />
             </ListItem>
           </Link>
-          <Link href='/create' to='/create'>
+          <Link href='/create' color='inherit'>
             <ListItem button>
               <ListItemIcon>
                 <LocalBarIcon /> 
@@ -69,7 +98,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
         </List>
         <Divider />
         <List component='nav'>
-          <Link href='/signin' to='/signin'>
+          <Link href='/signin' color='inherit'>
             <ListItem button>
               <ListItemIcon>
                 <ExitToAppIcon />

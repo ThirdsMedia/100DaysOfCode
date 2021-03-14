@@ -33,14 +33,14 @@ const theme = createMuiTheme({
 
 export default function App() {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
         <Route path="/" exact component={LandingPage} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/create" component={Wizard} />
-        <Route path="/ucts" render={() => <Products data={exampleDatabase} />} />
+        <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
         <Route path="/profile" render={() => <Profile profileData={profileData} />} />
         <Route path="/editprofile" render={() => <EditProfile profileData={profileData} />} />
         <Route path="/cocktail" render={() => <ItemSheet item={exampleDatabase[0]} isPreview />} />

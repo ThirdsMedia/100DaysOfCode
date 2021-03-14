@@ -1,7 +1,7 @@
 const info = [
 	{
 		id: 0,
-    location: "/products",
+    location: "/discover",
     title: "Discover",
     desc: "Search for one of our custom cocktail recipes",
 		image: process.env.PUBLIC_URL + "/assets/dark-forest.jpeg",

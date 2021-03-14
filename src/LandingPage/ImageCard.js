@@ -44,29 +44,28 @@ export default function ImageCard({ info, isAnimated}) {
       ... isAnimated ? { timeout: 1000 } : {}
     }>
       <Link href={info.location}>
-      <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={info.image}
-            title="Navigate"
-            href="/products"
-          />
-          <CardContent>
-            <Typography 
-              gutterBottom 
-              variant="h5" 
-              component="h1" 
-              className={classes.title}
-            >
-              {info.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraph}>
-              {info.desc}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+        <Card className={classes.root}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={info.image}
+              title="Navigate"
+            />
+            <CardContent>
+              <Typography 
+                gutterBottom 
+                variant="h5" 
+                component="h1" 
+                className={classes.title}
+              >
+                {info.title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraph}>
+                {info.desc}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
       </Link>
     </Collapse>
   );
