@@ -1,9 +1,9 @@
 import React from 'react';
-import helpText from '../static/helpText';
 import {
   Drawer,
-  Box,
+  Grid,
   Typography,
+  Divider
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -12,21 +12,39 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
     maxWidth: 500,
   },
+  title: {
+    textAlign: 'center',
+    fontFamily: 'Nunito',
+    padding: 5,
+  },
 }));
 
-export default function InfoDrawer({ step, isOpen, handleDrawer }) {
+export default function InfoDrawer({ step, stepTitle, isOpen, handleDrawer }) {
   const classes = useStyles();
 
   const steps = () => {
     switch (step) {
       case 0:
-        return helpText[0]
+        return `help text1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBBBBBBBBBBBBBBBBBBBBB
+                  CCCCCCCCCCCCCCCCCCCCCCC`
       case 1:
-        return helpText[1]
+        return `Text 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        `
       case 2:
-        return helpText[2]
+        return `Text 3 yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+                yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+                yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+                yyyyyyYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYyyyyyyyyy
+        `
       case 3:
-        return helpText[3]
+        return `Text 4 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgggggggggg
+                ggggggggggggggggggggggggggggggggggggggggggggggggg aaaaaaa
+                GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGggggggggg
+                gggggggggggggggggggggggggggggggggggggggggghghggggggg`
       default:
         return false
     }
@@ -39,21 +57,19 @@ export default function InfoDrawer({ step, isOpen, handleDrawer }) {
       onClose={handleDrawer}
       variant='persistent'
     >
-      <Box className={classes.root}>
-      {
-        step <= 3
-        ? 
-          <Typography 
-            align="center"
-            component="body1" 
-            color="textSecondary"
-            noWrap
-          >
-            { steps() }
-          </Typography>
-        : false
-      }
-      </Box>
+      <Grid container direction='column' className={classes.root}>
+        {
+          step <= 3
+          ? (
+            <div>
+              <Typography className={classes.title} variant='h5'>{stepTitle}</Typography>
+              <Divider />
+              <p>{steps()}</p>
+            </div>
+          )
+          : false
+        }
+      </Grid>
     </Drawer>
   );
 }

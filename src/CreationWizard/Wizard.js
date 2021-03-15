@@ -100,6 +100,7 @@ export default function Wizard() {
       <div>
         <InfoDrawer 
           step={activeStep} 
+          stepTitle={steps[activeStep]}
           isOpen={isOpen}
           handleDrawer={handleDrawer}
         /> 
@@ -112,7 +113,7 @@ export default function Wizard() {
       <div className={classes.buttonDiv}>
       {
         /* Once all steps are completed then display the Review button */
-        readyForReview && activeStep <= steps.length - 1
+        activeStep === steps.length
           ? <Button
               className={classes.button}
               variant="outlined"

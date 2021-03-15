@@ -6,6 +6,8 @@ import exampleDatabase from './static/exampleDatabase';
 import profileData from './static/profileData';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
+import ForgotPassword from './Auth/ForgotPassword';
+import Contact from './Contact';
 import Wizard from './CreationWizard/Wizard';
 import Products from './Products/Products';
 import LandingPage from './LandingPage/LandingPage';
@@ -39,6 +41,8 @@ export default function App() {
         <Route path="/" exact component={LandingPage} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/forgotpassword" component={ForgotPassword} />
+        <Route path="/contact" component={Contact} />
         <Route path="/create" component={Wizard} />
         <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
         <Route path="/profile" render={() => <Profile profileData={profileData} />} />
