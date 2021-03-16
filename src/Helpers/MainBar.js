@@ -54,6 +54,7 @@ export default function MainBar({ color }) {
         position="sticky" 
         className={classes.appBar} 
         elevation={0}
+        color="transparent"
       >
         <Toolbar className={classes.appBarWrapper}>
           <IconButton onClick={handleDrawer}>

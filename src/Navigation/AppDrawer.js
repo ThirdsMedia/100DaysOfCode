@@ -17,6 +17,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import EmailIcon from '@material-ui/icons/Email';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -93,6 +94,14 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
                 <LocalBarIcon /> 
               </ListItemIcon>
               <ListItemText primary="Create" />
+            </ListItem>
+          </Link>
+          <Link href='/contact' color='inherit'>
+            <ListItem button>
+              <ListItemIcon>
+                <EmailIcon />
+              </ListItemIcon>
+              <ListItemText primary="Contact Us" />
             </ListItem>
           </Link>
         </List>

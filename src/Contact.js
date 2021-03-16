@@ -1,4 +1,5 @@
 import React from 'react';
+import MainBar from './Helpers/MainBar';
 import Copyright from './Helpers/Copyright';
 import {
   Avatar,
@@ -19,13 +20,11 @@ const useStyles = makeStyles((theme) => ({
   image: {
     backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/polynesiancocktail.webp'})`,
     backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    margin: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -42,9 +41,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     borderRadius: 37,
   },
-  textField: {
-    borderRadius: 37,
-  },
 }));
 
 export default function Contact() {
@@ -52,7 +48,9 @@ export default function Contact() {
 
   return (
     <Grid container component="main" className={classes.root}>
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={false} sm={4} md={7} className={classes.image}>
+        <MainBar />
+      </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -64,31 +62,43 @@ export default function Contact() {
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
-              margin="normal"
+              margin="dense"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
               autoFocus
-              InputProps={{
-                className: classes.textField
-              }}
             />
             <TextField
               variant="outlined"
-              margin="normal"
+              margin="dense"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              InputProps={{
-                className: classes.textField
-              }}
+              name="email"
+              label="Email"
+              id="email"
+            />
+            <TextField
+              variant="outlined"
+              margin="dense"
+              fullWidth
+              name="phone"
+              label="Phone Number (optional)"
+              id="phone"
+            />
+            <TextField
+              variant="outlined"
+              margin="dense"
+              required
+              fullWidth
+              multiline
+              rows='6'
+              maxRows='10'
+              name="message"    
+              label="Message"
+              id="message"
             />
             <Button
               type="submit"
@@ -97,7 +107,7 @@ export default function Contact() {
               color="primary"
               className={classes.submit}
             >
-              Contact Us
+              Submit
             </Button>
             <Box mt={5}>
               <Copyright />
