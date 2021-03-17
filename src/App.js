@@ -1,17 +1,17 @@
 import React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import Profile from './Profile/Profile';
-import EditProfile from './Profile/EditProfile';
+import Profile from './Pages/Profile/Profile';
+import EditProfile from './Pages/Profile/EditProfile';
 import exampleDatabase from './static/exampleDatabase';
 import profileData from './static/profileData';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
-import Contact from './Contact';
+import Contact from './Pages/Contact';
 import Wizard from './CreationWizard/Wizard';
 import Products from './Products/Products';
 import LandingPage from './LandingPage/LandingPage';
-import ItemSheet from './Helpers/ItemSheet';
+import Cocktail from './Components/Cocktail';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightGreen, pink } from '@material-ui/core/colors';
@@ -47,7 +47,7 @@ export default function App() {
         <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
         <Route path="/profile" render={() => <Profile profileData={profileData} />} />
         <Route path="/editprofile" render={() => <EditProfile profileData={profileData} />} />
-        <Route path="/cocktail" render={() => <ItemSheet item={exampleDatabase[0]} isPreview />} />
+        <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} isPreview />} />
       </Router>
     </ThemeProvider>
   )

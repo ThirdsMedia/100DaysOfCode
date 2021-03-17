@@ -1,8 +1,6 @@
 import React from 'react';
-import Copyright from '../Helpers/Copyright';
+import Copyright from '../Components/Copyright';
 import tmImage from '../assets/ThirdsMediaSmall.png';
-
-/* Material UI Core */
 import {
   Container,
   Avatar,

@@ -1,5 +1,5 @@
 import React from 'react';
-import MainBar from '../Helpers/MainBar';
+import MainBar from '../Components/MainBar';
 import Header from './Header';
 import CallToAction from './CallToAction';
 import { CssBaseline } from '@material-ui/core';

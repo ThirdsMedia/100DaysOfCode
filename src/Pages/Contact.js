@@ -1,6 +1,6 @@
 import React from 'react';
-import MainBar from './Helpers/MainBar';
-import Copyright from './Helpers/Copyright';
+import MainBar from '../Components/MainBar';
+import Copyright from '../Components/Copyright';
 import {
   Avatar,
   Button,

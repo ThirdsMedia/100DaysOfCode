@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MainBar from '../Helpers/MainBar';
+import MainBar from '../Components/MainBar';
 import InfoDrawer from './InfoDrawer';
 import CocktailStepper from './CocktailStepper';
 import Next from './Next';

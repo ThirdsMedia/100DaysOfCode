@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Container,
   Grid,
+  Link,
   Card,
   CardActionArea,
   CardContent,
@@ -47,41 +48,43 @@ export default function CardList({ data }) {
         data.map((card) => {
           return (
             <Grid key={card.id} item>
-              <Card raised className={classes.card}>
-                <CardActionArea>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image={cocktailImage}
-                    title="MoonBoots"
-                  />
-                  <CardContent>
-                    <Typography 
-                      gutterBottom 
-                      variant="h5" 
-                      component="h2"
-                      className={classes.text}
-                    >
-                      {card.name}
-                    </Typography>
-                    <div className={classes.content}>
-                    {
-                      card.ingredients.map((item) => {
-                        return (
-                          <Typography 
-                            key={item.id}
-                            variant="body2" 
-                            color="textSecondary" 
-                            component="p" 
-                          >
-                            {item.name}
-                          </Typography>
-                        );
-                      })
-                    }
-                    </div>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+              <Link href="/cocktail">
+                <Card raised className={classes.card}>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={cocktailImage}
+                      title="MoonBoots"
+                    />
+                    <CardContent>
+                      <Typography 
+                        gutterBottom 
+                        variant="h5" 
+                        component="h2"
+                        className={classes.text}
+                      >
+                        {card.name}
+                      </Typography>
+                      <div className={classes.content}>
+                      {
+                        card.ingredients.map((item) => {
+                          return (
+                            <Typography 
+                              key={item.id}
+                              variant="body2" 
+                              color="textSecondary" 
+                              component="p" 
+                            >
+                              {item.name}
+                            </Typography>
+                          );
+                        })
+                      }
+                      </div>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Link>
             </Grid>
           )
         })

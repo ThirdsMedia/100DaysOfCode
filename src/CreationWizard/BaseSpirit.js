@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import MetricSelector from '../Helpers/MetricSelector';
-import ImperialSelector from '../Helpers/ImperialSelector';
+import MetricSelector from '../Components/MetricSelector';
+import ImperialSelector from '../Components/ImperialSelector';
 import {
   Container,
   TextField,

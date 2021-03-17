@@ -1,8 +1,8 @@
 import React, { useState }  from 'react';
-import CardList from '../Products/CardList';
-import QRCode from '../Helpers/QRCode';
-import ProfilePic from '../assets/dj-pct.jpg';
-import exampleDatabase from '../static/exampleDatabase';
+import CardList from '../../Products/CardList';
+import QRCode from '../../Components/QRCode';
+import ProfilePic from '../../assets/dj-pct.jpg';
+import exampleDatabase from '../../static/exampleDatabase';
 import {
   AppBar,
   Avatar,

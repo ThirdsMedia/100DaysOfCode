@@ -1,7 +1,5 @@
 import React from 'react';
-import Copyright from '../Helpers/Copyright';
-
-/* Material UI Core */
+import Copyright from '../Components/Copyright';
 import {
   Container,
   Avatar,
