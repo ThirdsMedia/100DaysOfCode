@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MainBar({ color }) {
+export default function MainBar({ color, noLogo }) {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,15 +54,19 @@ export default function MainBar({ color }) {
         position="sticky" 
         className={classes.appBar} 
         elevation={0}
-        color="transparent"
+        color='transparent'
       >
         <Toolbar className={classes.appBarWrapper}>
           <IconButton onClick={handleDrawer}>
             <SortIcon className={classes.icon} />
           </IconButton>
-          <Typography className={classes.header} component="h1" variant="h3">
-            Thirds<span className={classes.colorText}>Media</span>
-          </Typography>
+          {
+            !noLogo
+              ? <Typography className={classes.header} component="h1" variant="h3">
+                  Thirds<span className={classes.colorText}>Media</span>
+                </Typography>
+              : false
+          }
         </Toolbar>
       </AppBar>
     </div>

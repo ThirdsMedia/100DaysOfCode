@@ -64,7 +64,7 @@ export default function InfoDrawer({ step, stepTitle, isOpen, handleDrawer }) {
             <div>
               <Typography className={classes.title} variant='h5'>{stepTitle}</Typography>
               <Divider />
-              <p>{steps()}</p>
+              <Typography variant="p">{steps()}</Typography>
             </div>
           )
           : false

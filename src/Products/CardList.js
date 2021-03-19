@@ -65,22 +65,24 @@ export default function CardList({ data }) {
                       >
                         {card.name}
                       </Typography>
-                      <div className={classes.content}>
-                      {
-                        card.ingredients.map((item) => {
-                          return (
-                            <Typography 
-                              key={item.id}
-                              variant="body2" 
-                              color="textSecondary" 
-                              component="p" 
-                            >
-                              {item.name}
-                            </Typography>
-                          );
-                        })
-                      }
-                      </div>
+                      <Grid container className={classes.content} justify='center'>
+                        <Grid item>
+                        {
+                          card.ingredients.map((item) => {
+                            return (
+                              <Typography 
+                                key={item.id}
+                                variant="body2" 
+                                color="textSecondary" 
+                                component="p" 
+                              >
+                                {item.name}
+                              </Typography>
+                            );
+                          })
+                        }
+                        </Grid>
+                      </Grid>
                     </CardContent>
                   </CardActionArea>
                 </Card>

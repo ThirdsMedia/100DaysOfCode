@@ -1,4 +1,5 @@
 import React, { useState }  from 'react';
+import MainBar from '../../Components/MainBar';
 import CardList from '../../Products/CardList';
 import QRCode from '../../Components/QRCode';
 import ProfilePic from '../../assets/dj-pct.jpg';
@@ -112,6 +113,9 @@ export default function Profile({ profileData }) {
 
   return (
     <div>
+      <div style={{backgroundColor: '#202020'}}>
+        <MainBar noLogo />
+      </div>
       <Container maxWidth="xl" className={classes.container}>
         <Avatar className={classes.profilePic} src={ProfilePic} />
         <Container className={classes.info}>

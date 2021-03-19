@@ -18,6 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CropFreeIcon from '@material-ui/icons/CropFree';
+import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
 
 
 const useStyles = makeStyles(theme => ({
@@ -79,16 +80,34 @@ const useStyles = makeStyles(theme => ({
 export default function ItemSheet({ item, isPreview }) {
   const classes = useStyles();
   const [showQRCode, setShowQRCode] = useState(false);
-  const handleQRCode = () => setShowQRCode(!showQRCode);
+
+  const handleQRCode = () => {
+    setShowQRCode(!showQRCode);
+  }
 
   return (
     <div>
       <div className={classes.header} id='drink-image'>
-        <Scroll to='drink-info' smooth='true'>
-          <IconButton>
-            <ExpandMoreIcon className={classes.scrollButton} />
-          </IconButton>
-        </Scroll>
+        {
+          !isPreview
+          ? <Scroll to='drink-info' smooth='true'>
+              <IconButton>
+                <ExpandMoreIcon className={classes.scrollButton} />
+              </IconButton>
+            </Scroll>
+          : <div> 
+              <input 
+                type="file" 
+                accept="image/*" 
+                hidden 
+              />
+              <label htmlFor="contained-button-file">
+                <IconButton>
+                  <AddAPhotoOutlinedIcon className={classes.scrollButton} />
+                </IconButton>
+              </label>
+            </div>
+        }
       </div>
       <div id="drink-info" className={classes.info}>
         <AppBar position='sticky' className={classes.appBar}>

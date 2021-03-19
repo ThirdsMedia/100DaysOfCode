@@ -8,7 +8,6 @@ import {
   FormControl,
   FormControlLabel,
   Select,
-  InputLabel,
   ListSubheader,
   MenuItem,
   Checkbox,
