@@ -971,3 +971,43 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [ForgotPassword](https://github.com/ThirdsMedia/100DaysOfCode/tree/day44/src/Auth/ForgotPassword.js)
 
+### Day 45: March 18, 2021 - Thursday
+
+**Today's Progress**: Started the About page. Added search filters to the Products page. Added a Selector to the BaseSpirit component.
+
+**Thoughts:** I feel like I keep finding other tiny things that I forgot to think about. I have this nagging feeling like my code is completely messy and reptetive and poorly organized. Everything works though, so as long as it translates well to AndroidStudio emulator then I'm not terribly worried. Of COURSE it's messy :P.
+
+**Front-end To Do:**
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [ ] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [ ] Once you've passed the submit code part, make it display a button and redirect. 
+	- [ ] About component
+	- [ ] LandingPage
+		- [ ] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] Instead of having a button in the Instructions component to help you select a picture just change the review ItemSheet to have a blank photo instead of the current one behind the ExpandMoreIcon. Don't allow anything to continue until a picture is selected and then display the rest of the ItemSheet
+		- [ ] CameraRoll to choose a picture
+		- [ ] Add props to decided whether the ItemSheet component is a review version or a display version.
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Tiny gremlins keep peering around corners. 
+
+**Solutions:** Stop feeding them. 
+
+**Link to work:** [All over the place](https://github.com/ThirdsMedia/100DaysOfCode/tree/day45/src)
+
