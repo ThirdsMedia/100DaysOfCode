@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainBar from '../Components/MainBar';
 import CardList from './CardList';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import spirits from '../static/spirits';
+import {
+  TextField,
+  Grid,
+  FormControl,
+  ListSubheader,
+  InputLabel,
+  Select,
+  MenuItem,
+  InputAdornment,
+} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -20,27 +29,55 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 50,
     width: 700,
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
 }));
 
 export default function Products({ data }) {
   const classes = useStyles();
+  const [filter, setFilter] = useState('name');
+
+  const handleChange = (event) => {
+    setFilter(event.target.value) 
+  }
 
   return (
     <div>
       <div className={classes.appBar}>
         <MainBar />
-        <TextField 
-          id="search"
-          variant="outlined"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />              
-              </InputAdornment>
-            ),
-            className: classes.searchBox
-          }}
-        />
+        <Grid container alignItems='center' justify='center'>
+          <Grid item>
+            <TextField 
+              id="search"
+              variant="outlined"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />              
+                  </InputAdornment>
+                ),
+                className: classes.searchBox
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="search-filter">Filter by</InputLabel>
+              <Select defaultValue="" id="search-filter">
+                <MenuItem value={'name'}>Cocktail Name</MenuItem>
+                <MenuItem value={'creator'}>Cocktail Creator</MenuItem>
+                <ListSubheader>Base Spirit'</ListSubheader>
+                {
+                  spirits.map((spirit, id) => {
+                    return <MenuItem value={spirit}>{spirit}</MenuItem>
+                  })
+                }
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
       </div>
       <CardList data={data} />
     </div>

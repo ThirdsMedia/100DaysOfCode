@@ -8,6 +8,7 @@ import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
 import Contact from './Pages/Contact';
+import About from './Pages/About';
 import Wizard from './CreationWizard/Wizard';
 import Products from './Products/Products';
 import LandingPage from './LandingPage/LandingPage';
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/contact" component={Contact} />
         <Route path="/create" component={Wizard} />
+        <Route path="/about" component={About} />
         <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
         <Route path="/profile" render={() => <Profile profileData={profileData} />} />
         <Route path="/editprofile" render={() => <EditProfile profileData={profileData} />} />

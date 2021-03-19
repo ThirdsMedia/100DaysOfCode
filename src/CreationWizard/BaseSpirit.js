@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import MetricSelector from '../Components/MetricSelector';
 import ImperialSelector from '../Components/ImperialSelector';
+import spirits from '../static/spirits';
 import {
   Container,
   TextField,
+  FormControl,
   FormControlLabel,
+  Select,
+  InputLabel,
+  ListSubheader,
+  MenuItem,
   Checkbox,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,6 +23,11 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     width: 650
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
+    minWidth: 120,
   },
 }));
 
@@ -45,6 +56,16 @@ export default function BaseSpirit() {
             className: classes.input
           }}
         />
+        <FormControl variant="outlined" className={classes.formControl}>
+          <Select defaultValue="" id="search-filter">
+            <ListSubheader>Spirit Type</ListSubheader>
+            {
+              spirits.map((spirit, id) => {
+                return <MenuItem value={spirit}>{spirit}</MenuItem>
+              })
+            }
+          </Select>
+        </FormControl>
       </div>
       {
         isMetric
@@ -54,3 +75,4 @@ export default function BaseSpirit() {
     </Container>
   );
 }
+

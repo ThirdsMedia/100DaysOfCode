@@ -94,7 +94,7 @@ export default function SignIn() {
         justify="space-around"
       >
         <Grid item>
-          <Link variant="body4">
+          <Link href="/forgotpassword" variant="body4">
             Forgot password?
           </Link>
         </Grid>
