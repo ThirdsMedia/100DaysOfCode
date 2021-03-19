@@ -1011,3 +1011,43 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [All over the place](https://github.com/ThirdsMedia/100DaysOfCode/tree/day45/src)
 
+### Day 46: March 19, 2021 - Friday
+
+**Today's Progress**: Fixed tiny code gremlins: Added more to the About page, added image upload to Cocktail.js, fixed MainBar color in Profile.js, some other stuff I can't remember. 
+
+**Thoughts:** ..
+
+**Front-end To Do:**
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [ ] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [ ] Once you've passed the submit code part, make it display a button and redirect. 
+	- [ ] About component
+	- [ ] LandingPage
+		- [ ] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] Instead of having a button in the Instructions component to help you select a picture just change the review ItemSheet to have a blank photo instead of the current one behind the ExpandMoreIcon. Don't allow anything to continue until a picture is selected and then display the rest of the ItemSheet
+		- [x] CameraRoll to choose a picture
+		- [ ] Add props to decided whether the ItemSheet component is a review version or a display version.
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** So many small things I can't keep track of.
+
+**Solutions:** Fix your To do list lol.
+
+**Link to work:** [All over the place](https://github.com/ThirdsMedia/100DaysOfCode/tree/day46/src)
+
