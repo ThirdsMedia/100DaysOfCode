@@ -1051,7 +1051,7 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [All over the place](https://github.com/ThirdsMedia/100DaysOfCode/tree/day46/src)
 
-### Day 47: March 21, 2021 - Sunday
+### Day 48: March 21, 2021 - Sunday
 
 **Today's Progress**: Fixed Landing page so that the CardItem's switch from row to column when screen width gets smaller. Added some functionality to ForgotPassword. Stared off into the distance
 
@@ -1090,5 +1090,45 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Live in the woods. 
 
 **Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day47)
+
+### Day 47: March 21, 2021 - Sunday
+
+**Today's Progress**: Finished ForgotPassword.js
+
+**Thoughts:** So thinking ahead to when I start coding the backend I'm seeing a few core functionalities to work on: User authentication (register, login, log out via Firebase), complex data input (the cocktail build form), updating profile information and favorites (updating database contents), QRCode generation (nodejs module of some sort), Password reset and Contact forms (email stuff via nodemailer or some sort of mailchimp integration), pictures (either file upload form on web, or camera/camera roll on mobile). Doesn't sound like much..... lol. 
+
+**Front-end To Do:**
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [x] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [x] Once you've passed the submit code part, make it display a button and redirect. 
+	- [x] About component
+	- [x] LandingPage
+		- [x] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] Instead of having a button in the Instructions component to help you select a picture just change the review ItemSheet to have a blank photo instead of the current one behind the ExpandMoreIcon. Don't allow anything to continue until a picture is selected and then display the rest of the ItemSheet
+		- [x] CameraRoll to choose a picture
+		- [ ] Add props to decided whether the ItemSheet component is a review version or a display version.
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** None. Smooth sailing this hour.
+
+**Solutions:** Jump out of the boat.
+
+**Link to work:** [ForgotPassword](https://github.com/ThirdsMedia/100DaysOfCode/tree/day48/src/Auth/ForgotPassword.js)
 
 
