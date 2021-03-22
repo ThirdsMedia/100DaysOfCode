@@ -2,10 +2,7 @@ import React from 'react';
 import MainBar from '../Components/MainBar';
 import {
   Typography,
-  IconButton,
 } from '@material-ui/core';
-import { Link as Scroll } from 'react-scroll';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({

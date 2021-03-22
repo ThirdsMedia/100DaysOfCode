@@ -43,7 +43,7 @@ export default function ImageCard({ info, isAnimated, image }) {
     <Collapse appear in={isAnimated} {
       ... isAnimated ? { timeout: 1000 } : {}
     }>
-      <Link href={info.location}>
+      <Link style={{ textDecoration: 'none' }} href={info.location}>
         <Card className={classes.root}>
           <CardActionArea>
             <CardMedia
