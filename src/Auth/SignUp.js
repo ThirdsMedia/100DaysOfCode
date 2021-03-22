@@ -9,7 +9,7 @@ import {
   Link 
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { lightGreen } from '@material-ui/core/colors';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -26,9 +26,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(5),
     fontWeight: 'bold',
     borderRadius: 50,
-    backgroundColor: lightGreen[500],
+    backgroundColor: theme.palette.primary.main,
     '&:hover': {
-      backgroundColor: lightGreen[700],
+      backgroundColor: theme.palette.primary.hover,
     },
   },
 }))
@@ -38,7 +38,9 @@ export default function SignUp() {
 
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">
-      <Avatar />
+      <Avatar>
+        <LockOpenIcon />
+      </Avatar>
       <Typography component="h1" variant="h5" color="textPrimary">
         Sign Up
       </Typography>

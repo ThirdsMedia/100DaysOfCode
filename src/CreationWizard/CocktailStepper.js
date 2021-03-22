@@ -9,20 +9,87 @@ import {
   Step,
   StepLabel,
   StepContent,
+  Button,
   Typography,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const useStyles = makeStyles(theme => ({
+  nextButton: {
+    borderRadius: 37,
+  },
+}));
 
 // You may need to refer to this: https://stackoverflow.com/questions/61215349/material-ui-stepper-not-keeping-state-when-move-next-or-back
-function renderStep(step) {
+function RenderStep(step, handleNext) {
+  const classes = useStyles();
+
   switch (step) {
     case 0:
-      return <BasicInfo />
+      return (
+        <div>
+          <BasicInfo />
+          <Button
+            className={classes.nextButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+            startIcon={<ExpandMoreIcon />}
+            onClick={handleNext}
+          >
+            Next
+          </Button>
+        </div>
+      )
     case 1:
-      return <BaseSpirit />
+      return (
+        <div>
+        <BaseSpirit />
+          <Button
+            className={classes.nextButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+            startIcon={<ExpandMoreIcon />}
+            onClick={handleNext}
+          >
+            Continue
+          </Button>
+        </div>
+      )
     case 2:
-      return <Ingredients />
+      return (
+          <div>
+          <Ingredients />
+          <Button
+            className={classes.nextButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+            startIcon={<ExpandMoreIcon />}
+            onClick={handleNext}
+          >
+            Keep going
+          </Button>
+          </div>
+      )
     case 3: 
-      return <Instructions />
+      return (
+        <div>
+        <Instructions />
+          <Button
+          //  className={classes.nextButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+            startIcon={<ExpandMoreIcon />}
+            onClick={handleNext}
+          >
+            Almost there
+          </Button>
+        </div>
+      )
     default:
       return false
   }
@@ -45,7 +112,7 @@ export default function CocktailStepper({ steps, activeStep, handleNext, handleR
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
             <StepContent id={`step-${activeStep}`}>
-              <Typography>{renderStep(index)}</Typography>
+              <Typography>{RenderStep(index, handleNext)}</Typography>
             </StepContent>
           </Step>
         ))

@@ -61,6 +61,7 @@ function IngredientInput({ isMetric }) {
               <Switch
                 name="recipe-type"
                 color="secondary"
+                checked={isUnitIngredient}
                 onChange={handleIsUnitIngredient}
               />
             }

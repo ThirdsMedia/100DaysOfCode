@@ -1,6 +1,5 @@
 import React from 'react';
 import Copyright from '../Components/Copyright';
-import tmImage from '../assets/ThirdsMediaSmall.png';
 import {
   Container,
   Avatar,
@@ -13,7 +12,7 @@ import {
   Checkbox 
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { lightGreen } from '@material-ui/core/colors';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -30,9 +29,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(5),
     fontWeight: 'bold',
     borderRadius: 50,
-    backgroundColor: lightGreen[500],
+    backgroundColor: theme.palette.primary.main,
     '&:hover': {
-      backgroundColor: lightGreen[700],
+      backgroundColor: theme.palette.primary.hover,
     },
     logo: {
       height: theme.spacing(10),
@@ -46,7 +45,9 @@ export default function SignIn() {
 
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">
-      <Avatar className={classes.logo} src={tmImage} />
+      <Avatar>
+        <LockOpenIcon />
+      </Avatar>
       <Typography component="h1" variant="h5">
         Sign In
       </Typography>

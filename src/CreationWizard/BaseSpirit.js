@@ -11,6 +11,7 @@ import {
   ListSubheader,
   MenuItem,
   Checkbox,
+  Button,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -27,6 +28,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     padding: theme.spacing(1),
     minWidth: 120,
+  },
+  nextButton: {
+    borderRadius: 37,
   },
 }));
 

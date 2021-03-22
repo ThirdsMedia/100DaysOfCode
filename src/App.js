@@ -13,6 +13,7 @@ import Wizard from './CreationWizard/Wizard';
 import Products from './Products/Products';
 import LandingPage from './LandingPage/LandingPage';
 import Cocktail from './Components/Cocktail';
+import Review from './Components/Review';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightGreen, pink } from '@material-ui/core/colors';
@@ -21,6 +22,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: lightGreen[500],
+      hover: lightGreen[700],
       background: '#202020',
     },
     secondary: {
@@ -46,10 +48,11 @@ export default function App() {
         <Route path="/contact" component={Contact} />
         <Route path="/create" component={Wizard} />
         <Route path="/about" component={About} />
+        <Route path="/review" render={() => <Review item={exampleDatabase[0]} />} />
         <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
         <Route path="/profile" render={() => <Profile profileData={profileData} />} />
         <Route path="/editprofile" render={() => <EditProfile profileData={profileData} />} />
-        <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} isPreview />} />
+        <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} />} />
       </Router>
     </ThemeProvider>
   )

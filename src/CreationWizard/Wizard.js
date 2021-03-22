@@ -9,6 +9,7 @@ import {
   IconButton,
   Button,
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { makeStyles } from '@material-ui/core/styles';
@@ -118,7 +119,7 @@ export default function Wizard() {
               className={classes.button}
               variant="outlined"
               color="primary"
-              href="/cocktail"
+              href="/review"
               onClick={() => console.log("Went to next")}
             >
               Review

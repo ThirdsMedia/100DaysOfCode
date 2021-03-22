@@ -88,7 +88,7 @@ export default function ForgotPassword() {
 
   return (
     <main>
-      <MainBar />
+      <MainBar noLogo />
       <Stepper activeStep={activeStep} orientation="vertical">
         <Step>
           <StepLabel>Enter your email</StepLabel>
@@ -142,6 +142,7 @@ export default function ForgotPassword() {
                   </FormControl>
                 </Grid>
               </Grid>
+              <div style={{textAlign: 'center'}}>
               <IconButton 
                 className={classes.submitButton}
                 type="submit"
@@ -152,6 +153,7 @@ export default function ForgotPassword() {
               >
                 <ExpandMoreIcon />
               </IconButton>
+              </div>
             </Container>
           </StepContent>
         </Step>
