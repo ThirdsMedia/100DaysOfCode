@@ -12,16 +12,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: 'center',
     minHeight: '100vh',
-    backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/thirdstree.jpg'})`,   
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
   },
   about: {
-    height: '100vh',
+    backgroundColor: theme.palette.primary.background,
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
-    marginTop: 75,
+    margin: theme.spacing(2),
+    borderRadius: 10,
   },
   text: {
     fontFamily: 'Nunito',
@@ -41,11 +39,6 @@ export default function About() {
   return (
     <main className={classes.root}>
       <MainBar />
-      <Scroll to="about" smooth="true">
-        <IconButton>
-          <ExpandMoreIcon className={classes.goDown} />
-        </IconButton>
-      </Scroll>
       <div className={classes.about}>
         <Typography id="about" className={classes.text}>
           It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).

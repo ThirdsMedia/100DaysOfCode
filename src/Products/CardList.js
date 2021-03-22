@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function CardList({ data }) {
   const classes = useStyles();
-  console.log(process.env.PUBLIC_URL + '/assets/')
 
   return (
     <Container>
@@ -66,7 +65,6 @@ export default function CardList({ data }) {
                         {card.name}
                       </Typography>
                       <Grid container className={classes.content} justify='center'>
-                        <Grid item>
                         {
                           card.ingredients.map((item) => {
                             return (
@@ -76,12 +74,11 @@ export default function CardList({ data }) {
                                 color="textSecondary" 
                                 component="p" 
                               >
-                                {item.name}
+                                {item.name+", "}
                               </Typography>
                             );
                           })
                         }
-                        </Grid>
                       </Grid>
                     </CardContent>
                   </CardActionArea>

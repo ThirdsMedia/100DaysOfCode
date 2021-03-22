@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 
 // So here's how we get an animation to run upon scrolling
 // WE don't want those to appear until we scroll
-export default function ImageCard({ info, isAnimated}) {
+export default function ImageCard({ info, isAnimated, image }) {
   const classes = useStyles();
 
   // boom
@@ -48,7 +48,7 @@ export default function ImageCard({ info, isAnimated}) {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={info.image}
+              image={image}
               title="Navigate"
             />
             <CardContent>

@@ -39,58 +39,73 @@ const useStyles = makeStyles(theme => ({
 
 const steps = ["Enter your email", "Reset password", "Enter code"];
 
-function renderStep(step, props) {
+function renderStep(step, handleNext) {
   switch(step) {
     case 0:
-      return <EnterEmail props={props} />
+      return <EnterEmail handleNext={handleNext} />
     case 1:
-      return <TextCode props={props} />
+      return <TextCode handleNext={handleNext} />
     case 2:
-      return <Verify props={props} />
+      return <Verify handleNext={handleNext} />
     default:
       return false
   }
 }
 
-function EnterEmail({ props }) {
+function EnterEmail({ handleNext }) {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
   /*
    * This would pull data from a database based on the email passed to the form
    * If it doesn't exist, render red error text instead
    */
+  const searchForUserEmail = () => {
+    // perform lookup in database
+    // if found then...
+    setIsEmailValid(true)
+
+    if(email) {
+      console.log("Yay!, found ", email)
+      handleNext()
+    } else {
+      console.log("Sorry, no email")
+    }
+  }
 
   return (
     <Container className={classes.root} component="main" maxWidth="sm">
       <Typography variant="subtitle2" color="textSecondary">
-        Enter the email associated with your account.
+        Enter the email associated with your account
       </Typography>
-      <TextField
-        id="email"
-        label="Email"
-        margin="normal"
-        required
-        fullWidth
-        variant="outlined"
-        InputProps={{
-          className: classes.textField
-        }}
-      />
-      <Button 
-        className={classes.submitButton}
-        type="submit"
-        color="primary"
-        fullWidth
-        variant="contained"
-        onClick={props}
-      >
-        Search
-      </Button>
+        <TextField
+          id="email"
+          label="Email"
+          margin="normal"
+          required
+          fullWidth
+          variant="outlined"
+          onInput={ e => setEmail(e.target.value)}
+          InputProps={{
+            className: classes.textField
+          }}
+        />
+        <Button 
+          className={classes.submitButton}
+          type="submit"
+          color="primary"
+          fullWidth
+          variant="contained"
+          onClick={searchForUserEmail}
+        >
+          Search
+        </Button>
     </Container>
   );
 }
 
-function TextCode({ props }) {
+function TextCode({ handleNext }) {
   const classes = useStyles();
   const [value, setValue] = useState('phone');
 
@@ -127,7 +142,7 @@ function TextCode({ props }) {
         color="primary"
         fullWidth
         variant="contained"
-        onClick={props}
+        onClick={handleNext}
       >
         Next
       </Button>
@@ -135,7 +150,7 @@ function TextCode({ props }) {
   );
 }
 
-function Verify({ props }) {
+function Verify({ handleNext }) {
   const classes = useStyles();
 
   /* 
@@ -165,7 +180,7 @@ function Verify({ props }) {
         color="primary"
         fullWidth
         variant="contained"
-        onClick={props}
+        onClick={handleNext}
       >
         Submit
       </Button>
@@ -197,6 +212,7 @@ export default function ForgotPassword() {
           ))
         }
       </Stepper>
+      <Typography>Your</Typography>
     </div>
   );
 }
