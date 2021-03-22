@@ -4,7 +4,9 @@ import {
   Container,
   Typography,
   TextField,
+  IconButton,
   Button,
+  Link,
   Grid,
   Stepper,
   Step,
@@ -15,10 +17,11 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  step: {
     marginTop: theme.spacing(6),
     textAlign: 'center'
   },
@@ -37,159 +40,21 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const steps = ["Enter your email", "Reset password", "Enter code"];
-
-function renderStep(step, handleNext) {
-  switch(step) {
-    case 0:
-      return <EnterEmail handleNext={handleNext} />
-    case 1:
-      return <TextCode handleNext={handleNext} />
-    case 2:
-      return <Verify handleNext={handleNext} />
-    default:
-      return false
-  }
-}
-
-function EnterEmail({ handleNext }) {
-  const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(false);
-
-  /*
-   * This would pull data from a database based on the email passed to the form
-   * If it doesn't exist, render red error text instead
-   */
-  const searchForUserEmail = () => {
-    // perform lookup in database
-    // if found then...
-    setIsEmailValid(true)
-
-    if(email) {
-      console.log("Yay!, found ", email)
-      handleNext()
-    } else {
-      console.log("Sorry, no email")
-    }
-  }
-
-  return (
-    <Container className={classes.root} component="main" maxWidth="sm">
-      <Typography variant="subtitle2" color="textSecondary">
-        Enter the email associated with your account
-      </Typography>
-        <TextField
-          id="email"
-          label="Email"
-          margin="normal"
-          required
-          fullWidth
-          variant="outlined"
-          onInput={ e => setEmail(e.target.value)}
-          InputProps={{
-            className: classes.textField
-          }}
-        />
-        <Button 
-          className={classes.submitButton}
-          type="submit"
-          color="primary"
-          fullWidth
-          variant="contained"
-          onClick={searchForUserEmail}
-        >
-          Search
-        </Button>
-    </Container>
-  );
-}
-
-function TextCode({ handleNext }) {
-  const classes = useStyles();
-  const [value, setValue] = useState('phone');
-
-  const handleChange = (event) => {
-    setValue(event.target.value)
-  }
-
-  /*
-   * this component would need to pull user data from database using the email previously passed
-   * and then send a randomly generated code to either the phone (via text, or the email)
-   * But for starters, it could just be email
-   */
-
-  return (
-    <Container maxWidth="sm">
-      <Grid justify='center' alignItems='center' container spacing='3'>
-        <Grid item>
-          <Typography variant="subtitle2" color="textSecondary">
-            How would you like to receive your code?
-          </Typography>
-        </Grid>
-        <Grid item>
-          <FormControl component="fieldset">
-            <RadioGroup aria-label="method" name="method" value={value} onChange={handleChange}>
-              <FormControlLabel value="phone" control={<Radio />} label="Phone number" />
-              <FormControlLabel value="email" control={<Radio />} label="Email" />
-            </RadioGroup>
-          </FormControl>
-        </Grid>
-      </Grid>
-      <Button 
-        className={classes.submitButton}
-        type="submit"
-        color="primary"
-        fullWidth
-        variant="contained"
-        onClick={handleNext}
-      >
-        Next
-      </Button>
-    </Container>
-  );
-}
-
-function Verify({ handleNext }) {
-  const classes = useStyles();
-
-  /* 
-   * Add logic to render red error text if the code was wrong
-   * Or go to next if correct
-   */
-
-  return (
-    <Container className={classes.root} component="main" maxWidth="sm">
-      <Typography variant="subtitle2" color="textSecondary">
-        Enter the code you received
-      </Typography>
-      <TextField
-        id="code"
-        label="Code"
-        margin="normal"
-        required
-        fullWidth
-        variant="outlined"
-        InputProps={{
-          className: classes.textField
-        }}
-      />
-      <Button 
-        className={classes.submitButton}
-        type="submit"
-        color="primary"
-        fullWidth
-        variant="contained"
-        onClick={handleNext}
-      >
-        Submit
-      </Button>
-    </Container>
-  );
-}
-
 export default function ForgotPassword() {
+  const classes = useStyles();
+  const steps = [
+    "Enter email", 
+    "Choose verification method", 
+    "Enter verification code", 
+    "Reset password"
+  ];
   const [activeStep, setActiveStep] = useState(0);
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [verifyMethod, setVerifyMethod] = useState('email');
+  const [verified, setVerified] = useState(false);
+  const [passwordReset, setPasswordReset] = useState(false);
 
   const handleNext = () => {
     if (activeStep < steps.length) {
@@ -197,22 +62,172 @@ export default function ForgotPassword() {
     } 
   }
 
+  const handleVerifyMethod = (event) => {
+    setVerifyMethod(event.target.value)
+  }
+
+  const handleVerificationCode = (event) => {
+    setCode(event.target.value)
+  }
+
+  const searchForUserEmail = () => {
+    // perform lookup in database, if found then do these next two things..
+    setIsEmailValid(true)
+    handleNext()
+  }
+
+  const handleSetVerify = () => {
+    setVerified(true)
+    handleNext()
+  }
+
+  const handlePasswordReset = () => {
+    setPasswordReset(true)
+    handleNext()
+  }
+
   return (
-    <div>
+    <main>
       <MainBar />
       <Stepper activeStep={activeStep} orientation="vertical">
-        {
-          steps.map((label, index) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-              <StepContent>
-                <Typography>{renderStep(index, handleNext)}</Typography>
-              </StepContent>
-            </Step>
-          ))
-        }
+        <Step>
+          <StepLabel>Enter your email</StepLabel>
+          <StepContent>
+            <Container className={classes.step} maxWidth="sm">
+              <Typography variant="subtitle2" color="textSecondary">
+                Enter the email associated with your account
+              </Typography>
+              <TextField
+                id="email"
+                label="Email"
+                margin="normal"
+                required
+                fullWidth
+                variant="outlined"
+                onInput={ e => setEmail(e.target.value)}
+                InputProps={{
+                  className: classes.textField
+                }}
+              />
+              <IconButton 
+                className={classes.submitButton}
+                type="submit"
+                color="primary"
+                fullWidth
+                disabled={ !email ? true : false }
+                variant="contained"
+                onClick={searchForUserEmail}
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+            </Container>
+          </StepContent>
+        </Step>
+        <Step>
+          <StepLabel>Send verification code</StepLabel>
+          <StepContent>
+            <Container maxWidth="sm">
+              <Grid justify='center' alignItems='center' container spacing='3'>
+                <Grid item>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    How would you like to receive your code?
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <FormControl component="fieldset">
+                    <RadioGroup aria-label="method" name="method" value={verifyMethod} onChange={handleVerifyMethod}>
+                      <FormControlLabel value="phone" control={<Radio />} label="Phone number" />
+                      <FormControlLabel value="email" control={<Radio />} label="Email" />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <IconButton 
+                className={classes.submitButton}
+                type="submit"
+                color="primary"
+                fullWidth
+                variant="contained"
+                onClick={handleNext}
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+            </Container>
+          </StepContent>
+        </Step>
+        <Step>
+          <StepLabel>Enter code</StepLabel>
+          <StepContent>
+            <Container className={classes.step} maxWidth="sm">
+              <Typography variant="subtitle2" color="textSecondary">
+                Enter the code you received
+              </Typography>
+              <TextField
+                id="code"
+                label="Code"
+                margin="normal"
+                required
+                fullWidth
+                variant="outlined"
+                onInput={ e => setCode(e.target.value) }
+                InputProps={{
+                  className: classes.textField
+                }}
+              />
+              <IconButton 
+                className={classes.submitButton}
+                type="submit"
+                color="primary"
+                fullWidth
+                disabled={ !code ? true : false }
+                variant="contained"
+                onClick={handleSetVerify}
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+            </Container>
+          </StepContent>
+        </Step>
+        <Step>
+          <StepLabel>Reset password</StepLabel>
+          <StepContent>
+            <Container className={classes.step} maxWidth="sm">
+              <Typography variant="subtitle2" color="textSecondary">
+                Enter a new password
+              </Typography>
+              <TextField
+                id="password"
+                label="New Password"
+                margin="normal"
+                required
+                fullWidth
+                type="password"
+                variant="outlined"
+                InputProps={{
+                  className: classes.textField
+                }}
+              />
+              <Button 
+                className={classes.submitButton}
+                type="submit"
+                color="primary"
+                fullWidth
+                variant="contained"
+                onClick={handlePasswordReset}
+              >
+                Submit
+              </Button>
+            </Container>
+          </StepContent>
+        </Step>
       </Stepper>
-      <Typography>Your</Typography>
-    </div>
+      {
+        passwordReset
+          ? <Typography align="center" variant="h6">
+              Success! Your password has been reset. Click <Link href="/signin">here</Link> to login.
+            </Typography>
+          : false
+      }
+    </main>
   );
 }

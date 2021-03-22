@@ -5,10 +5,7 @@ import {
   Avatar,
   Typography,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Button,
-  Grid,
   Link 
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -88,23 +85,9 @@ export default function SignUp() {
       >
         Create Account
       </Button>
-      <Grid 
-        container
-        justify="center"
-        alignItems="center"
-      >
-        <Grid item>
-           <FormControlLabel
-            control={<Checkbox color="secondary" id="remember" size="small" />}
-            label="Receive notifications via text"
-          />
-        </Grid>
-        <Grid item>
-          <Link href="/signin" variant="body4">
-            Already have an account? Sign In
-          </Link>
-        </Grid>
-      </Grid>
+        <Link href="/signin" variant="body4">
+          Already have an account? Sign In
+        </Link>
       <Copyright /> 
     </Container>
   );
