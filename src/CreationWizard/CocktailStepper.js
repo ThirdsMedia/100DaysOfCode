@@ -14,15 +14,22 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Link as Scroll } from 'react-scroll';
 
 const useStyles = makeStyles(theme => ({
+  buttonDiv: {
+    textAlign: 'center',
+  },
   nextButton: {
     borderRadius: 37,
+    textTransform: 'none',
+    margin: 10,
+    fontFamily: 'Nunito',
   },
 }));
 
 // You may need to refer to this: https://stackoverflow.com/questions/61215349/material-ui-stepper-not-keeping-state-when-move-next-or-back
-function RenderStep(step, handleNext) {
+function RenderStep(step, handleNext, activeStep) {
   const classes = useStyles();
 
   switch (step) {
@@ -30,64 +37,80 @@ function RenderStep(step, handleNext) {
       return (
         <div>
           <BasicInfo />
-          <Button
-            className={classes.nextButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-            startIcon={<ExpandMoreIcon />}
-            onClick={handleNext}
-          >
-            Next
-          </Button>
+          <div className={classes.buttonDiv}>
+            <Scroll to={`step-${activeStep}`} smooth="true">
+              <Button
+                className={classes.nextButton}
+                type="submit"
+                color="primary"
+                variant="contained"
+                endIcon={<ExpandMoreIcon />}
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </Scroll>
+          </div>
         </div>
       )
     case 1:
       return (
         <div>
-        <BaseSpirit />
-          <Button
-            className={classes.nextButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-            startIcon={<ExpandMoreIcon />}
-            onClick={handleNext}
-          >
-            Continue
-          </Button>
+          <BaseSpirit />
+          <div className={classes.buttonDiv}>
+            <Scroll to={`step-${activeStep}`} smooth="true">
+              <Button
+                className={classes.nextButton}
+                type="submit"
+                color="primary"
+                variant="contained"
+                endIcon={<ExpandMoreIcon />}
+                onClick={handleNext}
+              >
+                Continue
+              </Button>
+            </Scroll>
+          </div>
         </div>
       )
     case 2:
       return (
-          <div>
+        <div>
           <Ingredients />
-          <Button
-            className={classes.nextButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-            startIcon={<ExpandMoreIcon />}
-            onClick={handleNext}
-          >
-            Keep going
-          </Button>
+          <div className={classes.buttonDiv}>
+            <Scroll to={`step-${activeStep}`} smooth="true">
+              <Button
+                className={classes.nextButton}
+                type="submit"
+                color="primary"
+                variant="contained"
+                endIcon={<ExpandMoreIcon />}
+                onClick={handleNext}
+              >
+                Keep going
+              </Button>
+            </Scroll>
           </div>
+        </div>
       )
     case 3: 
       return (
         <div>
-        <Instructions />
-          <Button
-          //  className={classes.nextButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-            startIcon={<ExpandMoreIcon />}
-            onClick={handleNext}
-          >
-            Almost there
-          </Button>
+          <Instructions />
+          <div className={classes.buttonDiv}>
+            <Scroll to={`step-${activeStep}`} smooth="true">
+              <Button
+                className={classes.nextButton}
+                type="submit"
+                color="primary"
+                variant="contained"
+                endIcon={<ExpandMoreIcon />}
+                onClick={handleNext}
+              >
+                Almost there
+              </Button>
+            </Scroll>
+          </div>
         </div>
       )
     default:
@@ -112,7 +135,7 @@ export default function CocktailStepper({ steps, activeStep, handleNext, handleR
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
             <StepContent id={`step-${activeStep}`}>
-              <Typography>{RenderStep(index, handleNext)}</Typography>
+              <Typography>{RenderStep(index, handleNext, activeStep)}</Typography>
             </StepContent>
           </Step>
         ))

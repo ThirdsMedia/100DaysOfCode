@@ -104,6 +104,14 @@ export default function EditProfile({ profileData }) {
             className={classes.field}
             fullWidth
           />
+          <TextField 
+            id="instagram"
+            label="Instagram"
+            variant="outlined"
+            defaultValue={profileData.instagram} 
+            className={classes.field}
+            fullWidth
+          />
         </form>
         <Grid container justify="center">
           <Grid item xs="2">

@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 import { Link as Scroll } from 'react-scroll';
 import { makeStyles } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
 

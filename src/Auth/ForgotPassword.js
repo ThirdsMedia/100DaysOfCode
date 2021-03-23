@@ -38,6 +38,9 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.main,
     },
   },
+  message: {
+    fontFamily: 'Nunito',
+  },
 }))
 
 export default function ForgotPassword() {
@@ -225,7 +228,7 @@ export default function ForgotPassword() {
       </Stepper>
       {
         passwordReset
-          ? <Typography align="center" variant="h6">
+          ? <Typography className={classes.message} align="center" variant="h6">
               Success! Your password has been reset. Click <Link href="/signin">here</Link> to login.
             </Typography>
           : false

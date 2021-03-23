@@ -1,5 +1,4 @@
 import React from 'react';
-import Copyright from '../Components/Copyright';
 import {
   Container,
   Avatar,
@@ -67,6 +66,16 @@ export default function SignUp() {
         }}
       />
       <TextField
+        id="phone"
+        label="Phone Number (optional)"
+        margin="normal"
+        fullWidth
+        variant="outlined"
+        InputProps={{
+          className: classes.textField
+        }}
+      />
+      <TextField
         id="password"
         label="Password"
         margin="normal"
@@ -87,10 +96,9 @@ export default function SignUp() {
       >
         Create Account
       </Button>
-        <Link href="/signin" variant="body4">
-          Already have an account? Sign In
-        </Link>
-      <Copyright /> 
+      <Link href="/signin" variant="body4">
+        Already have an account? Sign In
+      </Link>
     </Container>
   );
 }
