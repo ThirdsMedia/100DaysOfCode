@@ -1169,3 +1169,43 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Meditate more
 
 **Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day49/src)
+
+### Day 50: March 23, 2021 - Tuesday
+
+**Today's Progress**: Finished the frontend. 
+
+**Thoughts:** So for all intents and purposes I'm done with the front end exactly at the halfway point. Way to go. Obviously there will still be other tweaks to the front end as I begin to work on the backend, but for now I've done all I can do without knowing more about how the application will work. Take a breath yo. 
+
+**Front-end To Do:**
+- [x] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [x] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [x] Once you've passed the submit code part, make it display a button and redirect. 
+	- [x] About component
+	- [x] LandingPage
+		- [x] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [x] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [x] CameraRoll to choose a picture
+		- [x] Review
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [x] Make any final style touches and clean up the project structure
+- [x] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** None
+
+**Solutions:** Still meditate more
+
+**Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day50/src)
+
