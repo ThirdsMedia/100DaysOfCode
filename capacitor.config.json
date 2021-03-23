@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.jade",
+  "appName": "jade",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "cordova": {}
+}
