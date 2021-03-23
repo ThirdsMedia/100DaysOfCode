@@ -77,8 +77,6 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Issues:** Can't figure out how to change the border color of TextField when highlighted. I keep attempting to edit it with the classes field of TextField but I'm not sure that's the way. Both the Remember Me checkbox and the highlighted TextField are the same color when activated, so maybe that color is changed higher up then the actual components. 
 
 **Link to work:** [Sign In and Sign Up pages](https://github.com/ThirdsMedia/100DaysOfCode/tree/day6/src)
-<<<<<<< HEAD
-=======
 
 ### Day 7: February, 7 2021 - Monday
 
@@ -1012,5 +1010,202 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Stop feeding them. 
 
 **Link to work:** [All over the place](https://github.com/ThirdsMedia/100DaysOfCode/tree/day45/src)
->>>>>>> 51e8583c0fc439339afef78eed22bb350429c0fe
+
+### Day 46: March 19, 2021 - Friday
+
+**Today's Progress**: Fixed tiny code gremlins: Added more to the About page, added image upload to Cocktail.js, fixed MainBar color in Profile.js, some other stuff I can't remember. 
+
+**Thoughts:** ..
+
+**Front-end To Do:**
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [ ] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [ ] Once you've passed the submit code part, make it display a button and redirect. 
+	- [ ] About component
+	- [ ] LandingPage
+		- [ ] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] Instead of having a button in the Instructions component to help you select a picture just change the review ItemSheet to have a blank photo instead of the current one behind the ExpandMoreIcon. Don't allow anything to continue until a picture is selected and then display the rest of the ItemSheet
+		- [x] CameraRoll to choose a picture
+		- [ ] Add props to decided whether the ItemSheet component is a review version or a display version.
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** So many small things I can't keep track of.
+
+**Solutions:** Fix your To do list lol.
+
+**Link to work:** [All over the place](https://github.com/ThirdsMedia/100DaysOfCode/tree/day46/src)
+
+### Day 47: March 21, 2021 - Sunday
+
+**Today's Progress**: Fixed Landing page so that the CardItem's switch from row to column when screen width gets smaller. Added some functionality to ForgotPassword. Stared off into the distance
+
+**Thoughts:** Not many. I'm tired as hell. The entire front end is basically done, except for adding meaningful text where paragraphs of text are, and small tidbits here and there. I feel like that's the hardest part. I have no motivation to work on the small stuff. I'm eager to begin coding the backend portion and implementing the code logic.
+
+**Front-end To Do:**
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [ ] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [ ] Once you've passed the submit code part, make it display a button and redirect. 
+	- [x] About component
+	- [x] LandingPage
+		- [x] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] Instead of having a button in the Instructions component to help you select a picture just change the review ItemSheet to have a blank photo instead of the current one behind the ExpandMoreIcon. Don't allow anything to continue until a picture is selected and then display the rest of the ItemSheet
+		- [x] CameraRoll to choose a picture
+		- [ ] Add props to decided whether the ItemSheet component is a review version or a display version.
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Trump is going to have his own social media network.
+
+**Solutions:** Live in the woods. 
+
+**Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day47)
+
+### Day 48: March 21, 2021 - Sunday
+
+**Today's Progress**: Finished ForgotPassword.js
+
+**Thoughts:** So thinking ahead to when I start coding the backend I'm seeing a few core functionalities to work on: User authentication (register, login, log out via Firebase), complex data input (the cocktail build form), updating profile information and favorites (updating database contents), QRCode generation (nodejs module of some sort), Password reset and Contact forms (email stuff via nodemailer or some sort of mailchimp integration), pictures (either file upload form on web, or camera/camera roll on mobile). Doesn't sound like much..... lol. 
+
+**Front-end To Do:**
+- [ ] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [x] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [x] Once you've passed the submit code part, make it display a button and redirect. 
+	- [x] About component
+	- [x] LandingPage
+		- [x] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [ ] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [ ] Instead of having a button in the Instructions component to help you select a picture just change the review ItemSheet to have a blank photo instead of the current one behind the ExpandMoreIcon. Don't allow anything to continue until a picture is selected and then display the rest of the ItemSheet
+		- [x] CameraRoll to choose a picture
+		- [ ] Add props to decided whether the ItemSheet component is a review version or a display version.
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** None. Smooth sailing this hour.
+
+**Solutions:** Jump out of the boat.
+
+**Link to work:** [ForgotPassword](https://github.com/ThirdsMedia/100DaysOfCode/tree/day48/src/Auth/ForgotPassword.js)
+
+### Day 49: March 22, 2021 - Monday
+
+**Today's Progress**: Finished the Review component. Added a next button to the CreationWizard
+
+**Thoughts:** Practically done with the frontend. Tommorrow I'll basically just make sure Navigation is solid and go through and make sure all the finishing touches are done. 
+
+**Front-end To Do:**
+- [x] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [x] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [x] Once you've passed the submit code part, make it display a button and redirect. 
+	- [x] About component
+	- [x] LandingPage
+		- [x] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [x] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [x] CameraRoll to choose a picture
+		- [x] Review
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [ ] Make any final style touches and clean up the project structure
+- [ ] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** Monday anxiety
+
+**Solutions:** Meditate more
+
+**Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day49/src)
+
+### Day 50: March 23, 2021 - Tuesday
+
+**Today's Progress**: Finished the frontend. 
+
+**Thoughts:** So for all intents and purposes I'm done with the front end exactly at the halfway point. Way to go. Obviously there will still be other tweaks to the front end as I begin to work on the backend, but for now I've done all I can do without knowing more about how the application will work. Take a breath yo. 
+
+**Front-end To Do:**
+- [x] Finish individual components
+	- [x] Include the LandingPage component into the project, and fix it up so that it fits the theme. 
+	- [x] Finish the ItemSheet component
+	- [x] Create a Contact component
+	- [x] A ForgotPassword component
+		- [x] turn this into a Stepper component to go through the process so you don't have to create multiple pages
+		- [x] Once you've passed the submit code part, make it display a button and redirect. 
+	- [x] About component
+	- [x] LandingPage
+		- [x] Make the Create and Discover cards switch to vertical column alignment when the page width gets smaller so mobile will work.
+		- [x] Add navigation to the Products and CreationWizard components
+	- [x] The CreationWizard 
+		- [x] Wizard (where the Stepper is)
+		- [x] BasicInfo
+		- [x] BaseSpirit and Ingredients
+		- [x] Instructions
+		- [x] CameraRoll to choose a picture
+		- [x] Review
+	- [x] The Discover Page
+		- [x] Add search filter options
+- [x] Navigation 
+	- [x] Navigation drawer
+	- [x] Make everything accessible without having to edit App.js
+- [x] Make any final style touches and clean up the project structure
+- [x] Re-deploy on gh-pages. The front-end should be complete
+
+**Issues:** None
+
+**Solutions:** Still meditate more
+
+**Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day50/src)
 
