@@ -1209,3 +1209,40 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day50/src)
 
+### Day 51: March 24, 2021 - Wednesday
+
+**Today's Progress**: Added firebase config to the project. Added state variables to set user, email, and password to the sign in page. Separated routes so that Router shows you SignIn, SignUp, and ForgotPassword when user is null, and the rest of the app when user isn't null.
+
+**Thoughts:** I'm excited. Already on my way to having working authentication. Firebase is familiar to me and already configured, and all the authentication components are set up with the appropriate state variables. I'm careful to not fall into the illusion that this will go by quickly. There is still much to do. 
+
+**Backend To Do:**
+- [ ] User Authentication (Firestore auth)
+	- [ ] Finish the UserProvider
+	- [ ] Implement firestore.auth functionality
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] Editing Profile Data (Updating firestore)
+	- [ ] Successfully update the user profile on Firebase and display without reloading app
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+
+**Issues:** Need to figure out how to implement UserProvider React hooks style.
+
+**Solutions:** Read slower when doing research XD.
+
+**Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day51/src)
+
+
