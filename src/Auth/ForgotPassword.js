@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import MainBar from '../Components/MainBar';
 import {
   Container,
   Typography,
@@ -91,7 +90,6 @@ export default function ForgotPassword() {
 
   return (
     <main>
-      <MainBar noLogo />
       <Stepper activeStep={activeStep} orientation="vertical">
         <Step>
           <StepLabel>Enter your email</StepLabel>
@@ -229,7 +227,7 @@ export default function ForgotPassword() {
       {
         passwordReset
           ? <Typography className={classes.message} align="center" variant="h6">
-              Success! Your password has been reset. Click <Link href="/signin">here</Link> to login.
+              Success! Your password has been reset. Click <Link href="/">here</Link> to login.
             </Typography>
           : false
       }

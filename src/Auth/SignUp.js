@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Avatar,
@@ -34,6 +34,29 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const createUserWithEmailAndPassword = (event, email, password) => {
+    event.preventDefault();
+  }
+
+  const onChangeHandler = (event) => {
+    const {name, value} = event.currentTarget;
+
+    if (name === "userEmail") {
+      setEmail(name)
+    } else if (name === "userPhone") {
+      setPhone(name)
+    } else if (name === "userPassword") {
+      setPassword(name)
+    } else if (name === "userName") {
+      setUserName(name)
+    }
+  }
 
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">
@@ -46,10 +69,12 @@ export default function SignUp() {
       <TextField
         id="name"
         label="Name"
+        value={userName}
         margin="normal"
         required
         fullWidth
         variant="outlined"
+        onChange={(e) => onChangeHandler(e)}
         InputProps={{
           className: classes.textField
         }}
@@ -57,10 +82,12 @@ export default function SignUp() {
       <TextField
         id="email"
         label="Email"
+        value={email}
         margin="normal"
         required
         fullWidth
         variant="outlined"
+        onChange={(e) => onChangeHandler(e)}
         InputProps={{
           className: classes.textField
         }}
@@ -68,9 +95,11 @@ export default function SignUp() {
       <TextField
         id="phone"
         label="Phone Number (optional)"
+        value={phone}
         margin="normal"
         fullWidth
         variant="outlined"
+        onChange={(e) => onChangeHandler(e)}
         InputProps={{
           className: classes.textField
         }}
@@ -78,11 +107,13 @@ export default function SignUp() {
       <TextField
         id="password"
         label="Password"
+        value={password}
         margin="normal"
         type="password"
         variant="outlined"
         required
         fullWidth
+        onChange={(e) => onChangeHandler(e)}
         InputProps={{
           className: classes.textField
         }}
@@ -96,7 +127,7 @@ export default function SignUp() {
       >
         Create Account
       </Button>
-      <Link href="/signin" variant="body4">
+      <Link href="/" variant="body4">
         Already have an account? Sign In
       </Link>
     </Container>

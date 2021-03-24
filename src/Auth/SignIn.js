@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Copyright from '../Components/Copyright';
 import {
   Container,
@@ -26,22 +26,41 @@ const useStyles = makeStyles(theme => ({
   },
   submitButton: {
     color: 'white',
-    margin: theme.spacing(5),
+    margin: theme.spacing(2),
+    textTransform: 'none',
     fontWeight: 'bold',
     borderRadius: 50,
-    backgroundColor: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.hover,
-    },
-    logo: {
-      height: theme.spacing(10),
-      width: theme.spacing(10),
-    },
   },
-}))
+  logo: {
+    height: theme.spacing(10),
+    width: theme.spacing(10),
+  },
+  error: {
+    color: theme.palette.secondary.main,
+    fontFamily: 'Nunito',
+    margin: theme.spacing(2),
+  },
+}));
 
 export default function SignIn() {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const signInWithEmailAndPassword = (event, email, password) => {
+    event.preventDefault();
+  }
+
+  const onChangeHandler = (event) => {
+    const {name, value} = event.currentTarget;
+
+    if (name === 'userEmail') {
+      setEmail(value);
+    } else if (name === 'userPassword') {
+      setPassword(value);
+    }
+  }
 
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">
@@ -51,25 +70,36 @@ export default function SignIn() {
       <Typography component="h1" variant="h5">
         Sign In
       </Typography>
+      {
+        error
+          ? <Typography className={classes.error}>{error}</Typography>
+          : false
+      }
       <TextField
         id="email"
+        name="userEmail"
         label="Email"
         margin="normal"
+        value={email}
         required
         fullWidth
         variant="outlined"
+        onChange={(e) => onChangeHandler(e)}
         InputProps={{
           className: classes.textField
         }}
       />
       <TextField
         id="password"
+        name="userPassword"
         label="Password"
+        value={password}
         margin="normal"
         type="password"
         required
         fullWidth
         variant="outlined"
+        onChange={(e) => onChangeHandler(e)}
         InputProps={{
           className: classes.textField
         }}
@@ -89,6 +119,16 @@ export default function SignIn() {
         href="/"
       >
         Sign In
+      </Button>
+      <Button 
+        className={classes.submitButton}
+        type="submit"
+        color="secondary"
+        fullWidth
+        variant="contained"
+        href="/"
+      >
+        Sign in with Google
       </Button>
       <Grid 
         container
