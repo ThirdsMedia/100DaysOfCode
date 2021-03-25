@@ -1245,4 +1245,40 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day51/src)
 
+### Day 52: March 25, 2021 - Thursday
+
+**Today's Progress**: Created a useAuth hook and AuthProvider to be used by the rest of the application. 
+
+**Thoughts:** Spent a lot of time reading today. I've abstracted away a lot of the auth provider stuff so actually using login, logout, register methods should be easy.
+
+**Backend To Do:**
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [ ] Implement authentication functionality throughout the application
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] Editing Profile Data (Updating firestore)
+	- [ ] Successfully update the user profile on Firebase and display without reloading app
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+
+**Issues:** I need to gain a better understanding of React hooks, especially useContext. 
+
+**Solutions:** Read slower when doing research XD.
+
+**Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day52/src)
+
 
