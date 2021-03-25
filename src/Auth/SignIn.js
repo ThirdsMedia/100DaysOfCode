@@ -64,8 +64,8 @@ export default function SignIn() {
 
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">
-      <Avatar>
-        <LockOpenIcon />
+      <Avatar color="primary">
+        <LockOpenIcon color="secondary"/>
       </Avatar>
       <Typography component="h1" variant="h5">
         Sign In

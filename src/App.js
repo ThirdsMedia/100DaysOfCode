@@ -12,7 +12,7 @@ import profileData from './static/profileData';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
-//import UserProvider from './Providers/UserProvider';
+import { AuthProvider } from './FirebaseAuthProvider';
 
 /* App */
 import Profile from './Pages/Profile/Profile';
@@ -49,6 +49,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <AuthProvider>
       {
         user ?
           <Router>
@@ -69,6 +70,7 @@ export default function App() {
             <Route path="/forgotpassword" component={ForgotPassword} />
           </Router>
       }
+      </AuthProvider>
     </ThemeProvider>
   )
 }

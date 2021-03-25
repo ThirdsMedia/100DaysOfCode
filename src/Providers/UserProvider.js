@@ -1,24 +1,37 @@
-import React, { 
+import { 
   useState, 
   useEffect,
+  useContext,
   createContext 
 } from 'react';
 import { auth } from '../firebase';
 
 export const UserContext = createContext({ user: null });
 
-export default function UserProvider() {
-  const [user, setUser] = useState({user: null});
-
-  // this should be useEffect()
-  useEffect(() => {
-    auth.onAuthStateChanged(userAuth => {
-      setUser({user: userAuth});
-    })
-  });
-
-  return (
-    <UserContext.Provider value={user}>
-    </UserContext.Provider>
-  );
+export const useSession = () => {
+  const { user } = useContext(UserContext);
+  return user;
 }
+
+export const useAuth = () => {
+  const [state, setState] = useState(() => {
+    const user = auth.currentUser
+    return {
+      initializing: !user,
+      user,
+    }
+  })
+
+  function onChange(user) {
+    setState({initializing: false, user})
+  }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(onChange)
+
+    return () => unsubscribe()
+  }, [])
+
+  return state;
+}
+
