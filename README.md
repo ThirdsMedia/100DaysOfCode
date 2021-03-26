@@ -1281,4 +1281,41 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day52/src)
 
+### Day 53: March 26, 2021 - Friday
+
+**Today's Progress**: Implemented all the user authentication functions as well as Google auth signin. 
+
+**Thoughts:** Well that was fun. Took some messing with the syntax and error handling to see what was going on with firebase when I screwed up the login, but now everything works authentication-wise. I just need to implement a user deletion function, as well as Loading animation in between logging in and out. 
+
+**Backend To Do:**
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [ ] Smooth out transitions between login and authenticated (it still shows the login page in between initializing user). Add a loading icon
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] Editing Profile Data (Updating firestore)
+	- [ ] Successfully update the user profile on Firebase and display without reloading app
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+
+**Issues:** Syntax errors with onClick functions.
+
+**Solutions:** Try harder.
+
+**Link to work:** [Auth](https://github.com/ThirdsMedia/100DaysOfCode/tree/day53/src/FirebaseAuthProvider.js)
+
 
