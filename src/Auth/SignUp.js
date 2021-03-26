@@ -131,7 +131,6 @@ export default function SignUp() {
         color="primary"
         fullWidth
         variant="contained"
-        href="/"
         onClick={() => 
           auth.signup(email, password).catch((e) => {
             setError(e.message)
