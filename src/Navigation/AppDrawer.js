@@ -1,5 +1,6 @@
 import React from 'react';
 import profileData from '../static/profileData';
+import { useAuth } from '../FirebaseAuthProvider';
 import {
   Avatar,
   Drawer,
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AppDrawer({ isOpen, handleDrawer }) {
   const classes = useStyles();
+  const auth = useAuth();
 
   return (
     <Drawer
@@ -116,14 +118,12 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
         </List>
         <Divider />
         <List component='nav'>
-          <Link href='/signin' color='inherit'>
-            <ListItem button>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="Log Out" />
-            </ListItem> 
-          </Link>
+          <ListItem button onClick={auth.signout}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Log Out" />
+          </ListItem> 
         </List>
       </div>
     </Drawer>

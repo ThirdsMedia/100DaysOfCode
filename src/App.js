@@ -12,7 +12,7 @@ import profileData from './static/profileData';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
-import { AuthProvider } from './FirebaseAuthProvider';
+import { useAuth } from './FirebaseAuthProvider';
 
 /* App */
 import Profile from './Pages/Profile/Profile';
@@ -44,14 +44,13 @@ const theme = createMuiTheme({
 })
 
 export default function App() {
-  const user = null;
+  const auth = useAuth();
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AuthProvider>
       {
-        user ?
+        auth.user ?
           <Router>
             <Route path="/" exact component={LandingPage} />
             <Route path="/contact" component={Contact} />
@@ -70,7 +69,6 @@ export default function App() {
             <Route path="/forgotpassword" component={ForgotPassword} />
           </Router>
       }
-      </AuthProvider>
     </ThemeProvider>
   )
 }

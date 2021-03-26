@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Copyright from '../Components/Copyright';
+import { useAuth } from '../FirebaseAuthProvider';
 import {
   Container,
   Avatar,
@@ -44,13 +45,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const auth = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-
-  const signInWithEmailAndPassword = (event, email, password) => {
-    event.preventDefault();
-  }
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
@@ -116,7 +114,11 @@ export default function SignIn() {
         color="primary"
         fullWidth
         variant="contained"
-        href="/"
+        onClick={() => {
+          auth.signin(email, password).catch((e) => {
+            setError(e.message);
+          })
+        }}
       >
         Sign In
       </Button>
@@ -126,7 +128,13 @@ export default function SignIn() {
         color="secondary"
         fullWidth
         variant="contained"
-        href="/"
+        onClick={() => {
+          auth.signInWithGoogle().catch((e) => {
+            setError(e.message)
+            console.log(error);
+            return error;
+          })
+        }}
       >
         Sign in with Google
       </Button>

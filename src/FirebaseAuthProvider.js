@@ -25,8 +25,68 @@ export const useAuth = () => {
   return useContext(UserContext);
 }
 
-export function AuthProvider({ children }) {
+function useProvideAuth() {
   const [user, setUser] = useState(null);
+  const googleAuth = new firebase.auth.GoogleAuthProvider();
+
+  const signin = (email, password) => {
+    return firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(response => {
+        setUser(response.user);
+        return response.user;
+      })
+  }
+
+  const signup = (email, password) => {
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(response => {
+        setUser(response.user);
+        return response.user;
+      });
+  }
+
+  const signout = () => {
+    return firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(false);
+      });
+  }
+
+  const sendPasswordResetEmail = (email) => {
+    return firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        return true;
+      })
+  }
+
+  const confirmPasswordReset = (code, password) => {
+    return firebase
+      .auth()
+      .confirmPasswordReset(code, password)
+      .then(() => {
+        return true;
+      })
+  }
+
+  const signInWithGoogle = () => {
+    return firebase
+      .auth()
+      .signInWithPopup(googleAuth)
+      .then((response) => {
+        const cred = response.credential;
+        const token = cred.token;
+        setUser(response.user)
+        return response.user;
+      });
+  }
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
@@ -38,10 +98,24 @@ export function AuthProvider({ children }) {
     })
 
     return () => unsubscribe();
-  }, [])
+  }, []);
+
+  return {
+    user,
+    signin,
+    signup,
+    signout,
+    sendPasswordResetEmail,
+    confirmPasswordReset,
+    signInWithGoogle,
+  };
+}
+
+export function AuthProvider({ children }) {
+  const auth = useProvideAuth();
 
   return (
-    <UserContext.Provider value={{user}}>
+    <UserContext.Provider value={auth}>
       {children}
     </UserContext.Provider>
   );

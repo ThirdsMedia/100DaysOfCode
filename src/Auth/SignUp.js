@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from '../FirebaseAuthProvider';
 import {
   Container,
   Avatar,
@@ -34,27 +35,29 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const auth = useAuth();
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const createUserWithEmailAndPassword = (event, email, password) => {
+/*  const createUserWithEmailAndPassword = (event, email, password) => {
     event.preventDefault();
   }
+  */
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
 
-    if (name === "userEmail") {
-      setEmail(name)
-    } else if (name === "userPhone") {
-      setPhone(name)
-    } else if (name === "userPassword") {
-      setPassword(name)
-    } else if (name === "userName") {
-      setUserName(name)
+    if (name === 'signup-userEmail') {
+      setEmail(value)
+    } else if (name === 'signup-userPhone') {
+      setPhone(value)
+    } else if (name === 'signup-userPassword') {
+      setPassword(value)
+    } else if (name === 'signup-userName') {
+      setUserName(value)
     }
   }
 
@@ -67,8 +70,9 @@ export default function SignUp() {
         Sign Up
       </Typography>
       <TextField
-        id="name"
+        id="signup-name"
         label="Name"
+        name="signup-userName"
         value={userName}
         margin="normal"
         required
@@ -80,8 +84,9 @@ export default function SignUp() {
         }}
       />
       <TextField
-        id="email"
+        id="signup-email"
         label="Email"
+        name="signup-userEmail"
         value={email}
         margin="normal"
         required
@@ -93,8 +98,9 @@ export default function SignUp() {
         }}
       />
       <TextField
-        id="phone"
+        id="signup-phone"
         label="Phone Number (optional)"
+        name="signup-userPhone"
         value={phone}
         margin="normal"
         fullWidth
@@ -105,8 +111,9 @@ export default function SignUp() {
         }}
       />
       <TextField
-        id="password"
+        id="signup-password"
         label="Password"
+        name="signup-userPassword"
         value={password}
         margin="normal"
         type="password"
@@ -124,6 +131,12 @@ export default function SignUp() {
         color="primary"
         fullWidth
         variant="contained"
+        href="/"
+        onClick={() => 
+          auth.signup(email, password).catch((e) => {
+            setError(e.message)
+          })
+        }
       >
         Create Account
       </Button>
