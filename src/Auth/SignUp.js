@@ -31,6 +31,11 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.hover,
     },
   },
+  error: {
+    color: theme.palette.secondary.main,
+    fontFamily: 'Nunito',
+    margin: theme.spacing(2),
+  },
 }))
 
 export default function SignUp() {
@@ -42,10 +47,6 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-/*  const createUserWithEmailAndPassword = (event, email, password) => {
-    event.preventDefault();
-  }
-  */
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
@@ -61,6 +62,16 @@ export default function SignUp() {
     }
   }
 
+  const checkPasswordHandler = () => {
+    if (password < 8) {
+      setError("Password must be at least 8 characters")
+    }// else {
+//      auth.signup(email, password).catch((e) => {
+ //       setError(e.message)
+  //    })
+    //}
+  }
+
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">
       <Avatar>
@@ -69,6 +80,11 @@ export default function SignUp() {
       <Typography component="h1" variant="h5" color="textPrimary">
         Sign Up
       </Typography>
+      {
+        error
+          ? <Typography className={classes.error}>{error}</Typography>
+          : false
+      }
       <TextField
         id="signup-name"
         label="Name"
@@ -131,11 +147,11 @@ export default function SignUp() {
         color="primary"
         fullWidth
         variant="contained"
-        onClick={() => 
+        onClick={() => {
           auth.signup(email, password).catch((e) => {
-            setError(e.message)
+            setError(e.message);
           })
-        }
+        }}
       >
         Create Account
       </Button>

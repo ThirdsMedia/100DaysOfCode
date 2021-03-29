@@ -131,8 +131,6 @@ export default function SignIn() {
         onClick={() => {
           auth.signInWithGoogle().catch((e) => {
             setError(e.message)
-            console.log(error);
-            return error;
           })
         }}
       >

@@ -40,6 +40,10 @@ function useProvideAuth() {
   }
 
   const signup = (email, password) => {
+    if (password < 8) {
+      console.log("password should be at least 8 characters")
+    }
+
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
