@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Copyright from '../Components/Copyright';
 import { useAuth } from '../FirebaseAuthProvider';
 import {
@@ -10,7 +10,8 @@ import {
   FormControlLabel,
   Grid,
   Link,
-  Checkbox 
+  Checkbox,
+  CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
@@ -111,12 +112,13 @@ export default function SignIn() {
       <Button 
         className={classes.submitButton}
         type="submit"
+        name="reg"
         color="primary"
         fullWidth
         variant="contained"
         onClick={() => {
           auth.signin(email, password).catch((e) => {
-            setError(e.message);
+            setError(e.message)
           })
         }}
       >
@@ -125,6 +127,7 @@ export default function SignIn() {
       <Button 
         className={classes.submitButton}
         type="submit"
+        name="goog"
         color="secondary"
         fullWidth
         variant="contained"

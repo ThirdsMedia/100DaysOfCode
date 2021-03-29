@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../FirebaseAuthProvider';
 import {
   Container,
@@ -6,7 +6,8 @@ import {
   Typography,
   TextField,
   Button,
-  Link 
+  Link,
+  CircularProgress
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
@@ -47,7 +48,6 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
 
@@ -60,16 +60,6 @@ export default function SignUp() {
     } else if (name === 'signup-userName') {
       setUserName(value)
     }
-  }
-
-  const checkPasswordHandler = () => {
-    if (password < 8) {
-      setError("Password must be at least 8 characters")
-    }// else {
-//      auth.signup(email, password).catch((e) => {
- //       setError(e.message)
-  //    })
-    //}
   }
 
   return (

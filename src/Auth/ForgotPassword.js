@@ -41,14 +41,17 @@ export default function ForgotPassword() {
   const classes = useStyles();
   const auth = useAuth();
   const [email, setEmail] = useState('');
-  const [error, setError] = useState(null);
-  const [emailSent, setEmailSent] = useState(false);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState(null);
 
   const onResetPasswordHandler = () => {
     // perform lookup in database, if found then do these next two things..
     auth.sendPasswordResetEmail(email)
-      .then(() => setError(`An email has been sent to ${email}`))
-      .catch((e) => setError(e.message))
+      .then(() => setMessage(`An email has been sent to ${email}`))
+      .catch((err) => {
+        setError(true)
+        setMessage(err.message)
+      })
   }
 
   return (
@@ -81,9 +84,14 @@ export default function ForgotPassword() {
         </Button>
       </Container>
       {
-        error
-          ? <Typography color="primary" className={classes.message} align="center" variant="h6">
-              {error} 
+        message
+          ? <Typography 
+              color={error ? "secondary" : "primary"}
+              className={classes.message} 
+              align="center" 
+              variant="h6"
+            >
+              {message}. Login<Link style={{color: 'white'}} href="/"> here</Link>
             </Typography>
           : false
       }
