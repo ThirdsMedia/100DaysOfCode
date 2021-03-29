@@ -35,11 +35,6 @@ const useStyles = makeStyles(theme => ({
   message: {
     fontFamily: 'Nunito',
   },
-  error: {
-    color: theme.palette.secondary.main,
-    fontFamily: 'Nunito',
-    margin: theme.spacing(2),
-  },
 }))
 
 export default function ForgotPassword() {
@@ -87,7 +82,7 @@ export default function ForgotPassword() {
       </Container>
       {
         error
-          ? <Typography className={classes.error} align="center" variant="h6">
+          ? <Typography color="primary" className={classes.message} align="center" variant="h6">
               {error} 
             </Typography>
           : false
