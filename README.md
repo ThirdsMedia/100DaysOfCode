@@ -1358,4 +1358,46 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Auth](https://github.com/ThirdsMedia/100DaysOfCode/tree/day56/src/Auth)
 
+### Day 57: March 30, 2021 - Tuesday
+
+**Today's Progress**: Added firebase.firestore() capabilities to FirebaseAuthProvider so that user information is added to a firestore database upon sign up. Accessed user data in Profile instead of using the static JSON object database I created. 
+
+**Thoughts:** This is a big leap for user authentication. Now updating user information is essentially effortless (I just use firestore's update() method). I still need to add in Loading animation though, but otherwise the majority of the logic for creating and updating user profile information is complete. 
+
+**Backend To Do:**
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] Smooth out transitions between login and authenticated (it still shows the login page in between initializing user). Add a loading icon
+	- [x] Added Firestore user database for Profile data
+	- [ ] Fix error handling on login and signup
+	- [ ] Figure out how to show the CircularProgress page in between loggin out
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] Editing Profile Data (Updating firestore)
+	- [ ] Successfully update the user profile on Firebase and display without reloading app
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+
+**Issues:** For some reason my .env file disappeared and I couldn't figure out how to access my App for 30 minutes. 
+
+**Solutions:** Realizing that the same issue exists for the past three days so it must be something other then syntax. Discovered the firebase environment variables were suddenly missing and re-added them.
+
+**Link to work:** [Auth](https://github.com/ThirdsMedia/100DaysOfCode/tree/day57/src/FirebaseAuthProvider.js)
+
+
 
