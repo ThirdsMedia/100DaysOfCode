@@ -43,7 +43,7 @@ export default function SignUp() {
   const auth = useAuth();
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [userName, setUserName] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
@@ -56,8 +56,8 @@ export default function SignUp() {
       setPhone(value)
     } else if (name === 'signup-userPassword') {
       setPassword(value)
-    } else if (name === 'signup-userName') {
-      setUserName(value)
+    } else if (name === 'signup-displayName') {
+      setDisplayName(value)
     }
   }
 
@@ -77,8 +77,8 @@ export default function SignUp() {
       <TextField
         id="signup-name"
         label="Name"
-        name="signup-userName"
-        value={userName}
+        name="signup-displayName"
+        value={displayName}
         margin="normal"
         required
         fullWidth
@@ -137,7 +137,7 @@ export default function SignUp() {
         fullWidth
         variant="contained"
         onClick={() => {
-          auth.signup(email, password).catch((e) => {
+          auth.signup(displayName, email, password).catch((e) => {
             setError(e.message);
           })
         }}

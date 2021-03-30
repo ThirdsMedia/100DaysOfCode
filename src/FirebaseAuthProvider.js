@@ -18,6 +18,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+/* 
+ * Auth API reference
+ * https://firebase.google.com/docs/reference/js/firebase.auth.Auth
+ */
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -37,12 +42,11 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
   const googleAuth = new firebase.auth.GoogleAuthProvider();
   const [loading, setLoading] = useState(false)
 
   const signin = (email, password) => {
-    setLoading(true)
-
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -50,32 +54,37 @@ function useProvideAuth() {
         setUser(response.user);
         return response.user;
       })
-      .finally(() => setLoading(false))
+      .catch((e) => setError(e))
   }
 
-  const signup = (email, password) => {
-    setLoading(true)
-
+  const signup = (displayName, email, password) => {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(response => {
-        setUser(response.user);
+        const uid = response.user.uid
+        const data = {
+          id: uid,
+          email,
+          displayName,
+        }
+        const userRef = firebase.firestore().collection("users")
+        userRef.doc(uid).set(data).then(() => {
+          setUser(response.user);
+        })
+        .catch((e) => setError(e))
         return response.user;
       })
-      .finally(() => setLoading(false))
   }
 
   const signout = () => {
-    setLoading(true)
-
     return firebase
       .auth()
       .signOut()
       .then(() => {
         setUser(false);
       })
-      .finally(() => setLoading(false))
+      .catch((e) => setError(e))
   }
 
   const sendPasswordResetEmail = (email) => {
@@ -97,8 +106,6 @@ function useProvideAuth() {
   }
 
   const signInWithGoogle = () => {
-    setLoading(true)
-    
     return firebase
       .auth()
       .signInWithPopup(googleAuth)
@@ -108,15 +115,23 @@ function useProvideAuth() {
         setUser(response.user)
         return response.user;
       })
-      .finally(() => setLoading(false))
+      .catch((e) => setError(e))
   }
 
   useEffect(() => {
+    const userRef = firebase.firestore().collection("users");
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        setUser(user);
+        userRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data()
+            console.log("User uid: ", user.uid, "User: ", user, "Document data: ", document.data())
+            setUser(userData)
+          })
       } else {
-        setUser(false);
+        setUser(false)
       }
     })
 
@@ -125,6 +140,7 @@ function useProvideAuth() {
 
   return {
     user,
+    error,
     signin,
     signup,
     signout,

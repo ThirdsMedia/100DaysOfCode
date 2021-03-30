@@ -1,4 +1,5 @@
 import React, { useState }  from 'react';
+import { useAuth } from '../../FirebaseAuthProvider';
 import MainBar from '../../Components/MainBar';
 import CardList from '../../Products/CardList';
 import QRCode from '../../Components/QRCode';
@@ -103,9 +104,16 @@ function a11yProps(index) {
   };
 }
 
+/*
+ * Firebase Auth API Reference 
+ * https://firebase.google.com/docs/reference/js/firebase.User
+ */
+
 export default function Profile({ profileData }) {
   const classes = useStyles();
+  const auth = useAuth();
   const [value, setValue] = useState(0);
+  console.log(auth.user.email, auth.user.phoneNumber, auth.user.displayName)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -120,7 +128,7 @@ export default function Profile({ profileData }) {
         <Avatar className={classes.profilePic} src={ProfilePic} />
         <Container className={classes.info}>
           <Typography component="h1" variant="h3" style={{fontFamily: 'Nunito'}}>
-            {profileData.fname} {profileData.lname}
+            {auth.user.displayName}
           </Typography>
           <span style={{color: '#d0d0d0'}}>{profileData.username}</span>
           <Breadcrumbs className={classes.breadcrumbs}>
