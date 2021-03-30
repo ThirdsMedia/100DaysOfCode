@@ -7,16 +7,17 @@ import {
   useContext,
   createContext 
 } from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
+//import CircularProgress from '@material-ui/core/CircularProgress';
+//import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
   loadingScreen: {
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(6),
   },
 }));
+*/
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -38,10 +39,10 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [user, setUser] = useState(null);
   const googleAuth = new firebase.auth.GoogleAuthProvider();
-  const [loading, setLoading] = useState(false)
+//  const [loading, setLoading] = useState(false)
 
   const signin = (email, password) => {
-    setLoading(true)
+ //   setLoading(true)
 
     return firebase
       .auth()
@@ -50,11 +51,11 @@ function useProvideAuth() {
         setUser(response.user);
         return response.user;
       })
-      .finally(() => setLoading(false))
+ //     .finally(() => setLoading(false))
   }
 
   const signup = (email, password) => {
-    setLoading(true)
+  //  setLoading(true)
 
     return firebase
       .auth()
@@ -63,11 +64,11 @@ function useProvideAuth() {
         setUser(response.user);
         return response.user;
       })
-      .finally(() => setLoading(false))
+   //   .finally(() => setLoading(false))
   }
 
   const signout = () => {
-    setLoading(true)
+    //setLoading(true)
 
     return firebase
       .auth()
@@ -75,7 +76,7 @@ function useProvideAuth() {
       .then(() => {
         setUser(false);
       })
-      .finally(() => setLoading(false))
+     // .finally(() => setLoading(false))
   }
 
   const sendPasswordResetEmail = (email) => {
@@ -97,7 +98,7 @@ function useProvideAuth() {
   }
 
   const signInWithGoogle = () => {
-    setLoading(true)
+    //setLoading(true)
     
     return firebase
       .auth()
@@ -108,7 +109,7 @@ function useProvideAuth() {
         setUser(response.user)
         return response.user;
       })
-      .finally(() => setLoading(false))
+      //.finally(() => setLoading(false))
   }
 
   useEffect(() => {
@@ -128,7 +129,7 @@ function useProvideAuth() {
     signin,
     signup,
     signout,
-    loading,
+    //loading,
     sendPasswordResetEmail,
     confirmPasswordReset,
     signInWithGoogle,
@@ -137,15 +138,16 @@ function useProvideAuth() {
 
 export function AuthProvider({ children }) {
   const auth = useProvideAuth();
-  const classes = useStyles();
+ // const classes = useStyles();
 
-  if (auth.loading) {
+ /* if (auth.loading) {
     return (
       <div className={classes.loadingScreen}>
         <CircularProgress color="secondary" />
       </div>
     );
   }
+  */
 
   return (
     <UserContext.Provider value={auth}>

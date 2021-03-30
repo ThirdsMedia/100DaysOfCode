@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Copyright from '../Components/Copyright';
 import { useAuth } from '../FirebaseAuthProvider';
 import {
@@ -11,7 +11,6 @@ import {
   Grid,
   Link,
   Checkbox,
-  CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOpenIcon from '@material-ui/icons/LockOpen';

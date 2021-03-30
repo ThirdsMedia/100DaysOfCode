@@ -4,14 +4,9 @@ import {
   Container,
   Typography,
   TextField,
-  IconButton,
   Button,
   Link,
-  Grid,
-  FormControl,
-  FormControlLabel,
 } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({

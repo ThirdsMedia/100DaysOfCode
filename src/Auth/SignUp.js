@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../FirebaseAuthProvider';
 import {
   Container,
@@ -7,7 +7,6 @@ import {
   TextField,
   Button,
   Link,
-  CircularProgress
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
