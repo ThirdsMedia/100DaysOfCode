@@ -1399,5 +1399,48 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Auth](https://github.com/ThirdsMedia/100DaysOfCode/tree/day57/src/FirebaseAuthProvider.js)
 
+### Day 58: March 31, 2021 - Wednesday
+
+**Today's Progress**: Removed static user profile data file. Removed EditProfile component and added it into the Profile component and trimmed down a lot of useless makeStyles objects as well as other redundant or useless lines of code. Reorganized project structure. Deleted unecessary files. Cleaned up navigation a bit. 
+
+**Thoughts:** I didn't do a lot of what I actually planned to do, but cleaned up quite a bit of stuff. I am also strictly pulling user data from Firebase instead of a static .js file. Next I need to work on updating profile info with firebase.firestore() and reflecting those changes in the user profile. I also still need to implement a Loading screen in between logging in, logging out, and switching components in the Router. 
+
+**Backend To Do:**
+- [ ] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [ ] Smooth out transitions between login and authenticated (it still shows the login page in between initializing user). Add a loading icon
+	- [x] Added Firestore user database for Profile data
+	- [ ] Fix error handling on login and signup
+	- [ ] Figure out how to show the CircularProgress page in between loggin out
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [ ] Successfully update the user profile on Firebase and display without reloading app
+	- [x] Pull profile data from Firebase
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+
+**Issues:** I did the stupid .env thing again.
+
+**Solutions:** Create a new Firebase instance. Stop being an idiot. 
+
+**Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day58/src)
+
 
 
