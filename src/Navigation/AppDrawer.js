@@ -1,5 +1,5 @@
 import React from 'react';
-import profileData from '../static/profileData';
+import { useHistory } from 'react-router-dom';
 import { useAuth } from '../FirebaseAuthProvider';
 import {
   Avatar,
@@ -23,7 +23,6 @@ import EmailIcon from '@material-ui/icons/Email';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 5,
@@ -40,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
 export default function AppDrawer({ isOpen, handleDrawer }) {
   const classes = useStyles();
   const auth = useAuth();
+  const history = useHistory();
+
+  const onSignOutHandler = () => {
+    auth.signout()
+    history.push("/")
+  }
 
   return (
     <Drawer
@@ -52,16 +57,15 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
         <Grid container className={classes.avatar}>
           <Grid item>
             <IconButton href="/profile">
-              <Avatar src={profileData.picture} />  
+              <Avatar />
             </IconButton>
           </Grid>
           <Grid item>
             <Typography variant="h6" className={classes.title}>
-              {profileData.fname+' '}
-              {profileData.lname}
+              {auth.user.displayName}
             </Typography>
             <Typography variant="caption" color="textSecondary" className={classes.title}>
-              {profileData.username}
+              {auth.user.username}
             </Typography>
           </Grid>
         </Grid>
@@ -118,7 +122,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
         </List>
         <Divider />
         <List component='nav'>
-          <ListItem button onClick={auth.signout}>
+          <ListItem button onClick={() => onSignOutHandler()}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>

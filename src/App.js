@@ -1,12 +1,11 @@
 import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightGreen, pink } from '@material-ui/core/colors';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 /* Static data */
 import exampleDatabase from './static/exampleDatabase';
-import profileData from './static/profileData';
 
 /* Auth */
 import SignIn from './Auth/SignIn';
@@ -15,10 +14,9 @@ import ForgotPassword from './Auth/ForgotPassword';
 import { useAuth } from './FirebaseAuthProvider';
 
 /* App */
-import Profile from './Pages/Profile/Profile';
-import EditProfile from './Pages/Profile/EditProfile';
-import Contact from './Pages/Contact';
-import About from './Pages/About';
+import Profile from './Components/Profile';
+import Contact from './Components/Contact';
+import About from './Components/About';
 import Wizard from './CreationWizard/Wizard';
 import Products from './Products/Products';
 import LandingPage from './LandingPage/LandingPage';
@@ -52,21 +50,24 @@ export default function App() {
       {
         auth.user ?
           <Router>
-            <Route path="/" exact component={LandingPage} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/create" component={Wizard} />
-            <Route path="/about" component={About} />
-            <Route path="/review" render={() => <Review item={exampleDatabase[0]} />} />
-            <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
-            <Route path="/profile" render={() => <Profile profileData={profileData} />} />
-            <Route path="/editprofile" render={() => <EditProfile profileData={profileData} />} />
-            <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} />} />
+            <Switch>
+              <Route exact path="/" component={LandingPage} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/create" component={Wizard} />
+              <Route path="/about" component={About} />
+              <Route path="/review" render={() => <Review item={exampleDatabase[0]} />} />
+              <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
+              <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} />} />
+            </Switch>
           </Router>
         :
           <Router>
-            <Route path="/" exact component={SignIn} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/forgotpassword" component={ForgotPassword} />
+            <Switch>
+              <Route path="/" exact component={SignIn} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/forgotpassword" component={ForgotPassword} />
+            </Switch>
           </Router>
       }
     </ThemeProvider>

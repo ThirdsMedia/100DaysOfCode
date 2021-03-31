@@ -1,22 +1,12 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
 import { 
   useState, 
   useEffect,
   useContext,
   createContext 
 } from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({
-  loadingScreen: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(6),
-  },
-}));
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 /* 
  * Auth API reference
@@ -44,7 +34,6 @@ function useProvideAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const googleAuth = new firebase.auth.GoogleAuthProvider();
-  const [loading, setLoading] = useState(false)
 
   const signin = (email, password) => {
     return firebase
@@ -144,7 +133,6 @@ function useProvideAuth() {
     signin,
     signup,
     signout,
-    loading,
     sendPasswordResetEmail,
     confirmPasswordReset,
     signInWithGoogle,
@@ -153,15 +141,6 @@ function useProvideAuth() {
 
 export function AuthProvider({ children }) {
   const auth = useProvideAuth();
-  const classes = useStyles();
-
-  if (auth.loading) {
-    return (
-      <div className={classes.loadingScreen}>
-        <CircularProgress color="secondary" />
-      </div>
-    );
-  }
 
   return (
     <UserContext.Provider value={auth}>
