@@ -1442,5 +1442,49 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/tree/day58/src)
 
+### Day 59: April 1, 2021 - Thursday
+
+**Today's Progress**: Added userUpdate function to FirebaseAuthProvider.Added a field into EditProfile to update the user's displayName on Firebase. Successfully updated the user profile and displayed it upon reloading of Route.
+
+**Thoughts:** Pretty exciting. Doing this puts me halfway to completing adding Cocktails to the database too, though I'm sure there will be a few gotchas along the way still. One thing I need to do is get the Profile page to reload upon clicking of the EditProfile button. I think it's because Profile can't see the state changes of EditProfile, if it could, then that wouldn't even be a problem. So basically Profile just needs to be immediately aware of EditProfile's state change. Shouldn't be too hard. Also, updating new fields such as auth.user.twitter throws an error, so all I need to do there is create the full user object upon signing up. This can be done in the FirebaseAuthProvider. One last thing, now I want to change the name of that file since it's starting to provide more then just auth, but that's mainly an aesthetic and organizational issue which isn't super important.
+
+**Backend To Do:**
+- [ ] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [ ] Smooth out transitions between login and authenticated (it still shows the login page in between initializing user). Add a loading icon
+	- [x] Added Firestore user database for Profile data
+	- [ ] Fix error handling on login and signup
+	- [ ] Figure out how to show the CircularProgress page in between loggin out
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [ ] Make changes update immediately so that you don't have to manually refresh Profile
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+
+**Issues:** Just need to get the Profile to update immediately, and create the full user object upon completion of SignUp.
+
+**Solutions:** Make Profile aware of EditProfile's state, or possibly implement useEffect() in Profile.
+
+**Link to work:** [Profile](https://github.com/ThirdsMedia/100DaysOfCode/tree/day59/Components/Profile.js)
+
 
 
