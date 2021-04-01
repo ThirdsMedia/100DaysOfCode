@@ -1,5 +1,6 @@
 import React, { useState }  from 'react';
 import { useAuth } from '../FirebaseAuthProvider';
+import { useHistory } from 'react-router-dom';
 import MainBar from './MainBar';
 import CardList from '../Products/CardList';
 import QRCode from './QRCode';
@@ -111,25 +112,51 @@ function a11yProps(index) {
   };
 }
 
-function EditProfile({ user }) {
+function EditProfile({ auth }) {
   const classes = useStyles(); 
+  const history = useHistory();
+  const [userData, setUserData] = useState({
+    id: auth.user.id,
+    displayName: auth.user.displayName,
+    email: auth.user.email,
+/*    bio: auth.user.bio,
+    website: auth.user.website,
+    twitter: auth.user.twitter,
+    instagram: auth.user.instagram,
+    */
+  })
+
+  const onChangeHandler = (event) => {
+    const {name, value} = event.currentTarget    
+
+    // this works. Just do it for the rest of the fields now
+    if (name === "displayName") {
+      setUserData(Object.assign({}, userData, {displayName: value}))
+    }
+  }
+
+  const onSubmitHandler = () => {
+    auth.updateUser(userData)
+    history.push("/profile");
+  }
 
   return (
     <div className={classes.form}>
       <form>
         <TextField 
-          id="fname" 
-          label="First Name"
+          name="displayName"
+          label="Name"
           variant="outlined"
-          defaultValue={user.displayName} 
+          defaultValue={userData.displayName}
           className={classes.field}
           fullWidth
+          onChange={(e) => onChangeHandler(e)}
         />
         <TextField 
           id="bio" 
           label="Bio"
           variant="outlined"
-          defaultValue={user.bio} 
+          defaultValue={auth.user.bio} 
           className={classes.field}
           fullWidth 
           multiline 
@@ -139,7 +166,7 @@ function EditProfile({ user }) {
           id="website" 
           label="Website"
           variant="outlined"
-          defaultValue={user.url} 
+          defaultValue={auth.user.url} 
           className={classes.field}
           fullWidth
         />
@@ -147,7 +174,7 @@ function EditProfile({ user }) {
           id="twitter"
           label="Twitter"
           variant="outlined"
-          defaultValue={user.twitter} 
+          defaultValue={auth.user.twitter} 
           className={classes.field}
           fullWidth
         />
@@ -155,24 +182,24 @@ function EditProfile({ user }) {
           id="instagram"
           label="Instagram"
           variant="outlined"
-          defaultValue={user.instagram} 
+          defaultValue={auth.user.instagram} 
           className={classes.field}
           fullWidth
         />
       </form>
       <Grid container justify="center">
-        <Grid item xs="2">
+        <Grid item xs={2}>
           <Button 
             color="primary" 
             variant="outlined"
             className={classes.button}
             startIcon={<SaveIcon />}
-            href="/profile"
+            onClick={onSubmitHandler}
           >
             Update Profile
           </Button>
         </Grid>
-        <Grid item xs="2">
+        <Grid item xs={2}>
           <Button 
             color="secondary" 
             variant="outlined"
@@ -197,7 +224,7 @@ export default function Profile() {
   const classes = useStyles();
   const auth = useAuth();
   const [value, setValue] = useState(0);
-
+  
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
@@ -244,7 +271,7 @@ export default function Profile() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <EditProfile user={auth.user} />
+        <EditProfile auth={auth} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CardList data={exampleDatabase} />

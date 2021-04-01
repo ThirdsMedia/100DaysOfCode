@@ -76,6 +76,19 @@ function useProvideAuth() {
       .catch((e) => setError(e))
   }
 
+  const updateUser = (userData) => {
+    const userRef = firebase.firestore().collection("users");
+    if (user) {
+      userRef
+        .doc(user.id)
+        .update(userData)
+        .then(() => {
+          console.log("From provider after update: ", user)
+        })
+        .catch((e) => setError(e.message))
+    }
+  }
+
   const sendPasswordResetEmail = (email) => {
     return firebase
       .auth()
@@ -136,6 +149,7 @@ function useProvideAuth() {
     sendPasswordResetEmail,
     confirmPasswordReset,
     signInWithGoogle,
+    updateUser,
   };
 }
 
