@@ -1486,5 +1486,49 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Profile](https://github.com/ThirdsMedia/100DaysOfCode/tree/day59/Components/Profile.js)
 
+### Day 60: April 2, 2021 - Friday
+
+**Today's Progress**: Added more fields to the signup function in FirebaseAuthProvider. Added update capabilities to all fields in Profile.
+
+**Thoughts:** Welp, I have to run to work, but creating a user, and updating it's information definitely works, I just didn't have time to split the onChangeHandler into individual event handler functions, which I must do otherwise updating the user doesn't work very well. 
+
+**Backend To Do:**
+- [ ] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [ ] Smooth out transitions between login and authenticated (it still shows the login page in between initializing user). Add a loading icon
+	- [x] Added Firestore user database for Profile data
+	- [ ] Fix error handling on login and signup
+	- [ ] Figure out how to show the CircularProgress page in between loggin out
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [ ] Make changes update immediately so that you don't have to manually refresh Profile
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+
+**Issues:** All user fields not updating. Also need to get the Profile to update immediately, and create the full user object upon completion of SignUp.
+
+**Solutions:** Make Profile aware of EditProfile's state, or possibly implement useEffect() in Profile. Split onChangeHandler into individual event handlers per field
+
+**Link to work:** [Profile](https://github.com/ThirdsMedia/100DaysOfCode/tree/day60/Components/Profile.js)
+
 
 
