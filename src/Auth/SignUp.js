@@ -137,9 +137,8 @@ export default function SignUp() {
         fullWidth
         variant="contained"
         onClick={() => {
-          auth.signup(displayName, email, password).catch((e) => {
-            setError(e.message);
-          })
+          auth.signup(displayName, phone, email, password)
+            .catch((e) => setError(e.message))
         }}
       >
         Create Account

@@ -46,17 +46,28 @@ function useProvideAuth() {
       .catch((e) => setError(e))
   }
 
-  const signup = (displayName, email, password) => {
+  const signup = (displayName, phone, email, password) => {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(response => {
         const uid = response.user.uid
-        const data = {
+        const initData = {
           id: uid,
           email,
           displayName,
+          phone,
+          bio: '',
+          twitter: '',
+          instagram: '',
+          website: '',
+          picture: '',
+          favorites: [],
         }
+        // finish creating the full user object
+        const data = Object.assign({}, initData)
+
+        // User was already added to the Auth database, now add it to firestore
         const userRef = firebase.firestore().collection("users")
         userRef.doc(uid).set(data).then(() => {
           setUser(response.user);
@@ -129,7 +140,7 @@ function useProvideAuth() {
           .get()
           .then((document) => {
             const userData = document.data()
-            console.log("User uid: ", user.uid, "User: ", user, "Document data: ", document.data())
+//            console.log("User uid: ", user.uid, "User: ", user, "Document data: ", document.data())
             setUser(userData)
           })
       } else {

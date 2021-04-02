@@ -118,20 +118,38 @@ function EditProfile({ auth }) {
   const [userData, setUserData] = useState({
     id: auth.user.id,
     displayName: auth.user.displayName,
+    phone: auth.user.phone,
     email: auth.user.email,
-/*    bio: auth.user.bio,
     website: auth.user.website,
     twitter: auth.user.twitter,
     instagram: auth.user.instagram,
-    */
+    picture: auth.user.picture,
+    favorites: auth.user.favorites,
   })
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget    
 
-    // this works. Just do it for the rest of the fields now
-    if (name === "displayName") {
-      setUserData(Object.assign({}, userData, {displayName: value}))
+    // switch statement logic makes things weird. If I get rid of all fields besides displayName then it works to update
+    // the displayName, but if I uncomment the below lines, nothing works. Hmmmm
+    //  
+    // Can confirm, any of the fields work, but only if they are the only one uncommented. May have to split into multiple
+    // event handlers
+    switch(name) {
+//      case "displayName":
+ //       setUserData(Object.assign({}, userData, {displayName: value}))
+      case "bio":
+        setUserData(Object.assign({}, userData, {bio: value}))
+        /*
+      case "twitter":
+        setUserData(Object.assign({}, userData, {twitter: value}))
+      case "instagram":
+        setUserData(Object.assign({}, userData, {instagram: value}))
+      case "website":
+        setUserData(Object.assign({}, userData, {website: value}))
+        */
+      default:
+        return false
     }
   }
 
@@ -144,6 +162,7 @@ function EditProfile({ auth }) {
     <div className={classes.form}>
       <form>
         <TextField 
+          id="displayName"
           name="displayName"
           label="Name"
           variant="outlined"
@@ -154,6 +173,7 @@ function EditProfile({ auth }) {
         />
         <TextField 
           id="bio" 
+          name="bio"
           label="Bio"
           variant="outlined"
           defaultValue={auth.user.bio} 
@@ -161,30 +181,37 @@ function EditProfile({ auth }) {
           fullWidth 
           multiline 
           rows={5}
+          onChange={(e) => onChangeHandler(e)}
         />
         <TextField 
           id="website" 
+          name="website"
           label="Website"
           variant="outlined"
           defaultValue={auth.user.url} 
           className={classes.field}
           fullWidth
+          onChange={(e) => onChangeHandler(e)}
         />
         <TextField 
           id="twitter"
+          name="twitter"
           label="Twitter"
           variant="outlined"
           defaultValue={auth.user.twitter} 
           className={classes.field}
           fullWidth
+          onChange={(e) => onChangeHandler(e)}
         />
         <TextField 
           id="instagram"
+          name="instagram"
           label="Instagram"
           variant="outlined"
           defaultValue={auth.user.instagram} 
           className={classes.field}
           fullWidth
+          onChange={(e) => onChangeHandler(e)}
         />
       </form>
       <Grid container justify="center">
