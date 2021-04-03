@@ -128,30 +128,45 @@ function EditProfile({ auth }) {
   })
 
   const onChangeHandler = (event) => {
-    const {name, value} = event.currentTarget    
+    const { name, value } = event.currentTarget
 
-    // switch statement logic makes things weird. If I get rid of all fields besides displayName then it works to update
-    // the displayName, but if I uncomment the below lines, nothing works. Hmmmm
-    //  
-    // Can confirm, any of the fields work, but only if they are the only one uncommented. May have to split into multiple
-    // event handlers
     switch(name) {
-//      case "displayName":
- //       setUserData(Object.assign({}, userData, {displayName: value}))
+      case "displayName":
+        setUserData(Object.assign({}, userData, {displayName: value})
       case "bio":
-        setUserData(Object.assign({}, userData, {bio: value}))
-        /*
+        setUserData(Object.assign({}, userData, {bio: value})
       case "twitter":
-        setUserData(Object.assign({}, userData, {twitter: value}))
+        setUserData(Object.assign({}, userData, {twitter: value})
       case "instagram":
-        setUserData(Object.assign({}, userData, {instagram: value}))
+        setUserData(Object.assign({}, userData, {instagram: value})
       case "website":
-        setUserData(Object.assign({}, userData, {website: value}))
-        */
+        setUserData(Object.assign({}, userData, {website: value})
       default:
         return false
     }
   }
+
+  /*
+  const onChangeName = (event) => {
+    setUserData(Object.assign({}, userData, {displayName: event.target.value})
+  }
+
+  const onChangeBio = (event) => {
+    setUserData(Object.assign({}, userData, {bio: event.target.value})
+  }
+
+  const onChangeTwitter = (event) => {
+    setUserData(Object.assign({}, userData, {twitter: event.target.value})
+  }
+
+  const onChangeWebsite = (event) => {
+    setUserData(Object.assign({}, userData, {website: event.target.value})
+  }
+
+  const onChangeInstagram = (event) => {
+    setUserData(Object.assign({}, userData, {instagram: event.target.value})
+  }
+  */
 
   const onSubmitHandler = () => {
     auth.updateUser(userData)
@@ -176,7 +191,7 @@ function EditProfile({ auth }) {
           name="bio"
           label="Bio"
           variant="outlined"
-          defaultValue={auth.user.bio} 
+          defaultValue={userData.bio}
           className={classes.field}
           fullWidth 
           multiline 
@@ -188,7 +203,7 @@ function EditProfile({ auth }) {
           name="website"
           label="Website"
           variant="outlined"
-          defaultValue={auth.user.url} 
+          defaultValue={userData.website}
           className={classes.field}
           fullWidth
           onChange={(e) => onChangeHandler(e)}
@@ -198,7 +213,7 @@ function EditProfile({ auth }) {
           name="twitter"
           label="Twitter"
           variant="outlined"
-          defaultValue={auth.user.twitter} 
+          defaultValue={userData.twitter}
           className={classes.field}
           fullWidth
           onChange={(e) => onChangeHandler(e)}
@@ -208,7 +223,7 @@ function EditProfile({ auth }) {
           name="instagram"
           label="Instagram"
           variant="outlined"
-          defaultValue={auth.user.instagram} 
+          defaultValue={userData.instagram}
           className={classes.field}
           fullWidth
           onChange={(e) => onChangeHandler(e)}
