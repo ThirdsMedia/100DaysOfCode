@@ -1530,5 +1530,46 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [Profile](https://github.com/ThirdsMedia/100DaysOfCode/tree/day60/Components/Profile.js)
 
+### Day 61: April 3, 2021 - Saturday
 
+**Today's Progress**: User profile successfully updates and reflects changes upon reload. Loading screen in between route changes works. 
 
+**Thoughts:** Cool. Strangely I added a CircularProgress component back into FirebaseAuthProvider, and even though I believe I've added the ability to update the loading state to true and false within the useEffect which tracks changes to Auth state, it actually only displays the loading changes during route change, and NOT auth change. Sooooo, I guess either way it fixed half of the Loading problem lol, just in the exact opposite way I thought it would. User profile updates successfully, but I just need to added some code that forces the whole Profile component to reload itself upon update so the user gets a visual queue that it worked. Maybe render some sort of message on the screen saying shit worked. Last thing I need to do after that for user profile is make it able to update the user's picture. 
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [ ] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [ ] Fix error handling on login and signup
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [ ] Make changes update immediately so that you don't have to manually refresh Profile
+	- [ ] Update user picture
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+
+**Issues:** Still can't display loading screen between auth changes.
+
+**Solutions:** Dunno, maybe implement functionality to display loading upon route change and it'll work for auth, since the other way around seems to be true lol. 
+
+**Link to work:** [Profile](https://github.com/ThirdsMedia/100DaysOfCode/tree/day61/Components/Profile)
