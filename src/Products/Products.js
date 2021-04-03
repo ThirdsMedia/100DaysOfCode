@@ -46,7 +46,7 @@ export default function Products({ data }) {
   return (
     <div>
       <div className={classes.appBar}>
-        <MainBar />
+        <MainBar noLogo />
         <Grid container alignItems='center' justify='center'>
           <Grid item>
             <TextField 

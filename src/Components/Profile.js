@@ -118,6 +118,7 @@ function EditProfile({ auth }) {
   const [userData, setUserData] = useState({
     id: auth.user.id,
     displayName: auth.user.displayName,
+    bio: auth.user.bio,
     phone: auth.user.phone,
     email: auth.user.email,
     website: auth.user.website,
@@ -127,46 +128,25 @@ function EditProfile({ auth }) {
     favorites: auth.user.favorites,
   })
 
-  const onChangeHandler = (event) => {
-    const { name, value } = event.currentTarget
-
-    switch(name) {
-      case "displayName":
-        setUserData(Object.assign({}, userData, {displayName: value})
-      case "bio":
-        setUserData(Object.assign({}, userData, {bio: value})
-      case "twitter":
-        setUserData(Object.assign({}, userData, {twitter: value})
-      case "instagram":
-        setUserData(Object.assign({}, userData, {instagram: value})
-      case "website":
-        setUserData(Object.assign({}, userData, {website: value})
-      default:
-        return false
-    }
-  }
-
-  /*
   const onChangeName = (event) => {
-    setUserData(Object.assign({}, userData, {displayName: event.target.value})
+    setUserData(Object.assign({}, userData, {displayName: event.target.value}))
   }
 
   const onChangeBio = (event) => {
-    setUserData(Object.assign({}, userData, {bio: event.target.value})
+    setUserData(Object.assign({}, userData, {bio: event.target.value}))
   }
 
   const onChangeTwitter = (event) => {
-    setUserData(Object.assign({}, userData, {twitter: event.target.value})
+    setUserData(Object.assign({}, userData, {twitter: event.target.value}))
   }
 
   const onChangeWebsite = (event) => {
-    setUserData(Object.assign({}, userData, {website: event.target.value})
+    setUserData(Object.assign({}, userData, {website: event.target.value}))
   }
 
   const onChangeInstagram = (event) => {
-    setUserData(Object.assign({}, userData, {instagram: event.target.value})
+    setUserData(Object.assign({}, userData, {instagram: event.target.value}))
   }
-  */
 
   const onSubmitHandler = () => {
     auth.updateUser(userData)
@@ -184,7 +164,7 @@ function EditProfile({ auth }) {
           defaultValue={userData.displayName}
           className={classes.field}
           fullWidth
-          onChange={(e) => onChangeHandler(e)}
+          onChange={(e) => onChangeName(e)}
         />
         <TextField 
           id="bio" 
@@ -196,7 +176,7 @@ function EditProfile({ auth }) {
           fullWidth 
           multiline 
           rows={5}
-          onChange={(e) => onChangeHandler(e)}
+          onChange={(e) => onChangeBio(e)}
         />
         <TextField 
           id="website" 
@@ -206,7 +186,7 @@ function EditProfile({ auth }) {
           defaultValue={userData.website}
           className={classes.field}
           fullWidth
-          onChange={(e) => onChangeHandler(e)}
+          onChange={(e) => onChangeWebsite(e)}
         />
         <TextField 
           id="twitter"
@@ -216,7 +196,7 @@ function EditProfile({ auth }) {
           defaultValue={userData.twitter}
           className={classes.field}
           fullWidth
-          onChange={(e) => onChangeHandler(e)}
+          onChange={(e) => onChangeTwitter(e)}
         />
         <TextField 
           id="instagram"
@@ -226,7 +206,7 @@ function EditProfile({ auth }) {
           defaultValue={userData.instagram}
           className={classes.field}
           fullWidth
-          onChange={(e) => onChangeHandler(e)}
+          onChange={(e) => onChangeInstagram(e)}
         />
       </form>
       <Grid container justify="center">

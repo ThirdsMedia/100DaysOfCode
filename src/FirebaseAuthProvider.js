@@ -7,6 +7,16 @@ import {
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  loading: {
+    background: theme.palette.primary.background,
+    display: 'flex',
+    justifyContent: 'center',
+  },
+}));
 
 /* 
  * Auth API reference
@@ -32,6 +42,7 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const googleAuth = new firebase.auth.GoogleAuthProvider();
 
@@ -140,11 +151,13 @@ function useProvideAuth() {
           .get()
           .then((document) => {
             const userData = document.data()
-//            console.log("User uid: ", user.uid, "User: ", user, "Document data: ", document.data())
             setUser(userData)
+            setLoading(false)
           })
       } else {
+        setLoading(false)
         setUser(false)
+
       }
     })
 
@@ -157,6 +170,7 @@ function useProvideAuth() {
     signin,
     signup,
     signout,
+    loading,
     sendPasswordResetEmail,
     confirmPasswordReset,
     signInWithGoogle,
@@ -166,6 +180,15 @@ function useProvideAuth() {
 
 export function AuthProvider({ children }) {
   const auth = useProvideAuth();
+  const classes = useStyles();
+
+  if (auth.loading) {
+    return (
+      <div className={classes.loading}>
+        <CircularProgress color="secondary" />
+      </div>
+    )
+  }
 
   return (
     <UserContext.Provider value={auth}>
