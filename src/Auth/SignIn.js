@@ -11,6 +11,7 @@ import {
   Grid,
   Link,
   Checkbox,
+  CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
@@ -48,7 +49,7 @@ export default function SignIn() {
   const auth = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(auth.error);
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
@@ -58,6 +59,14 @@ export default function SignIn() {
     } else if (name === 'userPassword') {
       setPassword(value);
     }
+  }
+
+  if (auth.loading) {
+    return (
+      <div className={classes.loading}>
+        <CircularProgress color="secondary" />
+      </div>
+    )
   }
 
   return (
@@ -73,6 +82,7 @@ export default function SignIn() {
           ? <Typography className={classes.error}>{error}</Typography>
           : false
       }
+
       <TextField
         id="email"
         name="userEmail"
@@ -115,11 +125,7 @@ export default function SignIn() {
         color="primary"
         fullWidth
         variant="contained"
-        onClick={() => {
-          auth.signin(email, password).catch((e) => {
-            setError(e.message)
-          })
-        }}
+        onClick={() => auth.signin(email, password)}
       >
         Sign In
       </Button>

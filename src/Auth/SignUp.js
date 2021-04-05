@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   Link,
+  CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
@@ -45,7 +46,15 @@ export default function SignUp() {
   const [phone, setPhone] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(auth.error);
+
+  if (auth.loading) {
+    return (
+      <div className={classes.loading}>
+        <CircularProgress color="secondary" />
+      </div>
+    )
+  }
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
@@ -136,10 +145,7 @@ export default function SignUp() {
         color="primary"
         fullWidth
         variant="contained"
-        onClick={() => {
-          auth.signup(displayName, phone, email, password)
-            .catch((e) => setError(e.message))
-        }}
+        onClick={() => auth.signup(displayName, phone, email, password)}
       >
         Create Account
       </Button>

@@ -11,9 +11,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  loading: {
-    background: theme.palette.primary.background,
+  root: {
     display: 'flex',
+    backgroundColor: theme.palette.primary.background,
     justifyContent: 'center',
   },
 }));
@@ -47,23 +47,37 @@ function useProvideAuth() {
   const googleAuth = new firebase.auth.GoogleAuthProvider();
 
   const signin = (email, password) => {
+    setLoading(true)
+
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(response => {
-        setUser(response.user);
+        setUser(response.user)
         return response.user;
       })
-      .catch((e) => setError(e))
+      .catch((e) => setError(e.message))
+      .finally(() => {
+        setLoading(false)
+        setError(null)
+      })
   }
 
   const signup = (displayName, phone, email, password) => {
+    setLoading(true)
+
+    // this doesn't display the error
+    if (!displayName) {
+      setLoading(false)
+      setError("You must specify a display name!")
+    } 
+
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(response => {
         const uid = response.user.uid
-        const initData = {
+        const userData = Object.assign({}, {
           id: uid,
           email,
           displayName,
@@ -74,18 +88,22 @@ function useProvideAuth() {
           website: '',
           picture: '',
           favorites: [],
-        }
-        // finish creating the full user object
-        const data = Object.assign({}, initData)
+        });
 
         // User was already added to the Auth database, now add it to firestore
         const userRef = firebase.firestore().collection("users")
-        userRef.doc(uid).set(data).then(() => {
-          setUser(response.user);
-        })
-        .catch((e) => setError(e))
-        return response.user;
+        userRef
+          .doc(uid)
+          .set(userData)
+          .then(() => setUser(response.user))
+          .catch((e) => setError(e.message))
+          .finally(() => firebase.auth().signOut())
       })
+      .catch((e) => setError(e.message))
+      .finally(() => {
+        setLoading(false)
+        setError(null)
+      });
   }
 
   const signout = () => {
@@ -93,21 +111,20 @@ function useProvideAuth() {
       .auth()
       .signOut()
       .then(() => {
-        setUser(false);
+        setUser(false)
+        setError(null)
       })
-      .catch((e) => setError(e))
   }
 
   const updateUser = (userData) => {
     const userRef = firebase.firestore().collection("users");
     if (user) {
-      userRef
+      return userRef
         .doc(user.id)
         .update(userData)
         .then(() => {
-          console.log("From provider after update: ", user)
+          console.log("successfully updated user")
         })
-        .catch((e) => setError(e.message))
     }
   }
 
@@ -115,31 +132,29 @@ function useProvideAuth() {
     return firebase
       .auth()
       .sendPasswordResetEmail(email)
-      .then(() => {
-        return true;
-      })
+      .then(() => true)
   }
 
   const confirmPasswordReset = (code, password) => {
     return firebase
       .auth()
       .confirmPasswordReset(code, password)
-      .then(() => {
-        return true;
-      })
+      .then(() => true)
   }
 
   const signInWithGoogle = () => {
+    setLoading(true);
+
     return firebase
       .auth()
       .signInWithPopup(googleAuth)
       .then((response) => {
-        const cred = response.credential;
-        const token = cred.token;
+        //const cred = response.credential;
+        //const token = cred.token;
         setUser(response.user)
         return response.user;
       })
-      .catch((e) => setError(e))
+      .finally(() => setLoading(false));
   }
 
   useEffect(() => {
@@ -157,7 +172,6 @@ function useProvideAuth() {
       } else {
         setLoading(false)
         setUser(false)
-
       }
     })
 
@@ -167,10 +181,10 @@ function useProvideAuth() {
   return {
     user,
     error,
+    loading,
     signin,
     signup,
     signout,
-    loading,
     sendPasswordResetEmail,
     confirmPasswordReset,
     signInWithGoogle,
@@ -184,7 +198,7 @@ export function AuthProvider({ children }) {
 
   if (auth.loading) {
     return (
-      <div className={classes.loading}>
+      <div className={classes.root}>
         <CircularProgress color="secondary" />
       </div>
     )

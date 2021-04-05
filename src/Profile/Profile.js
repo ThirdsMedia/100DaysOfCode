@@ -1,9 +1,8 @@
 import React, { useState }  from 'react';
 import { useAuth } from '../FirebaseAuthProvider';
-import { useHistory } from 'react-router-dom';
-import MainBar from './MainBar';
+import MainBar from '../Components/MainBar';
 import CardList from '../Products/CardList';
-import QRCode from './QRCode';
+import QRCode from '../Components/QRCode';
 import ProfilePic from '../assets/dj-pct.jpg';
 import exampleDatabase from '../static/exampleDatabase';
 import {
@@ -114,7 +113,6 @@ function a11yProps(index) {
 
 function EditProfile({ auth }) {
   const classes = useStyles(); 
-  const history = useHistory();
   const [userData, setUserData] = useState({
     id: auth.user.id,
     displayName: auth.user.displayName,
@@ -126,7 +124,8 @@ function EditProfile({ auth }) {
     instagram: auth.user.instagram,
     picture: auth.user.picture,
     favorites: auth.user.favorites,
-  })
+  });
+  const [error, setError] = useState(auth.error);
 
   const onChangeName = (event) => {
     setUserData(Object.assign({}, userData, {displayName: event.target.value}))
@@ -150,7 +149,9 @@ function EditProfile({ auth }) {
 
   const onSubmitHandler = () => {
     auth.updateUser(userData)
-    history.push("/profile");
+      .then(() => console.log("Successfully updated the user's data"))
+      .catch((e) => setError(e.message))
+      .finally(() => window.location.reload(true))
   }
 
   return (
