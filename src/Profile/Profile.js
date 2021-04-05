@@ -3,16 +3,14 @@ import { useAuth } from '../FirebaseAuthProvider';
 import MainBar from '../Components/MainBar';
 import CardList from '../Products/CardList';
 import QRCode from '../Components/QRCode';
-import ProfilePic from '../assets/dj-pct.jpg';
+import EditProfile from './EditProfile';
 import exampleDatabase from '../static/exampleDatabase';
 import {
   AppBar,
   Avatar,
   Container,
-  Button,
-  TextField,
-  Grid,
   Box,
+  IconButton,
   Link,
   Typography,
   Breadcrumbs,
@@ -22,8 +20,6 @@ import {
 import LinkIcon from '@material-ui/icons/Link';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import DeleteIcon from '@material-ui/icons/Delete';
-import SaveIcon from '@material-ui/icons/Save';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -38,18 +34,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     fontFamily: 'Nunito',
     borderRadius: 15,
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: 25,
-  },
-  field: {
-    marginBottom: 15,
-    backgroundColor: theme.palette.primary.background
-  },
-  button: {
-    borderRadius: 37
   },
   nav: {
     display: 'flex',
@@ -111,8 +95,16 @@ function a11yProps(index) {
   };
 }
 
-function EditProfile({ auth }) {
-  const classes = useStyles(); 
+/*
+ * Firebase Auth API Reference 
+ * https://firebase.google.com/docs/reference/js/firebase.User
+ */
+
+export default function Profile() {
+  const classes = useStyles();
+  const auth = useAuth();
+  const [value, setValue] = useState(0);
+  const [image, setImage] = useState(auth.user.picture);
   const [userData, setUserData] = useState({
     id: auth.user.id,
     displayName: auth.user.displayName,
@@ -125,131 +117,17 @@ function EditProfile({ auth }) {
     picture: auth.user.picture,
     favorites: auth.user.favorites,
   });
-  const [error, setError] = useState(auth.error);
-
-  const onChangeName = (event) => {
-    setUserData(Object.assign({}, userData, {displayName: event.target.value}))
-  }
-
-  const onChangeBio = (event) => {
-    setUserData(Object.assign({}, userData, {bio: event.target.value}))
-  }
-
-  const onChangeTwitter = (event) => {
-    setUserData(Object.assign({}, userData, {twitter: event.target.value}))
-  }
-
-  const onChangeWebsite = (event) => {
-    setUserData(Object.assign({}, userData, {website: event.target.value}))
-  }
-
-  const onChangeInstagram = (event) => {
-    setUserData(Object.assign({}, userData, {instagram: event.target.value}))
-  }
-
-  const onSubmitHandler = () => {
-    auth.updateUser(userData)
-      .then(() => console.log("Successfully updated the user's data"))
-      .catch((e) => setError(e.message))
-      .finally(() => window.location.reload(true))
-  }
-
-  return (
-    <div className={classes.form}>
-      <form>
-        <TextField 
-          id="displayName"
-          name="displayName"
-          label="Name"
-          variant="outlined"
-          defaultValue={userData.displayName}
-          className={classes.field}
-          fullWidth
-          onChange={(e) => onChangeName(e)}
-        />
-        <TextField 
-          id="bio" 
-          name="bio"
-          label="Bio"
-          variant="outlined"
-          defaultValue={userData.bio}
-          className={classes.field}
-          fullWidth 
-          multiline 
-          rows={5}
-          onChange={(e) => onChangeBio(e)}
-        />
-        <TextField 
-          id="website" 
-          name="website"
-          label="Website"
-          variant="outlined"
-          defaultValue={userData.website}
-          className={classes.field}
-          fullWidth
-          onChange={(e) => onChangeWebsite(e)}
-        />
-        <TextField 
-          id="twitter"
-          name="twitter"
-          label="Twitter"
-          variant="outlined"
-          defaultValue={userData.twitter}
-          className={classes.field}
-          fullWidth
-          onChange={(e) => onChangeTwitter(e)}
-        />
-        <TextField 
-          id="instagram"
-          name="instagram"
-          label="Instagram"
-          variant="outlined"
-          defaultValue={userData.instagram}
-          className={classes.field}
-          fullWidth
-          onChange={(e) => onChangeInstagram(e)}
-        />
-      </form>
-      <Grid container justify="center">
-        <Grid item xs={2}>
-          <Button 
-            color="primary" 
-            variant="outlined"
-            className={classes.button}
-            startIcon={<SaveIcon />}
-            onClick={onSubmitHandler}
-          >
-            Update Profile
-          </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <Button 
-            color="secondary" 
-            variant="outlined"
-            className={classes.button}
-            startIcon={<DeleteIcon />}
-            href="/profile"
-          >
-            Cancel
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
-  );
-}
-
-/*
- * Firebase Auth API Reference 
- * https://firebase.google.com/docs/reference/js/firebase.User
- */
-
-export default function Profile() {
-  const classes = useStyles();
-  const auth = useAuth();
-  const [value, setValue] = useState(0);
   
   const handleChange = (event, newValue) => {
     setValue(newValue)
+  }
+
+  const handleImageUpload = (event) => {
+    if (event.target.files.length > 0) {
+      const img = URL.createObjectURL(event.target.files[0]);
+      setImage(img);
+      auth.updateImage(img)
+    }
   }
 
   return (
@@ -258,7 +136,23 @@ export default function Profile() {
         <MainBar noLogo />
       </div>
       <Container maxWidth="xl" className={classes.container}>
-        <Avatar className={classes.profilePic} src={ProfilePic} />
+        <div id="avatar-section">
+          <input 
+            accept="image/*" 
+            hidden 
+            id="photo-upload" 
+            type="file" 
+            onChange={(e) => handleImageUpload(e)} 
+          />
+          <label htmlFor="photo-upload">
+            <IconButton component="span">
+              <Avatar 
+                className={classes.profilePic} 
+src={image} 
+              />
+            </IconButton>
+          </label>
+        </div>
         <Container className={classes.info}>
           <Typography component="h1" variant="h3" style={{fontFamily: 'Nunito'}}>
             {auth.user.displayName}
@@ -271,7 +165,7 @@ export default function Profile() {
             <Link rel="noopener" href={auth.user.instagram} className={classes.link}>
               <InstagramIcon />
             </Link>
-            <Link rel="noopener" href={auth.user.url} className={classes.link}>
+            <Link rel="noopener" href={auth.user.website} className={classes.link}>
               <LinkIcon />
             </Link>
           </Breadcrumbs>
@@ -294,7 +188,7 @@ export default function Profile() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <EditProfile auth={auth} />
+        <EditProfile auth={auth} userData={userData} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CardList data={exampleDatabase} />

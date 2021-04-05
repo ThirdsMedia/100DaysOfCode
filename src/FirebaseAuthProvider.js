@@ -7,6 +7,7 @@ import {
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -128,6 +129,14 @@ function useProvideAuth() {
     }
   }
 
+  const updateImage = (image) => {
+    const storageRef = firebase.storage().ref()
+    storageRef.put(image).then((snapshot) => {
+      console.log("uploaded: ", image)
+    })
+
+  }
+
   const sendPasswordResetEmail = (email) => {
     return firebase
       .auth()
@@ -189,6 +198,7 @@ function useProvideAuth() {
     confirmPasswordReset,
     signInWithGoogle,
     updateUser,
+    updateImage,
   };
 }
 
