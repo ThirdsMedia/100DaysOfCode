@@ -46,6 +46,7 @@ function useProvideAuth() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const googleAuth = new firebase.auth.GoogleAuthProvider();
+  const storageRef = firebase.storage().ref()
 
   const signin = (email, password) => {
     setLoading(true)
@@ -129,12 +130,14 @@ function useProvideAuth() {
     }
   }
 
-  const updateImage = (image) => {
-    const storageRef = firebase.storage().ref()
-    storageRef.put(image).then((snapshot) => {
-      console.log("uploaded: ", image)
-    })
+  const uploadImageToStorage = (image, name) => {
+    const imageRef = storageRef.child(`${user.id}/images/${name}`)
 
+    return imageRef
+      .put(image)
+      .then((snapshot) => {
+        return imageRef.getDownloadURL()
+      })
   }
 
   const sendPasswordResetEmail = (email) => {
@@ -198,7 +201,7 @@ function useProvideAuth() {
     confirmPasswordReset,
     signInWithGoogle,
     updateUser,
-    updateImage,
+    uploadImageToStorage,
   };
 }
 

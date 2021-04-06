@@ -105,28 +105,26 @@ export default function Profile() {
   const auth = useAuth();
   const [value, setValue] = useState(0);
   const [image, setImage] = useState(auth.user.picture);
-  const [userData, setUserData] = useState({
-    id: auth.user.id,
-    displayName: auth.user.displayName,
-    bio: auth.user.bio,
-    phone: auth.user.phone,
-    email: auth.user.email,
-    website: auth.user.website,
-    twitter: auth.user.twitter,
-    instagram: auth.user.instagram,
-    picture: auth.user.picture,
-    favorites: auth.user.favorites,
-  });
+  const [userData, setUserData] = useState({...auth.user})
   
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
 
   const handleImageUpload = (event) => {
+    const imageName = event.target.files[0].name
+
     if (event.target.files.length > 0) {
-      const img = URL.createObjectURL(event.target.files[0]);
-      setImage(img);
-      auth.updateImage(img)
+      const imageFile = URL.createObjectURL(event.target.files[0]);
+      setImage(imageFile);
+
+      // upload to firebase and set the user's new avatar image
+      auth.uploadImageToStorage(imageFile, imageName)
+        .then((ref) => {
+          console.log("The ref: ", ref)
+          setUserData(Object.assign({}, userData, {picture: ref}))
+        })
+        .catch((e) => console.log(e))
     }
   }
 
@@ -148,7 +146,7 @@ export default function Profile() {
             <IconButton component="span">
               <Avatar 
                 className={classes.profilePic} 
-src={image} 
+                src={image} 
               />
             </IconButton>
           </label>
