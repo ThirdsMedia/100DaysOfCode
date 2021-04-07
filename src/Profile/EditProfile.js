@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function EditProfile({ auth, userData}) {
+export default function EditProfile({ auth, userData, imageRef}) {
   const classes = useStyles(); 
   const [userObject, setUserObject] = useState(userData);  
   const [error, setError] = useState(auth.error);
@@ -48,15 +48,11 @@ export default function EditProfile({ auth, userData}) {
     setUserObject(Object.assign({}, userData, {instagram: event.target.value}))
   }
 
-  const onChangeUserImage = (event) => {
-    setUserObject(Object.assign({}, userData, {picture: event.target.value}))
-  }
-
   const onSubmitHandler = () => {
     auth.updateUser(userObject)
-      .then(() => console.log("Successfully updated the user's data"))
+      .then(() => console.log("userData: ", userData, "userObject: ", userObject))
       .catch((e) => setError(e.message))
-      .finally(() => window.location.reload(true))
+      .finally(() => {})//window.location.reload(true))
   }
 
   return (

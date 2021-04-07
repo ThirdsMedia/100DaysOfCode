@@ -134,7 +134,7 @@ function useProvideAuth() {
     const imageRef = storageRef.child(`${user.id}/images/${name}`)
 
     return imageRef
-      .put(image)
+      .putString(image)
       .then((snapshot) => {
         return imageRef.getDownloadURL()
       })
@@ -202,6 +202,7 @@ function useProvideAuth() {
     signInWithGoogle,
     updateUser,
     uploadImageToStorage,
+    storageRef,
   };
 }
 

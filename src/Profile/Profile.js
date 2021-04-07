@@ -106,7 +106,9 @@ export default function Profile() {
   const [value, setValue] = useState(0);
   const [image, setImage] = useState(auth.user.picture);
   const [userData, setUserData] = useState({...auth.user})
-  
+  const [userObject, setUserObject] = useState(userData);
+  console.log("Profile reload: ", image)
+
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
@@ -119,10 +121,10 @@ export default function Profile() {
       setImage(imageFile);
 
       // upload to firebase and set the user's new avatar image
-      auth.uploadImageToStorage(imageFile, imageName)
+      auth.uploadImageToStorage(imageFile.toString(), imageName)
         .then((ref) => {
-          console.log("The ref: ", ref)
-          setUserData(Object.assign({}, userData, {picture: ref}))
+          console.log("The ref: ", ref.toString())
+//          setUserObject(Object.assign({}, userData, {picture: ref}))
         })
         .catch((e) => console.log(e))
     }
@@ -186,7 +188,11 @@ export default function Profile() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <EditProfile auth={auth} userData={userData} />
+        <EditProfile 
+          auth={auth} 
+          userData={userData} 
+          imageRef={image} 
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CardList data={exampleDatabase} />
