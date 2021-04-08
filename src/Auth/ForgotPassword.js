@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useAuth } from '../Firebase/FirebaseAuthProvider';
 import {
   Container,
   Typography,

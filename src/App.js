@@ -11,11 +11,11 @@ import exampleDatabase from './static/exampleDatabase';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
-import { useAuth } from './FirebaseAuthProvider';
+import { useAuth } from './Firebase/FirebaseAuthProvider';
 
 /* App */
 import Profile from './Profile/Profile';
-import Contact from './Components/Contact';
+import Contact from './Contact/Contact';
 import About from './Components/About';
 import Wizard from './CreationWizard/Wizard';
 import Products from './Products/Products';

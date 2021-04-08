@@ -1,5 +1,5 @@
 import React, { useState }  from 'react';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useAuth } from '../Firebase/FirebaseAuthProvider';
 import MainBar from '../Components/MainBar';
 import CardList from '../Products/CardList';
 import QRCode from '../Components/QRCode';
@@ -107,7 +107,6 @@ export default function Profile() {
   const [image, setImage] = useState(auth.user.picture);
   const [userData, setUserData] = useState({...auth.user})
   const [userObject, setUserObject] = useState(userData);
-  console.log("Profile reload: ", image)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)

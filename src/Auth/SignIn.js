@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Copyright from '../Components/Copyright';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useAuth } from '../Firebase/FirebaseAuthProvider';
 import {
   Container,
   Avatar,

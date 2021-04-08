@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useAuth } from '../Firebase/FirebaseAuthProvider';
 import {
   Avatar,
   Drawer,
