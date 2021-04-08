@@ -1776,3 +1776,56 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** If I knew then I wouldn't have the issue
 
 **Link to work:** [FirebaseAuthProvider](https://github.com/ThirdsMedia/100DaysOfCode/tree/day65/src/)
+
+### Day 66: April 8, 2021 - Thursday
+
+**Today's Progress**: Almost nothing. Started adding functionality for Contact form. Realized that you can't implement it fully until you upgrade to paid for version of Firebase.
+
+**Thoughts:** Seriously rough couple days. Not only did I make no progress, but realized that for 4 days I've somehow missed the fact that updating Profile information was broken. I think it's from moving EditProfile into it's own component. I don't understand how I missed that.
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [x] Enforce input of Display Name field 
+	- [ ] and throw error if unsuccessful
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [ ] Console.log the full object of data inputted into the Contact form
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [ ] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [ ] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Set the user's avatar when changed in Profile by clicking on the picture and selecting the picture file
+	- [ ] Adding favorites
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** Broke Profile updating. Image rendering doesn't work even though I successfully uploaded a picture to firebase.storage() and grabbed the right download URL. Can't complete Contact form functionality until paid for
+
+**Solutions:** Move EditProfile back into Profile component. Dunno about image rendering. Finish the part of Contact where you get the data the user submitted and console.log it at least. 
+
+**Link to work:** [Doesn't matter](https://github.com/ThirdsMedia/100DaysOfCode/tree/day66/src/)
