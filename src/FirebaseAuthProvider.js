@@ -7,6 +7,7 @@ import {
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -45,6 +46,7 @@ function useProvideAuth() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const googleAuth = new firebase.auth.GoogleAuthProvider();
+  const storageRef = firebase.storage().ref();
 
   const signin = (email, password) => {
     setLoading(true)
@@ -128,6 +130,29 @@ function useProvideAuth() {
     }
   }
 
+  const uploadImageToStorage = (image, name) => {
+    const imageRef = storageRef.child(`${user.id}/images/${name}`)
+
+    return imageRef
+      .putString(image)
+      .then((snapshot) => {
+        return imageRef.getDownloadURL()
+      })
+  }
+
+  const sendContactEmail = (formData) => {
+    const emailRef = firebase.firestore().collection("emails");
+
+    emailRef.add({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+      time: new Date(),
+    })
+    .catch((e) => setError(e))
+  }
+
   const sendPasswordResetEmail = (email) => {
     return firebase
       .auth()
@@ -189,6 +214,8 @@ function useProvideAuth() {
     confirmPasswordReset,
     signInWithGoogle,
     updateUser,
+    uploadImageToStorage,
+    sendContactEmail,
   };
 }
 
@@ -202,6 +229,10 @@ export function AuthProvider({ children }) {
         <CircularProgress color="secondary" />
       </div>
     )
+  }
+
+  if (auth.error) {
+    alert(auth.error);
   }
 
   return (

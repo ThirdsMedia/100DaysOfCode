@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../FirebaseAuthProvider';
 import {
@@ -40,11 +40,10 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
   const classes = useStyles();
   const auth = useAuth();
   const history = useHistory();
-  const [error, setError] = useState(auth.error);
 
   const onSignOutHandler = () => {
     auth.signout()
-      .catch((e) => setError(e.message))
+      .catch((e) => console.log(e.message))
       .finally(() => history.push("/"))
   }
 

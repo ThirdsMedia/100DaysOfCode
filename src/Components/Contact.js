@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuth } from '../FirebaseAuthProvider';
 import MainBar from '../Components/MainBar';
 import Copyright from '../Components/Copyright';
 import {
@@ -45,6 +46,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Contact() {
   const classes = useStyles();
+  const auth = useAuth();
+  const [formData, setFormData] = useState({});
+
+  const onChangeInput = (event) => {
+    setFormData({...formData, [event.target.name]: event.target.value});
+  }
+
+  const onSubmitForm = (event) => {
+    event.preventDefault()
+    console.log(formData);
+    auth.sendContactEmail(formData);
+    setFormData({});
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -59,7 +73,11 @@ export default function Contact() {
           <Typography component="h1" variant="h5">
             Get In Touch 
           </Typography>
-          <form className={classes.form} noValidate>
+          <form 
+            className={classes.form} 
+            noValidate
+            onSubmit={onSubmitForm}
+          >
             <TextField
               variant="outlined"
               margin="dense"
@@ -68,8 +86,10 @@ export default function Contact() {
               id="name"
               label="Name"
               name="name"
+              value={formData.name || ''}
               autoComplete="name"
               autoFocus
+              onChange={(e) => onChangeInput(e)}
             />
             <TextField
               variant="outlined"
@@ -77,8 +97,10 @@ export default function Contact() {
               required
               fullWidth
               name="email"
+              value={formData.email || ''}
               label="Email"
               id="email"
+              onChange={(e) => onChangeInput(e)}
             />
             <TextField
               variant="outlined"
@@ -86,7 +108,9 @@ export default function Contact() {
               fullWidth
               name="phone"
               label="Phone Number (optional)"
+              value={formData.phone || ''}
               id="phone"
+              onChange={(e) => onChangeInput(e)}
             />
             <TextField
               variant="outlined"
@@ -95,10 +119,12 @@ export default function Contact() {
               fullWidth
               multiline
               rows='6'
-              maxRows='10'
+              maxrows='10'
               name="message"    
+              value={formData.message || ''}
               label="Message"
               id="message"
+              onChange={(e) => onChangeInput(e)}
             />
             <Button
               type="submit"

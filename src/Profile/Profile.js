@@ -3,13 +3,13 @@ import { useAuth } from '../FirebaseAuthProvider';
 import MainBar from '../Components/MainBar';
 import CardList from '../Products/CardList';
 import QRCode from '../Components/QRCode';
-import ProfilePic from '../assets/dj-pct.jpg';
 import exampleDatabase from '../static/exampleDatabase';
 import {
   AppBar,
   Avatar,
   Container,
   Button,
+  IconButton,
   TextField,
   Grid,
   Box,
@@ -113,44 +113,16 @@ function a11yProps(index) {
 
 function EditProfile({ auth }) {
   const classes = useStyles(); 
-  const [userData, setUserData] = useState({
-    id: auth.user.id,
-    displayName: auth.user.displayName,
-    bio: auth.user.bio,
-    phone: auth.user.phone,
-    email: auth.user.email,
-    website: auth.user.website,
-    twitter: auth.user.twitter,
-    instagram: auth.user.instagram,
-    picture: auth.user.picture,
-    favorites: auth.user.favorites,
-  });
-  const [error, setError] = useState(auth.error);
+  const [userData, setUserData] = useState({...auth.user});
 
-  const onChangeName = (event) => {
-    setUserData(Object.assign({}, userData, {displayName: event.target.value}))
-  }
-
-  const onChangeBio = (event) => {
-    setUserData(Object.assign({}, userData, {bio: event.target.value}))
-  }
-
-  const onChangeTwitter = (event) => {
-    setUserData(Object.assign({}, userData, {twitter: event.target.value}))
-  }
-
-  const onChangeWebsite = (event) => {
-    setUserData(Object.assign({}, userData, {website: event.target.value}))
-  }
-
-  const onChangeInstagram = (event) => {
-    setUserData(Object.assign({}, userData, {instagram: event.target.value}))
+  const onChangeInput = (event) => {
+    setUserData({...userData, [event.target.name]: event.target.value})
   }
 
   const onSubmitHandler = () => {
     auth.updateUser(userData)
       .then(() => console.log("Successfully updated the user's data"))
-      .catch((e) => setError(e.message))
+      .catch((e) => console.log(e.message))
       .finally(() => window.location.reload(true))
   }
 
@@ -165,7 +137,7 @@ function EditProfile({ auth }) {
           defaultValue={userData.displayName}
           className={classes.field}
           fullWidth
-          onChange={(e) => onChangeName(e)}
+          onChange={(e) => onChangeInput(e)}
         />
         <TextField 
           id="bio" 
@@ -177,7 +149,7 @@ function EditProfile({ auth }) {
           fullWidth 
           multiline 
           rows={5}
-          onChange={(e) => onChangeBio(e)}
+          onChange={(e) => onChangeInput(e)}
         />
         <TextField 
           id="website" 
@@ -187,7 +159,7 @@ function EditProfile({ auth }) {
           defaultValue={userData.website}
           className={classes.field}
           fullWidth
-          onChange={(e) => onChangeWebsite(e)}
+          onChange={(e) => onChangeInput(e)}
         />
         <TextField 
           id="twitter"
@@ -197,7 +169,7 @@ function EditProfile({ auth }) {
           defaultValue={userData.twitter}
           className={classes.field}
           fullWidth
-          onChange={(e) => onChangeTwitter(e)}
+          onChange={(e) => onChangeInput(e)}
         />
         <TextField 
           id="instagram"
@@ -207,7 +179,7 @@ function EditProfile({ auth }) {
           defaultValue={userData.instagram}
           className={classes.field}
           fullWidth
-          onChange={(e) => onChangeInstagram(e)}
+          onChange={(e) => onChangeInput(e)}
         />
       </form>
       <Grid container justify="center">
@@ -247,9 +219,27 @@ export default function Profile() {
   const classes = useStyles();
   const auth = useAuth();
   const [value, setValue] = useState(0);
+  const [image, setImage] = useState(auth.user.picture);
   
   const handleChange = (event, newValue) => {
     setValue(newValue)
+  }
+
+  const handleImageUpload = (event) => {
+    const imageName = event.target.files[0].name
+
+    if (event.target.files.length > 0) {
+      const imageFile = URL.createObjectURL(event.target.files[0]);
+      setImage(imageFile);
+
+      // upload to firebase and set the user's new avatar image
+      auth.uploadImageToStorage(imageFile.toString(), imageName)
+        .then((ref) => {
+          console.log("The ref: ", ref.toString())
+//          setUserObject(Object.assign({}, userData, {picture: ref}))
+        })
+        .catch((e) => console.log(e))
+    }
   }
 
   return (
@@ -258,7 +248,23 @@ export default function Profile() {
         <MainBar noLogo />
       </div>
       <Container maxWidth="xl" className={classes.container}>
-        <Avatar className={classes.profilePic} src={ProfilePic} />
+        <div id="avatar-section">
+          <input 
+            accept="image/*" 
+            hidden 
+            id="photo-upload" 
+            type="file" 
+            onChange={(e) => handleImageUpload(e)} 
+          />
+          <label htmlFor="photo-upload">
+            <IconButton component="span">
+              <Avatar 
+                className={classes.profilePic} 
+                src={image} 
+              />
+            </IconButton>
+          </label>
+        </div>
         <Container className={classes.info}>
           <Typography component="h1" variant="h3" style={{fontFamily: 'Nunito'}}>
             {auth.user.displayName}
