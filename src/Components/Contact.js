@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../FirebaseAuthProvider';
+import { useHistory } from 'react-router-dom';
 import MainBar from '../Components/MainBar';
 import Copyright from '../Components/Copyright';
 import {
@@ -42,12 +43,19 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     borderRadius: 37,
   },
+  error: {
+    color: theme.palette.secondary.main,
+    fontFamily: 'Nunito',
+    margin: theme.spacing(2),
+  },
 }));
 
 export default function Contact() {
   const classes = useStyles();
   const auth = useAuth();
+  const history = useHistory();
   const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
 
   const onChangeInput = (event) => {
     setFormData({...formData, [event.target.name]: event.target.value});
@@ -55,9 +63,20 @@ export default function Contact() {
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    console.log(formData);
-    auth.sendContactEmail(formData);
-    setFormData({});
+
+    auth.sendContactEmail(formData)
+      .then(() => {
+        setFormData({});
+        history.push(
+          "/success",
+          { message: "Thanks for contacting us! We will get back to you shortly." }
+        )
+        setError(null)
+      })
+      .catch((e) => {
+        console.log(e.message)
+        setError("Failed to submit form. Perhaps you forgot to fill in a required input?")
+      })
   }
 
   return (
@@ -78,6 +97,11 @@ export default function Contact() {
             noValidate
             onSubmit={onSubmitForm}
           >
+            {
+              error
+                ? <Typography className={classes.error}>{error}</Typography>
+                : false // navigate to the success page
+            }
             <TextField
               variant="outlined"
               margin="dense"

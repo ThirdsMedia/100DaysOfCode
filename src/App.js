@@ -22,6 +22,7 @@ import Products from './Products/Products';
 import LandingPage from './LandingPage/LandingPage';
 import Cocktail from './Components/Cocktail';
 import Review from './Components/Review';
+import Success from './Components/Success';
 
 const theme = createMuiTheme({
   palette: {
@@ -56,6 +57,7 @@ export default function App() {
               <Route path="/contact" component={Contact} />
               <Route path="/create" component={Wizard} />
               <Route path="/about" component={About} />
+              <Route path="/success" component={Success} />
               <Route path="/review" render={() => <Review item={exampleDatabase[0]} />} />
               <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
               <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} />} />

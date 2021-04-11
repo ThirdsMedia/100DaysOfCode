@@ -143,14 +143,19 @@ function useProvideAuth() {
   const sendContactEmail = (formData) => {
     const emailRef = firebase.firestore().collection("emails");
 
-    emailRef.add({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      message: formData.message,
-      time: new Date(),
+    return new Promise((resolve, reject) => {
+      emailRef.add({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || '',
+        message: formData.message,
+        time: new Date(),
+      })
+      .then(() => resolve(console.log("Successfully added email to database")))
+      .catch((e) => {
+        reject("Failed to submit contact form. Perhaps you forgot to fill out a required input?")
+      })
     })
-    .catch((e) => setError(e))
   }
 
   const sendPasswordResetEmail = (email) => {
