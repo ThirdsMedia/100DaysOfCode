@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../FirebaseAuthProvider';
+import { useHistory } from 'react-router-dom';
+//import firebase from 'firebase/app';
+//import 'firebase/firestore';
 import {
   Container,
   Avatar,
@@ -42,6 +45,7 @@ const useStyles = makeStyles(theme => ({
 export default function SignUp() {
   const classes = useStyles();
   const auth = useAuth();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -70,6 +74,17 @@ export default function SignUp() {
     }
   }
 
+  const onSubmitForm = () => {
+    auth.signup(displayName, phone, email, password)
+      .finally(() => {
+        history.push(
+          "/success",
+          { message: "Successfully created user!" },          
+        );
+      })
+    console.log("From onSubmitForm: ", auth.error)
+  }
+
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">
       <Avatar>
@@ -83,73 +98,77 @@ export default function SignUp() {
           ? <Typography className={classes.error}>{error}</Typography>
           : false
       }
-      <TextField
-        id="signup-name"
-        label="Name"
-        name="signup-displayName"
-        value={displayName}
-        margin="normal"
-        required
-        fullWidth
-        variant="outlined"
-        onChange={(e) => onChangeHandler(e)}
-        InputProps={{
-          className: classes.textField
-        }}
-      />
-      <TextField
-        id="signup-email"
-        label="Email"
-        name="signup-userEmail"
-        value={email}
-        margin="normal"
-        required
-        fullWidth
-        variant="outlined"
-        onChange={(e) => onChangeHandler(e)}
-        InputProps={{
-          className: classes.textField
-        }}
-      />
-      <TextField
-        id="signup-phone"
-        label="Phone Number (optional)"
-        name="signup-userPhone"
-        value={phone}
-        margin="normal"
-        fullWidth
-        variant="outlined"
-        onChange={(e) => onChangeHandler(e)}
-        InputProps={{
-          className: classes.textField
-        }}
-      />
-      <TextField
-        id="signup-password"
-        label="Password"
-        name="signup-userPassword"
-        value={password}
-        margin="normal"
-        type="password"
-        variant="outlined"
-        required
-        fullWidth
-        onChange={(e) => onChangeHandler(e)}
-        InputProps={{
-          className: classes.textField
-        }}
-      />
-      <Button 
-        className={classes.submitButton}
-        type="submit"
-        color="primary"
-        fullWidth
-        variant="contained"
-        onClick={() => auth.signup(displayName, phone, email, password)}
+      <form
+        noValidate
+        onSubmit={onSubmitForm}
       >
-        Create Account
-      </Button>
-      <Link href="/" variant="body4">
+        <TextField
+          id="signup-name"
+          label="Name"
+          name="signup-displayName"
+          value={displayName}
+          margin="normal"
+          required
+          fullWidth
+          variant="outlined"
+          onChange={(e) => onChangeHandler(e)}
+          InputProps={{
+            className: classes.textField
+          }}
+        />
+        <TextField
+          id="signup-email"
+          label="Email"
+          name="signup-userEmail"
+          value={email}
+          margin="normal"
+          required
+          fullWidth
+          variant="outlined"
+          onChange={(e) => onChangeHandler(e)}
+          InputProps={{
+            className: classes.textField
+          }}
+        />
+        <TextField
+          id="signup-phone"
+          label="Phone Number (optional)"
+          name="signup-userPhone"
+          value={phone}
+          margin="normal"
+          fullWidth
+          variant="outlined"
+          onChange={(e) => onChangeHandler(e)}
+          InputProps={{
+            className: classes.textField
+          }}
+        />
+        <TextField
+          id="signup-password"
+          label="Password"
+          name="signup-userPassword"
+          value={password}
+          margin="normal"
+          type="password"
+          variant="outlined"
+          required
+          fullWidth
+          onChange={(e) => onChangeHandler(e)}
+          InputProps={{
+            className: classes.textField
+          }}
+        />
+        <Button 
+          className={classes.submitButton}
+          type="submit"
+          color="primary"
+          fullWidth
+          variant="contained"
+        >
+          Create Account
+        </Button>
+      </form>
+      <Link href="/" variant="body2">
         Already have an account? Sign In
       </Link>
     </Container>

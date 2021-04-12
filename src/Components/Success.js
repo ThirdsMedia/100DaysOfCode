@@ -30,7 +30,6 @@ export default function Success() {
 
   return (
     <div>
-      <MainBar />
       <div className={classes.root}>
         <Typography className={classes.message}>
           {location.state.message} <span><NavLink to="/" className={classes.navlink}>Go Home</NavLink></span>

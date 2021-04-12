@@ -68,44 +68,43 @@ function useProvideAuth() {
   const signup = (displayName, phone, email, password) => {
     setLoading(true)
 
-    // this doesn't display the error
-    if (!displayName) {
-      setLoading(false)
-      setError("You must specify a display name!")
-    } 
+    const promise = new Promise((resolve, reject) => {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(response => {
+          const userData = Object.assign({}, {
+            id: response.user.uid,
+            email,
+            displayName,
+            phone,
+            bio: '',
+            twitter: '',
+            instagram: '',
+            website: '',
+            picture: '',
+            favorites: [],
+          });
+          resolve(userData);
+        })
+        .catch((e) => reject("Reject from signup() function's promise: ", e.message))
+    }) 
 
-    return firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(response => {
-        const uid = response.user.uid
-        const userData = Object.assign({}, {
-          id: uid,
-          email,
-          displayName,
-          phone,
-          bio: '',
-          twitter: '',
-          instagram: '',
-          website: '',
-          picture: '',
-          favorites: [],
-        });
-
-        // User was already added to the Auth database, now add it to firestore
-        const userRef = firebase.firestore().collection("users")
-        userRef
-          .doc(uid)
-          .set(userData)
-          .then(() => setUser(response.user))
-          .catch((e) => setError(e.message))
-          .finally(() => firebase.auth().signOut())
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => {
-        setLoading(false)
-        setError(null)
-      });
+    // This doesn't seem to work out well. You may just need to return the promise and deal with it all in SignUp.js
+    // Probably makes the most sense to not deal with then() or catch() here, but still do a finally() so you can 
+    // set the error to null and Loading to false
+    return promise.then((data) => {
+      firebase.firestore().collection("users")
+        .doc(data.id)
+        .set(data)
+        .then(() => setUser(data))
+      firebase.auth().signOut()
+    })
+    .catch((e) => {
+      setLoading(false);
+      setError(e)
+      console.log(e)
+    })
   }
 
   const signout = () => {
@@ -127,6 +126,7 @@ function useProvideAuth() {
         .then(() => {
           console.log("successfully updated user")
         })
+        .catch((e) => setError(e))
     }
   }
 
@@ -138,6 +138,7 @@ function useProvideAuth() {
       .then((snapshot) => {
         return imageRef.getDownloadURL()
       })
+      .catch((e) => setError(e))
   }
 
   const sendContactEmail = (formData) => {
@@ -163,6 +164,7 @@ function useProvideAuth() {
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => true)
+      .catch((e) => setError(e))
   }
 
   const confirmPasswordReset = (code, password) => {
@@ -209,15 +211,15 @@ function useProvideAuth() {
   }, []);
 
   return {
-    user,
-    error,
-    loading,
-    signin,
+    user,     // the user object
+    error,    // the error message
+    loading,  // the loading boolean
+    signin, 
     signup,
     signout,
+    signInWithGoogle,
     sendPasswordResetEmail,
     confirmPasswordReset,
-    signInWithGoogle,
     updateUser,
     uploadImageToStorage,
     sendContactEmail,
@@ -234,10 +236,6 @@ export function AuthProvider({ children }) {
         <CircularProgress color="secondary" />
       </div>
     )
-  }
-
-  if (auth.error) {
-    alert(auth.error);
   }
 
   return (

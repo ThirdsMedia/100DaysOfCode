@@ -69,6 +69,7 @@ export default function App() {
               <Route path="/" exact component={SignIn} />
               <Route path="/signup" component={SignUp} />
               <Route path="/forgotpassword" component={ForgotPassword} />
+              <Route path="/success" component={Success} />
             </Switch>
           </Router>
       }

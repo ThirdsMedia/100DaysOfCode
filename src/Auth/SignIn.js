@@ -149,12 +149,12 @@ export default function SignIn() {
         justify="space-around"
       >
         <Grid item>
-          <Link href="/forgotpassword" variant="body4">
+          <Link href="/forgotpassword" variant="body2">
             Forgot password?
           </Link>
         </Grid>
         <Grid item>
-          <Link href="/signup" variant="body4">
+          <Link href="/signup" variant="body2">
             Sign Up
           </Link>
         </Grid>
