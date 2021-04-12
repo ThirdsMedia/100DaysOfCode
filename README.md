@@ -1939,3 +1939,63 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Go break something
 
 **Link to work:** [Contact](https://github.com/ThirdsMedia/100DaysOfCode/tree/day68/src/Components/Contact.js)
+
+### Day 69: April 11, 2021 - Sunday
+
+**Today's Progress**: Started adding error handling into SignUp and signup() function from the provider
+
+**Thoughts:** Yikes, this turned out to be a mess. I figured I could implement it the same as in Contact, but the signup() function is different. Too many Promises lol. So I think I'll have to deal with the .then() and the catch() from the signup() function in SignUp.js, but it just feels wrong since everything else is handled in the provider. Oh well. If it works...
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [x] Enforce input of Display Name field 
+	- [ ] and throw error if unsuccessful
+	- [ ] Navigate to Success component upon successfully signing up 
+		- [ ] The navigation to Success should happen in then() from the returned promise in signup()
+		- [ ] The setLoading and setError should be handled inside of signup() in finally()
+		- [ ] Adding the user to firestore seems to need to happen in SignUp.js, not the provider. Unless I just create a separate function inside the Provider....
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [ ] Successfully console.log() a full cocktail object
+	- [ ] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Set the user's avatar when changed in Profile by clicking on the picture and selecting the picture file
+	- [ ] Adding favorites
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** Can't get the firebase error from signup() to return to SignUp.js. Can't handle .then() and catch() from the promise in signup. 
+
+**Solutions:** May need to deal with it in SignUp.js. May need to create a separate function to add a user's data to firebase instead of doing it in signup().
+
+**Link to work:** [FirebaseAuthProvider](https://github.com/ThirdsMedia/100DaysOfCode/tree/day69/src/FirebaseAuthProvider.js)
+
