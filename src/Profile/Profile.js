@@ -219,8 +219,8 @@ export default function Profile() {
   const classes = useStyles();
   const auth = useAuth();
   const [value, setValue] = useState(0);
-  const [image, setImage] = useState(auth.user.picture);
-  
+  const [image, setImage] = useState(auth.user.picture)
+
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
@@ -230,15 +230,11 @@ export default function Profile() {
 
     if (event.target.files.length > 0) {
       const imageFile = URL.createObjectURL(event.target.files[0]);
+      console.log(auth.user.picture)
       setImage(imageFile);
 
       // upload to firebase and set the user's new avatar image
-      auth.uploadImageToStorage(imageFile.toString(), imageName)
-        .then((ref) => {
-          console.log("The ref: ", ref.toString())
-//          setUserObject(Object.assign({}, userData, {picture: ref}))
-        })
-        .catch((e) => console.log(e))
+      auth.uploadImageToStorage(imageFile, imageName)
     }
   }
 
@@ -259,8 +255,8 @@ export default function Profile() {
           <label htmlFor="photo-upload">
             <IconButton component="span">
               <Avatar 
-                className={classes.profilePic} 
-                src={image} 
+                className={classes.profilepic} 
+                src={image}
               />
             </IconButton>
           </label>
@@ -311,4 +307,5 @@ export default function Profile() {
     </div>
   );
 }
+
 

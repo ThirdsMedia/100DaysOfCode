@@ -45,6 +45,7 @@ function useProvideAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userImage, setUserImage] = useState(null);
   const googleAuth = new firebase.auth.GoogleAuthProvider();
   const storageRef = firebase.storage().ref();
 
@@ -116,13 +117,28 @@ function useProvideAuth() {
     }
   }
 
-  const uploadImageToStorage = (image, name) => {
-    const imageRef = storageRef.child(`${user.id}/images/${name}`)
+  /*
+  const updateUserProfile = (imageURL) => {
+    const user = firebase.auth().currentUser
+    user.updateProfile({photoURL: imageURL})
+      .then(() => {
+        console.log("Image url: ", firebase.auth().currentUser.photoURL, "User data: ", user)
+      })
+      .catch((e) => console.log(e))
+  }
+  */
 
-    return imageRef
-      .putString(image)
+  const uploadImageToStorage = (image, name) => {
+//    const imageRef = storageRef.child(`${user.id}/images/${name}`)
+    const imageRef = storageRef.child(name)
+
+    // This successfully updates the user's picture in Firestore. Now to just get it to display on Profile
+    imageRef
+      .put(image)
       .then((snapshot) => {
-        return imageRef.getDownloadURL()
+        imageRef.getDownloadURL().then((url) => {
+          updateUser({picture: url})
+        })
       })
       .catch((e) => setError(e))
   }
@@ -179,6 +195,7 @@ function useProvideAuth() {
     const userRef = firebase.firestore().collection("users");
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        console.log("From useEffect: ", user.photoURL)
         userRef
           .doc(user.uid)
           .get()
