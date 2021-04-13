@@ -68,43 +68,29 @@ function useProvideAuth() {
   const signup = (displayName, phone, email, password) => {
     setLoading(true)
 
-    const promise = new Promise((resolve, reject) => {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(response => {
-          const userData = Object.assign({}, {
-            id: response.user.uid,
-            email,
-            displayName,
-            phone,
-            bio: '',
-            twitter: '',
-            instagram: '',
-            website: '',
-            picture: '',
-            favorites: [],
-          });
-          resolve(userData);
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(response => {
+        const userData = Object.assign({}, {
+          id: response.user.uid,
+          email,
+          displayName,
+          phone,
+          bio: '',
+          twitter: '',
+          instagram: '',
+          website: '',
+          picture: '',
+          favorites: [],
         })
-        .catch((e) => reject("Reject from signup() function's promise: ", e.message))
-    }) 
-
-    // This doesn't seem to work out well. You may just need to return the promise and deal with it all in SignUp.js
-    // Probably makes the most sense to not deal with then() or catch() here, but still do a finally() so you can 
-    // set the error to null and Loading to false
-    return promise.then((data) => {
-      firebase.firestore().collection("users")
-        .doc(data.id)
-        .set(data)
-        .then(() => setUser(data))
-      firebase.auth().signOut()
-    })
-    .catch((e) => {
-      setLoading(false);
-      setError(e)
-      console.log(e)
-    })
+        firebase.firestore().collection("users").doc(response.user.id).set(userData)
+      })
+      .catch((e) => setError(e.message))
+      .finally(() => {
+        setLoading(false)
+        setError(null)
+      })
   }
 
   const signout = () => {

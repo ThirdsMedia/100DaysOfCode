@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../FirebaseAuthProvider';
 import { useHistory } from 'react-router-dom';
-//import firebase from 'firebase/app';
-//import 'firebase/firestore';
 import {
   Container,
   Avatar,
@@ -74,15 +72,9 @@ export default function SignUp() {
     }
   }
 
+
   const onSubmitForm = () => {
     auth.signup(displayName, phone, email, password)
-      .finally(() => {
-        history.push(
-          "/success",
-          { message: "Successfully created user!" },          
-        );
-      })
-    console.log("From onSubmitForm: ", auth.error)
   }
 
   return (
@@ -98,10 +90,7 @@ export default function SignUp() {
           ? <Typography className={classes.error}>{error}</Typography>
           : false
       }
-      <form
-        noValidate
-        onSubmit={onSubmitForm}
-      >
+      <form noValidate onSubmit={onSubmitForm}>
         <TextField
           id="signup-name"
           label="Name"
