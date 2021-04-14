@@ -61,11 +61,11 @@ export default function InfoDrawer({ step, stepTitle, isOpen, handleDrawer }) {
         {
           step <= 3
           ? (
-            <div>
+            <main>
               <Typography className={classes.title} variant='h5'>{stepTitle}</Typography>
               <Divider />
-              <Typography variant="p">{steps()}</Typography>
-            </div>
+              <Typography component='span'>{steps()}</Typography>
+            </main>
           )
           : false
         }

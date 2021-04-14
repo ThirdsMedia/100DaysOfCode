@@ -3,6 +3,7 @@ import MainBar from '../Components/MainBar';
 import InfoDrawer from './InfoDrawer';
 import CocktailStepper from './CocktailStepper';
 import Next from './Next';
+import { useCocktail, CocktailProvider } from '../Providers/CocktailProvider';
 import {
   AppBar,
   Toolbar,
@@ -40,7 +41,16 @@ const useStyles = makeStyles(theme => ({
  */
 
 export default function Wizard() {
+  return (
+    <CocktailProvider>
+      <Create />
+    </CocktailProvider>
+  );
+}
+
+function Create() {
   const classes = useStyles();
+  const cocktail = useCocktail();
   const steps = ['Basic Information', 'Base Spirit', 'Ingredients', 'Instructions'];
   const [activeStep, setActiveStep] = useState(0);
   const [readyForReview, setReadyForReview] = useState(false);
@@ -68,6 +78,9 @@ export default function Wizard() {
   const handleReview = () => {
     setReadyForReview(true)
   }
+
+  // works
+  console.log("From wizard: ", cocktail.theCocktailData);
 
   return (
     <main>
@@ -119,6 +132,7 @@ export default function Wizard() {
               variant="outlined"
               color="primary"
               href="/review"
+              // will need to change to a history.push here
               onClick={() => console.log("Went to next")}
             >
               Review

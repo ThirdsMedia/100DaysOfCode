@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useCocktail } from '../Providers/CocktailProvider';
 import BasicInfo from './BasicInfo';
 import BaseSpirit from './BaseSpirit';
 import Ingredients from './Ingredients';
@@ -29,8 +30,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // You may need to refer to this: https://stackoverflow.com/questions/61215349/material-ui-stepper-not-keeping-state-when-move-next-or-back
-function RenderStep(step, handleNext, activeStep) {
+function RenderStep(step, cocktail, handleNext, activeStep) {
   const classes = useStyles();
+
+  // works
+  // console.log("From renderstep: ", cocktail.theCocktailData);
 
   switch (step) {
     case 0:
@@ -120,6 +124,7 @@ function RenderStep(step, handleNext, activeStep) {
 
 export default function CocktailStepper({ steps, activeStep, handleNext, handleReview }) {
   const [checked, setChecked] = useState(false);
+  const cocktail = useCocktail();
 
   useEffect(() => {
     setChecked(true);
@@ -135,7 +140,9 @@ export default function CocktailStepper({ steps, activeStep, handleNext, handleR
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
             <StepContent id={`step-${activeStep}`}>
-              <Typography>{RenderStep(index, handleNext, activeStep)}</Typography>
+              <Typography component='span'>
+                {RenderStep(index, cocktail, handleNext, activeStep)}
+              </Typography>
             </StepContent>
           </Step>
         ))
