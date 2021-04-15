@@ -16,12 +16,16 @@ export const useCocktail = () => {
 
 function useCocktailProvider() {
   const [theCocktailData, setTheCocktailData] = useState({});
-  //console.log("From useCocktail: ", theCocktailData);
+  const [cocktailIngredients, setCocktailIngredients] = useState([]);
 
   const buildCocktailFromInput = (event) => {
-    const { name, value } = event.currentTarget;
-    setTheCocktailData({...theCocktailData, [name]: value});
-    console.log("From provider: ", name, value)
+//    const { name, value } = event.currentTarget;
+    setTheCocktailData({...theCocktailData, [event.target.name]: event.target.value});
+ //   console.log(event.target.name, event.target.value)
+  }
+
+  const buildCocktailIngredient = (name, object) => {
+    setTheCocktailData({...theCocktailData, [name]: object});  
   }
 
   const addCocktailToFirestore = () => {

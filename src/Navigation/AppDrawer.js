@@ -63,10 +63,10 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
           </Grid>
           <Grid item>
             <Typography variant="h6" className={classes.title}>
-              {auth.user.displayName}
+              {/*auth.user.displayName*/}
             </Typography>
             <Typography variant="caption" color="textSecondary" className={classes.title}>
-              {auth.user.username}
+              {/*auth.user.username*/}
             </Typography>
           </Grid>
         </Grid>

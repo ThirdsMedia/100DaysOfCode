@@ -11,13 +11,14 @@ import 'firebase/storage';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
     display: 'flex',
-    backgroundColor: theme.palette.primary.background,
+    backgroundColor: '#202020',
+    height: '100vh',
     justifyContent: 'center',
   },
-}));
+});
 
 /* 
  * Auth API reference
@@ -233,6 +234,7 @@ export function AuthProvider({ children }) {
   const auth = useProvideAuth();
   const classes = useStyles();
 
+  /*
   if (auth.loading) {
     return (
       <div className={classes.root}>
@@ -240,6 +242,7 @@ export function AuthProvider({ children }) {
       </div>
     )
   }
+  */
 
   return (
     <UserContext.Provider value={auth}>

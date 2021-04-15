@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCocktail } from '../Providers/CocktailProvider';
 import {
   Container,
   TextField,
@@ -44,6 +45,8 @@ const methods = [
 
 export default function Instructions() {
   const classes = useStyles();
+  const cocktail = useCocktail();
+  const cocktailData = cocktail.theCocktailData;
 
   return (
     <Container maxWidth="md" className={classes.formContainer}>
@@ -51,6 +54,8 @@ export default function Instructions() {
         <InputLabel htmlFor="age-native-simple">Build Method</InputLabel>
         <Select
           native
+          value={cocktailData.method}
+          onChange={(e) => cocktail.buildCocktailFromInput(e)}
           inputProps={{
             name: 'method',
             id: 'method-native',
@@ -68,6 +73,8 @@ export default function Instructions() {
         <InputLabel htmlFor="age-native-simple">Glassware</InputLabel>
         <Select
           native
+          value={cocktailData.glass}
+          onChange={(e) => cocktail.buildCocktailFromInput(e)}
           inputProps={{
             name: 'glass',
             id: 'glass-native',
@@ -83,12 +90,15 @@ export default function Instructions() {
       </FormControl>
       <TextField 
         id='instructions'
+        name='instructions'
+        value={cocktailData.instructions}
         label='Instructions'
         variant='outlined'
         margin='normal'
         multiline
         rows='5'
         maxRows='10'
+        onChange={(e) => cocktail.buildCocktailFromInput(e)}
       />
     </Container>
   );

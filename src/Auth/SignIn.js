@@ -61,6 +61,7 @@ export default function SignIn() {
     }
   }
 
+  /*
   if (auth.loading) {
     return (
       <div className={classes.loading}>
@@ -68,6 +69,7 @@ export default function SignIn() {
       </div>
     )
   }
+  */
 
   return (
     <Container className={classes.paper} component="main" maxWidth="sm">

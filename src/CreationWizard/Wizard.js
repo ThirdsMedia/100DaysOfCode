@@ -64,11 +64,6 @@ function Create() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
-  /*
-   * This should also be pushing the entered data into the object
-   * This could get complicated. I'll need to give each input a unique ID so that if I backtrack I can have it update
-   * The unique item you'd want to change otherwise stuff could get messy
-   */
   const handleNext = () => {
     if (activeStep < steps.length) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -131,9 +126,8 @@ function Create() {
               className={classes.button}
               variant="outlined"
               color="primary"
-              href="/review"
-              // will need to change to a history.push here
-              onClick={() => console.log("Went to next")}
+              // will need to add a history.push here
+              onClick={() => console.log("Teh Cocktail: ", cocktail.theCocktailData)}
             >
               Review
             </Button>
