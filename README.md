@@ -2231,3 +2231,62 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day73/src/CreationWizard)
 
+### Day 74: April 16, 2021 - Friday
+
+**Today's Progress**: Greatly simplified the CreationWizard components. Removed prop drilling and fully utilized the CocktailProvider.
+
+**Thoughts:** Surprised I made it out of that one alive. Now I just need to focus on BaseSpirit.js and getting it to console.log the dummy object once the form is submitted. Currently, I can't get the form to do anything onSubmit.
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [ ] Enforce input of Display Name field 
+	- [x] and throw error if unsuccessful
+	- [ ] Navigate to Success component upon successfully signing up 
+		- [ ] The navigation to Success should happen in then() from the returned promise in signup()
+		- [ ] The setLoading and setError should be handled inside of signup() in finally()
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [x] Successfully console.log() a full cocktail object
+	- [x] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Get BaseSpirit to console.log the cocktail object onSubmit
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Set the user's avatar when changed in Profile by clicking on the picture and selecting the picture file
+	- [ ] Adding favorites
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** Can't get <form onSubmit={}> to work in BaseSpirit.js
+
+**Solutions:** Perhaps the button and the form aren't seeing each other.
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day74/src/CreationWizard)
+
