@@ -20,7 +20,10 @@ function useCocktailProvider() {
 
   const buildCocktailFromInput = (event) => {
 //    const { name, value } = event.currentTarget;
-    setTheCocktailData({...theCocktailData, [event.target.name]: event.target.value});
+    setTheCocktailData({
+      ...theCocktailData, 
+      [event.target.name]: event.target.value}
+    );
  //   console.log(event.target.name, event.target.value)
   }
 

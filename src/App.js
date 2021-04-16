@@ -44,28 +44,23 @@ const theme = createMuiTheme({
 
 export default function App() {
   const auth = useAuth();
-  const user = true;
+//  const user = true;
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {
-        user ?
+        auth.user ?
           <Router>
             <Switch>
               <Route exact path="/" component={LandingPage} />
-        {/*              <Route path="/profile" component={Profile} />
+              <Route path="/profile" component={Profile} />
               <Route path="/contact" component={Contact} />
-              */}
               <Route path="/create" component={Wizard} />
-        {/*
               <Route path="/about" component={About} />
               <Route path="/success" component={Success} />
-              */}
               <Route path="/review" render={() => <Review item={exampleDatabase[0]} />} />
-        {/*
               <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
-              */}
               <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} />} />
             </Switch>
           </Router>
