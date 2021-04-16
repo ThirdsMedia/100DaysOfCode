@@ -1,4 +1,5 @@
 import React from 'react';
+//import { useCocktail } from '../Providers/CocktailProvider';
 import {
   Drawer,
   Grid,
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InfoDrawer({ step, stepTitle, isOpen, handleDrawer }) {
   const classes = useStyles();
+//  const cocktail = useCocktail();
 
   const steps = () => {
     switch (step) {

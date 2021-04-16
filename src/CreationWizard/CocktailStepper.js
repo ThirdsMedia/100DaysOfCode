@@ -10,119 +10,26 @@ import {
   Step,
   StepLabel,
   StepContent,
-  Button,
   Typography,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link as Scroll } from 'react-scroll';
-
-const useStyles = makeStyles(theme => ({
-  buttonDiv: {
-    textAlign: 'center',
-  },
-  nextButton: {
-    borderRadius: 37,
-    textTransform: 'none',
-    margin: 10,
-    fontFamily: 'Nunito',
-  },
-}));
 
 // You may need to refer to this: https://stackoverflow.com/questions/61215349/material-ui-stepper-not-keeping-state-when-move-next-or-back
-function RenderStep(step, cocktail, handleNext, activeStep) {
-  const classes = useStyles();
-
-  // works
-  // console.log("From renderstep: ", cocktail.theCocktailData);
-
+function RenderStep(step) {
   switch (step) {
     case 0:
-      return (
-        <div>
-          <BasicInfo />
-          <div className={classes.buttonDiv}>
-            <Scroll to={`step-${activeStep}`} smooth="true">
-              <Button
-                className={classes.nextButton}
-                type="submit"
-                color="primary"
-                variant="contained"
-                endIcon={<ExpandMoreIcon />}
-                onClick={handleNext}
-              >
-                Next
-              </Button>
-            </Scroll>
-          </div>
-        </div>
-      )
+      return <BasicInfo />
     case 1:
-      return (
-        <div>
-          <BaseSpirit />
-          <div className={classes.buttonDiv}>
-            <Scroll to={`step-${activeStep}`} smooth="true">
-              <Button
-                className={classes.nextButton}
-                type="submit"
-                color="primary"
-                variant="contained"
-                endIcon={<ExpandMoreIcon />}
-                onClick={handleNext}
-              >
-                Continue
-              </Button>
-            </Scroll>
-          </div>
-        </div>
-      )
+      return <BaseSpirit />
     case 2:
-      return (
-        <div>
-          <Ingredients />
-          <div className={classes.buttonDiv}>
-            <Scroll to={`step-${activeStep}`} smooth="true">
-              <Button
-                className={classes.nextButton}
-                type="submit"
-                color="primary"
-                variant="contained"
-                endIcon={<ExpandMoreIcon />}
-                onClick={handleNext}
-              >
-                Keep going
-              </Button>
-            </Scroll>
-          </div>
-        </div>
-      )
+      return <Ingredients />
     case 3: 
-      return (
-        <div>
-          <Instructions />
-          <div className={classes.buttonDiv}>
-            <Scroll to={`step-${activeStep}`} smooth="true">
-              <Button
-                className={classes.nextButton}
-                type="submit"
-                color="primary"
-                variant="contained"
-                endIcon={<ExpandMoreIcon />}
-                onClick={handleNext}
-              >
-                Almost there
-              </Button>
-            </Scroll>
-          </div>
-        </div>
-      )
+      return <Instructions />
     default:
       return false
   }
 }
 
-export default function CocktailStepper({ steps, activeStep, handleNext, handleReview }) {
+export default function CocktailStepper() {
   const [checked, setChecked] = useState(false);
   const cocktail = useCocktail();
 
@@ -134,14 +41,14 @@ export default function CocktailStepper({ steps, activeStep, handleNext, handleR
     <Collapse appear in={checked} {
       ... checked ? { timeout: 1000 } : {}
     }>
-      <Stepper activeStep={activeStep} orientation="vertical">
+      <Stepper activeStep={cocktail.activeStep} orientation="vertical">
       {
-        steps.map((label, index) => (
+        cocktail.steps.map((label, index) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
-            <StepContent id={`step-${activeStep}`}>
+            <StepContent id={`step-${cocktail.activeStep}`}>
               <Typography component='span'>
-                {RenderStep(index, cocktail, handleNext, activeStep)}
+                {RenderStep(index)}
               </Typography>
             </StepContent>
           </Step>

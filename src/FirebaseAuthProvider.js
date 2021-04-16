@@ -234,7 +234,6 @@ export function AuthProvider({ children }) {
   const auth = useProvideAuth();
   const classes = useStyles();
 
-  /*
   if (auth.loading) {
     return (
       <div className={classes.root}>
@@ -242,7 +241,6 @@ export function AuthProvider({ children }) {
       </div>
     )
   }
-  */
 
   return (
     <UserContext.Provider value={auth}>

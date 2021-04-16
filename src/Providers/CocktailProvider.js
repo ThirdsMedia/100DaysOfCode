@@ -17,20 +17,31 @@ export const useCocktail = () => {
 function useCocktailProvider() {
   const [theCocktailData, setTheCocktailData] = useState({});
   const [cocktailIngredients, setCocktailIngredients] = useState([]);
+  const steps = ['Basic Information', 'Base Spirit', 'Ingredients', 'Instructions'];
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  }
+
+  const handleNext = () => {
+    if (activeStep < steps.length) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    } 
+  }
 
   const buildCocktailFromInput = (event) => {
-//    const { name, value } = event.currentTarget;
     setTheCocktailData({
       ...theCocktailData, 
-      [event.target.name]: event.target.value}
-    );
- //   console.log(event.target.name, event.target.value)
+      [event.target.name]: event.target.value
+    });
   }
 
-  const buildCocktailIngredient = (name, object) => {
-    setTheCocktailData({...theCocktailData, [name]: object});  
+  const buildCocktailIngredient = (event, object) => {
+    setTheCocktailData({...theCocktailData, [event.target.name]: object});  
   }
 
+  /*
   const addCocktailToFirestore = () => {
   }
 
@@ -39,13 +50,18 @@ function useCocktailProvider() {
 
   const deleteCocktail = () => {
   }
+  */
 
   return {
+    steps,
+    handleBack,
+    handleNext,
+    activeStep,
     theCocktailData,
     buildCocktailFromInput,
-    addCocktailToFirestore,
-    updateCocktailInFirestore,
-    deleteCocktail,
+//    addCocktailToFirestore,
+//    updateCocktailInFirestore,
+//    deleteCocktail,
   }
 }
 

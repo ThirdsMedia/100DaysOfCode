@@ -4,7 +4,10 @@ import {
   Container,
   TextField,
   Grid,
+  Button,
 } from '@material-ui/core';
+import { Link as Scroll } from 'react-scroll';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -13,6 +16,15 @@ const useStyles = makeStyles(theme => ({
     padding: 20,
     fontFamily: 'Nunito',
     textAlign: 'center',
+  },
+  buttonDiv: {
+    textAlign: 'center',
+  },
+  nextButton: {
+    borderRadius: 37,
+    textTransform: 'none',
+    margin: 10,
+    fontFamily: 'Nunito',
   },
 }));
 
@@ -34,7 +46,7 @@ export default function BasicInfo() {
             margin='normal'
             fullWidth
             onChange={(e) => cocktail.buildCocktailFromInput(e)}
-            InputLabelProps={{ shrink: true}}
+//            InputLabelProps={{ shrink: true}}
           />
           <TextField 
             id='creator'
@@ -83,6 +95,20 @@ export default function BasicInfo() {
         rowsMax='10'
         onChange={(e) => cocktail.buildCocktailFromInput(e)}
       />
+      <div className={classes.buttonDiv}>
+        <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
+          <Button
+            className={classes.nextButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+            endIcon={<ExpandMoreIcon />}
+            onClick={cocktail.handleNext}
+          >
+            Next
+          </Button>
+        </Scroll>
+      </div>
     </Container>
   );
 }

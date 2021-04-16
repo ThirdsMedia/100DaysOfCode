@@ -6,7 +6,10 @@ import {
   Select,
   FormControl,
   InputLabel,
+  Button,
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Link as Scroll } from 'react-scroll';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -20,6 +23,15 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
+  },
+  buttonDiv: {
+    textAlign: 'center',
+  },
+  nextButton: {
+    borderRadius: 37,
+    textTransform: 'none',
+    margin: 10,
+    fontFamily: 'Nunito',
   },
 }));
 
@@ -97,9 +109,23 @@ export default function Instructions() {
         margin='normal'
         multiline
         rows='5'
-        maxRows='10'
+        maxrows='10'
         onChange={(e) => cocktail.buildCocktailFromInput(e)}
       />
+      <div className={classes.buttonDiv}>
+        <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
+          <Button
+            className={classes.nextButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+            endIcon={<ExpandMoreIcon />}
+            onClick={cocktail.handleNext}
+          >
+            Almost there
+          </Button>
+        </Scroll>
+      </div>
     </Container>
   );
 }

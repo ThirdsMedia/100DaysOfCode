@@ -255,7 +255,7 @@ export default function Profile() {
           <label htmlFor="photo-upload">
             <IconButton component="span">
               <Avatar 
-                className={classes.profilepic} 
+                className={classes.profilePic} 
                 src={image}
               />
             </IconButton>

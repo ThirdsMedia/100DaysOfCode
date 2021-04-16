@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import MainBar from '../Components/MainBar';
 import InfoDrawer from './InfoDrawer';
 import CocktailStepper from './CocktailStepper';
-import Next from './Next';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { Link as Scroll } from 'react-scroll';
 import { useCocktail, CocktailProvider } from '../Providers/CocktailProvider';
 import {
   AppBar,
@@ -51,28 +53,9 @@ export default function Wizard() {
 function Create() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const steps = ['Basic Information', 'Base Spirit', 'Ingredients', 'Instructions'];
-  const [activeStep, setActiveStep] = useState(0);
-  const [readyForReview, setReadyForReview] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleDrawer = () => {
-    setIsOpen(!isOpen)
-  }
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
-  }
-
-  const handleNext = () => {
-    if (activeStep < steps.length) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1)
-    } 
-  }
-
-  const handleReview = () => {
-    setReadyForReview(true)
-  }
+  const handleDrawer = () => setIsOpen(!isOpen)
 
   // works
   console.log("From wizard: ", cocktail.theCocktailData);
@@ -86,18 +69,25 @@ function Create() {
         className={classes.appBar}
       >
         <Toolbar>
-          <IconButton disabled={activeStep === 0} onClick={handleBack}>
+          <IconButton disabled={cocktail.activeStep === 0} onClick={cocktail.handleBack}>
             <ExpandLessIcon />
           </IconButton>
-          <Next
-            activeStep={activeStep}
-            steps={steps}
-            handleNext={handleNext}
-            handleReview={handleReview}
-           />
+          <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
+            <IconButton
+              variant="contained"
+              color="primary"
+              onClick={cocktail.handleNext}
+            >
+            {
+              cocktail.activeStep > cocktail.steps.length - 1
+                ? <CheckCircleIcon />
+                : <ExpandMoreIcon />
+            }
+            </IconButton>
+          </Scroll>
           {
             /* If you're at the end of your stepper then stop showing the help icon */
-            activeStep <= steps.length - 1
+            cocktail.activeStep <= cocktail.steps.length - 1
               ? <IconButton className={classes.infoButton} onClick={handleDrawer}>
                   <InfoOutlinedIcon />
                 </IconButton>
@@ -107,21 +97,17 @@ function Create() {
       </AppBar>
       <div>
         <InfoDrawer 
-          step={activeStep} 
-          stepTitle={steps[activeStep]}
+          step={cocktail.activeStep} 
+          stepTitle={cocktail.steps[cocktail.activeStep]}
           isOpen={isOpen}
           handleDrawer={handleDrawer}
         /> 
-        <CocktailStepper 
-          steps={steps} 
-          activeStep={activeStep} 
-          handleNext={handleNext}
-        />
+        <CocktailStepper />
       </div>
       <div className={classes.buttonDiv}>
       {
         /* Once all steps are completed then display the Review button */
-        activeStep === steps.length
+        cocktail.activeStep === cocktail.steps.length
           ? <Button
               className={classes.button}
               variant="outlined"

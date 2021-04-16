@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import MetricSelector from '../Components/MetricSelector';
-import ImperialSelector from '../Components/ImperialSelector';
+import { useCocktail } from '../Providers/CocktailProvider';
+import MetricSelector from './MetricSelector';
+import ImperialSelector from './ImperialSelector';
 import spirits from '../static/spirits';
 import {
   Container,
@@ -10,8 +11,11 @@ import {
   Select,
   ListSubheader,
   MenuItem,
+  Button,
 } from '@material-ui/core';
+import { Link as Scroll } from 'react-scroll';
 import { makeStyles } from '@material-ui/core/styles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 
 const useStyles = makeStyles(theme => ({
@@ -32,12 +36,20 @@ const useStyles = makeStyles(theme => ({
   nextItem: {
     textAlign: 'center',
   },
+  buttonDiv: {
+    textAlign: 'center',
+  },
+  nextButton: {
+    borderRadius: 37,
+    textTransform: 'none',
+    margin: 10,
+    fontFamily: 'Nunito',
+  },
 }));
 
 function IngredientInput() {
   const classes = useStyles();
   const [isUnitIngredient, setIsUnitIngredient] = useState(true);
-  const unitTypes = ["Imperial", "Metric", "Unit"];
   const [unitType, setUnitType] = useState('Imperial');
 
   const handleIsUnitIngredient = () => {
@@ -68,9 +80,7 @@ function IngredientInput() {
           label='Ingredient'
           variant='outlined'
           margin='normal'
-          InputProps={{
-            className: classes.input
-          }}
+          InputProps={{className: classes.input}}
         />
         {
           unitType === "Imperial" || unitType === "Metric"
@@ -79,7 +89,7 @@ function IngredientInput() {
                   <ListSubheader>Spirit Type</ListSubheader>
                   {
                     spirits.map((spirit, id) => {
-                      return <MenuItem value={spirit}>{spirit}</MenuItem>
+                      return <MenuItem key={id} value={spirit}>{spirit}</MenuItem>
                     })
                   }
                 </Select>
@@ -104,6 +114,7 @@ function IngredientInput() {
 
 export default function Ingredients() {
   const classes = useStyles();
+  const cocktail = useCocktail();
   const newInput = {
     'amount': '',
     'name': '',
@@ -127,6 +138,20 @@ export default function Ingredients() {
         <IconButton onClick={addNewInput} color="primary">
           <AddBoxIcon fontSize="large"/>
         </IconButton>
+      </div>
+      <div className={classes.buttonDiv}>
+        <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
+          <Button
+            className={classes.nextButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+            endIcon={<ExpandMoreIcon />}
+            onClick={cocktail.handleNext}
+          >
+            Keep going
+          </Button>
+        </Scroll>
       </div>
     </Container>
   );
