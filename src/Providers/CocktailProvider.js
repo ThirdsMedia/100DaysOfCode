@@ -37,8 +37,11 @@ function useCocktailProvider() {
     });
   }
 
-  const buildCocktailIngredient = (event, object) => {
-    setTheCocktailData({...theCocktailData, [event.target.name]: object});  
+  const buildCocktailIngredient = (object) => {
+    setTheCocktailData({
+      ...theCocktailData, 
+      baseSpirit: {...object}
+    })
   }
 
   /*
@@ -59,6 +62,7 @@ function useCocktailProvider() {
     activeStep,
     theCocktailData,
     buildCocktailFromInput,
+    buildCocktailIngredient,
 //    addCocktailToFirestore,
 //    updateCocktailInFirestore,
 //    deleteCocktail,

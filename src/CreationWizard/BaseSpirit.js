@@ -48,15 +48,20 @@ export default function BaseSpirit() {
   const cocktail = useCocktail();
   const cocktailData = cocktail.theCocktailData;
   const [isMetric, setIsMetric] = useState(false);
-  const [baseSpiritObject, setBaseSpiritObject] = useState({});
+  const [baseSpirit, setBaseSpirit] = useState({});
 
   const handleIsMetric = () => {
     setIsMetric(!isMetric)
   }
   
-  const testFunction = () => {
-    console.log(baseSpiritObject)
-    console.log("teset")
+  const onChangeInput = (e) => {
+    setBaseSpirit({...baseSpirit, [e.target.name]: e.target.value})
+  }
+
+  const onSubmitForm = (event) => {
+    event.preventDefault()
+    console.log("On submit: ", baseSpirit)
+    cocktail.buildCocktailIngredient(baseSpirit)
   }
 
   /*
@@ -72,34 +77,33 @@ export default function BaseSpirit() {
      */
 
   // NOTE: onSubmit isn't working. Fix that next
+//  console.log(baseSpiritObject)
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
-      <form noValidate onSubmit={() => console.log("test")}>
+      <form noValidate onSubmit={onSubmitForm}>
         <FormControlLabel
           control={<Checkbox color="secondary" id="metric" size="small" />}
           label="Metric"
           onChange={handleIsMetric}
         />
-        <div>
           <TextField 
-            id='baseSpirit'
-            name='baseSpirit'
-            value={cocktailData.baseSpirit}
+            id='baseSpiritName'
+            name='name'
+            value={cocktailData.baseSpirit.name}
             label='Ingredient'
             variant='outlined'
             margin='normal'
             InputProps={{className: classes.input}}
-            onChange={(e) => {
-              setBaseSpiritObject({...baseSpiritObject, [e.target.name]: e.target.value})
-            }}
+            onChange={(e) => onChangeInput(e)}
           />
           <FormControl name='spiritSelector' variant="outlined" className={classes.formControl}>
             <Select 
               // look up uncontrolled to controlled input errors
               defaultValue="" 
-              id='spiritType'
-              name='spiritType'
-              onClick={(e) => cocktail.buildCocktailFromInput(e)}
+              id='baseSpiritType'
+              name='type'
+              value={cocktailData.baseSpirit.type}
+              onChange={(e) => onChangeInput(e)}
             >
               <ListSubheader>Spirit Type</ListSubheader>
               {
@@ -113,24 +117,22 @@ export default function BaseSpirit() {
               }
             </Select>
           </FormControl>
-        </div>
         {
           isMetric ? <MetricSelector /> : <ImperialSelector />
         }
-        <div className={classes.buttonDiv}>
-          <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
             <Button
               className={classes.nextButton}
               type="submit"
               color="primary"
               variant="contained"
               endIcon={<ExpandMoreIcon />}
-              onClick={cocktail.handleNext}
+              onClick={() => {
+                document.getElementById(`step-${cocktail.activeStep}`).scrollIntoView()
+                cocktail.handleNext()
+              }}
             >
               Continue
             </Button>
-          </Scroll>
-        </div>
       </form>
     </Container>
   );
