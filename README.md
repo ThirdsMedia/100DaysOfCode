@@ -2290,7 +2290,6 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day74/src/CreationWizard)
 
-
 ### Day 75: April 19, 2021 - Monday
 
 **Today's Progress**: Started getting the Base spirit object into the larger cocktail object.
@@ -2349,4 +2348,63 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Vanilla javascript perhaps. 
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day75/src/CreationWizard)
+
+### Day 76: April 19, 2021 - Monday
+
+**Today's Progress**: Successfully added base spirit object to larger object. 
+
+**Thoughts:** Almost done with the base spirit object. I just need to add an element to the object to keep track of the unit type so you can tell whether or not it's in metric or imperial. No real issues here, just need to change up the logic a little bit. Today is Monday, and I just completed Saturday (day 75), and Sunday (day 76). I may take a break, or I may just keep going and finish Monday that way I can be caught up and ready to do one hour tommorrow. That, or I'll just do two hours tommorrow. 
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [ ] Enforce input of Display Name field 
+	- [x] and throw error if unsuccessful
+	- [ ] Navigate to Success component upon successfully signing up 
+		- [ ] The navigation to Success should happen in then() from the returned promise in signup()
+		- [ ] The setLoading and setError should be handled inside of signup() in finally()
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [x] Successfully console.log() a full cocktail object
+	- [x] Make sure that it updates appropriately if you backtrack the form
+	- [x] Get BaseSpirit to console.log the cocktail object onSubmit
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Set the user's avatar when changed in Profile by clicking on the picture and selecting the picture file
+	- [ ] Adding favorites
+- [ ] React Native Functionality
+	- [ ] Create a camera component
+	- [ ] Create a photo library component
+	- [ ] Make the camera component load Cocktail.js with the appropriate QR code data
+- [ ] App finishing touches
+	- [ ] Make sure the mobile version looks good on both Android and iOS
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** Just didn't finish working on the metric vs. imperial portion. 
+**Solutions:** Keep coding
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day76/src/CreationWizard)
+
 
