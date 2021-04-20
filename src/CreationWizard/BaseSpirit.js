@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
-import MetricSelector from './MetricSelector';
-import ImperialSelector from './ImperialSelector';
+//import MetricSelector from './MetricSelector';
+//import ImperialSelector from './ImperialSelector';
 import spirits from '../static/spirits';
-import { Link as Scroll } from 'react-scroll';
 import {
   Container,
   TextField,
@@ -13,7 +12,10 @@ import {
   ListSubheader,
   MenuItem,
   Checkbox,
-  Button
+  Button,
+  Typography,
+  Slider,
+  Switch,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
@@ -47,49 +49,49 @@ export default function BaseSpirit() {
   const classes = useStyles();
   const cocktail = useCocktail();
   const cocktailData = cocktail.theCocktailData;
-  const [isMetric, setIsMetric] = useState(false);
+  const [unitType, setUnitType] = useState(false);
   const [baseSpirit, setBaseSpirit] = useState({});
 
-  const handleIsMetric = () => {
-    setIsMetric(!isMetric)
+  const handleUnitType = (e) => {
+    setUnitType(!unitType)
+    setBaseSpirit({...baseSpirit, [e.target.name]: e.target.value})
+    console.log(e.target.name, unitType)
   }
   
   const onChangeInput = (e) => {
     setBaseSpirit({...baseSpirit, [e.target.name]: e.target.value})
   }
 
-  const onSubmitForm = (event) => {
-    event.preventDefault()
-    console.log("On submit: ", baseSpirit)
-    cocktail.buildCocktailIngredient(baseSpirit)
+  const onChangeSlider = name => (event, newValue) => {
+    setBaseSpirit({...baseSpirit, [name]: newValue})
   }
 
-  /*
-   * The way to make this work so that it adds everything to an object is to wrap the form in a <form> tag (go figure),
-   * and then create an object above. Then you create a function in CocktailProvider which takes an object as an argument,
-   * and adds it to the cocktailData object the same way buildCocktailFromInput does. 
-   * Should work.
-   */
+  const onSubmitForm = (event) => {
+    event.preventDefault()
+
+    if (baseSpirit) {
+      cocktail.buildCocktailIngredient(baseSpirit)
+    }
+  }
 
     /*
      * So at <form onSubmit={testFunction}> This function would be the one that adds the object to the larger cocktail object
      * Until then, the input changes should be modifying the temporary object initialized here within this component
      */
 
-  // NOTE: onSubmit isn't working. Fix that next
-//  console.log(baseSpiritObject)
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
       <form noValidate onSubmit={onSubmitForm}>
         <FormControlLabel
-          control={<Checkbox color="secondary" id="metric" size="small" />}
-          label="Metric"
-          onChange={handleIsMetric}
+          control={<Switch color="secondary" id="unit" name="unit" size="small" />}
+          label="Unit Type"
+          onChange={(e) => handleUnitType(e)}
         />
+        <div>
           <TextField 
             id='baseSpiritName'
             name='name'
-            value={cocktailData.baseSpirit.name}
+            value={baseSpirit.name || ''}
             label='Ingredient'
             variant='outlined'
             margin='normal'
@@ -98,11 +100,10 @@ export default function BaseSpirit() {
           />
           <FormControl name='spiritSelector' variant="outlined" className={classes.formControl}>
             <Select 
-              // look up uncontrolled to controlled input errors
               defaultValue="" 
               id='baseSpiritType'
               name='type'
-              value={cocktailData.baseSpirit.type}
+              value={baseSpirit.type || ''}
               onChange={(e) => onChangeInput(e)}
             >
               <ListSubheader>Spirit Type</ListSubheader>
@@ -117,22 +118,55 @@ export default function BaseSpirit() {
               }
             </Select>
           </FormControl>
-        {
-          isMetric ? <MetricSelector /> : <ImperialSelector />
-        }
-            <Button
-              className={classes.nextButton}
-              type="submit"
-              color="primary"
-              variant="contained"
-              endIcon={<ExpandMoreIcon />}
-              onClick={() => {
-                document.getElementById(`step-${cocktail.activeStep}`).scrollIntoView()
-                cocktail.handleNext()
-              }}
-            >
-              Continue
-            </Button>
+          {
+            unitType
+              ? (
+                <div>
+                  <Typography id="discrete-slider" gutterBottom>
+                    Milliliters
+                  </Typography>
+                  <Slider
+                    id="baseSpiritAmount"
+                    name="amount"
+                    defaultValue={15}
+                    valueLabelDisplay="auto"
+                    step={5}
+                    min={5}
+                    max={120}
+                    marks
+                    onChange={onChangeSlider("amount")}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <Typography id="discrete-slider" gutterBottom>
+                    Ounces
+                  </Typography>
+                  <Slider
+                    id='baseSpiritAmount'
+                    name='amount'
+                    defaultValue={1}
+                    valueLabelDisplay="auto"
+                    step={0.25}
+                    min={0.25}
+                    max={6}
+                    marks
+                    onChange={onChangeSlider("amount")}
+                  />
+                </div>
+            )
+          }
+          <Button
+            className={classes.nextButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+            endIcon={<ExpandMoreIcon />}
+            onClick={cocktail.handleNext}
+          >
+            Continue
+          </Button>
+        </div>
       </form>
     </Container>
   );

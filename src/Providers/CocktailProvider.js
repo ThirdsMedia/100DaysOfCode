@@ -27,6 +27,7 @@ function useCocktailProvider() {
   const handleNext = () => {
     if (activeStep < steps.length) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1)
+      document.getElementById(`step-${activeStep}`).scrollIntoView({behavior: 'smooth'})
     } 
   }
 

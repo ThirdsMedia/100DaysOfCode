@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
-import MetricSelector from './MetricSelector';
-import ImperialSelector from './ImperialSelector';
+//import MetricSelector from './MetricSelector';
+//import ImperialSelector from './ImperialSelector';
 import spirits from '../static/spirits';
 import {
   Container,
@@ -12,6 +12,8 @@ import {
   ListSubheader,
   MenuItem,
   Button,
+  Typography,
+  Slider,
 } from '@material-ui/core';
 import { Link as Scroll } from 'react-scroll';
 import { makeStyles } from '@material-ui/core/styles';
@@ -51,6 +53,11 @@ function IngredientInput() {
   const classes = useStyles();
   const [isUnitIngredient, setIsUnitIngredient] = useState(true);
   const [unitType, setUnitType] = useState('Imperial');
+  const [spiritObject, setSpiritObject] = useState({});
+
+  const onChangeSlider = name => (event, newValue) => {
+    setSpiritObject({...spiritObject, [name]: newValue})
+  }
 
   const handleIsUnitIngredient = () => {
     setIsUnitIngredient(!isUnitIngredient)
@@ -101,12 +108,43 @@ function IngredientInput() {
         isUnitIngredient 
           ? (
             unitType === "Metric"
-              ? <MetricSelector />
-              : unitType === "Imperial"
-                  ? <ImperialSelector />
-                  : false
-          )
-          : false
+              ? (
+                <div>
+                  <Typography id="discrete-slider" gutterBottom>
+                    Milliliters
+                  </Typography>
+                  <Slider
+                    id="baseSpiritAmount"
+                    name="metricAmount"
+                    defaultValue={15}
+                    valueLabelDisplay="auto"
+                    step={5}
+                    min={5}
+                    max={60}
+                    marks
+                    onChange={onChangeSlider("amount")}
+                  />
+                </div>
+              ) : unitType === "Imperial"
+                  ? (
+                    <div>
+                      <Typography id="discrete-slider" gutterBottom>
+                        Ounces
+                      </Typography>
+                      <Slider
+                        id='baseSpiritAmount'
+                        name='amount'
+                        defaultValue={1}
+                        valueLabelDisplay="auto"
+                        step={0.25}
+                        min={0.25}
+                        max={6}
+                        marks
+                        onChange={onChangeSlider("amount")}
+                      />
+                    </div>
+                  ) : false
+          ) : false
       }
     </div>
   );

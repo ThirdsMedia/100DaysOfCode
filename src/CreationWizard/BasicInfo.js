@@ -6,7 +6,7 @@ import {
   Grid,
   Button,
 } from '@material-ui/core';
-import { Link as Scroll } from 'react-scroll';
+//import { Link as Scroll } from 'react-scroll';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -96,18 +96,19 @@ export default function BasicInfo() {
         onChange={(e) => cocktail.buildCocktailFromInput(e)}
       />
       <div className={classes.buttonDiv}>
-        <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
-          <Button
-            className={classes.nextButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-            endIcon={<ExpandMoreIcon />}
-            onClick={cocktail.handleNext}
-          >
-            Next
-          </Button>
-        </Scroll>
+        <Button
+          className={classes.nextButton}
+          type="submit"
+          color="primary"
+          variant="contained"
+          endIcon={<ExpandMoreIcon />}
+          onClick={() => {
+//            document.getElementById(`step-${cocktail.activeStep}`).scrollIntoView({behavior: 'smooth'})
+            cocktail.handleNext()
+          }}
+        >
+          Next
+        </Button>
       </div>
     </Container>
   );
