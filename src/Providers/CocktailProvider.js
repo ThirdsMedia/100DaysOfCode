@@ -1,11 +1,8 @@
 import React, { 
   useState,
   useContext, 
-  useEffect,
   createContext,
 } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
 
 const CocktailContext = createContext();
 
@@ -13,11 +10,9 @@ export const useCocktail = () => {
   return useContext(CocktailContext);  
 }
 
-
 function useCocktailProvider() {
-  const [theCocktailData, setTheCocktailData] = useState({});
-  const [cocktailIngredients, setCocktailIngredients] = useState([]);
-  const steps = ['Basic Information', 'Base Spirit', 'Ingredients', 'Instructions'];
+  const [recipe, setRecipe] = useState({});
+  const steps = ['Basic Information', 'Ingredients', 'Miscellaneous', 'Instructions'];
   const [activeStep, setActiveStep] = useState(0);
 
   const handleBack = () => {
@@ -27,51 +22,39 @@ function useCocktailProvider() {
   const handleNext = () => {
     if (activeStep < steps.length) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1)
-      document.getElementById(`step-${activeStep}`).scrollIntoView({behavior: 'smooth'})
+//      document.getElementById(`step-${activeStep}`).scrollIntoView({behavior: 'smooth'})
     } 
   }
 
-  const buildCocktailFromInput = (event) => {
-    setTheCocktailData({
-      ...theCocktailData, 
+  // So this works for BasicInfo and Instructions
+  // See comments in Ingredients.js to understand what you are trying to do better
+  // I need to get this to where it works for the above two components, but also works for Ingredients.js, (and misc for that matter)
+  const buildFromInput = (event) => {
+    // alternatively, I could just have this accept two args, and manually pass [event.target.name], and the other value 
+    // could literally be anything
+    setRecipe({
+      ...recipe, 
       [event.target.name]: event.target.value
     });
   }
 
-  const buildCocktailIngredient = (object) => {
-    setTheCocktailData({
-      ...theCocktailData, 
-      baseSpirit: {...object}
-    })
-  }
-
+  // You are trying to get rid of this
+  // Alternatively I could simply create one for Miscellanous and have three, but that's messy. 
   const addIngredientsToCocktail = (ingredientsArray) => {
-    setTheCocktailData({
-      ...theCocktailData,
+    setRecipe({
+      ...recipe,
       ingredients: ingredientsArray
     })
   }
 
-  /*
-  const addCocktailToFirestore = () => {
-  }
-
-  const updateCocktailInFirestore = () => {
-  }
-
-  const deleteCocktail = () => {
-  }
-  */
-
   return {
     steps,
+    recipe,
     handleBack,
     handleNext,
     activeStep,
-    theCocktailData,
-    buildCocktailFromInput,
-    buildCocktailIngredient,
-    addIngredientsToCocktail,
+    buildFromInput, // this should change to buildRecipe, and be used throughout the entire Cocktail stepper
+    addIngredientsToCocktail, // this should be gone
 //    addCocktailToFirestore,
 //    updateCocktailInFirestore,
 //    deleteCocktail,

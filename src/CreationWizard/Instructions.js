@@ -58,7 +58,6 @@ const methods = [
 export default function Instructions() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const cocktailData = cocktail.theCocktailData;
 
   return (
     <Container maxWidth="md" className={classes.formContainer}>
@@ -66,8 +65,8 @@ export default function Instructions() {
         <InputLabel htmlFor="age-native-simple">Build Method</InputLabel>
         <Select
           native
-          value={cocktailData.method}
-          onChange={(e) => cocktail.buildCocktailFromInput(e)}
+          value={cocktail.recipe.method}
+          onChange={(e) => cocktail.buildFromInput(e)}
           inputProps={{
             name: 'method',
             id: 'method-native',
@@ -85,8 +84,8 @@ export default function Instructions() {
         <InputLabel htmlFor="age-native-simple">Glassware</InputLabel>
         <Select
           native
-          value={cocktailData.glass}
-          onChange={(e) => cocktail.buildCocktailFromInput(e)}
+          value={cocktail.recipe.glass}
+          onChange={(e) => cocktail.buildFromInput(e)}
           inputProps={{
             name: 'glass',
             id: 'glass-native',
@@ -103,14 +102,14 @@ export default function Instructions() {
       <TextField 
         id='instructions'
         name='instructions'
-        value={cocktailData.instructions}
+        value={cocktail.recipe.instructions}
         label='Instructions'
         variant='outlined'
         margin='normal'
         multiline
         rows='5'
         maxrows='10'
-        onChange={(e) => cocktail.buildCocktailFromInput(e)}
+        onChange={(e) => cocktail.buildFromInput(e)}
       />
       <div className={classes.buttonDiv}>
         <Scroll to={`step-${cocktail.activeStep}`} smooth="true">

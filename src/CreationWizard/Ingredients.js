@@ -17,7 +17,6 @@ import {
   Slider,
   Divider,
 } from '@material-ui/core';
-import { Link as Scroll } from 'react-scroll';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddBoxIcon from '@material-ui/icons/AddBox';
@@ -47,6 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
   submitButton: {
     height: theme.spacing(7),
+    margin: theme.spacing(2),
   },
   nextButton: {
     borderRadius: 37,
@@ -56,26 +56,31 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const spirits = [
-  "Non-alcoholic",
-  "Bourbon",
-  "Whiskey",
-  "Scotch",
-  "Brandy",
-  "Cognac",
-  "Rum",
-  "Tequila",
-  "Gin",
-  "Vodka",
-  "Absinthe",
-  "Vermouth",
+const types = [
+  "baseSpirit",
+  "modifier",
+  "nonAlcoholic",
+  "misc",
 ];
   
-function IngredientInput({ ingredientsArray, number, input, unitType }) {
+export default function Ingredients() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const cocktailData = cocktail.theCocktailData
   const [spiritObject, setSpiritObject] = useState({});
+  const [inputs, setInputs] = useState([{
+    amount: '',
+    name: '',
+    type: '',
+  }]);
+  const [unitType, setUnitType] = useState('imperial');
+  const ingredients = [{
+    id: 0,
+    ingredient: {},
+  }];
+
+  const addNewInput = () => setInputs([...inputs, {}])
+
+  const handleUnitType = (e) => setUnitType(e.target.value)
 
   const onChangeSlider = name => (event, newValue) => {
     setSpiritObject({...spiritObject, [name]: newValue})
@@ -86,103 +91,24 @@ function IngredientInput({ ingredientsArray, number, input, unitType }) {
   }
 
   const onAddIngredientsToArray = () => {
-    ingredientsArray.push(spiritObject)
+    ingredients.push(spiritObject)
   }
-
-  return (
-    <div>
-      <TextField 
-        id='ingredient'
-        label='Ingredient'
-        name='name'
-        variant='outlined'
-        margin='normal'
-        InputProps={{className: classes.input}}
-        onChange={(e) => onChangeInput(e)}
-      />
-      <FormControl variant="outlined" className={classes.formControl}>
-        <Select 
-          defaultValue="" 
-          name='type' 
-          id="spiritType"
-          onChange={(e) => onChangeInput(e)}
-        >
-          <ListSubheader>Spirit Type</ListSubheader>
-          {
-            spirits.map((spirit, id) => {
-              return <MenuItem key={id} value={spirit}>{spirit}</MenuItem>
-            })
-          }
-        </Select>
-      </FormControl>
-      <Button
-        className={classes.submitButton}
-        type="submit"
-        color="primary"
-        variant="contained"
-        onClick={onAddIngredientsToArray}
-      >
-        Submit
-      </Button>
-      {
-        unitType === "metric" ? 
-          <div>
-            <Typography id="discrete-slider" gutterBottom>
-              Milliliters
-            </Typography>
-            <Slider
-              id="baseSpiritAmount"
-              name="metricAmount"
-              defaultValue={15}
-              valueLabelDisplay="auto"
-              step={5}
-              min={5}
-              max={60}
-              marks
-              onChange={onChangeSlider("amount")}
-            />
-          </div>
-        : <div>
-            <Typography id="discrete-slider" gutterBottom>
-              Ounces
-            </Typography>
-            <Slider
-              id='baseSpiritAmount'
-              name='amount'
-              defaultValue={1}
-              valueLabelDisplay="auto"
-              step={0.25}
-              min={0.25}
-              max={6}
-              marks
-              onChange={onChangeSlider("amount")}
-            />
-          </div>
-      }
-    </div>
-  );
-}
-
-export default function Ingredients() {
-  const classes = useStyles();
-  const cocktail = useCocktail();
-  const [inputs, setInputs] = useState([{}]);
-  const [unitType, setUnitType] = useState('imperial');
-  const [ingredients, setIngredients] = useState([]);
-
-  const addNewInput = () => setInputs([...inputs, {}])
-
-  const handleUnitType = (e) => setUnitType(e.target.value)
 
   const onSubmitForm = (event) => {
     event.preventDefault()
 
-    cocktail.addIngredientsToCocktail(ingredients)
+    console.log("Onsubmitform: ", event.target.getAttribute("name"), event.target.getAttribute("value"))
   }
 
   return (
-    <div className={classes.formContainer}>
-      <form noValidate onSubmit={onSubmitForm}>
+    <form 
+      noValidate 
+      className={classes.formContainer}
+      id='ingredients'
+      name='ingredients'
+      value={ingredients}
+      onSubmit={onSubmitForm} 
+    >
       <Grid container alignItems='center'>
         <Grid item xs>
           <FormControl component='fieldset' className={classes.formControl}>
@@ -190,7 +116,6 @@ export default function Ingredients() {
             <RadioGroup row aria-label='unitType' name='unit' value={unitType} onChange={handleUnitType}>
               <FormControlLabel value='imperial' control={<Radio />} label='Imperial' />
               <FormControlLabel value='metric' control={<Radio />} label='Metric' />
-              <FormControlLabel value='unit' control={<Radio />} label='Unit' />
             </RadioGroup>
           </FormControl>
         </Grid>
@@ -204,31 +129,93 @@ export default function Ingredients() {
       {
         inputs.map((input, id) => { 
           return (
-            <IngredientInput 
-              key={`ingredient-${id}`} 
-              number={id}
-              input={input} 
-              ingredientsArray={ingredients}
-              unitType={unitType}
-            />
+            <div>
+              <TextField 
+                id='ingredient'
+                label='Ingredient'
+                name='name'
+         //       value={ingredients[id].name}
+                variant='outlined'
+                margin='normal'
+                InputProps={{className: classes.input}}
+                onChange={(e) => onChangeInput(e)}
+              />
+              <FormControl variant="outlined" className={classes.formControl}>
+                <Select 
+                  defaultValue="" 
+                  name='type' 
+                  id="spiritType"
+                  onChange={(e) => onChangeInput(e)}
+                >
+                  <ListSubheader>Spirit Type</ListSubheader>
+                  {
+                    types.map((type, id) => {
+                      return <MenuItem key={id} value={type}>{type}</MenuItem>
+                    })
+                  }
+                </Select>
+              </FormControl>
+              <Button
+                className={classes.submitButton}
+                color="primary"
+                variant="contained"
+                onClick={onAddIngredientsToArray}
+              >
+                Submit
+              </Button>
+              {
+                unitType === "metric" ? 
+                  <div>
+                    <Typography id="discrete-slider" gutterBottom>
+                      Milliliters
+                    </Typography>
+                    <Slider
+                      id="baseSpiritAmount"
+                      name="metricAmount"
+          //            value={ingredients[id].amount}
+                      defaultValue={15}
+                      valueLabelDisplay="auto"
+                      step={5}
+                      min={5}
+                      max={60}
+                      marks
+                      onChange={onChangeSlider("amount")}
+                    />
+                  </div>
+                : <div>
+                    <Typography id="discrete-slider" gutterBottom>
+                      Ounces
+                    </Typography>
+                    <Slider
+                      id='baseSpiritAmount'
+                      name='amount'
+           //           value={ingredients[id].amount}
+                      defaultValue={1}
+                      valueLabelDisplay="auto"
+                      step={0.25}
+                      min={0.25}
+                      max={6}
+                      marks
+                      onChange={onChangeSlider("amount")}
+                    />
+                  </div>
+              }
+            </div>
           )
         })
       }
       <div className={classes.buttonDiv}>
-        <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
-          <Button
-            className={classes.nextButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-            endIcon={<ExpandMoreIcon />}
-            onClick={cocktail.handleNext}
-          >
-            Keep going
-          </Button>
-        </Scroll>
+        <Button
+          className={classes.nextButton}
+          type="submit"
+          color="primary"
+          variant="contained"
+          endIcon={<ExpandMoreIcon />}
+          onClick={cocktail.handleNext}
+        >
+          Keep going
+        </Button>
       </div>
-      </form>
-    </div>
+    </form>
   );
 }

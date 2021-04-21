@@ -51,9 +51,6 @@ function Create() {
 
   const handleDrawer = () => setIsOpen(!isOpen)
 
-  // works
-  console.log("From wizard: ", cocktail.theCocktailData);
-
   return (
     <main>
       <MainBar noLogo />
@@ -106,8 +103,7 @@ function Create() {
               className={classes.button}
               variant="outlined"
               color="primary"
-              // will need to add a history.push here
-              onClick={() => console.log("Teh Cocktail: ", cocktail.theCocktailData)}
+              onClick={() => console.log("Teh Cocktail: ", cocktail.recipe)}
             >
               Review
             </Button>

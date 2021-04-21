@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
 import BasicInfo from './BasicInfo';
-import BaseSpirit from './BaseSpirit';
+//import BaseSpirit from './BaseSpirit';
 import Ingredients from './Ingredients';
+import Miscellaneous from './Miscellaneous';
 import Instructions from './Instructions';
 import {
   Collapse,
@@ -19,9 +20,9 @@ function RenderStep(step) {
     case 0:
       return <BasicInfo />
     case 1:
-      return <BaseSpirit />
-    case 2:
       return <Ingredients />
+    case 2:
+      return <Miscellaneous />
     case 3: 
       return <Instructions />
     default:
