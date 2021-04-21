@@ -36,12 +36,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-/*
- * Notes:
- *  - git branch day36 if you want to see the version where you could pick your recipe type. 
- *  - Removed that feature because it's WAY too much code and there must be a simpler way
- */
-
 export default function Wizard() {
   return (
     <CocktailProvider>
@@ -62,7 +56,7 @@ function Create() {
 
   return (
     <main>
-      <MainBar />
+      <MainBar noLogo />
       <AppBar 
         position='sticky' 
         elevation={0} 

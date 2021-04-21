@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
-//import MetricSelector from './MetricSelector';
-//import ImperialSelector from './ImperialSelector';
-import spirits from '../static/spirits';
 import {
-  Container,
+  Grid,
   TextField,
   IconButton,
   FormControl,
+  FormLabel,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
   Select,
   ListSubheader,
   MenuItem,
@@ -36,10 +37,15 @@ const useStyles = makeStyles(theme => ({
     minWidth: 120,
   },
   nextItem: {
-    textAlign: 'center',
+    display: 'flex',
+    alignItems: 'right',
+    justifyContent: 'flex-end',
   },
   buttonDiv: {
     textAlign: 'center',
+  },
+  submitButton: {
+    height: theme.spacing(7),
   },
   nextButton: {
     borderRadius: 37,
@@ -49,65 +55,94 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function IngredientInput() {
+const spirits = [
+  "Bourbon",
+  "Whiskey",
+  "Scotch",
+  "Brandy",
+  "Cognac",
+  "Rum",
+  "Tequila",
+  "Gin",
+  "Vodka",
+  "Absinthe",
+  "Vermouth",
+];
+  
+function IngredientInput({ ingredientNumber, newInput, unitType }) {
   const classes = useStyles();
   const [isUnitIngredient, setIsUnitIngredient] = useState(true);
-  const [unitType, setUnitType] = useState('Imperial');
   const [spiritObject, setSpiritObject] = useState({});
 
   const onChangeSlider = name => (event, newValue) => {
     setSpiritObject({...spiritObject, [name]: newValue})
   }
 
+  const onChangeInput = (e) => {
+    setSpiritObject({...spiritObject, [e.target.name]: e.target.value})
+  }
+
   const handleIsUnitIngredient = () => {
     setIsUnitIngredient(!isUnitIngredient)
   }
 
-  const handleUnitType = (event) => {
-    setUnitType(event.target.value)
-  }
+  console.log("From IngredientInput: ", ingredientNumber, newInput)
+  console.log(spiritObject)
 
   return (
     <div>
-      <div>
-        <FormControl variant="outlined" className={classes.formControl}>
-          <Select 
-            defaultValue="Spirit" 
-            id="ingredient-type"
-            value={unitType}
-            onChange={handleUnitType}
+      <Grid container alignContent='center' alignItems='center'>
+        {/* This is where you enter the spirit name */}
+        <Grid item xs>
+          <TextField 
+            id='ingredient'
+            label='Ingredient'
+            name='name'
+            variant='outlined'
+            margin='normal'
+            InputProps={{className: classes.input}}
+            onChange={(e) => onChangeInput(e)}
+          />
+        </Grid>
+        <Grid item xs>
+          {
+            // Select the spirit type here 
+            unitType === "imperial" || unitType === "metric"
+              ? <FormControl variant="outlined" className={classes.formControl}>
+                  <Select 
+                    defaultValue="" 
+                    name='type' 
+                    id="spiritType"
+                    onChange={(e) => onChangeInput(e)}
+                  >
+                    <ListSubheader>Spirit Type</ListSubheader>
+                    {
+                      spirits.map((spirit, id) => {
+                        return <MenuItem key={id} value={spirit}>{spirit}</MenuItem>
+                      })
+                    }
+                  </Select>
+                </FormControl>
+              : false
+          }
+        </Grid>
+        <Grid item xs>
+          <Button
+            className={classes.submitButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+          //  onClick={cocktail.handleNext}
           >
-            <MenuItem value="Imperial">Imperial</MenuItem>
-            <MenuItem value="Metric">Metric</MenuItem>
-            <MenuItem value="Unit">Unit</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField 
-          id='ingredient'
-          label='Ingredient'
-          variant='outlined'
-          margin='normal'
-          InputProps={{className: classes.input}}
-        />
-        {
-          unitType === "Imperial" || unitType === "Metric"
-            ? <FormControl variant="outlined" className={classes.formControl}>
-                <Select defaultValue="" id="search-filter">
-                  <ListSubheader>Spirit Type</ListSubheader>
-                  {
-                    spirits.map((spirit, id) => {
-                      return <MenuItem key={id} value={spirit}>{spirit}</MenuItem>
-                    })
-                  }
-                </Select>
-              </FormControl>
-            : false
-        }
-      </div>
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
       {
+        // This is the slider
         isUnitIngredient 
           ? (
-            unitType === "Metric"
+            unitType === "metric"
               ? (
                 <div>
                   <Typography id="discrete-slider" gutterBottom>
@@ -125,7 +160,7 @@ function IngredientInput() {
                     onChange={onChangeSlider("amount")}
                   />
                 </div>
-              ) : unitType === "Imperial"
+              ) : unitType === "imperial"
                   ? (
                     <div>
                       <Typography id="discrete-slider" gutterBottom>
@@ -153,30 +188,50 @@ function IngredientInput() {
 export default function Ingredients() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const newInput = {
-    'amount': '',
-    'name': '',
-    'unit': '',
-  };
+  const newInput = {}
   const [inputs, setInputs] = useState([{...newInput}]);
+  const [unitType, setUnitType] = useState('imperial');
 
   const addNewInput = () => {
     setInputs([...inputs, {...newInput}])
-    console.log(window.pageYOffset)
+  }
+
+  const handleUnitType = (e) => {
+    setUnitType(e.target.value)
   }
 
   return (
-    <Container maxWidth="lg" className={classes.formContainer}>
+    <div className={classes.formContainer}>
+      <Grid container alignItems='center'>
+        <Grid item xs>
+          <FormControl component='fieldset' className={classes.formControl}>
+            <FormLabel component='legend'>Unit Type</FormLabel>
+            <RadioGroup row aria-label='unitType' name='unit' value={unitType} onChange={handleUnitType}>
+              <FormControlLabel value='imperial' control={<Radio />} label='Imperial' />
+              <FormControlLabel value='metric' control={<Radio />} label='Metric' />
+              <FormControlLabel value='unit' control={<Radio />} label='Unit' />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+        <Grid item>
+          <IconButton onClick={addNewInput} color="primary">
+            <AddBoxIcon fontSize="large"/>
+          </IconButton>
+        </Grid>
+      </Grid>
       {
         inputs.map((input, id) => { 
-          return <IngredientInput key={`ingredient-${id}`} />
+          return (
+            <IngredientInput 
+              key={`ingredient-${id}`} 
+              ingredientNumber={id} 
+              newInput={input} 
+              setInput={setInputs} 
+              unitType={unitType}
+            />
+          )
         })
       }
-      <div className={classes.nextItem}>
-        <IconButton onClick={addNewInput} color="primary">
-          <AddBoxIcon fontSize="large"/>
-        </IconButton>
-      </div>
       <div className={classes.buttonDiv}>
         <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
           <Button
@@ -191,6 +246,6 @@ export default function Ingredients() {
           </Button>
         </Scroll>
       </div>
-    </Container>
+    </div>
   );
 }

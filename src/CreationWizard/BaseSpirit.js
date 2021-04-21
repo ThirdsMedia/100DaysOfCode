@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
-//import MetricSelector from './MetricSelector';
-//import ImperialSelector from './ImperialSelector';
-import spirits from '../static/spirits';
 import {
-  Container,
   TextField,
   FormControl,
-  FormControlLabel,
   Select,
   ListSubheader,
   MenuItem,
-  Checkbox,
   Button,
   Typography,
   Slider,
-  Switch,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,17 +38,34 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const spirits = [
+  "Bourbon",
+  "Whiskey",
+  "Scotch",
+  "Brandy",
+  "Cognac",
+  "Rum",
+  "Tequila",
+  "Gin",
+  "Vodka",
+  "Absinthe",
+  "Vermouth",
+];
+  
 export default function BaseSpirit() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const cocktailData = cocktail.theCocktailData;
-  const [unitType, setUnitType] = useState(false);
-  const [baseSpirit, setBaseSpirit] = useState({});
+  const [unitType, setUnitType] = useState('imperial');
+  const [baseSpirit, setBaseSpirit] = useState({
+    amount: 0,
+    name: '',
+    type: '',
+    unit: unitType,
+  });
 
   const handleUnitType = (e) => {
-    setUnitType(!unitType)
+    setUnitType(e.target.value)
     setBaseSpirit({...baseSpirit, [e.target.name]: e.target.value})
-    console.log(e.target.name, unitType)
   }
   
   const onChangeInput = (e) => {
@@ -74,88 +84,92 @@ export default function BaseSpirit() {
     }
   }
 
-    /*
-     * So at <form onSubmit={testFunction}> This function would be the one that adds the object to the larger cocktail object
-     * Until then, the input changes should be modifying the temporary object initialized here within this component
-     */
-
   return (
-    <Container maxWidth="lg" className={classes.formContainer}>
+    <div className={classes.formContainer}>
       <form noValidate onSubmit={onSubmitForm}>
-        <FormControlLabel
-          control={<Switch color="secondary" id="unit" name="unit" size="small" />}
-          label="Unit Type"
-          onChange={(e) => handleUnitType(e)}
+        <FormControl variant="outlined" className={classes.formControl}>
+          <Select 
+            defaultValue="imperial" 
+            id="spiritUnitType"
+            value={unitType}
+            onChange={handleUnitType}
+          >
+            <MenuItem value="imperial">Imperial</MenuItem>
+            <MenuItem value="metric">Metric</MenuItem>
+          </Select>
+        </FormControl>
+        <TextField 
+          id='baseSpiritName'
+          name='name'
+          value={baseSpirit.name || ''}
+          label='Ingredient'
+          variant='outlined'
+          margin='normal'
+          InputProps={{className: classes.input}}
+          onChange={(e) => onChangeInput(e)}
         />
-        <div>
-          <TextField 
-            id='baseSpiritName'
-            name='name'
-            value={baseSpirit.name || ''}
-            label='Ingredient'
-            variant='outlined'
-            margin='normal'
-            InputProps={{className: classes.input}}
+        <FormControl name='spiritSelector' variant="outlined" className={classes.formControl}>
+          <Select 
+            defaultValue="" 
+            id='baseSpiritType'
+            name='type'
+            value={baseSpirit.type || ''}
             onChange={(e) => onChangeInput(e)}
-          />
-          <FormControl name='spiritSelector' variant="outlined" className={classes.formControl}>
-            <Select 
-              defaultValue="" 
-              id='baseSpiritType'
-              name='type'
-              value={baseSpirit.type || ''}
-              onChange={(e) => onChangeInput(e)}
-            >
-              <ListSubheader>Spirit Type</ListSubheader>
-              {
-                spirits.map((spirit, id) => {
-                  return (
-                    <MenuItem key={id} value={spirit}>
-                      {spirit}
-                    </MenuItem>
-                  );
-                })
-              }
-            </Select>
-          </FormControl>
-          {
-            unitType
-              ? (
-                <div>
-                  <Typography id="discrete-slider" gutterBottom>
-                    Milliliters
-                  </Typography>
-                  <Slider
-                    id="baseSpiritAmount"
-                    name="amount"
-                    defaultValue={15}
-                    valueLabelDisplay="auto"
-                    step={5}
-                    min={5}
-                    max={120}
-                    marks
-                    onChange={onChangeSlider("amount")}
-                  />
-                </div>
-              ) : (
-                <div>
-                  <Typography id="discrete-slider" gutterBottom>
-                    Ounces
-                  </Typography>
-                  <Slider
-                    id='baseSpiritAmount'
-                    name='amount'
-                    defaultValue={1}
-                    valueLabelDisplay="auto"
-                    step={0.25}
-                    min={0.25}
-                    max={6}
-                    marks
-                    onChange={onChangeSlider("amount")}
-                  />
-                </div>
+          >
+            <ListSubheader>Spirit Type</ListSubheader>
+            {
+              spirits.map((spirit, id) => {
+                return (
+                  <MenuItem key={id} value={spirit}>
+                    {spirit}
+                  </MenuItem>
+                );
+              })
+            }
+          </Select>
+        </FormControl>
+        {
+          unitType === 'metric'
+            ? (
+              <div>
+                <Typography id="discrete-slider" gutterBottom>
+                  Milliliters
+                </Typography>
+                <Slider
+                  id="baseSpiritAmount"
+                  name="amount"
+                  defaultValue={15}
+                  valueLabelDisplay="auto"
+                  step={5}
+                  min={5}
+                  max={120}
+                  marks
+                  onChange={onChangeSlider("amount")}
+                />
+              </div>
+            ) : ( 
+              unitType === 'imperial' 
+                ? ( 
+                  <div>
+                    <Typography id="discrete-slider" gutterBottom>
+                      Ounces
+                    </Typography>
+                    <Slider
+                      id='baseSpiritAmount'
+                      name='amount'
+                      defaultValue={1}
+                      valueLabelDisplay="auto"
+                      step={0.25}
+                      min={0.25}
+                      max={6}
+                      marks
+                      onChange={onChangeSlider("amount")}
+                    />
+                  </div> 
+                ) : false
             )
-          }
+        }
+        <div className={classes.buttonDiv}>
           <Button
             className={classes.nextButton}
             type="submit"
@@ -168,7 +182,7 @@ export default function BaseSpirit() {
           </Button>
         </div>
       </form>
-    </Container>
+    </div>
   );
 }
 

@@ -6,7 +6,6 @@ import {
   Grid,
   Button,
 } from '@material-ui/core';
-//import { Link as Scroll } from 'react-scroll';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -46,7 +45,6 @@ export default function BasicInfo() {
             margin='normal'
             fullWidth
             onChange={(e) => cocktail.buildCocktailFromInput(e)}
-//            InputLabelProps={{ shrink: true}}
           />
           <TextField 
             id='creator'
@@ -102,10 +100,7 @@ export default function BasicInfo() {
           color="primary"
           variant="contained"
           endIcon={<ExpandMoreIcon />}
-          onClick={() => {
-//            document.getElementById(`step-${cocktail.activeStep}`).scrollIntoView({behavior: 'smooth'})
-            cocktail.handleNext()
-          }}
+          onClick={cocktail.handleNext}
         >
           Next
         </Button>
