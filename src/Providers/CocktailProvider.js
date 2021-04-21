@@ -45,6 +45,13 @@ function useCocktailProvider() {
     })
   }
 
+  const addIngredientsToCocktail = (ingredientsArray) => {
+    setTheCocktailData({
+      ...theCocktailData,
+      ingredients: ingredientsArray
+    })
+  }
+
   /*
   const addCocktailToFirestore = () => {
   }
@@ -64,6 +71,7 @@ function useCocktailProvider() {
     theCocktailData,
     buildCocktailFromInput,
     buildCocktailIngredient,
+    addIngredientsToCocktail,
 //    addCocktailToFirestore,
 //    updateCocktailInFirestore,
 //    deleteCocktail,
