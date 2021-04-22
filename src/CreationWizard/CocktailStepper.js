@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
 import BasicInfo from './BasicInfo';
-//import BaseSpirit from './BaseSpirit';
+import UnitType from './UnitType';
 import Ingredients from './Ingredients';
 import Miscellaneous from './Miscellaneous';
 import Instructions from './Instructions';
@@ -20,10 +20,12 @@ function RenderStep(step) {
     case 0:
       return <BasicInfo />
     case 1:
-      return <Ingredients />
+      return <UnitType />
     case 2:
+      return <Ingredients />
+    case 3:
       return <Miscellaneous />
-    case 3: 
+    case 4: 
       return <Instructions />
     default:
       return false

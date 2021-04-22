@@ -22,12 +22,17 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(7),
     margin: theme.spacing(2),    
   },
+  nextButton: {
+    borderRadius: 37,
+    textTransform: 'none',
+    margin: 10,
+    fontFamily: 'Nunito',
+  },
 }));
 
 export default function Miscellaneous() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const miscArray = [];
   const [misc, setMisc] = useState({});
   const [inputs, setInputs] = useState([{}]);
   const currentInput = inputs.length
@@ -65,7 +70,7 @@ export default function Miscellaneous() {
                 currentInput >= 1 ?
                 <IconButton
                   id={id}
-                  name='`ingredient-${id}`'
+                  name={`ingredient-${id}`}
                   className={classes.submitButton}
                   type="submit"
                   color="primary"
@@ -107,7 +112,7 @@ export default function Miscellaneous() {
           className={classes.nextButton}
           type="submit"
           color="primary"
-          variant="contained"
+          variant="outlined"
           endIcon={<ExpandMoreIcon />}
           onClick={cocktail.handleNext}
         >

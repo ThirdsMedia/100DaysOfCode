@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
+import { useForm } from 'react-hook-form';
 import {
-  Container,
   TextField,
   Select,
   FormControl,
@@ -9,7 +9,6 @@ import {
   Button,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link as Scroll } from 'react-scroll';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -58,15 +57,25 @@ const methods = [
 export default function Instructions() {
   const classes = useStyles();
   const cocktail = useCocktail();
+  const { 
+    register, 
+    handleSubmit, 
+  //  watch, 
+   // formState: { errors } 
+  } = useForm();
+
+  const onSubmit = (data) => {
+    cocktail.buildFromInput(data)
+  }
 
   return (
-    <Container maxWidth="md" className={classes.formContainer}>
+    <form className={classes.formContainer} onSubmit={handleSubmit((data) => onSubmit(data))}>
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-simple">Build Method</InputLabel>
         <Select
           native
+          {...register('method')}
           value={cocktail.recipe.method}
-          onChange={(e) => cocktail.buildFromInput(e)}
           inputProps={{
             name: 'method',
             id: 'method-native',
@@ -84,12 +93,8 @@ export default function Instructions() {
         <InputLabel htmlFor="age-native-simple">Glassware</InputLabel>
         <Select
           native
+          {...register('glass')}
           value={cocktail.recipe.glass}
-          onChange={(e) => cocktail.buildFromInput(e)}
-          inputProps={{
-            name: 'glass',
-            id: 'glass-native',
-          }}
         >
           <option aria-label="None" value="" />
           {
@@ -101,7 +106,7 @@ export default function Instructions() {
       </FormControl>
       <TextField 
         id='instructions'
-        name='instructions'
+        {...register('instructions')}
         value={cocktail.recipe.instructions}
         label='Instructions'
         variant='outlined'
@@ -109,22 +114,19 @@ export default function Instructions() {
         multiline
         rows='5'
         maxrows='10'
-        onChange={(e) => cocktail.buildFromInput(e)}
       />
       <div className={classes.buttonDiv}>
-        <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
-          <Button
-            className={classes.nextButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-            endIcon={<ExpandMoreIcon />}
-            onClick={cocktail.handleNext}
-          >
-            Almost there
-          </Button>
-        </Scroll>
+        <Button
+          className={classes.nextButton}
+          type="submit"
+          color="primary"
+          variant="outlined"
+          endIcon={<ExpandMoreIcon />}
+          onClick={cocktail.handleNext}
+        >
+          Almost there
+        </Button>
       </div>
-    </Container>
+    </form>
   );
 }

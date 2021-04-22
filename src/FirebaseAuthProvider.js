@@ -46,7 +46,6 @@ function useProvideAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [userImage, setUserImage] = useState(null);
   const googleAuth = new firebase.auth.GoogleAuthProvider();
   const storageRef = firebase.storage().ref();
 

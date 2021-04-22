@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
+import { useForm } from 'react-hook-form';
 import {
   Grid,
   TextField,
   IconButton,
-  FormControl,
-  FormLabel,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
+  FormControl,  
   Select,
   ListSubheader,
   MenuItem,
   Button,
   Typography,
   Slider,
-  Divider,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -44,10 +41,6 @@ const useStyles = makeStyles(theme => ({
   buttonDiv: {
     textAlign: 'center',
   },
-  submitButton: {
-    height: theme.spacing(7),
-    margin: theme.spacing(2),
-  },
   nextButton: {
     borderRadius: 37,
     textTransform: 'none',
@@ -57,30 +50,68 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const types = [
-  "baseSpirit",
-  "modifier",
-  "nonAlcoholic",
-  "misc",
+  "Base Spirit",
+  "Modifier",
+  "Non-alcoholic",
 ];
+
+function MinusButton({ props }) {
+  const { id, inputs, setInputs } = props;
+
+  const removeInput = (e, id) => {
+    const input = [...inputs]
+    // this may be the issue. It always removes the last item from the array, not the one with the specified ID
+    input.splice(id, 1);
+    setInputs(input);
+  }
+
+  return (
+    <div>
+      {
+        inputs.length > 1 ?
+        <IconButton
+          id={id}
+          name={`ingredient-${id}`}
+          color="primary"
+          onClick={(e) => removeInput(e, id)}
+        >
+          <RemoveIcon fontSize="large"/>
+        </IconButton>
+        : false
+      }
+    </div>
+  );
+}
+
+function PlusButton({ props }) {
+  const { id, inputs, setInputs } = props;
+
+  return (
+    <div>
+      {
+      inputs.length === id+1 
+        ? <IconButton
+            color="primary"
+            onClick={() => setInputs([...inputs, {}])}
+          >
+            <AddBoxIcon fontSize="large"/>
+          </IconButton>
+        : false
+      }
+    </div>
+  )
+}
   
 export default function Ingredients() {
   const classes = useStyles();
   const cocktail = useCocktail();
+  const { register, handleSubmit } = useForm();
   const [spiritObject, setSpiritObject] = useState({});
-  const [inputs, setInputs] = useState([{
-    amount: '',
-    name: '',
-    type: '',
-  }]);
-  const [unitType, setUnitType] = useState('imperial');
-  const ingredients = [{
-    id: 0,
-    ingredient: {},
-  }];
+  const [inputs, setInputs] = useState([{}]);
 
-  const addNewInput = () => setInputs([...inputs, {}])
-
-  const handleUnitType = (e) => setUnitType(e.target.value)
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data))
+  }
 
   const onChangeSlider = name => (event, newValue) => {
     setSpiritObject({...spiritObject, [name]: newValue})
@@ -90,51 +121,25 @@ export default function Ingredients() {
     setSpiritObject({...spiritObject, [e.target.name]: e.target.value})
   }
 
-  const onAddIngredientsToArray = () => {
-    ingredients.push(spiritObject)
-  }
-
-  const onSubmitForm = (event) => {
-    event.preventDefault()
-
-    console.log("Onsubmitform: ", event.target.getAttribute("name"), event.target.getAttribute("value"))
-  }
-
   return (
     <form 
       noValidate 
       className={classes.formContainer}
       id='ingredients'
       name='ingredients'
-      value={ingredients}
-      onSubmit={onSubmitForm} 
+      onSubmit={handleSubmit((data) => onSubmit(data))} 
     >
-      <Grid container alignItems='center'>
-        <Grid item xs>
-          <FormControl component='fieldset' className={classes.formControl}>
-            <FormLabel component='legend'>Unit Type</FormLabel>
-            <RadioGroup row aria-label='unitType' name='unit' value={unitType} onChange={handleUnitType}>
-              <FormControlLabel value='imperial' control={<Radio />} label='Imperial' />
-              <FormControlLabel value='metric' control={<Radio />} label='Metric' />
-            </RadioGroup>
-          </FormControl>
-        </Grid>
-        <Grid item>
-          <IconButton onClick={addNewInput} color="primary">
-            <AddBoxIcon fontSize="large"/>
-          </IconButton>
-        </Grid>
-      </Grid>
-      <Divider />
       {
         inputs.map((input, id) => { 
+          const inputProps = { id, inputs, setInputs }
+
           return (
             <div>
+              <MinusButton props={inputProps} />
               <TextField 
+                {...register(`ingredient${id}`)}
                 id='ingredient'
                 label='Ingredient'
-                name='name'
-         //       value={ingredients[id].name}
                 variant='outlined'
                 margin='normal'
                 InputProps={{className: classes.input}}
@@ -142,12 +147,12 @@ export default function Ingredients() {
               />
               <FormControl variant="outlined" className={classes.formControl}>
                 <Select 
+                  {...register('type')}
                   defaultValue="" 
-                  name='type' 
                   id="spiritType"
                   onChange={(e) => onChangeInput(e)}
                 >
-                  <ListSubheader>Spirit Type</ListSubheader>
+                  <ListSubheader>Ingredient Type</ListSubheader>
                   {
                     types.map((type, id) => {
                       return <MenuItem key={id} value={type}>{type}</MenuItem>
@@ -155,31 +160,22 @@ export default function Ingredients() {
                   }
                 </Select>
               </FormControl>
-              <Button
-                className={classes.submitButton}
-                color="primary"
-                variant="contained"
-                onClick={onAddIngredientsToArray}
-              >
-                Submit
-              </Button>
+              <PlusButton props={inputProps} />
               {
-                unitType === "metric" ? 
+                cocktail.recipe.unit === "metric" ? 
                   <div>
                     <Typography id="discrete-slider" gutterBottom>
                       Milliliters
                     </Typography>
                     <Slider
-                      id="baseSpiritAmount"
-                      name="metricAmount"
-          //            value={ingredients[id].amount}
+                      {...register('amount')}
+                      id='amount'
                       defaultValue={15}
                       valueLabelDisplay="auto"
                       step={5}
                       min={5}
                       max={60}
                       marks
-                      onChange={onChangeSlider("amount")}
                     />
                   </div>
                 : <div>
@@ -187,16 +183,14 @@ export default function Ingredients() {
                       Ounces
                     </Typography>
                     <Slider
-                      id='baseSpiritAmount'
-                      name='amount'
-           //           value={ingredients[id].amount}
+                      {...register('amount')}
+                      id='amount'
                       defaultValue={1}
                       valueLabelDisplay="auto"
                       step={0.25}
                       min={0.25}
                       max={6}
                       marks
-                      onChange={onChangeSlider("amount")}
                     />
                   </div>
               }
@@ -209,7 +203,7 @@ export default function Ingredients() {
           className={classes.nextButton}
           type="submit"
           color="primary"
-          variant="contained"
+          variant="outlined"
           endIcon={<ExpandMoreIcon />}
           onClick={cocktail.handleNext}
         >

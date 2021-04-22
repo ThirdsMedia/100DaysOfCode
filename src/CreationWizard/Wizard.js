@@ -51,6 +51,8 @@ function Create() {
 
   const handleDrawer = () => setIsOpen(!isOpen)
 
+  console.log("From wizard: ", cocktail.recipe);
+
   return (
     <main>
       <MainBar noLogo />

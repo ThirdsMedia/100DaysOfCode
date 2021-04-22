@@ -1,5 +1,4 @@
 import React from 'react';
-import MainBar from './MainBar';
 import {
   Typography,
 } from '@material-ui/core';
