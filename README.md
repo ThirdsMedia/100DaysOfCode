@@ -2585,5 +2585,60 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day79/src/CreationWizard)
 
+### Day 80: April 22, 2021 - Thursday
+
+**Today's Progress**: Largely refactored Wizard and Ingredients. Added a miscellaneous component. Added a UnitType component. Got rid of the BaseSpirit component. Implemented useForm.
+
+**Thoughts:** So now BasicInfo, UnitType, and Instructions all use the useForm() hook which makes things so much cleaner. I'll also be able to cleanly enforce required fields which is super nice. I refactored the shit out of Ingredients.js so make it simpler, but I still need to do some styling to make the plus and minus buttons be on either side of the TextField instead of on top and bottom. Should just require some display: 'flex' action, or at worst <Grid/>. Now I just need to get useForm working with Ingredients and Miscellaneous as well as make the plus and minus buttons remove the appropriate item. 
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [ ] Enforce input of Display Name field 
+	- [x] and throw error if unsuccessful
+	- [ ] Navigate to Success component upon successfully signing up 
+		- [ ] The navigation to Success should happen in then() from the returned promise in signup()
+		- [ ] The setLoading and setError should be handled inside of signup() in finally()
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [x] Successfully console.log() a full cocktail object
+	- [x] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Add input checking so you can't move on without filling out the name, type, and amount (useing useForm)
+	- [x] Fix workflow so that there is no BaseSpirit component, and instead add a Selector just like you specified above
+	- [ ] Figure out how to save values from Ingredients so if you have to go back they will still be there. 
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Set the user's avatar when changed in Profile by clicking on the picture and selecting the picture file
+	- [ ] Adding favorites
+- [ ] App finishing touches
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** Subtracting an input from inputs removes the last item from the array, instead of the one specified with id. 
+
+**Solutions:** I think I'm just using .splice() wrong.
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day80/src/CreationWizard)
 
 
