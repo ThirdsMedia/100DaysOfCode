@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useFirebase } from '../Providers/FirebaseProvider';
 import {
   Container,
   Typography,
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ForgotPassword() {
   const classes = useStyles();
-  const auth = useAuth();
+  const auth = useFirebase();
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
   const [message, setMessage] = useState(null);

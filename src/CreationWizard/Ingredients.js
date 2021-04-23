@@ -56,27 +56,40 @@ const types = [
 ];
 
 function MinusButton({ props }) {
-  const { id, inputs, setInputs } = props;
-
+  const { 
+    id, 
+    inputs, 
+    setInputs,
+    spiritObject,
+    setSpiritObject,
+    ingredientsArray,
+    setIngredientsArray
+  } = props;
+  
+  // Pretty sure this works appropriately, however I'm rendering something wrong in Ingredients
+  // Look into using delete() or array.filter to remove items as well
   const removeInput = (e, id) => {
-    const input = [...inputs]
-    // this may be the issue. It always removes the last item from the array, not the one with the specified ID
-    input.splice(id, 1);
-    setInputs(input);
+    console.log("Current input from remove button: ", inputs, inputs[id], inputs[id].id)
+    const tmpInput = [...inputs]
+    console.log("TmpInput: ", tmpInput)
+    // remove from the array using something other then an id
+    //tmpInput.splice(inputs[id] 1);
+    delete(tmpInput[id])
+    console.log("inputs after splice: ", tmpInput, tmpInput[id], tmpInput[id].id)
+    setInputs(tmpInput);
   }
 
   return (
     <div>
       {
         inputs.length > 1 ?
-        <IconButton
-          id={id}
-          name={`ingredient-${id}`}
-          color="primary"
-          onClick={(e) => removeInput(e, id)}
-        >
-          <RemoveIcon fontSize="large"/>
-        </IconButton>
+          <IconButton
+            id={id}
+            color="primary"
+            onClick={(e) => removeInput(e, id)}
+          >
+            <RemoveIcon fontSize="large"/>
+          </IconButton>
         : false
       }
     </div>
@@ -84,15 +97,32 @@ function MinusButton({ props }) {
 }
 
 function PlusButton({ props }) {
-  const { id, inputs, setInputs } = props;
+  const { 
+    id, 
+    inputs, 
+    setInputs, 
+    assignId,
+    spiritObject, 
+    setSpiritObject, 
+    ingredientsArray, 
+    setIngredientsArray 
+  } = props;
+
+  // WAY TO GO THIS WORKS FIRST TRY
+  const addIngredientToArray = () => {
+    inputs[id] = { id: id, ...spiritObject}
+    setIngredientsArray([...ingredientsArray, inputs[id]])
+    setInputs([...inputs, {}])
+    setSpiritObject({})
+  }
 
   return (
     <div>
       {
-      inputs.length === id+1 
-        ? <IconButton
+        inputs.length === id+1 ? 
+          <IconButton
             color="primary"
-            onClick={() => setInputs([...inputs, {}])}
+            onClick={() => addIngredientToArray()}
           >
             <AddBoxIcon fontSize="large"/>
           </IconButton>
@@ -107,17 +137,25 @@ export default function Ingredients() {
   const cocktail = useCocktail();
   const { register, handleSubmit } = useForm();
   const [spiritObject, setSpiritObject] = useState({});
+  const [ingredientsArray, setIngredientsArray] = useState([]);
   const [inputs, setInputs] = useState([{}]);
 
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data))
+  // This works yo!
+  console.log("From ingredients: ", ingredientsArray)
+
+  // Success. Now get the Slider working too, and add an id field to spiritOject
+  const onSubmit = () => {
+    cocktail.addIngredients(ingredientsArray)
   }
 
+  // Now just need to get this working and then make onSubmit add the ingredientsArray to the cocktail object
   const onChangeSlider = name => (event, newValue) => {
     setSpiritObject({...spiritObject, [name]: newValue})
   }
 
   const onChangeInput = (e) => {
+    // no fucking idea this doesn't work
+    //setSpiritObject({...spiritObject, id: [e.target.id]})
     setSpiritObject({...spiritObject, [e.target.name]: e.target.value})
   }
 
@@ -127,41 +165,53 @@ export default function Ingredients() {
       className={classes.formContainer}
       id='ingredients'
       name='ingredients'
-      onSubmit={handleSubmit((data) => onSubmit(data))} 
+      onSubmit={handleSubmit(onSubmit)} 
     >
       {
         inputs.map((input, id) => { 
-          const inputProps = { id, inputs, setInputs }
+          const inputProps = { 
+            id, 
+            inputs, 
+            setInputs, 
+            spiritObject, 
+            setSpiritObject, 
+            ingredientsArray, 
+            setIngredientsArray 
+          }
 
           return (
             <div>
-              <MinusButton props={inputProps} />
-              <TextField 
-                {...register(`ingredient${id}`)}
-                id='ingredient'
-                label='Ingredient'
-                variant='outlined'
-                margin='normal'
-                InputProps={{className: classes.input}}
-                onChange={(e) => onChangeInput(e)}
-              />
-              <FormControl variant="outlined" className={classes.formControl}>
-                <Select 
-                  {...register('type')}
-                  defaultValue="" 
-                  id="spiritType"
+              <Grid container alignContent="center" alignItems="center">
+                <MinusButton props={inputProps} />
+                <TextField 
+                  {...register('name')}
+                  id={id}
+                  label='Ingredient'
+                  value={inputs[id].name}
+                  variant='outlined'
+                  margin='normal'
+                  InputProps={{className: classes.input}}
                   onChange={(e) => onChangeInput(e)}
-                >
-                  <ListSubheader>Ingredient Type</ListSubheader>
-                  {
-                    types.map((type, id) => {
-                      return <MenuItem key={id} value={type}>{type}</MenuItem>
-                    })
-                  }
-                </Select>
-              </FormControl>
-              <PlusButton props={inputProps} />
+                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <Select 
+                    {...register('type')}
+                    defaultValue="" 
+                    id="spiritType"
+                    onChange={(e) => onChangeInput(e)}
+                  >
+                    <ListSubheader>Ingredient Type</ListSubheader>
+                    {
+                      types.map((type, id) => {
+                        return <MenuItem key={id} value={type}>{type}</MenuItem>
+                      })
+                    }
+                  </Select>
+                </FormControl>
+                <PlusButton props={inputProps} />
+              </Grid>
               {
+                // Pretty sure I'll need to use a Controller component from useForm here
                 cocktail.recipe.unit === "metric" ? 
                   <div>
                     <Typography id="discrete-slider" gutterBottom>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useFirebase } from '../Providers/FirebaseProvider';
 import {
   Avatar,
   Drawer,
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AppDrawer({ isOpen, handleDrawer }) {
   const classes = useStyles();
-  const auth = useAuth();
+  const auth = useFirebase();
   const history = useHistory();
 
   const onSignOutHandler = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useFirebase } from '../Providers/FirebaseProvider';
 import { useHistory } from 'react-router-dom';
 import MainBar from '../Components/MainBar';
 import Copyright from '../Components/Copyright';
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Contact() {
   const classes = useStyles();
-  const auth = useAuth();
+  const auth = useFirebase();
   const history = useHistory();
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);

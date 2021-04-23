@@ -11,7 +11,7 @@ import exampleDatabase from './static/exampleDatabase';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
-import { useAuth } from './FirebaseAuthProvider';
+import { useFirebase } from './Providers/FirebaseProvider';
 
 /* App */
 import Profile from './Profile/Profile';
@@ -43,14 +43,13 @@ const theme = createMuiTheme({
 })
 
 export default function App() {
-  const auth = useAuth();
-//  const user = true;
+  const firebase = useFirebase();
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {
-        auth.user ?
+        firebase.user ?
           <Router>
             <Switch>
               <Route exact path="/" component={LandingPage} />

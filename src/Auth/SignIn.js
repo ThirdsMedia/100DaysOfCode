@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Copyright from '../Components/Copyright';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useFirebase } from '../Providers/FirebaseProvider';
 import {
   Container,
   Avatar,
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const auth = useAuth();
+  const auth = useFirebase();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(auth.error);

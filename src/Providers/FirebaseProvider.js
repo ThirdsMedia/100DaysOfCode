@@ -36,13 +36,13 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-const UserContext = createContext();
+const FirebaseContext = createContext();
 
-export const useAuth = () => {
-  return useContext(UserContext);
+export const useFirebase = () => {
+  return useContext(FirebaseContext);
 }
 
-function useProvideAuth() {
+function useFirebaseProvider() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -117,17 +117,6 @@ function useProvideAuth() {
     }
   }
 
-  /*
-  const updateUserProfile = (imageURL) => {
-    const user = firebase.auth().currentUser
-    user.updateProfile({photoURL: imageURL})
-      .then(() => {
-        console.log("Image url: ", firebase.auth().currentUser.photoURL, "User data: ", user)
-      })
-      .catch((e) => console.log(e))
-  }
-  */
-
   const uploadImageToStorage = (image, name) => {
 //    const imageRef = storageRef.child(`${user.id}/images/${name}`)
     const imageRef = storageRef.child(name)
@@ -195,7 +184,6 @@ function useProvideAuth() {
     const userRef = firebase.firestore().collection("users");
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("From useEffect: ", user.photoURL)
         userRef
           .doc(user.uid)
           .get()
@@ -229,11 +217,11 @@ function useProvideAuth() {
   };
 }
 
-export function AuthProvider({ children }) {
-  const auth = useProvideAuth();
+export function FirebaseProvider({ children }) {
   const classes = useStyles();
+  const firebase = useFirebaseProvider();
 
-  if (auth.loading) {
+  if (firebase.loading) {
     return (
       <div className={classes.root}>
         <CircularProgress color="secondary" />
@@ -242,8 +230,8 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <UserContext.Provider value={auth}>
+    <FirebaseContext.Provider value={firebase}>
       {children}
-    </UserContext.Provider>
+    </FirebaseContext.Provider>
   );
 }

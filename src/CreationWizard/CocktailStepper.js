@@ -36,9 +36,7 @@ export default function CocktailStepper() {
   const [checked, setChecked] = useState(false);
   const cocktail = useCocktail();
 
-  useEffect(() => {
-    setChecked(true);
-  }, []);
+  useEffect(() => setChecked(true), []);
 
   return (
     <Collapse appear in={checked} {

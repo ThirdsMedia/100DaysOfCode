@@ -42,12 +42,10 @@ function useCocktailProvider() {
     setRecipe({...recipe, ...data})
   }
 
-  // You are trying to get rid of this
-  // Alternatively I could simply create one for Miscellanous and have three, but that's messy. 
-  const addIngredientsToCocktail = (ingredientsArray) => {
+  const addIngredients = (array) => {
     setRecipe({
       ...recipe,
-      ingredients: ingredientsArray
+      ingredients: array
     })
   }
 
@@ -57,11 +55,8 @@ function useCocktailProvider() {
     handleBack,
     handleNext,
     activeStep,
-    buildFromInput, // this should change to buildRecipe, and be used throughout the entire Cocktail stepper
-    addIngredientsToCocktail, // this should be gone
-//    addCocktailToFirestore,
-//    updateCocktailInFirestore,
-//    deleteCocktail,
+    buildFromInput, 
+    addIngredients, 
   }
 }
 

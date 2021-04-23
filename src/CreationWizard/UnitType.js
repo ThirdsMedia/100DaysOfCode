@@ -57,8 +57,18 @@ export default function UnitType() {
         </FormLabel>
         <Divider />
         <RadioGroup name='unit' value={unitType} onChange={handleUnitType}>
-          <FormControlLabel {...register('unit')} value='imperial' control={<Radio />} label='Imperial' />
-          <FormControlLabel {...register('unit')} value='metric' control={<Radio />} label='Metric' />
+          <FormControlLabel 
+            {...register('unit')} 
+            value='imperial' 
+            label='Imperial' 
+            control={<Radio />} 
+          />
+          <FormControlLabel 
+            {...register('unit')} 
+            value='metric' 
+            label='Metric' 
+            control={<Radio />} 
+          />
         </RadioGroup>
       </FormControl>
       <div className={classes.buttonDiv}>

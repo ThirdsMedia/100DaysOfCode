@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useFirebase } from '../Providers/FirebaseProvider';
 import { useHistory } from 'react-router-dom';
 import {
   Container,
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const auth = useAuth();
+  const auth = useFirebase();
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');

@@ -1,5 +1,5 @@
 import React, { useState }  from 'react';
-import { useAuth } from '../FirebaseAuthProvider';
+import { useFirebase } from '../Providers/FirebaseProvider';
 import MainBar from '../Components/MainBar';
 import CardList from '../Products/CardList';
 import QRCode from '../Components/QRCode';
@@ -217,7 +217,7 @@ function EditProfile({ auth }) {
 
 export default function Profile() {
   const classes = useStyles();
-  const auth = useAuth();
+  const auth = useFirebase();
   const [value, setValue] = useState(0);
   const [image, setImage] = useState(auth.user.picture)
 
@@ -291,8 +291,9 @@ export default function Profile() {
           aria-label="simple tabs example"
         >
           <Tab disableRipple label="Info" {...a11yProps(0)} />
-          <Tab disableRipple label="Favorites" {...a11yProps(1)} />
-          <Tab disableRipple label="QR Code" {...a11yProps(2)} />
+          <Tab disableRipple label="My Creations" {...a11yProps(1)} />
+          <Tab disableRipple label="Favorites" {...a11yProps(2)} />
+          <Tab disableRipple label="QR Code" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -302,6 +303,9 @@ export default function Profile() {
         <CardList data={exampleDatabase} />
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <CardList data={exampleDatabase} />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         <QRCode />       
       </TabPanel>
     </div>
