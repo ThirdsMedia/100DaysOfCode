@@ -2641,4 +2641,66 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day80/src/CreationWizard)
 
+### Day 81: April 23, 2021 - Friday
+
+**Today's Progress**: Implemented useForm to work with Ingredients.js and add each TextField and Selector as a separate object into an ingredients array which Wizard can see.
+
+**Thoughts:** Sooo much still to do. I still need to get the amount field added to each object before adding to the ingredients array, and I believe I can achieve that with a <Controller /> component from useForm(). However, once that is done I need to figure out how to make the MinusButton remove the appropriate Texfield so that it removes the correct value with it. I got halfway there with .splice() but since there's an empty object at the end of the array it causes weirdness. Using the delete() method gets tricky since it doesn't update the index so I'd have to potentially implement some extra logic, which I haven't had enough time to think about. The other option is the filter() method. 
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [ ] Enforce input of Display Name field 
+	- [ ] Add an option to select Mixologist or Customer user role when signing up, and make the changes in App to display the appropriate components based on role
+	- [x] and throw error if unsuccessful
+	- [ ] Navigate to Success component upon successfully signing up 
+		- [ ] The navigation to Success should happen in then() from the returned promise in signup()
+		- [ ] The setLoading and setError should be handled inside of signup() in finally()
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [x] Successfully console.log() a full cocktail object
+	- [x] Make sure that it updates appropriately if you backtrack the form
+	- [ ] Implement useForm on the ingredients component
+	- [x] Complete the Miscellaneous component
+	- [ ] Add input checking so you can't move on without filling out the name, type, and amount (using useForm)
+	- [ ] Implement a Controller to get the amount value from the Slider and pass it to the object with useForm
+	- [ ] Figure out the best way to delete objects from the array using the MinusButton
+	- [ ] Implement the Cocktail picture selector so that it either displays on the Review component, or make it so you can select it once at the Review component. 
+	- [x] Fix workflow so that there is no BaseSpirit component, and instead add a Selector just like you specified above
+	- [ ] Figure out how to save values from Ingredients so if you have to go back they will still be there. 
+	- [ ] Push object to Firebase
+	- [ ] Display firestore cocktails on the Products page
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Set the user's avatar when changed in Profile by clicking on the picture and selecting the picture file
+	- [ ] Adding favorites
+- [ ] App finishing touches
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** Subtracting an input from inputs removes the last item from the array, instead of the one specified with id. 
+
+**Solutions:** Check out array.filter() or figure out how best to use the delete() method
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/tree/day81/src/CreationWizard)
+
 
