@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import {
   Grid,
   TextField,
@@ -55,47 +55,6 @@ const types = [
   "Non-alcoholic",
 ];
 
-function MinusButton({ props }) {
-  const { 
-    id, 
-    inputs, 
-    setInputs,
-    spiritObject,
-    setSpiritObject,
-    ingredientsArray,
-    setIngredientsArray
-  } = props;
-  
-  // Pretty sure this works appropriately, however I'm rendering something wrong in Ingredients
-  // Look into using delete() or array.filter to remove items as well
-  const removeInput = (e, id) => {
-    console.log("Current input from remove button: ", inputs, inputs[id], inputs[id].id)
-    const tmpInput = [...inputs]
-    console.log("TmpInput: ", tmpInput)
-    // remove from the array using something other then an id
-    //tmpInput.splice(inputs[id] 1);
-    delete(tmpInput[id])
-    console.log("inputs after splice: ", tmpInput, tmpInput[id], tmpInput[id].id)
-    setInputs(tmpInput);
-  }
-
-  return (
-    <div>
-      {
-        inputs.length > 1 ?
-          <IconButton
-            id={id}
-            color="primary"
-            onClick={(e) => removeInput(e, id)}
-          >
-            <RemoveIcon fontSize="large"/>
-          </IconButton>
-        : false
-      }
-    </div>
-  );
-}
-
 function PlusButton({ props }) {
   const { 
     id, 
@@ -135,7 +94,7 @@ function PlusButton({ props }) {
 export default function Ingredients() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control } = useForm();
   const [spiritObject, setSpiritObject] = useState({});
   const [ingredientsArray, setIngredientsArray] = useState([]);
   const [inputs, setInputs] = useState([{}]);
@@ -154,8 +113,6 @@ export default function Ingredients() {
   }
 
   const onChangeInput = (e) => {
-    // no fucking idea this doesn't work
-    //setSpiritObject({...spiritObject, id: [e.target.id]})
     setSpiritObject({...spiritObject, [e.target.name]: e.target.value})
   }
 
@@ -182,12 +139,32 @@ export default function Ingredients() {
           return (
             <div>
               <Grid container alignContent="center" alignItems="center">
-                <MinusButton props={inputProps} />
+                <div>
+                  {
+                    inputs.length > 1 ?
+                      <IconButton
+                        id={id}
+                        color="primary"
+                        onClick={(e) => {
+//                          console.log(inputs[id], inputs)
+                          inputs.filter((item) => {
+                            if (item.id !== id) {
+                              console.log(item)
+                              ingredientsArray.push(item)
+                              console.log("Ingredients array: ", ingredientsArray)
+                            }
+                          })
+                        }}
+                      >
+                        <RemoveIcon fontSize="large"/>
+                      </IconButton>
+                    : false
+                  }
+                </div>
                 <TextField 
                   {...register('name')}
                   id={id}
                   label='Ingredient'
-                  value={inputs[id].name}
                   variant='outlined'
                   margin='normal'
                   InputProps={{className: classes.input}}
@@ -217,15 +194,21 @@ export default function Ingredients() {
                     <Typography id="discrete-slider" gutterBottom>
                       Milliliters
                     </Typography>
-                    <Slider
-                      {...register('amount')}
-                      id='amount'
+                    <Controller
+                      name='slider'
+                      control={control}
+//                      defaultValue={[0,60]}
+                      render={({ field }) => (
+                      <Slider {...field}
                       defaultValue={15}
+                      onChange={(value) => console.log(value)}
                       valueLabelDisplay="auto"
                       step={5}
                       min={5}
                       max={60}
                       marks
+                      />
+                      )}
                     />
                   </div>
                 : <div>
