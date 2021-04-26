@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
 import { useForm, Controller } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Grid,
   TextField,
@@ -55,40 +56,33 @@ const types = [
   "Non-alcoholic",
 ];
 
-function PlusButton({ props }) {
-  const { 
-    id, 
-    inputs, 
-    setInputs, 
-    assignId,
-    spiritObject, 
-    setSpiritObject, 
-    ingredientsArray, 
-    setIngredientsArray 
-  } = props;
-
-  // WAY TO GO THIS WORKS FIRST TRY
-  const addIngredientToArray = () => {
-    inputs[id] = { id: id, ...spiritObject}
-    setIngredientsArray([...ingredientsArray, inputs[id]])
-    setInputs([...inputs, {}])
-    setSpiritObject({})
-  }
+function InputField({ id, inputs, onClick }) {
+  const classes = useStyles();
 
   return (
-    <div>
+    <div> 
       {
-        inputs.length === id+1 ? 
+        inputs.length > 1 ?
           <IconButton
+            id={id}
             color="primary"
-            onClick={() => addIngredientToArray()}
+            onClick={onClick}
           >
-            <AddBoxIcon fontSize="large"/>
+            <RemoveIcon fontSize="large"/>
           </IconButton>
         : false
       }
+      <TextField 
+//        {...register('name')}
+        id={id}
+        label='Ingredient'
+        variant='outlined'
+        margin='normal'
+        InputProps={{className: classes.input}}
+ //       onChange={(e) => onChangeInput(e)}
+      />
     </div>
-  )
+  );
 }
   
 export default function Ingredients() {
@@ -101,6 +95,19 @@ export default function Ingredients() {
 
   // This works yo!
   console.log("From ingredients: ", ingredientsArray)
+
+  const handleRemoveInput = (id) => {
+    console.log("remove input: ", id)
+    console.log(inputs.findIndex((input) => input.id === id))
+    setInputs(inputs.filter((input) => input.id !== id));
+  }
+
+  const handleAddInput = () => {
+    setInputs([...inputs, { id: uuidv4() }])
+//    setIngredientsArray([...ingredientsArray, inputs[id]])
+//    setInputs([...inputs, {}])
+//    setSpiritObject({})
+  }
 
   // Success. Now get the Slider working too, and add an id field to spiritOject
   const onSubmit = () => {
@@ -124,69 +131,21 @@ export default function Ingredients() {
       name='ingredients'
       onSubmit={handleSubmit(onSubmit)} 
     >
-      {
-        inputs.map((input, id) => { 
-          const inputProps = { 
-            id, 
-            inputs, 
-            setInputs, 
-            spiritObject, 
-            setSpiritObject, 
-            ingredientsArray, 
-            setIngredientsArray 
-          }
-
-          return (
-            <div>
-              <Grid container alignContent="center" alignItems="center">
-                <div>
-                  {
-                    inputs.length > 1 ?
-                      <IconButton
-                        id={id}
-                        color="primary"
-                        onClick={(e) => {
-//                          console.log(inputs[id], inputs)
-                          inputs.filter((item) => {
-                            if (item.id !== id) {
-                              console.log(item)
-                              ingredientsArray.push(item)
-                              console.log("Ingredients array: ", ingredientsArray)
-                            }
-                          })
-                        }}
-                      >
-                        <RemoveIcon fontSize="large"/>
-                      </IconButton>
-                    : false
-                  }
-                </div>
-                <TextField 
-                  {...register('name')}
-                  id={id}
-                  label='Ingredient'
-                  variant='outlined'
-                  margin='normal'
-                  InputProps={{className: classes.input}}
-                  onChange={(e) => onChangeInput(e)}
-                />
-                <FormControl variant="outlined" className={classes.formControl}>
-                  <Select 
-                    {...register('type')}
-                    defaultValue="" 
-                    id="spiritType"
-                    onChange={(e) => onChangeInput(e)}
-                  >
-                    <ListSubheader>Ingredient Type</ListSubheader>
-                    {
-                      types.map((type, id) => {
-                        return <MenuItem key={id} value={type}>{type}</MenuItem>
-                      })
-                    }
-                  </Select>
-                </FormControl>
-                <PlusButton props={inputProps} />
-              </Grid>
+      {inputs.map((input, id) => { 
+        console.log(id, inputs.length)
+        return (
+          <div>
+            <InputField key={id} id={id} inputs={inputs} onClick={() => handleRemoveInput(id)} />
+            {
+              inputs.length === id+1 ? 
+                <IconButton
+                  color="primary"
+                  onClick={() => handleAddInput()}
+                >
+                  <AddBoxIcon fontSize="large"/>
+                </IconButton>
+              : false
+            }
               {
                 // Pretty sure I'll need to use a Controller component from useForm here
                 cocktail.recipe.unit === "metric" ? 
