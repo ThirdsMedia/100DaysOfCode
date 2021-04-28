@@ -12,8 +12,10 @@ import {
   Button,
   Typography,
   Slider,
+  Divider,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { v4 as uuidv4 } from 'uuid';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -29,7 +31,27 @@ const useStyles = makeStyles(theme => ({
   input: {
     width: 900,
   },
+  grid: {
+    gridGap: theme.spacing(5),
+    textAlign: 'center',
+    justifyContent: 'center',
+  },
+  ingredientsList: {
+    padding: 5,
+    backgroundColor: theme.palette.background.secondary,
+  },
+  inputField: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 10,
+  },
+  slider: {
+    marginTop: 20,
+  },
   formControl: {
+    display: 'flex',
+    flexDirection: 'row',
     margin: theme.spacing(2),
     minWidth: 120,
   },
@@ -37,6 +59,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'right',
     justifyContent: 'flex-end',
+  },
+  divider: {
+    margin: 25,
   },
   buttonDiv: {
     textAlign: 'center',
@@ -49,71 +74,127 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const types = [
-  "Base Spirit",
-  "Modifier",
-  "Non-alcoholic",
-];
+const RemoveButton = ({ onClick }) => (
+  <RemoveIcon
+    fontSize="large"
+    onClick={onClick}
+    style={{ cursor: "pointer" }}
+  />
+);
 
-function PlusButton({ props }) {
-  const { 
-    id, 
-    inputs, 
-    setInputs, 
-    assignId,
-    spiritObject, 
-    setSpiritObject, 
-    ingredientsArray, 
-    setIngredientsArray 
-  } = props;
+const NextButton = ({ onClick }) => {
+  const classes = useStyles(); 
+  
+  return (
+    <div className={classes.buttonDiv}>
+      <Button
+        className={classes.nextButton}
+        type="submit"
+        color="primary"
+        variant="outlined"
+        endIcon={<ExpandMoreIcon />}
+        onClick={onClick}
+      >
+        Keep going
+      </Button>
+    </div>
+  );
+}
 
-  // WAY TO GO THIS WORKS FIRST TRY
-  const addIngredientToArray = () => {
-    inputs[id] = { id: id, ...spiritObject}
-    setIngredientsArray([...ingredientsArray, inputs[id]])
-    setInputs([...inputs, {}])
-    setSpiritObject({})
-  }
+const ImperialSlider = ({ onChange }) => {
+  const classes = useStyles();
 
   return (
-    <div>
-      {
-        inputs.length === id+1 ? 
-          <IconButton
-            color="primary"
-            onClick={() => addIngredientToArray()}
-          >
-            <AddBoxIcon fontSize="large"/>
-          </IconButton>
-        : false
-      }
-    </div>
-  )
+    <Slider
+      id='amount'
+      name='amount'
+      defaultValue={1}
+      valueLabelDisplay="auto"
+      step={0.25}
+      min={0.25}
+      max={6}
+      marks
+      onChange={onChange}
+      className={classes.slider}
+    />
+  );
 }
-  
+
+const MetricSlider = ({ onChange }) => {
+  const classes = useStyles();
+
+  return (
+    <Slider
+      id='amount'
+      name='amount'
+      defaultValue={15}
+      valueLabelDisplay="auto"
+      step={5}
+      min={5}
+      max={80}
+      marks
+      onChange={onChange}
+      className={classes.slider}
+    />
+  );
+}
+
+const InputField = ({ id, register, onClick, onChange }) => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.inputField}>
+      <TextField 
+        register
+        label="Ingredient Name"
+        id={id} 
+        name='name' 
+        variant='outlined'
+        onChange={onChange} 
+        InputProps={{ className: classes.input}}
+      />
+      <IconButton>
+        <AddBoxIcon
+          color="primary"
+          fontSize="large"
+          onClick={onClick}
+        />
+      </IconButton>
+    </div>
+  );
+};
+
 export default function Ingredients() {
   const classes = useStyles();
   const cocktail = useCocktail();
+  const units = [ "fl. oz", "ml", "dash" ];
   const { register, handleSubmit, control } = useForm();
+  const [unitType, setUnitType] = useState(units[0]);
   const [spiritObject, setSpiritObject] = useState({});
-  const [ingredientsArray, setIngredientsArray] = useState([]);
-  const [inputs, setInputs] = useState([{}]);
+  const [ingredients, setIngredients] = useState([]);
+  const [visible, setVisible] = useState(false);
 
-  // This works yo!
-  console.log("From ingredients: ", ingredientsArray)
-
-  // Success. Now get the Slider working too, and add an id field to spiritOject
-  const onSubmit = () => {
-    cocktail.addIngredients(ingredientsArray)
-  }
-
-  // Now just need to get this working and then make onSubmit add the ingredientsArray to the cocktail object
   const onChangeSlider = name => (event, newValue) => {
     setSpiritObject({...spiritObject, [name]: newValue})
   }
 
   const onChangeInput = (e) => {
     setSpiritObject({...spiritObject, [e.target.name]: e.target.value})
+    console.log("Spirit object: ", spiritObject)
+  }
+
+  const onAddIngredient = () => {
+    setIngredients([...ingredients, {id: uuidv4(), ...spiritObject}])
+    setVisible(false);
+  }
+
+  const onRemoveIngredient = (id) => {
+    console.log(ingredients.findIndex((ingredient) => ingredient.id === id));
+    setIngredients(ingredients.filter((ingredient) => ingredient.id !== id));
+  }
+
+  const onSubmit = () => {
+    console.log("Ingredients: ", ingredients)
   }
 
   return (
@@ -124,125 +205,85 @@ export default function Ingredients() {
       name='ingredients'
       onSubmit={handleSubmit(onSubmit)} 
     >
-      {
-        inputs.map((input, id) => { 
-          const inputProps = { 
-            id, 
-            inputs, 
-            setInputs, 
-            spiritObject, 
-            setSpiritObject, 
-            ingredientsArray, 
-            setIngredientsArray 
-          }
-
-          return (
+      <div>
+        <InputField
+          register={{...register('name')}}
+          onChange={(e) => onChangeInput(e)}
+          onClick={() => setVisible(true)}
+        />
+        {
+          visible ?
             <div>
-              <Grid container alignContent="center" alignItems="center">
-                <div>
-                  {
-                    inputs.length > 1 ?
-                      <IconButton
-                        id={id}
-                        color="primary"
-                        onClick={(e) => {
-//                          console.log(inputs[id], inputs)
-                          inputs.filter((item) => {
-                            if (item.id !== id) {
-                              console.log(item)
-                              ingredientsArray.push(item)
-                              console.log("Ingredients array: ", ingredientsArray)
-                            }
-                          })
-                        }}
-                      >
-                        <RemoveIcon fontSize="large"/>
-                      </IconButton>
-                    : false
-                  }
-                </div>
-                <TextField 
-                  {...register('name')}
-                  id={id}
-                  label='Ingredient'
-                  variant='outlined'
-                  margin='normal'
-                  InputProps={{className: classes.input}}
-                  onChange={(e) => onChangeInput(e)}
-                />
-                <FormControl variant="outlined" className={classes.formControl}>
-                  <Select 
-                    {...register('type')}
-                    defaultValue="" 
-                    id="spiritType"
-                    onChange={(e) => onChangeInput(e)}
-                  >
-                    <ListSubheader>Ingredient Type</ListSubheader>
-                    {
-                      types.map((type, id) => {
-                        return <MenuItem key={id} value={type}>{type}</MenuItem>
-                      })
-                    }
-                  </Select>
-                </FormControl>
-                <PlusButton props={inputProps} />
+              <Typography id="unitSlider" gutterBottom>
+                { unitType === 'ml' ? 'Milliliters' : 'Fluid Ounces' }
+              </Typography>
+              <Grid container className={classes.grid}>
+                <Grid item xs={10}>
+                { unitType === 'ml' ? 
+                  <MetricSlider onChange={onChangeSlider("amount")} /> : 
+                  <ImperialSlider onChange={onChangeSlider("amount")} />
+                }
+                </Grid>
+                <Grid item>
+                  <FormControl variant="outlined">
+                    <Select 
+                      name='unit'
+                      defaultValue={unitType}
+                      id="spiritType"
+                      className={classes.selector}
+                      onChange={(e) => {
+                        setUnitType(e.target.value);
+                        onChangeInput(e)
+                      }}
+                    >
+                      <ListSubheader>Unit Type</ListSubheader>
+                      {
+                        units.map((unit, id) => {
+                          return <MenuItem key={id} value={unit}>{unit}</MenuItem>
+                        })
+                      }
+                    </Select>
+                  </FormControl>
+                </Grid>
               </Grid>
-              {
-                // Pretty sure I'll need to use a Controller component from useForm here
-                cocktail.recipe.unit === "metric" ? 
-                  <div>
-                    <Typography id="discrete-slider" gutterBottom>
-                      Milliliters
-                    </Typography>
-                    <Controller
-                      name='slider'
-                      control={control}
-//                      defaultValue={[0,60]}
-                      render={({ field }) => (
-                      <Slider {...field}
-                      defaultValue={15}
-                      onChange={(value) => console.log(value)}
-                      valueLabelDisplay="auto"
-                      step={5}
-                      min={5}
-                      max={60}
-                      marks
-                      />
-                      )}
-                    />
-                  </div>
-                : <div>
-                    <Typography id="discrete-slider" gutterBottom>
-                      Ounces
-                    </Typography>
-                    <Slider
-                      {...register('amount')}
-                      id='amount'
-                      defaultValue={1}
-                      valueLabelDisplay="auto"
-                      step={0.25}
-                      min={0.25}
-                      max={6}
-                      marks
-                    />
-                  </div>
-              }
-            </div>
-          )
-        })
-      }
-      <div className={classes.buttonDiv}>
-        <Button
-          className={classes.nextButton}
-          type="submit"
-          color="primary"
-          variant="outlined"
-          endIcon={<ExpandMoreIcon />}
-          onClick={cocktail.handleNext}
-        >
-          Keep going
-        </Button>
+              <div className={classes.buttonDiv}>
+                <Button
+                  className={classes.nextButton}
+                  type="button"
+                  color="primary"
+                  variant="outlined"
+                  onClick={onAddIngredient}
+                >
+                  Add Ingredient
+                </Button>
+              </div>
+          </div> : false
+        }
+        <Divider className={classes.divider} />
+        {
+          ingredients.map((ingredient, id) => { 
+            return (
+              <Grid container className={classes.ingredientsList}>
+                <Grid item xs={2}>
+                  <RemoveButton onClick={() => onRemoveIngredient(ingredient.id)} />
+                </Grid>
+                <Grid item xs>
+                  <Typography key={id}>
+                    Name: {ingredient.name}
+                  </Typography>
+                </Grid>
+                <Grid item xs>
+                  <Typography>
+                    Amount: {ingredient.amount}
+                  </Typography>
+                </Grid>
+              </Grid>
+            );
+          })
+        }
       </div>
+      { ingredients.length > 0 ? <NextButton /> : false }
     </form>
   );
 }
+

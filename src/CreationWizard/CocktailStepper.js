@@ -20,12 +20,8 @@ function RenderStep(step) {
     case 0:
       return <BasicInfo />
     case 1:
-      return <UnitType />
-    case 2:
       return <Ingredients />
-    case 3:
-      return <Miscellaneous />
-    case 4: 
+    case 2: 
       return <Instructions />
     default:
       return false
