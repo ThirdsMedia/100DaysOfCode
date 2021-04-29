@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
-import { useForm, Controller } from 'react-hook-form';
 import {
   Grid,
   TextField,
   IconButton,
   FormControl,  
   Select,
-  ListSubheader,
   MenuItem,
   Button,
   Typography,
@@ -24,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   formContainer: {
     display: 'flex',
     flexDirection: 'column',
+    textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0.3)',
     padding: 20,
     fontFamily: 'Nunito',
@@ -40,14 +39,12 @@ const useStyles = makeStyles(theme => ({
     padding: 5,
     backgroundColor: theme.palette.background.secondary,
   },
-  inputField: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
-  },
   slider: {
     marginTop: 20,
+  },
+  selector: {
+    marginRight: 10,
+    minWidth: 100,
   },
   formControl: {
     display: 'flex',
@@ -78,16 +75,18 @@ const RemoveButton = ({ onClick }) => (
   <RemoveIcon
     fontSize="large"
     onClick={onClick}
+    color="secondary"
     style={{ cursor: "pointer" }}
   />
 );
 
-const NextButton = ({ onClick }) => {
+const NextButton = ({ disabled, onClick }) => {
   const classes = useStyles(); 
   
   return (
     <div className={classes.buttonDiv}>
       <Button
+        disabled={disabled}
         className={classes.nextButton}
         type="submit"
         color="primary"
@@ -101,18 +100,18 @@ const NextButton = ({ onClick }) => {
   );
 }
 
-const ImperialSlider = ({ onChange }) => {
+const AmountSlider = ({ step, max, defaultValue, onChange }) => {
   const classes = useStyles();
 
   return (
     <Slider
       id='amount'
       name='amount'
-      defaultValue={1}
+      defaultValue={defaultValue}
       valueLabelDisplay="auto"
-      step={0.25}
-      min={0.25}
-      max={6}
+      step={step}
+      min={step}
+      max={max}
       marks
       onChange={onChange}
       className={classes.slider}
@@ -120,72 +119,55 @@ const ImperialSlider = ({ onChange }) => {
   );
 }
 
-const MetricSlider = ({ onChange }) => {
+const ItemSelector = ({ label, defaultValue, items, onChange }) => {
   const classes = useStyles();
 
   return (
-    <Slider
-      id='amount'
-      name='amount'
-      defaultValue={15}
-      valueLabelDisplay="auto"
-      step={5}
-      min={5}
-      max={80}
-      marks
-      onChange={onChange}
-      className={classes.slider}
-    />
+    <FormControl variant="outlined">
+      <Select 
+        name={label}
+        id={label}
+        defaultValue={defaultValue}
+        className={classes.selector}
+        onChange={onChange}
+      >
+        {
+          items.map((item, id) => {
+            return <MenuItem key={id} value={item}>{item}</MenuItem>
+          })
+        }
+      </Select>
+    </FormControl>
   );
 }
-
-const InputField = ({ id, register, onClick, onChange }) => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.inputField}>
-      <TextField 
-        register
-        label="Ingredient Name"
-        id={id} 
-        name='name' 
-        variant='outlined'
-        onChange={onChange} 
-        InputProps={{ className: classes.input}}
-      />
-      <IconButton>
-        <AddBoxIcon
-          color="primary"
-          fontSize="large"
-          onClick={onClick}
-        />
-      </IconButton>
-    </div>
-  );
-};
 
 export default function Ingredients() {
   const classes = useStyles();
   const cocktail = useCocktail();
   const units = [ "fl. oz", "ml", "dash" ];
-  const { register, handleSubmit, control } = useForm();
-  const [unitType, setUnitType] = useState(units[0]);
-  const [spiritObject, setSpiritObject] = useState({});
+  const types = [ "Base Spirit", "Modifier", "Non-alcoholic", "Miscellaneous", "Garnish" ];
+  const [unit, setUnit] = useState(units[0]);
+  const [name, setName] = useState('');
+  const [type, setType] = useState(types[0]);
+  const [amount, setAmount] = useState(1);
   const [ingredients, setIngredients] = useState([]);
-  const [visible, setVisible] = useState(false);
-
-  const onChangeSlider = name => (event, newValue) => {
-    setSpiritObject({...spiritObject, [name]: newValue})
-  }
-
-  const onChangeInput = (e) => {
-    setSpiritObject({...spiritObject, [e.target.name]: e.target.value})
-    console.log("Spirit object: ", spiritObject)
-  }
+  const [isVisible, setIsVisible] = useState(false);
 
   const onAddIngredient = () => {
-    setIngredients([...ingredients, {id: uuidv4(), ...spiritObject}])
-    setVisible(false);
+    setIngredients([
+      ...ingredients, 
+      {
+        amount: parseFloat(amount),
+        id: uuidv4(), 
+        name: name,
+        type: type,
+        unit: unit,
+      }
+    ]);
+    setName('');
+    setAmount(1);
+    setType(types[0]);
+    setIsVisible(false);
   }
 
   const onRemoveIngredient = (id) => {
@@ -193,71 +175,83 @@ export default function Ingredients() {
     setIngredients(ingredients.filter((ingredient) => ingredient.id !== id));
   }
 
-  const onSubmit = () => {
-    console.log("Ingredients: ", ingredients)
+  const onHandleNext = () => {
+    cocktail.addIngredients(ingredients);
+    cocktail.handleNext();
   }
 
+  // Need to add a Selector for spirit type to left of TextField
   return (
-    <form 
-      noValidate 
-      className={classes.formContainer}
-      id='ingredients'
-      name='ingredients'
-      onSubmit={handleSubmit(onSubmit)} 
-    >
+    <div className={classes.formContainer}>
       <div>
-        <InputField
-          register={{...register('name')}}
-          onChange={(e) => onChangeInput(e)}
-          onClick={() => setVisible(true)}
+        <ItemSelector
+          label='type'
+          defaultValue={type}
+          items={types}
+          onChange={(e) => setType(e.target.value)}
         />
+        <TextField
+          name="name"
+          label="Ingredient Name"
+          variant='outlined'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          InputProps={{ className: classes.input}}
+        />
+        <IconButton disabled={name === '' ? true : false}>
+          <AddBoxIcon
+            color={name === '' ? 'grey' : 'primary'}
+            fontSize="large"
+            onClick={() => setIsVisible(true)}
+          />
+        </IconButton>
         {
-          visible ?
+          // The sliders aren't updating their values in time. Saves as the last value not the current one specified
+          isVisible ?
             <div>
-              <Typography id="unitSlider" gutterBottom>
-                { unitType === 'ml' ? 'Milliliters' : 'Fluid Ounces' }
-              </Typography>
               <Grid container className={classes.grid}>
                 <Grid item xs={10}>
-                { unitType === 'ml' ? 
-                  <MetricSlider onChange={onChangeSlider("amount")} /> : 
-                  <ImperialSlider onChange={onChangeSlider("amount")} />
+                { 
+                  unit === 'ml' ? 
+                    <AmountSlider 
+                      step={5} 
+                      max={80} 
+                      defaultValue={15} 
+                      onChange={(e) => setAmount(e.target.textContent)} 
+                    /> 
+                  : unit === 'fl. oz' ? 
+                      <AmountSlider 
+                        step={0.25} 
+                        max={8} 
+                        defaultValue={1} 
+                        onChange={(e) => setAmount(e.target.textContent)} 
+                      />
+                    : <AmountSlider 
+                        step={1} 
+                        max={10} 
+                        defaultValue={2} 
+                        onChange={(e) => setAmount(e.target.textContent)} 
+                      />
                 }
                 </Grid>
                 <Grid item>
-                  <FormControl variant="outlined">
-                    <Select 
-                      name='unit'
-                      defaultValue={unitType}
-                      id="spiritType"
-                      className={classes.selector}
-                      onChange={(e) => {
-                        setUnitType(e.target.value);
-                        onChangeInput(e)
-                      }}
-                    >
-                      <ListSubheader>Unit Type</ListSubheader>
-                      {
-                        units.map((unit, id) => {
-                          return <MenuItem key={id} value={unit}>{unit}</MenuItem>
-                        })
-                      }
-                    </Select>
-                  </FormControl>
+                  <ItemSelector
+                    label='unit'
+                    defaultValue={unit}
+                    items={units}
+                    onChange={(e) => setUnit(e.target.value)}
+                  />
                 </Grid>
               </Grid>
-              <div className={classes.buttonDiv}>
-                <Button
-                  className={classes.nextButton}
-                  type="button"
-                  color="primary"
-                  variant="outlined"
-                  onClick={onAddIngredient}
-                >
-                  Add Ingredient
-                </Button>
-              </div>
-          </div> : false
+              <Button
+                className={classes.nextButton}
+                color="primary"
+                variant="outlined"
+                onClick={onAddIngredient}
+              >
+                Add Ingredient
+              </Button>
+            </div> : false
         }
         <Divider className={classes.divider} />
         {
@@ -277,13 +271,14 @@ export default function Ingredients() {
                     Amount: {ingredient.amount}
                   </Typography>
                 </Grid>
+              <Divider variant='fullWidth' className={classes.divider} />
               </Grid>
             );
           })
         }
       </div>
-      { ingredients.length > 0 ? <NextButton /> : false }
-    </form>
+      { ingredients.length > 0 ? <NextButton disabled={isVisible ? true : false} onClick={onHandleNext} /> : false }
+    </div>
   );
 }
 

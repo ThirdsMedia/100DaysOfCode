@@ -95,6 +95,7 @@ function useFirebaseProvider() {
   }
 
   const signout = () => {
+    console.log("It's signing you out automatically");
     return firebase
       .auth()
       .signOut()
