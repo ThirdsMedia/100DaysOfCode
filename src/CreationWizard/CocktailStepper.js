@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
 import BasicInfo from './BasicInfo';
-import UnitType from './UnitType';
 import Ingredients from './Ingredients';
-import Miscellaneous from './Miscellaneous';
 import Instructions from './Instructions';
 import {
   Collapse,

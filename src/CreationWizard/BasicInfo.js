@@ -30,44 +30,45 @@ const useStyles = makeStyles(theme => ({
 export default function BasicInfo() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const { 
-    register, 
-    handleSubmit, 
-  //  watch, 
-   // formState: { errors } 
-  } = useForm();
 
   const onSubmit = (data) => {
-    cocktail.buildFromInput(data)
+    if (!cocktail.formError) {
+      cocktail.buildFromInput(data)
+      cocktail.handleNext()
+    }
   }
 
+  // Instead of <span>, you should set an error. If the error is not null
   return (
-    <form className={classes.formContainer} onSubmit={handleSubmit((data) => onSubmit(data))}>
+    <form className={classes.formContainer} onSubmit={cocktail.handleSubmit((data) => onSubmit(data))}>
+      <span>{cocktail.formError}</span>
       <Grid container spacing={1}>
         <Grid item xs>
           <TextField 
             id='name'
-            {...register('name')}
+            {...cocktail.register('name', { required: true })}
             value={cocktail.recipe.name}
             label='Cocktail Name'
             variant='outlined'
             margin='normal'
             fullWidth
           />
+          {cocktail.errors.name && cocktail.setFormError("You forgot to enter a cocktail name")}
           <TextField 
             id='creator'
-            {...register('creator')}
+            {...cocktail.register('creator', { required: true })}
             value={cocktail.recipe.creator}
             label='Creator'
             variant='outlined'
             margin='normal'
             fullWidth
           />
+          {cocktail.errors.creator && cocktail.setFormError("You forgot to enter a creator name")}
         </Grid>
         <Grid item xs>
           <TextField 
             id='location'
-            {...register('location')}
+            {...cocktail.register('location', { required: true })}
             name='location'
             value={cocktail.recipe.location}
             label='Location'
@@ -75,20 +76,22 @@ export default function BasicInfo() {
             margin='normal'
             fullWidth
           />
+          {cocktail.errors.location && cocktail.setFormError("You forgot to set a location")}
           <TextField 
             id='date'
-            {...register('date')}
+            {...cocktail.register('date', { required: true })}
             value={cocktail.recipe.date}
             variant='outlined'
             margin='normal'
             fullWidth
             type='date'
           />
+          {cocktail.errors.date && cocktail.setFormError("You forgot to enter a creation date")}
         </Grid>
       </Grid>
       <TextField 
         id='description'
-        {...register('description')}
+        {...cocktail.register('description', { required: true })}
         value={cocktail.recipe.description}
         label='Description'
         variant='outlined'
@@ -98,6 +101,8 @@ export default function BasicInfo() {
         rows='6'
         rowsMax='10'
       />
+      {cocktail.errors.description && cocktail.setFormError("You forgot to enter a description")}
+
       <div className={classes.buttonDiv}>
         <Button
           className={classes.nextButton}
@@ -105,7 +110,6 @@ export default function BasicInfo() {
           color="primary"
           variant="outlined"
           endIcon={<ExpandMoreIcon />}
-          onClick={cocktail.handleNext}
         >
           Next
         </Button>

@@ -131,11 +131,9 @@ const ItemSelector = ({ label, defaultValue, items, onChange }) => {
         className={classes.selector}
         onChange={onChange}
       >
-        {
-          items.map((item, id) => {
-            return <MenuItem key={id} value={item}>{item}</MenuItem>
-          })
-        }
+        {items.map((item, id) => {
+          return <MenuItem key={id} value={item}>{item}</MenuItem>
+        })}
       </Select>
     </FormControl>
   );
@@ -217,20 +215,20 @@ export default function Ingredients() {
                       step={5} 
                       max={80} 
                       defaultValue={15} 
-                      onChange={(e) => setAmount(e.target.textContent)} 
+                      onChange={(event, newValue) => setAmount(newValue)} 
                     /> 
                   : unit === 'fl. oz' ? 
                       <AmountSlider 
                         step={0.25} 
                         max={8} 
                         defaultValue={1} 
-                        onChange={(e) => setAmount(e.target.textContent)} 
+                        onChange={(event, newValue) => setAmount(newValue)} 
                       />
                     : <AmountSlider 
                         step={1} 
                         max={10} 
                         defaultValue={2} 
-                        onChange={(e) => setAmount(e.target.textContent)} 
+                        onChange={(event, newValue) => setAmount(newValue)} 
                       />
                 }
                 </Grid>

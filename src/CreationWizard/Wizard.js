@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import MainBar from '../Components/MainBar';
 import InfoDrawer from './InfoDrawer';
 import CocktailStepper from './CocktailStepper';
@@ -36,6 +37,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// It seems like it would be a good idea to either wrap this is a FormProvider as well or, 
+// ... just use useForm inside of CocktailProvider since you've already created a custom provider
+// All I need to pass along is register, formState: { errors }, and handleSubmit
 export default function Wizard() {
   return (
     <CocktailProvider>
@@ -51,7 +55,9 @@ function Create() {
 
   const handleDrawer = () => setIsOpen(!isOpen)
 
-  console.log("From wizard: ", cocktail.recipe);
+  const onSubmitForm = () => {
+    console.log("Teh cocktail: ", cocktail.recipe);
+  }
 
   return (
     <main>
@@ -95,6 +101,7 @@ function Create() {
           isOpen={isOpen}
           handleDrawer={handleDrawer}
         /> 
+        { /* CocktailStepper should receive all of the useForm methods as props */}
         <CocktailStepper />
       </div>
       <div className={classes.buttonDiv}>
@@ -105,7 +112,8 @@ function Create() {
               className={classes.button}
               variant="outlined"
               color="primary"
-              onClick={() => console.log("Teh Cocktail: ", cocktail.recipe)}
+              // This is where useForm's handle submit should be
+              onClick={cocktail.handleSubmit(onSubmitForm)}
             >
               Review
             </Button>
