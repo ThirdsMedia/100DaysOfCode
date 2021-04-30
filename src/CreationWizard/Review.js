@@ -5,6 +5,7 @@ import {
   Container,
   IconButton,
   Button,
+  TextField,
   AppBar,
   Toolbar,
   Typography,
@@ -62,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Review({ item }) {
+export default function Review() {
   const classes = useStyles();
   const location = useLocation();
   const [isPictureSelected, setIsPictureSelected] = useState(false);
