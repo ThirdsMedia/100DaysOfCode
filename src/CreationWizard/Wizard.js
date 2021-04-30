@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import MainBar from '../Components/MainBar';
 import InfoDrawer from './InfoDrawer';
 import BasicInfo from './BasicInfo';
@@ -65,6 +66,7 @@ export default function Wizard() {
 function Create() {
   const classes = useStyles();
   const cocktail = useCocktail();
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const [checked, setChecked] = useState(false);
 
@@ -73,7 +75,10 @@ function Create() {
   const handleDrawer = () => setIsOpen(!isOpen)
 
   const onSubmitForm = () => {
-console.log("Teh cocktail: ", cocktail.recipe);
+    history.push({
+      pathname: "/review",
+      data: cocktail.recipe,
+    });
   }
 
   return (

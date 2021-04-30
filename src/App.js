@@ -18,10 +18,10 @@ import Profile from './Profile/Profile';
 import Contact from './Components/Contact';
 import About from './Components/About';
 import Wizard from './CreationWizard/Wizard';
+import Review from './CreationWizard/Review';
 import Products from './Products/Products';
 import LandingPage from './LandingPage/LandingPage';
 import Cocktail from './Components/Cocktail';
-import Review from './Components/Review';
 import Success from './Components/Success';
 
 const theme = createMuiTheme({

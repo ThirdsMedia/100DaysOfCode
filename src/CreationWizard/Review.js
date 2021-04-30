@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -14,14 +15,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
 
-
 const useStyles = makeStyles(theme => ({
   header: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    //backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/cocktail.jpg)'}`,
     backgroundColor: theme.palette.primary.background,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -63,14 +62,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ItemSheet({ item }) {
+export default function Review({ item }) {
   const classes = useStyles();
+  const location = useLocation();
   const [isPictureSelected, setIsPictureSelected] = useState(false);
   const [imagePath, setImagePath] = useState('');
 
-  const handlePictureSelect = () => {
-    setIsPictureSelected(true)
-  }
+  const handlePictureSelect = () => setIsPictureSelected(true)
 
   return (
     <div>
@@ -102,29 +100,30 @@ export default function ItemSheet({ item }) {
         </AppBar>
         <Container style={{textAlign: 'center'}}>
           <Typography component="h1" variant="h2" className={classes.title}>
-            {item.name}
+            {location.data.name}
           </Typography>
           <Typography color="textSecondary">
-            {item.creator}, {item.location}, {item.date}
+            {location.data.creator}, {location.data.location}, {location.data.date}
           </Typography>
           <Divider variant="middle" className={classes.divider} />
           <Typography color="textSecondary">
-            {item.description}
+            {location.data.description}
           </Typography>
         </Container>
         <Box className={classes.infoBox} boxShadow={5}>
           {
-            item.ingredients.map((ingredient) => {
+            location.data.ingredients.map((ingredient) => {
               return <Typography>{ingredient.amount} {ingredient.unit} {ingredient.name}</Typography>
             })
           }
-          {
-            item.miscellaneous.map((item) => {
+          {/*
+            location.data.miscellaneous.map((item) => {
               return <Typography>{item}</Typography>
             })
+            */
           }
           <Divider variant="middle" className={classes.divider} />
-          <Typography>{item.instructions}</Typography>
+          <Typography>{location.data.instructions}</Typography>
         </Box>
         <div className={classes.buttonDiv}>
           <Button
