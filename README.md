@@ -3071,3 +3071,64 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** I'm sure it's an easy fix, I'm just tired.
 
 **Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/blob/day87/src/CreationWizard/)
+
+### Day 88: April 30, 2021 - Friday
+
+**Today's Progress**: Finished adding error handling to the CreationWizard. Passed data to the Review component. 
+
+**Thoughts:** There's still quite a bit to do for the CreationWizard. I need to add an image upload section that renders on the review page. I also need to figure out the best way to edit the Review page if necessary. My thought is to display the data within TextFields and deal with the editing just the same as I would in Profile.js. There's no problem with that idea, except that the way the data is displayed would be tricky to get the formatting right. Or maybe I'm just being lazy. The alternative is to add a button next to Publish that says Edit and take the user back to the CreationWizard, but I don't like that very much. Seems cleaner to just deal with the editing right in the Review component. 
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [ ] Enforce input of Display Name field 
+	- [ ] Add an option to select Mixologist or Customer user role when signing up, and make the changes in App to display the appropriate components based on role
+	- [x] and throw error if unsuccessful
+	- [ ] Navigate to Success component upon successfully signing up 
+		- [ ] The navigation to Success should happen in then() from the returned promise in signup()
+		- [ ] The setLoading and setError should be handled inside of signup() in finally()
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [x] Successfully console.log() a full cocktail object
+	- [x] Make sure that it updates appropriately if you backtrack the form
+	- [x] Implement useForm on the ingredients component
+	- [x] Complete the Miscellaneous component
+	- [x] Add input checking so you can't move on without filling out the name, type, and amount 
+	- [x] Figure out the best way to delete objects from the array using the MinusButton (and make it work)
+	- [ ] Implement the Cocktail picture selector so that it either displays on the Review component, or make it so you can select it once at the Review component. 
+	- [x] Fix workflow so that there is no BaseSpirit component, and instead add a Selector just like you specified above
+	- [ ] Figure out how to save values from Ingredients so if you have to go back they will still be there. 
+	- [ ] Push object to Firebase
+	- [ ] Get the Review component to be editable
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Set the user's avatar when changed in Profile by clicking on the picture and selecting the picture file
+	- [ ] Adding favorites
+- [ ] App finishing touches
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** I think I'm going to have the same issue with the cocktail picture selection as I did in Profile.
+
+**Solutions:** Maybe ask someone on StackOverflow.
+
+**Link to work:** [CreationWizard](https://github.com/ThirdsMedia/100DaysOfCode/blob/day88/src/CreationWizard/)
