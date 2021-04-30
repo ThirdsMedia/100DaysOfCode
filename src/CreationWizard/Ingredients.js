@@ -34,6 +34,7 @@ const useStyles = makeStyles(theme => ({
     gridGap: theme.spacing(5),
     textAlign: 'center',
     justifyContent: 'center',
+    marginTop: 25,
   },
   ingredientsList: {
     padding: 5,
@@ -45,17 +46,6 @@ const useStyles = makeStyles(theme => ({
   selector: {
     marginRight: 10,
     minWidth: 100,
-  },
-  formControl: {
-    display: 'flex',
-    flexDirection: 'row',
-    margin: theme.spacing(2),
-    minWidth: 120,
-  },
-  nextItem: {
-    display: 'flex',
-    alignItems: 'right',
-    justifyContent: 'flex-end',
   },
   divider: {
     margin: 25,
@@ -178,7 +168,6 @@ export default function Ingredients() {
     cocktail.handleNext();
   }
 
-  // Need to add a Selector for spirit type to left of TextField
   return (
     <div className={classes.formContainer}>
       <div>
@@ -204,7 +193,6 @@ export default function Ingredients() {
           />
         </IconButton>
         {
-          // The sliders aren't updating their values in time. Saves as the last value not the current one specified
           isVisible ?
             <div>
               <Grid container className={classes.grid}>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
-import { useForm } from 'react-hook-form';
 import {
   TextField,
   Grid,
@@ -25,6 +24,9 @@ const useStyles = makeStyles(theme => ({
     margin: 10,
     fontFamily: 'Nunito',
   },
+  errors: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
 export default function BasicInfo() {
@@ -32,67 +34,62 @@ export default function BasicInfo() {
   const cocktail = useCocktail();
 
   const onSubmit = (data) => {
-    if (!cocktail.formError) {
-      cocktail.buildFromInput(data)
-      cocktail.handleNext()
-    }
+    cocktail.buildFromInput(data);
+    cocktail.handleNext();
   }
 
-  // Instead of <span>, you should set an error. If the error is not null
   return (
     <form className={classes.formContainer} onSubmit={cocktail.handleSubmit((data) => onSubmit(data))}>
-      <span>{cocktail.formError}</span>
       <Grid container spacing={1}>
         <Grid item xs>
           <TextField 
             id='name'
             {...cocktail.register('name', { required: true })}
-            value={cocktail.recipe.name}
+            defaultValue={cocktail.recipe.name}
             label='Cocktail Name'
             variant='outlined'
             margin='normal'
             fullWidth
           />
-          {cocktail.errors.name && cocktail.setFormError("You forgot to enter a cocktail name")}
+          {cocktail.errors.name ? <span className={classes.errors}>This field is required</span> : false}
           <TextField 
             id='creator'
             {...cocktail.register('creator', { required: true })}
-            value={cocktail.recipe.creator}
+            defaultValue={cocktail.recipe.creator}
             label='Creator'
             variant='outlined'
             margin='normal'
             fullWidth
           />
-          {cocktail.errors.creator && cocktail.setFormError("You forgot to enter a creator name")}
+          {cocktail.errors.creator ? <span className={classes.errors}>This field is required</span> : false}
         </Grid>
         <Grid item xs>
           <TextField 
             id='location'
             {...cocktail.register('location', { required: true })}
-            name='location'
-            value={cocktail.recipe.location}
+            defaultValue={cocktail.recipe.location}
             label='Location'
             variant='outlined'
             margin='normal'
             fullWidth
           />
-          {cocktail.errors.location && cocktail.setFormError("You forgot to set a location")}
+          {cocktail.errors.location ? <span className={classes.errors}>This field is required</span> : false}
           <TextField 
             id='date'
             {...cocktail.register('date', { required: true })}
-            value={cocktail.recipe.date}
+            defaultValue={cocktail.recipe.date}
             variant='outlined'
             margin='normal'
             fullWidth
             type='date'
           />
-          {cocktail.errors.date && cocktail.setFormError("You forgot to enter a creation date")}
+          {cocktail.errors.date ? <span className={classes.errors}>This field is required</span> : false}
         </Grid>
       </Grid>
       <TextField 
         id='description'
         {...cocktail.register('description', { required: true })}
-        value={cocktail.recipe.description}
+        defaultValue={cocktail.recipe.description}
         label='Description'
         variant='outlined'
         margin='normal'
@@ -101,8 +98,7 @@ export default function BasicInfo() {
         rows='6'
         rowsMax='10'
       />
-      {cocktail.errors.description && cocktail.setFormError("You forgot to enter a description")}
-
+      {cocktail.errors.description ? <span className={classes.errors}>This field is required</span> : false}
       <div className={classes.buttonDiv}>
         <Button
           className={classes.nextButton}

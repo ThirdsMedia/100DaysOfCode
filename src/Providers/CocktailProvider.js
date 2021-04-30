@@ -16,20 +16,15 @@ function useCocktailProvider() {
   const steps = ['Basic Information', 'Ingredients', 'Instructions'];
   const [activeStep, setActiveStep] = useState(0);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [formError, setFormError] = useState(null);
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
   const handleNext = () => {
-    if (formError) {
-      return formError
-    } else {
-      if (activeStep < steps.length) {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1)
-      } 
-    }
+    if (activeStep < steps.length) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    } 
   }
 
   const buildFromInput = (data) => {
@@ -45,6 +40,7 @@ function useCocktailProvider() {
 
   return {
     steps,
+    errors,
     recipe,
     handleBack,
     handleNext,
@@ -53,9 +49,6 @@ function useCocktailProvider() {
     addIngredients, 
     register,
     handleSubmit,
-    errors,
-    formError,
-    setFormError,
   }
 }
 

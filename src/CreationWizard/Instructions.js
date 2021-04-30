@@ -1,6 +1,5 @@
 import React from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
-import { useForm } from 'react-hook-form';
 import {
   TextField,
   Select,
@@ -32,6 +31,9 @@ const useStyles = makeStyles(theme => ({
     margin: 10,
     fontFamily: 'Nunito',
   },
+  errors: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
 const glassware = [
@@ -57,24 +59,19 @@ const methods = [
 export default function Instructions() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const { 
-    register, 
-    handleSubmit, 
-  //  watch, 
-   // formState: { errors } 
-  } = useForm();
 
   const onSubmit = (data) => {
-    cocktail.buildFromInput(data)
+    cocktail.buildFromInput(data);
+    cocktail.handleNext();
   }
 
   return (
-    <form className={classes.formContainer} onSubmit={handleSubmit((data) => onSubmit(data))}>
+    <form className={classes.formContainer} onSubmit={cocktail.handleSubmit((data) => onSubmit(data))}>
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-simple">Build Method</InputLabel>
         <Select
           native
-          {...register('method')}
+          {...cocktail.register('method', { required: true })}
           value={cocktail.recipe.method}
           inputProps={{
             name: 'method',
@@ -89,11 +86,12 @@ export default function Instructions() {
           }
         </Select>
       </FormControl>
+      {cocktail.errors.method ? <span className={classes.errors}>This field is required</span> : false}
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-simple">Glassware</InputLabel>
         <Select
           native
-          {...register('glass')}
+          {...cocktail.register('glass', { required: true })}
           value={cocktail.recipe.glass}
         >
           <option aria-label="None" value="" />
@@ -104,9 +102,10 @@ export default function Instructions() {
           }
         </Select>
       </FormControl>
+      {cocktail.errors.glass ? <span className={classes.errors}>This field is required</span> : false}
       <TextField 
         id='instructions'
-        {...register('instructions')}
+        {...cocktail.register('instructions', { required: true })}
         value={cocktail.recipe.instructions}
         label='Instructions'
         variant='outlined'
@@ -115,6 +114,7 @@ export default function Instructions() {
         rows='5'
         maxrows='10'
       />
+      {cocktail.errors.instructions ? <span className={classes.errors}>This field is required</span> : false}
       <div className={classes.buttonDiv}>
         <Button
           className={classes.nextButton}
@@ -122,7 +122,6 @@ export default function Instructions() {
           color="primary"
           variant="outlined"
           endIcon={<ExpandMoreIcon />}
-          onClick={cocktail.handleNext}
         >
           Almost there
         </Button>

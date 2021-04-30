@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react';
 import MainBar from '../Components/MainBar';
 import InfoDrawer from './InfoDrawer';
-import CocktailStepper from './CocktailStepper';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import { Link as Scroll } from 'react-scroll';
+import BasicInfo from './BasicInfo';
+import Ingredients from './Ingredients';
+import Instructions from './Instructions';
 import { useCocktail, CocktailProvider } from '../Providers/CocktailProvider';
 import {
   AppBar,
   Toolbar,
   IconButton,
   Button,
+  Collapse,
+  Stepper,
+  Step,
+  StepLabel,
+  StepContent,
+  Typography,
 } from '@material-ui/core';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -37,9 +41,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-// It seems like it would be a good idea to either wrap this is a FormProvider as well or, 
-// ... just use useForm inside of CocktailProvider since you've already created a custom provider
-// All I need to pass along is register, formState: { errors }, and handleSubmit
+function RenderStep(step) {
+  switch (step) {
+    case 0:
+      return <BasicInfo />
+    case 1:
+      return <Ingredients />
+    case 2: 
+      return <Instructions />
+    default:
+      return false
+  }
+}
+
 export default function Wizard() {
   return (
     <CocktailProvider>
@@ -52,11 +66,14 @@ function Create() {
   const classes = useStyles();
   const cocktail = useCocktail();
   const [isOpen, setIsOpen] = useState(false);
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => setChecked(true), []);
 
   const handleDrawer = () => setIsOpen(!isOpen)
 
   const onSubmitForm = () => {
-    console.log("Teh cocktail: ", cocktail.recipe);
+console.log("Teh cocktail: ", cocktail.recipe);
   }
 
   return (
@@ -71,19 +88,6 @@ function Create() {
           <IconButton disabled={cocktail.activeStep === 0} onClick={cocktail.handleBack}>
             <ExpandLessIcon />
           </IconButton>
-          <Scroll to={`step-${cocktail.activeStep}`} smooth="true">
-            <IconButton
-              variant="contained"
-              color="primary"
-              onClick={cocktail.handleNext}
-            >
-            {
-              cocktail.activeStep > cocktail.steps.length - 1
-                ? <CheckCircleIcon />
-                : <ExpandMoreIcon />
-            }
-            </IconButton>
-          </Scroll>
           {
             /* If you're at the end of your stepper then stop showing the help icon */
             cocktail.activeStep <= cocktail.steps.length - 1
@@ -101,8 +105,24 @@ function Create() {
           isOpen={isOpen}
           handleDrawer={handleDrawer}
         /> 
-        { /* CocktailStepper should receive all of the useForm methods as props */}
-        <CocktailStepper />
+        <Collapse appear in={checked} {
+          ... checked ? { timeout: 1000 } : {}
+        }>
+          <Stepper activeStep={cocktail.activeStep} orientation="vertical">
+          {
+            cocktail.steps.map((label, index) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+                <StepContent id={`step-${cocktail.activeStep}`}>
+                  <Typography component='span'>
+                    {RenderStep(index)}
+                  </Typography>
+                </StepContent>
+              </Step>
+            ))
+          }
+          </Stepper>
+        </Collapse>
       </div>
       <div className={classes.buttonDiv}>
       {
@@ -112,7 +132,6 @@ function Create() {
               className={classes.button}
               variant="outlined"
               color="primary"
-              // This is where useForm's handle submit should be
               onClick={cocktail.handleSubmit(onSubmitForm)}
             >
               Review
