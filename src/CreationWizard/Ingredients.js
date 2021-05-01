@@ -132,7 +132,7 @@ const ItemSelector = ({ label, defaultValue, items, onChange }) => {
 export default function Ingredients() {
   const classes = useStyles();
   const cocktail = useCocktail();
-  const units = [ "fl. oz", "ml", "dash" ];
+  const units = [ "fl. oz", "ml", "dash", "unit" ];
   const types = [ "Base Spirit", "Modifier", "Non-alcoholic", "Miscellaneous", "Garnish" ];
   const [unit, setUnit] = useState(units[0]);
   const [name, setName] = useState('');
