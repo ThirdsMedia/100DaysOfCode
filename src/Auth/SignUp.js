@@ -4,24 +4,43 @@ import Copyright from '../Components/Copyright';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import { useForm } from 'react-hook-form';
 import {
-  Container,
-  Avatar,
   Typography,
   Grid,
   TextField,
   Button,
   Link,
   CircularProgress,
+  Paper,
+  Box,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  main: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: theme.spacing(3),
+  },
+  root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/polynesiancocktail.webp'})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  paper: {
+    margin: theme.spacing(4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  error: {
+    color: theme.palette.secondary.main,
+    fontFamily: 'Nunito',
+    margin: theme.spacing(2),
   },
   textField: {
     borderRadius: 37,
@@ -36,11 +55,6 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.primary.hover,
     },
-  },
-  error: {
-    color: theme.palette.secondary.main,
-    fontFamily: 'Nunito',
-    margin: theme.spacing(2),
   },
 }))
 
@@ -191,13 +205,12 @@ function BusinessForm({ formProps }) {
   );
 }
 
-export default function SignUp({ formType }) {
+export default function SignUp() {
   const classes = useStyles();
   const firebase = useFirebase();
   const location = useLocation();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [userData, setUserData] = useState({});
-  const [signUpType, setSignUpType] = useState(formType);
   const formProps = { register, errors, userData, setUserData };
 
   if (firebase.loading) {
@@ -214,33 +227,38 @@ export default function SignUp({ formType }) {
   }
 
   return (
-    <Container className={classes.root} maxWidth="sm">
-      <Avatar>
-        <LockOpenIcon color="secondary" />
-      </Avatar>
-      <Typography component="h1" variant="h5" color="textPrimary">
-        Sign Up
-      </Typography>
-      <form noValidate onSubmit={handleSubmit(onSubmitForm)}>
-        {
-          location.formType === '/business' ?
-            <BusinessForm formProps={formProps} />
-          : <UserForm formProps={formProps} />
-        }
-        <Button 
-          className={classes.submitButton}
-          type="submit"
-          color="primary"
-          fullWidth
-        >
-          Create Account
-        </Button>
-      </form>
-      <Link href="/signin" variant="body2">
-        Already have an account? Sign In
-      </Link>
-      <Copyright />
-    </Container>
+    <Grid container component="main" className={classes.root}>
+      <Grid item xs={false} sm={4} md={6} className={classes.image} />
+      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            Sign up for Jade
+          </Typography>
+          <form noValidate onSubmit={handleSubmit(onSubmitForm)}>
+            {
+              location.formType === '/business' ?
+                <BusinessForm formProps={formProps} />
+              : <UserForm formProps={formProps} />
+            }
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submitButton}
+            >
+              Submit
+            </Button>
+          </form>
+          <Link href="/signin" variant="body2">
+            Already have an account? Sign In
+          </Link>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
+        </div>
+      </Grid>
+    </Grid>
   );
 }
 

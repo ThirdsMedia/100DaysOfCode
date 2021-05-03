@@ -67,7 +67,7 @@ function useFirebaseProvider() {
   }
 
   const signup = (data) => {
-    const { name, email, company, password, phone } = data;
+    const { address, company, name, email, password, phone } = data;
     setLoading(true)
 
     return firebase
@@ -76,14 +76,15 @@ function useFirebaseProvider() {
       .then(response => {
         const userData = Object.assign({}, {
           id: response.user.uid,
+          address,
           email,
           name,
           phone,
+          company,
           bio: '',
           isAdmin: false,
           isVerified: false,
           accountType: '',
-          company: '',
           twitter: '',
           instagram: '',
           website: '',
@@ -99,9 +100,6 @@ function useFirebaseProvider() {
         setError(null)
       })
   }
-
-  //const signUpAsCompany = () => {
-  //}
 
   const signout = () => {
     console.log("It's signing you out automatically");
