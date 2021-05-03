@@ -66,8 +66,8 @@ function useFirebaseProvider() {
       })
   }
 
-  const signup = ({ data }) => {
-    const { name, email, password, phone } = data;
+  const signup = (data) => {
+    const { name, email, company, password, phone } = data;
     setLoading(true)
 
     return firebase
@@ -90,6 +90,7 @@ function useFirebaseProvider() {
           picture: '',
           favorites: [],
         })
+        console.log("From provider: ", userData);
         firebase.firestore().collection("users").doc(response.user.id).set(userData)
       })
       .catch((e) => setError(e.message))

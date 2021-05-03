@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Copyright from '../Components/Copyright';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import { useForm } from 'react-hook-form';
@@ -6,6 +7,7 @@ import {
   Container,
   Avatar,
   Typography,
+  Grid,
   TextField,
   Button,
   Link,
@@ -111,17 +113,34 @@ function BusinessForm({ formProps }) {
 
   return (
     <div>
-      <TextField
-        label="Company Name"
-        {...register("name", { required: true })}
-        value={userData.name}
-        margin="normal"
-        fullWidth
-        variant="outlined"
-        onChange={(e) => onChangeInput(e)}
-        InputProps={{className: classes.textField}}
-      />
-      {errors.name && <span className={classes.error}>This field is required</span>}
+      <Grid container spacing={2}>
+        <Grid item xs>
+          <TextField
+            label="Name"
+            {...register("name", { required: true })}
+            value={userData.name}
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            onChange={(e) => onChangeInput(e)}
+            InputProps={{className: classes.textField}}
+          />
+          {errors.name && <span className={classes.error}>This field is required</span>}
+        </Grid>
+        <Grid item xs>
+          <TextField
+            label="Company"
+            {...register("company", { required: true })}
+            value={userData.company}
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            onChange={(e) => onChangeInput(e)}
+            InputProps={{className: classes.textField}}
+          />
+          {errors.company && <span className={classes.error}>This field is required</span>}
+        </Grid>
+      </Grid>
       <TextField
         label="Email"
         {...register("email", { required: true })}
@@ -172,12 +191,13 @@ function BusinessForm({ formProps }) {
   );
 }
 
-export default function SignUp() {
+export default function SignUp({ formType }) {
   const classes = useStyles();
   const firebase = useFirebase();
+  const location = useLocation();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [userData, setUserData] = useState({});
-  const [signUpType, setSignUpType] = useState('business');
+  const [signUpType, setSignUpType] = useState(formType);
   const formProps = { register, errors, userData, setUserData };
 
   if (firebase.loading) {
@@ -188,7 +208,10 @@ export default function SignUp() {
     )
   }
 
-  const onSubmitForm = () => console.log(userData);
+  const onSubmitForm = () => {
+    console.log(userData)
+    firebase.signup(userData);
+  }
 
   return (
     <Container className={classes.root} maxWidth="sm">
@@ -200,7 +223,7 @@ export default function SignUp() {
       </Typography>
       <form noValidate onSubmit={handleSubmit(onSubmitForm)}>
         {
-          signUpType === 'business' ?
+          location.formType === '/business' ?
             <BusinessForm formProps={formProps} />
           : <UserForm formProps={formProps} />
         }
@@ -220,3 +243,4 @@ export default function SignUp() {
     </Container>
   );
 }
+

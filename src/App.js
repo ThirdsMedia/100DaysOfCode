@@ -8,6 +8,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import exampleDatabase from './static/exampleDatabase';
 
 /* Auth */
+import Start from './Auth/Start';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
@@ -67,7 +68,8 @@ export default function App() {
         :
           <Router>
             <Switch>
-              <Route path="/" exact component={SignUp} />
+              <Route path="/" exact component={Start} />
+              <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
               <Route path="/forgotpassword" component={ForgotPassword} />
               <Route path="/success" component={Success} />
