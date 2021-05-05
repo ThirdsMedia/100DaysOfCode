@@ -93,15 +93,19 @@ function useFirebaseProvider() {
             company,
             email,
             favorites: [],
+            followers: [],
+            following: [],
             id: response.user.uid,
-            instagram: '',
             isVerified: false,
             isAdmin: accountType === 'business' ? true : false,
             name,
             phone,
             picture: '',
-            twitter: '',
-            website: '',
+            social: {
+              instagram: '',
+              twitter: '',
+              website: '',
+            },
           })
           firebase.firestore().collection("users").doc(response.user.uid).set(userData)
         })
@@ -126,14 +130,14 @@ function useFirebaseProvider() {
   
   // So this is a simulation of how you would fetch a company account's users 
   // You could loop through all the items in the employees array and fetch them from firestore like below
-  const getEmployees = () => {
+  const getEmployees = (eid) => {
     const userRef = firebase.firestore().collection("users");
-      return userRef
-        .doc(user.employees[0])
-        .get()
-        .then((document) => {
-          console.log("From provider: ", document.data())
-        }).catch((e) => console.log("error: ", e))
+    return userRef
+      .doc(eid)
+      .get()
+      .then((document) => {
+        return document.data()
+      }).catch((e) => console.log(e));
   }
 
   const updateUser = (userData) => {

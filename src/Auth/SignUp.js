@@ -244,7 +244,7 @@ export default function SignUp() {
 
   useEffect(() => {
     setUserData({...userData, accountType: type});
-  }, [userData, type]);
+  }, []);
   
   if (firebase.loading) {
     return (

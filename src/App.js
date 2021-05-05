@@ -16,17 +16,18 @@ import { useFirebase } from './Providers/FirebaseProvider';
 
 /* Authenticated */
 import Profile from './Profile/Profile';
+import EditProfile from './Profile/EditProfile';
 import Wizard from './CreationWizard/Wizard';
 import Review from './CreationWizard/Review';
 import Products from './Products/Products';
 import Cocktail from './Components/Cocktail';
+import Panel from './Admin/Panel';
 
 /* Either */
 import Contact from './Components/Contact';
 import About from './Components/About';
 import Success from './Components/Success';
-
-
+import NotFound from './Components/NotFound';
 
 const theme = createMuiTheme({
   palette: {
@@ -62,17 +63,21 @@ export default function App() {
         {
           firebase.user ? 
             <Switch>
-              <Route path="/" exact render={() => <Products data={exampleDatabase} />} />
+              <Route path={["/", "/home"]} exact render={() => <Products data={exampleDatabase} />} />
               <Route path="/profile" component={Profile} />
+              <Route path="/edit-profile" component={EditProfile} />
               <Route path="/create" component={Wizard} />
               <Route path="/review" render={() => <Review item={exampleDatabase[0]} />} />
               <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} />} />
+              { firebase.user.isAdmin ? <Route path="/admin" component={Panel} /> : false }
+              <Route component={NotFound} />
             </Switch>
           : <Switch>
               <Route path="/" exact component={Start} />
               <Route path="/signin" component={SignIn} />
               <Route path="/register/:type" component={SignUp} />
               <Route path="/forgotpassword" component={ForgotPassword} />
+              <Route component={NotFound} />
             </Switch>
         }
       </Router>

@@ -16,7 +16,6 @@ import {
 } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,7 +41,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
   const onSignOutHandler = () => {
     firebase.signout()
       .catch((e) => console.log(e.message))
-      .finally(() => history.push("/"))
+      .finally(() => history.push("/signin"))
   }
 
   return (
@@ -78,14 +77,6 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
               <ListItemText primary="Home" />
             </ListItem>
           </Link>
-          <Link href='/profile' color='inherit'>
-            <ListItem button>
-              <ListItemIcon>
-                <AccountCircleIcon /> 
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItem>
-          </Link>
           <Link href='/discover' color='inherit'>
             <ListItem button>
               <ListItemIcon>
@@ -104,7 +95,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
           </Link>
           {
             firebase.user.isAdmin ? 
-              <Link href='/management' color='inherit'>
+              <Link href='/admin' color='inherit'>
                 <ListItem button>
                   <ListItemIcon>
                     <LocalBarIcon /> 

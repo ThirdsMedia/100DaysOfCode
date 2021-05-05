@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Copyright from '../Components/Copyright';
+import { useHistory } from 'react-router-dom';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import {
   Container,
-  Avatar,
   Typography,
   TextField,
   Button,
@@ -14,24 +14,33 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.primary.background,
+  },
   paper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: theme.spacing(6),
+    border: '1px solid grey',
+    padding: theme.spacing(3),
+    backgroundColor: theme.palette.primary.background,
   },
-  textField: {
-    borderRadius: 37,
+  colorText: {
+    color: theme.palette.primary.main,
   },
   submitButton: {
     color: 'white',
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
     textTransform: 'none',
     fontWeight: 'bold',
-    borderRadius: 50,
+  },
+  googButton: {
+    margin: theme.spacing(1),
+    textTransform: 'none',
+    fontWeight: 'bold',
   },
   logo: {
     height: theme.spacing(10),
@@ -46,10 +55,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const auth = useFirebase();
+  const firebase = useFirebase();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(auth.error);
+  const [error, setError] = useState(firebase.error);
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
@@ -61,7 +71,11 @@ export default function SignIn() {
     }
   }
 
-  if (auth.loading) {
+  const onSignInHandler = () => {
+    firebase.signin().finally(() => history.push("/home"));
+  }
+
+  if (firebase.loading) {
     return (
       <div className={classes.loading}>
         <CircularProgress color="secondary" />
@@ -70,19 +84,16 @@ export default function SignIn() {
   }
 
   return (
-    <Container className={classes.paper} component="main" maxWidth="sm">
-      <Avatar color="primary">
-        <LockOpenIcon color="secondary"/>
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        Sign In
+    <div>
+    <Container className={classes.paper} component="main" maxWidth="xs">
+      <Typography style={{fontFamily: 'Nunito'}} component="h1" variant="h5">
+        Log in to <span className={classes.colorText}>JADE</span>
       </Typography>
       {
         error
           ? <Typography className={classes.error}>{error}</Typography>
           : false
       }
-
       <TextField
         id="email"
         name="userEmail"
@@ -93,9 +104,6 @@ export default function SignIn() {
         fullWidth
         variant="outlined"
         onChange={(e) => onChangeHandler(e)}
-        InputProps={{
-          className: classes.textField
-        }}
       />
       <TextField
         id="password"
@@ -108,9 +116,6 @@ export default function SignIn() {
         fullWidth
         variant="outlined"
         onChange={(e) => onChangeHandler(e)}
-        InputProps={{
-          className: classes.textField
-        }}
       />
       <Grid container>
         <FormControlLabel
@@ -125,29 +130,11 @@ export default function SignIn() {
         color="primary"
         fullWidth
         variant="contained"
-        onClick={() => auth.signin(email, password)}
+        onClick={onSignInHandler}
       >
         Sign In
       </Button>
-      <Button 
-        className={classes.submitButton}
-        type="submit"
-        name="goog"
-        color="secondary"
-        fullWidth
-        variant="contained"
-        onClick={() => {
-          auth.signInWithGoogle().catch((e) => {
-            setError(e.message)
-          })
-        }}
-      >
-        Sign in with Google
-      </Button>
-      <Grid 
-        container
-        justify="space-around"
-      >
+      <Grid container justify="space-around">
         <Grid item>
           <Link href="/forgotpassword" variant="body2">
             Forgot password?
@@ -159,7 +146,24 @@ export default function SignIn() {
           </Link>
         </Grid>
       </Grid>
-      <Copyright />
+      <Typography style={{color: '#d0d0d0'}}>Or</Typography>
+      <Button 
+        className={classes.googButton}
+        type="submit"
+        name="goog"
+        color="secondary"
+        fullWidth
+        variant="outlined"
+        onClick={() => {
+          firebase.signInWithGoogle().catch((e) => {
+            setError(e.message)
+          })
+        }}
+      >
+        Sign in with Google
+      </Button>
+
     </Container>
+    </div>
   );
 }
