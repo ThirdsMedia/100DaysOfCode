@@ -1,71 +1,77 @@
 import React, { useState } from 'react';
 import AppDrawer from '../Navigation/AppDrawer';
+import { useFirebase } from '../Providers/FirebaseProvider';
 import {
   AppBar,
   Toolbar,
+  Avatar,
   IconButton,
-  Typography,  
+  Button,
 } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+    flexGrow: 1,
   },
   appBar: {
     flexGrow: 1,
     background: 'transparent',
     boxShadow: 'none',
   },
-  appBarWrapper: {
-    width: "80%",
-    margin: "0 auto"
+  button: {
+    fontFamily: 'Nunito',
+    '&:hover': {
+      color: theme.palette.secondary.main,
+      backgroundColor: 'transparent',
+    },
   },
-  icon: {
-    color: '#fff',
-    fontSize: '2rem',
-  },
-  header: {
-    flexGrow: "1",
-    fontFamily: "Nunito",
-    color: '#fff'
-  },
-  colorText: {
-    color: theme.palette.secondary.main,    
+  loginButton: {
+    color: 'white',
+    textTransform: 'none',
+    backgroundColor: theme.palette.primary.main,    
+    fontFamily: 'Nunito',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
 }));
 
-export default function MainBar({ color, noLogo }) {
-  const classes = useStyles();
+export default function MainBar() {
+  const classes = useStyles() 
+  const firebase = useFirebase();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleDrawer = () => {
-    setIsOpen(!isOpen)
-  }
+  const onOpenDrawer = () => setIsOpen(!isOpen)
 
   return (
-    <div className={classes.root}>
-      <AppDrawer isOpen={isOpen} handleDrawer={handleDrawer} />
+    <div>
       <AppBar 
         position="sticky" 
-        className={classes.appBar} 
         elevation={0}
         color='transparent'
       >
-        <Toolbar className={classes.appBarWrapper}>
-          <IconButton onClick={handleDrawer}>
-            <SortIcon className={classes.icon} />
+        <Toolbar>
+          <IconButton href="/" edge="start"> 
+            <Avatar src={'../assets/ThirdsMediaSmall.png'} />
           </IconButton>
-          {
-            !noLogo
-              ? <Typography className={classes.header} component="h1" variant="h3">
-                  Thirds<span className={classes.colorText}>Media</span>
-                </Typography>
-              : false
+          <IconButton onClick={onOpenDrawer}>
+            { firebase.user ? <SortIcon /> : false }
+          </IconButton>
+          <div style={{flexGrow: 1}}></div>
+          { 
+            firebase.user ? 
+              <div>
+                <AppDrawer isOpen={isOpen} handleDrawer={onOpenDrawer} />
+                <Avatar /> 
+              </div>
+            : <Toolbar>
+                <Button className={classes.button} href="/about">About</Button>
+                <Button className={classes.button} href="/contact">Contact Us</Button>
+                <Button className={classes.button}>Training</Button>
+                <Button className={classes.loginButton} href="/signin" variant="contained">Login</Button>
+              </Toolbar>
           }
         </Toolbar>
       </AppBar>

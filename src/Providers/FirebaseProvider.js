@@ -67,38 +67,50 @@ function useFirebaseProvider() {
   }
 
   const signup = (data) => {
-    const { address, company, name, email, password, phone } = data;
+    const { 
+      accountType,
+      company, 
+      confirm, 
+      name, 
+      email, 
+      password, 
+      phone 
+    } = data;
+
     setLoading(true)
 
-    return firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(response => {
-        const userData = Object.assign({}, {
-          id: response.user.uid,
-          address,
-          email,
-          name,
-          phone,
-          company,
-          bio: '',
-          isAdmin: false,
-          isVerified: false,
-          accountType: '',
-          twitter: '',
-          instagram: '',
-          website: '',
-          picture: '',
-          favorites: [],
+    if (confirm !== password) {
+      setError("Passwords do not match");
+      setLoading(false);
+    } else {
+      return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(response => {
+          const userData = Object.assign({}, {
+            accountType,
+            bio: '',
+            company,
+            email,
+            favorites: [],
+            id: response.user.uid,
+            instagram: '',
+            isVerified: false,
+            isAdmin: accountType === 'business' ? true : false,
+            name,
+            phone,
+            picture: '',
+            twitter: '',
+            website: '',
+          })
+          firebase.firestore().collection("users").doc(response.user.uid).set(userData)
         })
-        console.log("From provider: ", userData);
-        firebase.firestore().collection("users").doc(response.user.id).set(userData)
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => {
-        setLoading(false)
-        setError(null)
-      })
+        .catch((e) => setError(e.message))
+        .finally(() => {
+          setLoading(false)
+          setError(null)
+        })
+    }
   }
 
   const signout = () => {
@@ -110,6 +122,18 @@ function useFirebaseProvider() {
         setUser(false)
         setError(null)
       })
+  }
+  
+  // So this is a simulation of how you would fetch a company account's users 
+  // You could loop through all the items in the employees array and fetch them from firestore like below
+  const getEmployees = () => {
+    const userRef = firebase.firestore().collection("users");
+      return userRef
+        .doc(user.employees[0])
+        .get()
+        .then((document) => {
+          console.log("From provider: ", document.data())
+        }).catch((e) => console.log("error: ", e))
   }
 
   const updateUser = (userData) => {
@@ -222,6 +246,7 @@ function useFirebaseProvider() {
     updateUser,
     uploadImageToStorage,
     sendContactEmail,
+    getEmployees,
   };
 }
 
@@ -243,3 +268,4 @@ export function FirebaseProvider({ children }) {
     </FirebaseContext.Provider>
   );
 }
+

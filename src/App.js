@@ -7,23 +7,26 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 /* Static data */
 import exampleDatabase from './static/exampleDatabase';
 
-/* Auth */
+/* Unauthenticated */
 import Start from './Auth/Start';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
 import { useFirebase } from './Providers/FirebaseProvider';
 
-/* App */
+/* Authenticated */
 import Profile from './Profile/Profile';
-import Contact from './Components/Contact';
-import About from './Components/About';
 import Wizard from './CreationWizard/Wizard';
 import Review from './CreationWizard/Review';
 import Products from './Products/Products';
-import LandingPage from './LandingPage/LandingPage';
 import Cocktail from './Components/Cocktail';
+
+/* Either */
+import Contact from './Components/Contact';
+import About from './Components/About';
 import Success from './Components/Success';
+
+
 
 const theme = createMuiTheme({
   palette: {
@@ -50,32 +53,29 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {
-        firebase.user ?
-          <Router>
+      <Router>
+        <Switch>
+          <Route path="/success" component={Success} /> 
+          <Route path="/contact" component={Contact} />
+          <Route path="/about" component={About} />
+        </Switch>
+        {
+          firebase.user ? 
             <Switch>
-              <Route exact path="/" component={LandingPage} />
+              <Route path="/" exact render={() => <Products data={exampleDatabase} />} />
               <Route path="/profile" component={Profile} />
-              <Route path="/contact" component={Contact} />
               <Route path="/create" component={Wizard} />
-              <Route path="/about" component={About} />
-              <Route path="/success" component={Success} />
               <Route path="/review" render={() => <Review item={exampleDatabase[0]} />} />
-              <Route path="/discover" render={() => <Products data={exampleDatabase} />} />
               <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} />} />
             </Switch>
-          </Router>
-        :
-          <Router>
-            <Switch>
+          : <Switch>
               <Route path="/" exact component={Start} />
-              <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
+              <Route path="/register/:type" component={SignUp} />
               <Route path="/forgotpassword" component={ForgotPassword} />
-              <Route path="/success" component={Success} />
             </Switch>
-          </Router>
-      }
+        }
+      </Router>
     </ThemeProvider>
   )
 }

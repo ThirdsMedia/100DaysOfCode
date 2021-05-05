@@ -18,8 +18,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
-import HelpIcon from '@material-ui/icons/Help';
-import EmailIcon from '@material-ui/icons/Email';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -38,11 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AppDrawer({ isOpen, handleDrawer }) {
   const classes = useStyles();
-  const auth = useFirebase();
+  const firebase = useFirebase();
   const history = useHistory();
 
   const onSignOutHandler = () => {
-    auth.signout()
+    firebase.signout()
       .catch((e) => console.log(e.message))
       .finally(() => history.push("/"))
   }
@@ -63,10 +61,10 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
           </Grid>
           <Grid item>
             <Typography variant="h6" className={classes.title}>
-              {auth.user.displayName}
+              {firebase.user.name}
             </Typography>
             <Typography variant="caption" color="textSecondary" className={classes.title}>
-              {auth.user.username}
+              {firebase.user.accountType}
             </Typography>
           </Grid>
         </Grid>
@@ -104,22 +102,18 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
               <ListItemText primary="Create" />
             </ListItem>
           </Link>
-          <Link href='/about' color='inherit'>
-            <ListItem button>
-              <ListItemIcon>
-                <HelpIcon />
-              </ListItemIcon>
-              <ListItemText primary="About" />
-            </ListItem>
-          </Link>
-          <Link href='/contact' color='inherit'>
-            <ListItem button>
-              <ListItemIcon>
-                <EmailIcon />
-              </ListItemIcon>
-              <ListItemText primary="Contact Us" />
-            </ListItem>
-          </Link>
+          {
+            firebase.user.isAdmin ? 
+              <Link href='/management' color='inherit'>
+                <ListItem button>
+                  <ListItemIcon>
+                    <LocalBarIcon /> 
+                  </ListItemIcon>
+                  <ListItemText primary="Management" />
+                </ListItem>
+              </Link>
+            : false
+          }
         </List>
         <Divider />
         <List component='nav'>

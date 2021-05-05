@@ -220,6 +220,7 @@ export default function Profile() {
   const auth = useFirebase();
   const [value, setValue] = useState(0);
   const [image, setImage] = useState(auth.user.picture)
+  auth.getEmployees()
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -263,7 +264,7 @@ export default function Profile() {
         </div>
         <Container className={classes.info}>
           <Typography component="h1" variant="h3" style={{fontFamily: 'Nunito'}}>
-            {auth.user.displayName}
+            {auth.user.name}
           </Typography>
           <span style={{color: '#d0d0d0'}}>{auth.user.username}</span>
           <Breadcrumbs className={classes.breadcrumbs}>
