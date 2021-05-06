@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MainBar from '../Components/MainBar';
+import StartPageBar from '../Components/StartPageBar';
 import { useHistory } from 'react-router-dom';
 import useWindowPosition from './useWindowPosition';
 import {
@@ -121,7 +121,7 @@ export default function Start() {
 
   return (
     <main className={classes.main}>
-      <MainBar />
+      <StartPageBar />
       <div className={classes.header} id="header">
         <Collapse appear in={checked} { 
           ... checked ? { timeout: 1000 } : {}
@@ -142,9 +142,9 @@ export default function Start() {
           Are you signing in as
         </Typography>
         <div className={classes.action}>
-          <NavCard title={"Customer"} navigate={() => onNavigate("customer")} />
-          <NavCard title={"Mixologist"} navigate={() => onNavigate("mixologist")} />
-          <NavCard title={"Business"} navigate={() => onNavigate("business")} />
+          <NavCard title={"Customer"} navigate={() => onNavigate("Customer")} />
+          <NavCard title={"Mixologist"} navigate={() => onNavigate("Mixologist")} />
+          <NavCard title={"Business"} navigate={() => onNavigate("Business")} />
         </div>
       </div>
     </main>

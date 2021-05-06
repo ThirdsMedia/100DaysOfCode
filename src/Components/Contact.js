@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import { useHistory } from 'react-router-dom';
-import MainBar from '../Components/MainBar';
+import StartPageBar from '../Components/StartPageBar';
 import Copyright from '../Components/Copyright';
 import {
   Avatar,
@@ -82,7 +82,7 @@ export default function Contact() {
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7} className={classes.image}>
-        <MainBar />
+        <StartPageBar />
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>

@@ -1,14 +1,13 @@
 import React, { useState }  from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import MainBar from '../Components/MainBar';
-import CardList from '../Products/CardList';
 import QRCode from '../Components/QRCode';
+import CardList from '../Products/CardList';
 import exampleDatabase from '../static/exampleDatabase';
 import {
   AppBar,
   Avatar,
   Container,
-  IconButton,
   Box,
   Link,
   Typography,
@@ -16,6 +15,7 @@ import {
   Tabs,
   Tab,
   Button,
+  Divider,
 } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -116,6 +116,7 @@ export default function Profile() {
     setValue(newValue)
   }
 
+  // This should be separated into it's own ImageUpload component
   const handleImageUpload = (event) => {
     const imageName = event.target.files[0].name
 
@@ -131,9 +132,8 @@ export default function Profile() {
 
   return (
     <div>
-      <div style={{backgroundColor: '#202020'}}>
-        <MainBar noLogo />
-      </div>
+    <MainBar noLogo />
+    <Container>
       <Container maxWidth="xl" className={classes.container}>
         <div id="avatar-section">
           <input 
@@ -155,6 +155,7 @@ export default function Profile() {
             {auth.user.name} <Button variant="outlined" color="primary" href="/edit-profile" className={classes.button}>Edit Profile</Button>
           </Typography>
           <span style={{color: '#d0d0d0'}}>{auth.user.accountType}</span>
+          <span style={{color: '#d0d0d0'}}>{auth.user.followers.length} Followers - {auth.user.following.length} Following</span>
           <Breadcrumbs className={classes.breadcrumbs}>
             <Link rel="noopener" href={auth.user.social.twitter} className={classes.link}>
               <TwitterIcon />
@@ -166,13 +167,14 @@ export default function Profile() {
               <LinkIcon />
             </Link>
           </Breadcrumbs>
+          <Divider />
           <Typography className={classes.bio}>
             {auth.user.bio}
           </Typography>
         </Container>
         <QRCode />       
       </Container>
-      <AppBar position="sticky" className={classes.navBar}>
+      <AppBar position="static" className={classes.navBar}>
         <Tabs 
           value={value}
           indicatorColor="primary"
@@ -190,6 +192,7 @@ export default function Profile() {
       <TabPanel value={value} index={1}>
         <CardList data={exampleDatabase} />
       </TabPanel>
+    </Container>
     </div>
   );
 }

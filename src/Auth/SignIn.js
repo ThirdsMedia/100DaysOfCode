@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Copyright from '../Components/Copyright';
-import { useHistory } from 'react-router-dom';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import {
   Container,
@@ -17,13 +15,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.primary.background,
+    backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/jade8.jpg'})`,
+    backgroundSize: 'cover',
+    minHeight: '100vh',
+    paddingTop: theme.spacing(10),
   },
   paper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: theme.spacing(6),
+    alignContent: 'center',
     border: '1px solid grey',
     padding: theme.spacing(3),
     backgroundColor: theme.palette.primary.background,
@@ -56,7 +57,6 @@ const useStyles = makeStyles(theme => ({
 export default function SignIn() {
   const classes = useStyles();
   const firebase = useFirebase();
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(firebase.error);
@@ -72,7 +72,7 @@ export default function SignIn() {
   }
 
   const onSignInHandler = () => {
-    firebase.signin().finally(() => history.push("/home"));
+    firebase.signin(email, password)
   }
 
   if (firebase.loading) {
@@ -84,7 +84,7 @@ export default function SignIn() {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
     <Container className={classes.paper} component="main" maxWidth="xs">
       <Typography style={{fontFamily: 'Nunito'}} component="h1" variant="h5">
         Log in to <span className={classes.colorText}>JADE</span>
@@ -94,46 +94,46 @@ export default function SignIn() {
           ? <Typography className={classes.error}>{error}</Typography>
           : false
       }
-      <TextField
-        id="email"
-        name="userEmail"
-        label="Email"
-        margin="normal"
-        value={email}
-        required
-        fullWidth
-        variant="outlined"
-        onChange={(e) => onChangeHandler(e)}
-      />
-      <TextField
-        id="password"
-        name="userPassword"
-        label="Password"
-        value={password}
-        margin="normal"
-        type="password"
-        required
-        fullWidth
-        variant="outlined"
-        onChange={(e) => onChangeHandler(e)}
-      />
-      <Grid container>
-        <FormControlLabel
-          control={<Checkbox color="secondary" id="remember" size="small" />}
-          label="Remember Me"
+        <TextField
+          id="email"
+          name="userEmail"
+          label="Email"
+          margin="normal"
+          value={email}
+          required
+          fullWidth
+          variant="outlined"
+          onChange={(e) => onChangeHandler(e)}
         />
-      </Grid>
-      <Button 
-        className={classes.submitButton}
-        type="submit"
-        name="reg"
-        color="primary"
-        fullWidth
-        variant="contained"
-        onClick={onSignInHandler}
-      >
-        Sign In
-      </Button>
+        <TextField
+          id="password"
+          name="userPassword"
+          label="Password"
+          value={password}
+          margin="normal"
+          type="password"
+          required
+          fullWidth
+          variant="outlined"
+          onChange={(e) => onChangeHandler(e)}
+        />
+        <Grid container>
+          <FormControlLabel
+            control={<Checkbox color="secondary" id="remember" size="small" />}
+            label="Remember Me"
+          />
+        </Grid>
+        <Button 
+          className={classes.submitButton}
+          type="submit"
+          name="reg"
+          color="primary"
+          fullWidth
+          variant="contained"
+          onClick={onSignInHandler}
+        >
+          Sign In
+        </Button>
       <Grid container justify="space-around">
         <Grid item>
           <Link href="/forgotpassword" variant="body2">

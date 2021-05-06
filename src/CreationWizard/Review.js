@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   Box,
   Container,
   IconButton,
   Button,
-  TextField,
   AppBar,
   Toolbar,
   Typography,
@@ -66,10 +65,10 @@ const useStyles = makeStyles(theme => ({
 export default function Review() {
   const classes = useStyles();
   const location = useLocation();
-  const [isPictureSelected, setIsPictureSelected] = useState(false);
-  const [imagePath, setImagePath] = useState('');
+//  const [isPictureSelected, setIsPictureSelected] = useState(false);
+//  const [imagePath, setImagePath] = useState('');
 
-  const handlePictureSelect = () => setIsPictureSelected(true)
+  //const handlePictureSelect = () => setIsPictureSelected(true)
 
   return (
     <div>
@@ -78,8 +77,8 @@ export default function Review() {
           <input 
             type="file" 
             accept="image/*" 
-            onChange={handlePictureSelect}
-            value={ e => setImagePath(e.target.value) }
+  //          onChange={handlePictureSelect}
+ //           value={ e => setImagePath(e.target.value) }
             hidden 
           />
           <label htmlFor="contained-button-file">

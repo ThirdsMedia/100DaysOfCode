@@ -46,8 +46,21 @@ function useFirebaseProvider() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const baseData = {
+    bio: '',
+    favorites: [],
+    followers: [],
+    following: [],
+    isVerified: false,
+    social: {
+      google: '',
+      instagram: '',
+      twitter: '',
+      website: '',
+    },
+  };
   const googleAuth = new firebase.auth.GoogleAuthProvider();
-  const storageRef = firebase.storage().ref();
+//  const storageRef = firebase.storage().ref();
 
   const signin = (email, password) => {
     setLoading(true)
@@ -67,54 +80,49 @@ function useFirebaseProvider() {
   }
 
   const signup = (data) => {
-    const { 
-      accountType,
-      company, 
-      confirm, 
-      name, 
-      email, 
-      password, 
-      phone 
-    } = data;
-
     setLoading(true)
 
-    if (confirm !== password) {
-      setError("Passwords do not match");
-      setLoading(false);
-    } else {
-      return firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(response => {
-          const userData = Object.assign({}, {
-            accountType,
-            bio: '',
-            company,
-            email,
-            favorites: [],
-            followers: [],
-            following: [],
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(data.email, data.password)
+      .then(response => {
+        firebase.firestore().collection("users")
+          .doc(response.user.uid)
+          .set({
+            ...data,
+            ...baseData,
             id: response.user.uid,
-            isVerified: false,
-            isAdmin: accountType === 'business' ? true : false,
-            name,
-            phone,
-            picture: '',
-            social: {
-              instagram: '',
-              twitter: '',
-              website: '',
-            },
+            isAdmin: false,
           })
-          firebase.firestore().collection("users").doc(response.user.uid).set(userData)
-        })
-        .catch((e) => setError(e.message))
-        .finally(() => {
-          setLoading(false)
-          setError(null)
-        })
-    }
+      })
+      .catch((e) => setError(e.message))
+      .finally(() => {
+        setError(null);
+        setLoading(false);
+      });
+  }
+
+  const signUpAsBusiness = (data) => {
+    setLoading(true);
+
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(data.email, data.password)
+      .then(response => {
+        firebase.firestore().collection("users")
+          .doc(response.user.uid)
+          .set({
+            ...data,
+            ...baseData,
+            id: response.user.uid,
+            isAdmin: true,
+          })
+      })
+      .catch((e) => setError(e.message))
+      .finally(() => {
+        setError(null);
+        setLoading(false);
+      });
   }
 
   const signout = () => {
@@ -127,9 +135,17 @@ function useFirebaseProvider() {
         setError(null)
       })
   }
+
+  const checkPasswordIntegrity = (password, confirm) => {
+    if (confirm !== password) {
+      setError("Passwords do not match")
+    }
+    setLoading(false);
+  }
   
   // So this is a simulation of how you would fetch a company account's users 
   // You could loop through all the items in the employees array and fetch them from firestore like below
+  /*
   const getEmployees = (eid) => {
     const userRef = firebase.firestore().collection("users");
     return userRef
@@ -139,6 +155,7 @@ function useFirebaseProvider() {
         return document.data()
       }).catch((e) => console.log(e));
   }
+  */
 
   const updateUser = (userData) => {
     const userRef = firebase.firestore().collection("users");
@@ -153,6 +170,7 @@ function useFirebaseProvider() {
     }
   }
 
+  /*
   const uploadImageToStorage = (image, name) => {
 //    const imageRef = storageRef.child(`${user.id}/images/${name}`)
     const imageRef = storageRef.child(name)
@@ -167,6 +185,7 @@ function useFirebaseProvider() {
       })
       .catch((e) => setError(e))
   }
+  */
 
   const sendContactEmail = (formData) => {
     const emailRef = firebase.firestore().collection("emails");
@@ -243,14 +262,14 @@ function useFirebaseProvider() {
     loading,  // the loading boolean
     signin, 
     signup,
+    signUpAsBusiness,
     signout,
     signInWithGoogle,
+    checkPasswordIntegrity,
     sendPasswordResetEmail,
     confirmPasswordReset,
     updateUser,
-    uploadImageToStorage,
     sendContactEmail,
-    getEmployees,
   };
 }
 

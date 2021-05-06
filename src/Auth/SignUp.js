@@ -88,7 +88,6 @@ function UserForm({ formProps }) {
       <TextField
         label="Name"
         {...register("name", { required: true })}
-        value={userData.name}
         margin="normal"
         fullWidth
         variant="outlined"
@@ -100,7 +99,6 @@ function UserForm({ formProps }) {
           <TextField
             label="Email"
             {...register("email", { required: true })}
-            value={userData.email}
             margin="normal"
             fullWidth
             variant="outlined"
@@ -112,7 +110,6 @@ function UserForm({ formProps }) {
           <TextField
             label="Phone Number (optional)"
             {...register("phone")}
-            value={userData.phone}
             margin="normal"
             fullWidth
             type="tel"
@@ -124,7 +121,6 @@ function UserForm({ formProps }) {
       <TextField
         label="Password"
         {...register("password", { required: true })}
-        value={userData.password}
         margin="normal"
         type="password"
         variant="outlined"
@@ -135,7 +131,6 @@ function UserForm({ formProps }) {
       <TextField
         label="Confirm Password"
         {...register("confirm", { required: true })}
-        value={userData.confirm}
         margin="normal"
         type="password"
         variant="outlined"
@@ -243,8 +238,8 @@ export default function SignUp() {
   const formProps = { register, errors, userData, setUserData };
 
   useEffect(() => {
-    setUserData({...userData, accountType: type});
-  }, []);
+    setUserData(userData => ({...userData, accountType: type}));
+  }, [type]);
   
   if (firebase.loading) {
     return (
@@ -258,7 +253,20 @@ export default function SignUp() {
     if (firebase.error) {
       return <span className={classes.error}>{firebase.error}</span>
     }
-    firebase.signup(userData);
+    
+    switch(type) {
+      case "Customer":
+        firebase.signup(userData);
+        break;
+      case "Mixologist":
+        firebase.signup(userData);
+        break;
+      case "Business":
+        firebase.signUpAsBusiness(userData);
+        break;
+      default:
+        return <div></div>
+    }
   }
 
   return (
@@ -272,11 +280,11 @@ export default function SignUp() {
           { firebase.error ? <span className={classes.error}>{firebase.error}</span> : false }
           <form noValidate onSubmit={handleSubmit(onSubmitForm)}>
             {
-              type === 'business' ?
+              type === 'Business' ?
                 <BusinessForm formProps={formProps} />
-              : type === 'mixologist' ? 
+              : type === 'Mixologist' || type === 'Customer' ? 
                   <UserForm formProps={formProps} />
-                : <UserForm formProps={formProps} />
+                : false
             }
             <FormControlLabel
               control={<Checkbox color="secondary" id="terms" />}
