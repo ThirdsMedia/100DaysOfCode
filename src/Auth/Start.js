@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import StartPageBar from '../Components/StartPageBar';
+import StartPageBar from '../Navigation/StartPageBar';
 import { useHistory } from 'react-router-dom';
 import useWindowPosition from './useWindowPosition';
 import {

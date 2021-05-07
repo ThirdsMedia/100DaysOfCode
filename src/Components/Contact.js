@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import { useHistory } from 'react-router-dom';
-import StartPageBar from '../Components/StartPageBar';
+import StartPageBar from '../Navigation/StartPageBar';
 import Copyright from '../Components/Copyright';
 import {
   Avatar,

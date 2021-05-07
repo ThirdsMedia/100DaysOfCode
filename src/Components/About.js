@@ -1,5 +1,5 @@
 import React from 'react';
-import StartPageBar from './StartPageBar';
+import StartPageBar from '../Navigation/StartPageBar';
 import {
   Typography,
 } from '@material-ui/core';

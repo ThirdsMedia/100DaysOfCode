@@ -55,7 +55,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
         <Grid container className={classes.avatar}>
           <Grid item>
             <IconButton href="/profile">
-              <Avatar />
+              <Avatar src={firebase.user.picture} />
             </IconButton>
           </Grid>
           <Grid item>

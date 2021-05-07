@@ -1,12 +1,13 @@
 import React, { useState }  from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
-import MainBar from '../Components/MainBar';
+import MainBar from '../Navigation/MainBar';
+import UserAvatar from './UserAvatar';
 import QRCode from '../Components/QRCode';
 import CardList from '../Products/CardList';
 import exampleDatabase from '../static/exampleDatabase';
 import {
   AppBar,
-  Avatar,
+  Avatar, 
   Container,
   Box,
   Link,
@@ -47,11 +48,6 @@ const useStyles = makeStyles(theme => ({
   bio: {
     fontFamily: 'Roboto',
   },
-  profilePic: {
-    height: theme.spacing(26),
-    width: theme.spacing(26),
-    cursor: "pointer",
-  },
   breadcrumbs: {
     fontFamily: 'Nunito',
     margin: 20
@@ -64,6 +60,10 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(8),
     textTransform: 'none',
     fontFamily: 'Nunito',
+  },
+  profilePic: {
+    height: theme.spacing(26),
+    width: theme.spacing(26),
   },
 }));
 
@@ -110,24 +110,9 @@ export default function Profile() {
   const classes = useStyles();
   const auth = useFirebase();
   const [value, setValue] = useState(0);
-  const [image, setImage] = useState(auth.user.picture)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
-  }
-
-  // This should be separated into it's own ImageUpload component
-  const handleImageUpload = (event) => {
-    const imageName = event.target.files[0].name
-
-    if (event.target.files.length > 0) {
-      const imageFile = URL.createObjectURL(event.target.files[0]);
-      console.log(auth.user.picture)
-      setImage(imageFile);
-
-      // upload to firebase and set the user's new avatar image
-      auth.uploadImageToStorage(imageFile, imageName)
-    }
   }
 
   return (
@@ -135,24 +120,10 @@ export default function Profile() {
     <MainBar noLogo />
     <Container>
       <Container maxWidth="xl" className={classes.container}>
-        <div id="avatar-section">
-          <input 
-            accept="image/*" 
-            hidden 
-            id="photo-upload" 
-            type="file" 
-            onChange={(e) => handleImageUpload(e)} 
-          />
-          <label htmlFor="photo-upload">
-            <Avatar 
-              className={classes.profilePic} 
-              src={image}
-            />
-          </label>
-        </div>
+        <Avatar src={auth.user.picture} className={classes.profilePic}/>
         <Container className={classes.info}>
           <Typography component="h1" variant="h3" style={{fontFamily: 'Nunito'}}>
-            {auth.user.name} <Button variant="outlined" color="primary" href="/edit-profile" className={classes.button}>Edit Profile</Button>
+            {auth.user.name} <Button variant="outlined" color="primary" href="/settings" className={classes.button}>Edit Profile</Button>
           </Typography>
           <span style={{color: '#d0d0d0'}}>{auth.user.accountType}</span>
           <span style={{color: '#d0d0d0'}}>{auth.user.followers.length} Followers - {auth.user.following.length} Following</span>

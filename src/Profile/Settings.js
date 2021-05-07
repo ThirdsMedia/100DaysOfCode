@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
-import MainBar from '../Components/MainBar';
+import MainBar from '../Navigation/MainBar';
+import UserAvatar from './UserAvatar';
 import { 
   Container,
   TextField,
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function EditProfile() {
+export default function Settings() {
   const classes = useStyles(); 
   const firebase = useFirebase();
   const [userData, setUserData] = useState({...firebase.user});
@@ -44,6 +45,7 @@ export default function EditProfile() {
     <div>
       <MainBar />
       <Container className={classes.container}>
+        <UserAvatar />
         <form>
           <TextField 
             id="displayName"

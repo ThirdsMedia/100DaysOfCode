@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import MainBar from '../Components/MainBar';
+import MainBar from '../Navigation/MainBar';
 import InfoDrawer from './InfoDrawer';
 import BasicInfo from './BasicInfo';
 import Ingredients from './Ingredients';

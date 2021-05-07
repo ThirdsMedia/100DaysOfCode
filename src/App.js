@@ -1,4 +1,5 @@
 import React from 'react';
+import { useFirebase } from './Providers/FirebaseProvider';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { lightGreen, pink } from '@material-ui/core/colors';
@@ -12,9 +13,10 @@ import Start from './Auth/Start';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import ForgotPassword from './Auth/ForgotPassword';
-import { useFirebase } from './Providers/FirebaseProvider';
+
+/* Authenticated */
 import Profile from './Profile/Profile';
-import EditProfile from './Profile/EditProfile';
+import Settings from './Profile/Settings';
 import Wizard from './CreationWizard/Wizard';
 import Review from './CreationWizard/Review';
 import Products from './Products/Products';
@@ -62,7 +64,7 @@ export default function App() {
             <Switch>
               <Route path={["/", "/home"]} exact component={Products} />
               <Route path="/profile" component={Profile} />
-              <Route path="/edit-profile" component={EditProfile} />
+              <Route path="/settings" component={Settings} />
               <Route path="/create" component={Wizard} />
               <Route path="/review" render={() => <Review item={exampleDatabase[0]} />} />
               <Route path="/cocktail" render={() => <Cocktail item={exampleDatabase[0]} />} />

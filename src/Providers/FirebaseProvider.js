@@ -46,6 +46,8 @@ function useFirebaseProvider() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const googleAuth = new firebase.auth.GoogleAuthProvider();
+  const storageRef = firebase.storage().ref();
   const baseData = {
     bio: '',
     favorites: [],
@@ -59,9 +61,8 @@ function useFirebaseProvider() {
       website: '',
     },
   };
-  const googleAuth = new firebase.auth.GoogleAuthProvider();
-//  const storageRef = firebase.storage().ref();
 
+  
   const signin = (email, password) => {
     setLoading(true)
 
@@ -143,20 +144,6 @@ function useFirebaseProvider() {
     setLoading(false);
   }
   
-  // So this is a simulation of how you would fetch a company account's users 
-  // You could loop through all the items in the employees array and fetch them from firestore like below
-  /*
-  const getEmployees = (eid) => {
-    const userRef = firebase.firestore().collection("users");
-    return userRef
-      .doc(eid)
-      .get()
-      .then((document) => {
-        return document.data()
-      }).catch((e) => console.log(e));
-  }
-  */
-
   const updateUser = (userData) => {
     const userRef = firebase.firestore().collection("users");
     if (user) {
@@ -170,22 +157,22 @@ function useFirebaseProvider() {
     }
   }
 
-  /*
-  const uploadImageToStorage = (image, name) => {
-//    const imageRef = storageRef.child(`${user.id}/images/${name}`)
-    const imageRef = storageRef.child(name)
+    // so this issue here is that it takes a lot of time to upload, so you have to sit there and wait and if
+    // you reload the page too soon it doesn't work because you didn't finish uploading.
+  const uploadImageToStorage = (image) => {
+    const imageRef = storageRef.child(`${user.id}/images/${image.name}`)
 
-    // This successfully updates the user's picture in Firestore. Now to just get it to display on Profile
-    imageRef
+    return imageRef
       .put(image)
       .then((snapshot) => {
-        imageRef.getDownloadURL().then((url) => {
-          updateUser({picture: url})
-        })
+        if (snapshot.state === 'success') {
+          return imageRef.getDownloadURL();
+        } else {
+          setError("Upload error: ", snapshot.state);
+          console.log(snapshot.state);
+        }
       })
-      .catch((e) => setError(e))
   }
-  */
 
   const sendContactEmail = (formData) => {
     const emailRef = firebase.firestore().collection("emails");
@@ -262,13 +249,14 @@ function useFirebaseProvider() {
     loading,  // the loading boolean
     signin, 
     signup,
-    signUpAsBusiness,
     signout,
+    signUpAsBusiness,
     signInWithGoogle,
+    updateUser,
+    uploadImageToStorage,
     checkPasswordIntegrity,
     sendPasswordResetEmail,
     confirmPasswordReset,
-    updateUser,
     sendContactEmail,
   };
 }
