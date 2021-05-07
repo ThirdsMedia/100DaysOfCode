@@ -3379,3 +3379,64 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Go for a jog.
 
 **Link to work:** [MainBar](https://github.com/ThirdsMedia/100DaysOfCode/blob/day93/src/Components/MainBar.js)
+
+### Day 94: May 6, 2021 - Thursday
+
+**Today's Progress**: Finally got the profile picture upload to Firebase storage working and got it to update the user's picture as the reference
+
+**Thoughts:** Woof. There's some issues though. First of all, it doesn't update immediately. You have to reload the app for it to update everywhere else on the application, which isn't exactly the worst thing ever. To be honest I just need to change where some of the logic is so that it doesn't actually update the user until I scroll down the settings and click the save button, which reloads the app and then that's all good I think. The other issue is that larger images take some time to upload, and there's no feedback to the user about how long it will take. So if I upload a 7mb file then click save and move on it may not actually work because it hadn't finished uploading to Firebase storage. Although, on second thought I think I just realized why many applications don't allow you to upload avatars over a certain size. It takes a toll on the database quota which would quickly rack up given enough users, and it introduces that little business logic bug I was just referring to. Soooo... all I have to do is add some stuff in the Firebase provider's upload function that checks to totalBytes of the snapshot reference and throws an error if it's too big. 
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [x] Enforce input of Display Name field 
+	- [x] Add an option to select Mixologist or Customer user role when signing up, and make the changes in App to display the appropriate components based on role
+	- [x] and throw error if unsuccessful
+	- [ ] Navigate to Success component upon successfully signing up 
+	- [ ] Send a verification email before allowing them to log in. (there's an emailVerified field in the firebase user object which is false by default). Check that upon attempting to log in. 
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [x] Successfully console.log() a full cocktail object
+	- [x] Make sure that it updates appropriately if you backtrack the form
+	- [x] Implement useForm on the ingredients component
+	- [x] Complete the Miscellaneous component
+	- [x] Add input checking so you can't move on without filling out the name, type, and amount 
+	- [x] Figure out the best way to delete objects from the array using the MinusButton (and make it work)
+	- [ ] Implement the Cocktail picture selector so that it either displays on the Review component, or make it so you can select it once at the Review component. 
+	- [x] Fix workflow so that there is no BaseSpirit component, and instead add a Selector just like you specified above
+	- [ ] Figure out how to save values from Ingredients so if you have to go back they will still be there. 
+	- [ ] Push object to Firebase
+	- [ ] Get the Review component to be editable
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Adding favorites
+	- [x] Separate the EditProfile component from the Profile component
+	- [ ] Redesign the Profile page to look more like a pretty social media profile
+- [ ] App finishing touches
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** Uploading a large picture introduces a business logic bug where you can interrupt the upload without realizing it if you save and move on too quickly. The image doesn't upload application-wide until a page reload.
+
+**Solutions:** Add the UserAvatar component into the Settings component so that you can't update the firebase.user object until you've actually saved the form in Settings (by clicking the button at the bottom of the page). Check the totalBytes value in the uploadImageToStorage function. If it gets past a certain point then throw an error. 
+
+**Link to work:** [FirebaseProvider](https://github.com/ThirdsMedia/100DaysOfCode/blob/day94/src/Providers/FirebaseProvider.js)
