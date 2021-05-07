@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import MainBar from '../Navigation/MainBar';
-import UserAvatar from './UserAvatar';
 import { 
-  Container,
+  Avatar,
+  IconButton,
   TextField,
   Grid,
   Button,
@@ -19,9 +19,19 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     padding: theme.spacing(3),
+    textAlign: 'center',
   },
   button: {
     borderRadius: 37
+  },
+  avatar: {
+    textAlign: 'center', 
+    marginBottom: theme.spacing(3),
+  },
+  profilePic: {
+    height: theme.spacing(26),
+    width: theme.spacing(26),
+    cursor: "pointer",
   },
 }));
 
@@ -29,85 +39,113 @@ export default function Settings() {
   const classes = useStyles(); 
   const firebase = useFirebase();
   const [userData, setUserData] = useState({...firebase.user});
+  const [image, setImage] = useState(firebase.user.picture);
+  const [file, setFile] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleImageChange = (event) => {
+    setFile(event.target.files[0]);
+    const imageFile = URL.createObjectURL(event.target.files[0]);
+    setImage(imageFile);
+  }
 
   const onChangeInput = (event) => {
     setUserData({...userData, [event.target.name]: event.target.value})
   }
 
-  const onSubmitHandler = () => {
-    firebase.updateUser(userData)
-      .then(() => console.log("Successfully updated the user's data"))
-      .catch((e) => console.log(e.message))
-      .finally(() => window.location.reload(true))
+// Yep, just add all the stuff in onUploadImage into here too
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    if (file) {
+      if (file.size > 2097152) {
+        setError("This file is too large");
+      } else {
+        firebase.uploadImageToStorage(file).then((url) => {
+          firebase.updateUser({...userData, picture: url})
+        })
+        .catch((e) => setError(e.message))
+      }
+    } else {
+      firebase.updateUser(userData);
+    }
   }
 
   return (
     <div>
       <MainBar />
-      <Container className={classes.container}>
-        <UserAvatar />
-        <form>
-          <TextField 
-            id="displayName"
-            name="displayName"
-            label="Name"
-            variant="outlined"
-            defaultValue={userData.name}
-            className={classes.field}
-            fullWidth
-            onChange={(e) => onChangeInput(e)}
-          />
-          <TextField 
-            id="bio" 
-            name="bio"
-            label="Bio"
-            variant="outlined"
-            defaultValue={userData.bio}
-            className={classes.field}
-            fullWidth 
-            multiline 
-            rows={5}
-            onChange={(e) => onChangeInput(e)}
-          />
-          <TextField 
-            id="website" 
-            name="website"
-            label="Website"
-            variant="outlined"
-            defaultValue={userData.social.website}
-            className={classes.field}
-            fullWidth
-            onChange={(e) => onChangeInput(e)}
-          />
-          <TextField 
-            id="twitter"
-            name="twitter"
-            label="Twitter"
-            variant="outlined"
-            defaultValue={userData.social.twitter}
-            className={classes.field}
-            fullWidth
-            onChange={(e) => onChangeInput(e)}
-          />
-          <TextField 
-            id="instagram"
-            name="instagram"
-            label="Instagram"
-            variant="outlined"
-            defaultValue={userData.social.instagram}
-            className={classes.field}
-            fullWidth
-            onChange={(e) => onChangeInput(e)}
-          />
-        </form>
+      <form className={classes.container} onSubmit={onSubmitHandler}>
+        <input 
+          accept="image/*" 
+          hidden 
+          id="photo-upload" 
+          type="file" 
+          onChange={(e) => handleImageChange(e)} 
+        />
+        <label htmlFor="photo-upload">
+          <IconButton component="span">
+            <Avatar 
+              className={classes.profilePic} 
+              src={image}
+            />
+          </IconButton>
+          {error ? <span>{error}</span> : false}
+        </label>
+        <TextField 
+          name="name"
+          label="Name"
+          variant="outlined"
+          defaultValue={userData.name}
+          className={classes.field}
+          fullWidth
+          onChange={(e) => onChangeInput(e)}
+        />
+        <TextField 
+          name="bio"
+          label="Bio"
+          variant="outlined"
+          defaultValue={userData.bio}
+          className={classes.field}
+          fullWidth 
+          multiline 
+          rows={5}
+          onChange={(e) => onChangeInput(e)}
+        />
+        <TextField 
+          name="website"
+          label="Website"
+          variant="outlined"
+          defaultValue={userData.website}
+          className={classes.field}
+          fullWidth
+          onChange={(e) => onChangeInput(e)}
+        />
+        <TextField 
+          name="twitter"
+          label="Twitter"
+          variant="outlined"
+          defaultValue={userData.twitter}
+          className={classes.field}
+          fullWidth
+          onChange={(e) => onChangeInput(e)}
+        />
+        <TextField 
+          name="instagram"
+          label="Instagram"
+          variant="outlined"
+          defaultValue={userData.instagram}
+          className={classes.field}
+          fullWidth
+          onChange={(e) => onChangeInput(e)}
+        />
         <Grid container justify="center">
           <Grid item xs={2}>
             <Button 
               color="primary" 
               variant="outlined"
+              type="submit"
               className={classes.button}
               startIcon={<SaveIcon />}
-              onClick={onSubmitHandler}
             >
               Update Profile
             </Button>
@@ -124,7 +162,7 @@ export default function Settings() {
             </Button>
           </Grid>
         </Grid>
-      </Container>
+        </form>
     </div>
   );
 }

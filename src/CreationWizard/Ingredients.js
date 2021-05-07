@@ -20,7 +20,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
-    display: 'flex',
+display: 'flex',
     flexDirection: 'column',
     textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0.3)',
@@ -128,6 +128,11 @@ const ItemSelector = ({ label, defaultValue, items, onChange }) => {
     </FormControl>
   );
 }
+
+/*
+ * This will need a Checkbox labeled: "Work in progress" or something so that verified Mixologists can submit unfinished cocktails
+ * for collaboration
+ */
 
 export default function Ingredients() {
   const classes = useStyles();

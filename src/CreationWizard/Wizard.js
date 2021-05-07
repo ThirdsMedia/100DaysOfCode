@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import MainBar from '../Navigation/MainBar';
 import InfoDrawer from './InfoDrawer';
+import PictureSelector from './PictureSelector';
 import BasicInfo from './BasicInfo';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
@@ -45,15 +46,22 @@ const useStyles = makeStyles(theme => ({
 function RenderStep(step) {
   switch (step) {
     case 0:
-      return <BasicInfo />
+      return <PictureSelector />
     case 1:
-      return <Ingredients />
+      return <BasicInfo />
     case 2: 
+      return <Ingredients />
+    case 3:
       return <Instructions />
     default:
       return false
   }
 }
+
+/* 
+ * I don't know why I didn't think about this before, but I'll need to add the user's id to this cocktail object too
+ * Date of submission aside from just the creation date
+ */
 
 export default function Wizard() {
   return (
@@ -71,6 +79,7 @@ function Create() {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => setChecked(true), []);
+  console.log("Teh cocktail: ", cocktail.recipe);
 
   const handleDrawer = () => setIsOpen(!isOpen)
 

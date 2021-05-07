@@ -54,12 +54,10 @@ function useFirebaseProvider() {
     followers: [],
     following: [],
     isVerified: false,
-    social: {
-      google: '',
-      instagram: '',
-      twitter: '',
-      website: '',
-    },
+    google: '',
+    instagram: '',
+    twitter: '',
+    website: '',
   };
 
   
@@ -87,6 +85,9 @@ function useFirebaseProvider() {
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
       .then(response => {
+        delete(data.password);
+        delete(data.confirm);
+
         firebase.firestore().collection("users")
           .doc(response.user.uid)
           .set({
@@ -110,6 +111,9 @@ function useFirebaseProvider() {
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
       .then(response => {
+        delete(data.password);
+        delete(data.confirm);
+
         firebase.firestore().collection("users")
           .doc(response.user.uid)
           .set({
@@ -146,14 +150,12 @@ function useFirebaseProvider() {
   
   const updateUser = (userData) => {
     const userRef = firebase.firestore().collection("users");
+
     if (user) {
       return userRef
         .doc(user.id)
         .update(userData)
-        .then(() => {
-          console.log("successfully updated user")
-        })
-        .catch((e) => setError(e))
+        .then(() => console.log("successfully updated user"));
     }
   }
 

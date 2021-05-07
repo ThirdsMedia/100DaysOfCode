@@ -13,7 +13,7 @@ export const useCocktail = () => {
 
 function useCocktailProvider() {
   const [recipe, setRecipe] = useState({});
-  const steps = ['Basic Information', 'Ingredients', 'Instructions'];
+  const steps = ['Cocktail Image', 'Basic Information', 'Ingredients', 'Instructions'];
   const [activeStep, setActiveStep] = useState(0);
   const { register, handleSubmit, formState: { errors } } = useForm();
 

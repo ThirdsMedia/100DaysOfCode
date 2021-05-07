@@ -1,7 +1,6 @@
 import React, { useState }  from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import MainBar from '../Navigation/MainBar';
-import UserAvatar from './UserAvatar';
 import QRCode from '../Components/QRCode';
 import CardList from '../Products/CardList';
 import exampleDatabase from '../static/exampleDatabase';
@@ -128,13 +127,13 @@ export default function Profile() {
           <span style={{color: '#d0d0d0'}}>{auth.user.accountType}</span>
           <span style={{color: '#d0d0d0'}}>{auth.user.followers.length} Followers - {auth.user.following.length} Following</span>
           <Breadcrumbs className={classes.breadcrumbs}>
-            <Link rel="noopener" href={auth.user.social.twitter} className={classes.link}>
+            <Link rel="noopener" href={auth.user.twitter} className={classes.link}>
               <TwitterIcon />
             </Link>
-            <Link rel="noopener" href={auth.user.social.instagram} className={classes.link}>
+            <Link rel="noopener" href={auth.user.instagram} className={classes.link}>
               <InstagramIcon />
             </Link>
-            <Link rel="noopener" href={auth.user.social.website} className={classes.link}>
+            <Link rel="noopener" href={auth.user.website} className={classes.link}>
               <LinkIcon />
             </Link>
           </Breadcrumbs>
