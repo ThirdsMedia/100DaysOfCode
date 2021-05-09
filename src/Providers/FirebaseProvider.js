@@ -46,8 +46,6 @@ function useFirebaseProvider() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const googleAuth = new firebase.auth.GoogleAuthProvider();
-  const storageRef = firebase.storage().ref();
   const baseData = {
     bio: '',
     favorites: [],
@@ -59,24 +57,6 @@ function useFirebaseProvider() {
     twitter: '',
     website: '',
   };
-
-  
-  const signin = (email, password) => {
-    setLoading(true)
-
-    return firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(response => {
-        setUser(response.user)
-        return response.user;
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => {
-        setLoading(false)
-        setError(null)
-      })
-  }
 
   const signup = (data) => {
     setLoading(true)
@@ -101,6 +81,7 @@ function useFirebaseProvider() {
       .finally(() => {
         setError(null);
         setLoading(false);
+        verifyUserEmail();
       });
   }
 
@@ -130,22 +111,29 @@ function useFirebaseProvider() {
       });
   }
 
-  const signout = () => {
-    console.log("It's signing you out automatically");
-    return firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        setUser(false)
-        setError(null)
-      })
+  const setCurrentUser = (user) => setUser(user)
+
+  // send a verification email
+  const verifyUserEmail = () => {
+    const user = firebase.auth().currentUser;
+
+    user.sendEmailVerification().then(() => console.log("Email sent successfully"));
   }
 
+  // Compare the password and confirm password fields
   const checkPasswordIntegrity = (password, confirm) => {
     if (confirm !== password) {
       setError("Passwords do not match")
     }
     setLoading(false);
+  }
+
+  const checkIsEmailVerified = () => {
+    return firebase.auth().currentUser.emailVerified ? true : false
+  }
+
+  const isAlreadyLoggedIn = () => {
+    return firebase.auth().currentUser ? true : false
   }
   
   const updateUser = (userData) => {
@@ -159,10 +147,8 @@ function useFirebaseProvider() {
     }
   }
 
-    // so this issue here is that it takes a lot of time to upload, so you have to sit there and wait and if
-    // you reload the page too soon it doesn't work because you didn't finish uploading.
   const uploadImageToStorage = (image) => {
-    const imageRef = storageRef.child(`${user.id}/images/${image.name}`)
+    const imageRef = firebase.storage().ref().child(`${user.id}/images/${image.name}`)
 
     return imageRef
       .put(image)
@@ -171,7 +157,6 @@ function useFirebaseProvider() {
           return imageRef.getDownloadURL();
         } else {
           setError("Upload error: ", snapshot.state);
-          console.log(snapshot.state);
         }
       })
   }
@@ -209,21 +194,6 @@ function useFirebaseProvider() {
       .then(() => true)
   }
 
-  const signInWithGoogle = () => {
-    setLoading(true);
-
-    return firebase
-      .auth()
-      .signInWithPopup(googleAuth)
-      .then((response) => {
-        //const cred = response.credential;
-        //const token = cred.token;
-        setUser(response.user)
-        return response.user;
-      })
-      .finally(() => setLoading(false));
-  }
-
   useEffect(() => {
     const userRef = firebase.firestore().collection("users");
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
@@ -249,14 +219,14 @@ function useFirebaseProvider() {
     user,     // the user object
     error,    // the error message
     loading,  // the loading boolean
-    signin, 
+    setCurrentUser,
     signup,
-    signout,
     signUpAsBusiness,
-    signInWithGoogle,
+    isAlreadyLoggedIn,
     updateUser,
     uploadImageToStorage,
     checkPasswordIntegrity,
+    checkIsEmailVerified,
     sendPasswordResetEmail,
     confirmPasswordReset,
     sendContactEmail,

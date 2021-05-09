@@ -53,7 +53,6 @@ export default function Settings() {
     setUserData({...userData, [event.target.name]: event.target.value})
   }
 
-// Yep, just add all the stuff in onUploadImage into here too
   const onSubmitHandler = (e) => {
     e.preventDefault();
 

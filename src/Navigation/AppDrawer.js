@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFirebase } from '../Providers/FirebaseProvider';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import {
   Avatar,
   Drawer,
@@ -35,13 +37,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AppDrawer({ isOpen, handleDrawer }) {
   const classes = useStyles();
-  const firebase = useFirebase();
+  const firebaseProvider = useFirebase();
   const history = useHistory();
 
   const onSignOutHandler = () => {
-    firebase.signout()
-      .catch((e) => console.log(e.message))
-      .finally(() => history.push("/signin"))
+    firebase.auth().signOut().then(() => {
+      firebaseProvider.setCurrentUser(false);
+      history.push("/")
+    })
   }
 
   return (
@@ -55,15 +58,15 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
         <Grid container className={classes.avatar}>
           <Grid item>
             <IconButton href="/profile">
-              <Avatar src={firebase.user.picture} />
+              <Avatar src={firebaseProvider.user.picture} />
             </IconButton>
           </Grid>
           <Grid item>
             <Typography variant="h6" className={classes.title}>
-              {firebase.user.name}
+              {firebaseProvider.user.name}
             </Typography>
             <Typography variant="caption" color="textSecondary" className={classes.title}>
-              {firebase.user.accountType}
+              {firebaseProvider.user.accountType}
             </Typography>
           </Grid>
         </Grid>
@@ -94,7 +97,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
             </ListItem>
           </Link>
           {
-            firebase.user.isAdmin ? 
+            firebaseProvider.user.isAdmin ? 
               <Link href='/admin' color='inherit'>
                 <ListItem button>
                   <ListItemIcon>

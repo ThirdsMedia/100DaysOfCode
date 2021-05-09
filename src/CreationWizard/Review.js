@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import {
+  Avatar,
   Box,
   Container,
   IconButton,
@@ -73,20 +74,7 @@ export default function Review() {
   return (
     <div>
       <div className={classes.header} id='drink-image'>
-        <div> 
-          <input 
-            type="file" 
-            accept="image/*" 
-  //          onChange={handlePictureSelect}
- //           value={ e => setImagePath(e.target.value) }
-            hidden 
-          />
-          <label htmlFor="contained-button-file">
-            <IconButton>
-              <AddAPhotoOutlinedIcon className={classes.scrollButton} />
-            </IconButton>
-          </label>
-        </div>
+        <Avatar src={location.data.picture} />
       </div>
       <div id="drink-info" className={classes.info}>
         <AppBar position='sticky' className={classes.appBar}>
@@ -127,7 +115,7 @@ export default function Review() {
         </Box>
         <div className={classes.buttonDiv}>
           <Button
-            className={classes.button}
+//            className={classes.button}
             variant="outlined"
             color="primary"
           >

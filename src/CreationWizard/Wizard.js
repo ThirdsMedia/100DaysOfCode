@@ -86,7 +86,7 @@ function Create() {
   const onSubmitForm = () => {
     history.push({
       pathname: "/review",
-      data: cocktail.recipe,
+      data: {...cocktail.recipe},
     });
   }
 

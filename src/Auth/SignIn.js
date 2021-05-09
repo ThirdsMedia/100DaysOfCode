@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useFirebase } from '../Providers/FirebaseProvider';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import {
   Container,
   Typography,
@@ -56,10 +59,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const firebase = useFirebase();
+  const firebaseProvider = useFirebase();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(firebase.error);
+  const [error, setError] = useState(null);
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
@@ -71,16 +75,15 @@ export default function SignIn() {
     }
   }
 
-  const onSignInHandler = () => {
-    firebase.signin(email, password)
-  }
-
-  if (firebase.loading) {
-    return (
-      <div className={classes.loading}>
-        <CircularProgress color="secondary" />
-      </div>
-    )
+  const onSignInHandler = (e) => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        firebaseProvider.setCurrentUser(response.user);
+      })
+      .catch((e) => setError(e))
+      .finally(() => history.push("/"));
   }
 
   return (

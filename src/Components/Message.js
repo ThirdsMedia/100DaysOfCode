@@ -27,11 +27,12 @@ export default function Success() {
   const classes = useStyles();
   const location = useLocation();
 
+  console.log("location: ", location);
   return (
     <div>
       <div className={classes.root}>
         <Typography className={classes.message}>
-          {location.state.message} <span><NavLink to="/" className={classes.navlink}>Go Home</NavLink></span>
+          {location.state.message} <span><NavLink to="/signin" className={classes.navlink}>Go to Sign In</NavLink></span>
         </Typography>
   
       </div>

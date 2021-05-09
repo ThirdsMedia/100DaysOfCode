@@ -26,7 +26,7 @@ import Panel from './Admin/Panel';
 /* Either */
 import Contact from './Components/Contact';
 import About from './Components/About';
-import Success from './Components/Success';
+import Message from './Components/Message';
 
 const theme = createMuiTheme({
   palette: {
@@ -55,7 +55,7 @@ export default function App() {
       <CssBaseline />
       <Router>
         <Switch>
-          <Route path="/success" component={Success} /> 
+          <Route path="/message" component={Message} /> 
           <Route path="/contact" component={Contact} />
           <Route path="/about" component={About} />
         </Switch>

@@ -22,6 +22,11 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(26),
     width: theme.spacing(26),
   },
+  button: {
+    textTransform: 'none',
+    margin: 10,
+    fontFamily: 'Nunito',
+  },
 }));
 
 export default function PictureSelector() {
@@ -31,6 +36,7 @@ export default function PictureSelector() {
   const [image, setImage] = useState('');
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(true);
 
   const handleImageChange = (e) => {
     setFile(e.target.files[0]);
@@ -44,11 +50,12 @@ export default function PictureSelector() {
     if (file) {
       firebase.uploadImageToStorage(file).then((url) => {
         cocktail.buildFromInput({picture: url});
+        setDisabled(false);
       });
     } else {
       setError("You must upload a valid picture");
     }
-    cocktail.handleNext()
+
   }
 
   return (
@@ -72,15 +79,19 @@ export default function PictureSelector() {
         </label>
         <Button type="submit" disabled={!file}>Submit</Button>
       </form>
-      <Button
-        className={classes.nextButton}
-        type="submit"
-        color="primary"
-        variant="outlined"
-        endIcon={<ExpandMoreIcon />}
-      >
-        Next
-      </Button>
+      <div>
+        <Button
+          className={classes.button}
+          type="submit"
+          disabled={disabled}
+          color="primary"
+          variant="outlined"
+          endIcon={<ExpandMoreIcon />}
+          onClick={() => cocktail.handleNext()}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }

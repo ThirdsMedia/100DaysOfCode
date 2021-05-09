@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFirebase } from '../Providers/FirebaseProvider';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import {
   Grid,
   Typography,
@@ -66,7 +68,7 @@ const StyledMenuItem = withStyles((theme) => ({
 
 export default function UserMenu() {
   const classes = useStyles();
-  const firebase = useFirebase();
+  const firebaseProvider = useFirebase();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -81,7 +83,7 @@ export default function UserMenu() {
   return (
     <div>
       <IconButton onClick={handleMenu}>
-        <Avatar src={firebase.user.picture} /> 
+        <Avatar src={firebaseProvider.user.picture} /> 
       </IconButton>
       <StyledMenu
         id="customized-menu"
@@ -93,12 +95,12 @@ export default function UserMenu() {
         <Grid container className={classes.menuGrid}>
           <Grid item>
             <IconButton>
-              <Avatar src={firebase.user.picture} />
+              <Avatar src={firebaseProvider.user.picture} />
             </IconButton>
           </Grid>
           <Grid item>
             <Typography variant="h6" className={classes.menu}>
-              {firebase.user.name}
+              {firebaseProvider.user.name}
             </Typography>
           </Grid>
         </Grid>
@@ -126,9 +128,10 @@ export default function UserMenu() {
             color="secondary" 
             variant="contained"
             onClick={() => {
-              firebase.signout()
-                .catch((e) => console.log(e.message))                
-                .finally(() => history.push("/signin"));
+              firebase.auth().signOut().then(() => {
+                firebaseProvider.setCurrentUser(false);
+                history.push("/")
+              })
             }}
           >
             Log out
