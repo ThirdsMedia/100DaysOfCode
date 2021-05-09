@@ -3500,4 +3500,65 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 
 **Solutions:** I'll get there.
 
-**Link to work:** [Settings](https://github.com/ThirdsMedia/100DaysOfCode/blob/day94/src/Profile/Settings.js)
+**Link to work:** [Settings](https://github.com/ThirdsMedia/100DaysOfCode/blob/day95/src/Profile/Settings.js)
+
+### Day 96: May 9, 2021 - Sunday
+
+**Today's Progress**: Removed a few functions from FirebaseProvider.js. Fixed SignIn page weirdness. Added email verification upon sign up, and made the app check if you're verified and prevent you from using it without first verifying your email.
+
+**Thoughts:** Abstracting away much of the Firebase functionality was making certain things much harder. Plus that file was getting to be huge and hard to understand. So I added the sign in and sign out functionality straight into the components that need it, and removed them from the Provider file. I think it makes more sense to use that file as a user provider/auxiliary firebase functions file for things like checking if a user is logged in, and checking if an email is verified or checking the password confirmation, etc. 
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [ ] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [x] Enforce input of Display Name field 
+	- [x] Add an option to select Mixologist or Customer user role when signing up, and make the changes in App to display the appropriate components based on role
+	- [x] and throw error if unsuccessful
+	- [ ] Navigate to Success component upon successfully signing up 
+	- [x] Send a verification email before allowing them to log in. (there's an emailVerified field in the firebase user object which is false by default). Check that upon attempting to log in. 
+- [ ] Cocktail Data Entry (Adding complex objects to firestore)
+	- [x] Successfully console.log() a full cocktail object
+	- [x] Make sure that it updates appropriately if you backtrack the form
+	- [x] Implement useForm on the ingredients component
+	- [x] Complete the Miscellaneous component
+	- [x] Add input checking so you can't move on without filling out the name, type, and amount 
+	- [x] Figure out the best way to delete objects from the array using the MinusButton (and make it work)
+	- [x] Implement the Cocktail picture selector
+	- [x] Fix workflow so that there is no BaseSpirit component, and instead add a Selector just like you specified above
+	- [ ] Figure out how to save values from Ingredients so if you have to go back they will still be there. 
+	- [ ] Push object to Firebase
+	- [ ] Leave an edit button on Review so you can go back to the form (and still have all the data there...)
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [ ] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [ ] Adding favorites
+	- [x] Separate the EditProfile component from the Profile component
+	- [ ] Redesign the Profile page to look more like a pretty social media profile
+- [ ] App finishing touches
+	- [ ] Fix any console errors remaining
+	- [ ] Make sure code is clean and organized. 
+	- [ ] Demo the app (user creation, deletion, login, logout, cocktail creation, profile modification, qr code cocktail sharing)
+
+**Issues:** Brain fog
+
+**Solutions:** Stop partying on Saturdays
+
+**Link to work:** [FirebaseProvider](https://github.com/ThirdsMedia/100DaysOfCode/blob/day96/src/Providers/FirebaseProvider.js)
