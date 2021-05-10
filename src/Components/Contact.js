@@ -68,7 +68,7 @@ export default function Contact() {
       .then(() => {
         setFormData({});
         history.push(
-          "/success",
+          "/message",
           { message: "Thanks for contacting us! We will get back to you shortly." }
         )
         setError(null)

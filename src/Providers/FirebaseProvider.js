@@ -45,119 +45,59 @@ export const useFirebase = () => {
 function useFirebaseProvider() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const baseData = {
-    bio: '',
-    favorites: [],
-    followers: [],
-    following: [],
-    isVerified: false,
-    google: '',
-    instagram: '',
-    twitter: '',
-    website: '',
-  };
-
-  const signup = (data) => {
-    setLoading(true)
-
-    return firebase
-      .auth()
-      .createUserWithEmailAndPassword(data.email, data.password)
-      .then(response => {
-        delete(data.password);
-        delete(data.confirm);
-
-        firebase.firestore().collection("users")
-          .doc(response.user.uid)
-          .set({
-            ...data,
-            ...baseData,
-            id: response.user.uid,
-            isAdmin: false,
-          })
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => {
-        setError(null);
-        setLoading(false);
-        verifyUserEmail();
-      });
-  }
-
-  const signUpAsBusiness = (data) => {
-    setLoading(true);
-
-    return firebase
-      .auth()
-      .createUserWithEmailAndPassword(data.email, data.password)
-      .then(response => {
-        delete(data.password);
-        delete(data.confirm);
-
-        firebase.firestore().collection("users")
-          .doc(response.user.uid)
-          .set({
-            ...data,
-            ...baseData,
-            id: response.user.uid,
-            isAdmin: true,
-          })
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => {
-        setError(null);
-        setLoading(false);
-      });
-  }
 
   const setCurrentUser = (user) => setUser(user)
 
-  // send a verification email
-  const verifyUserEmail = () => {
-    const user = firebase.auth().currentUser;
-
-    user.sendEmailVerification().then(() => console.log("Email sent successfully"));
+  const addUserToFirestore = (id, data, isAdmin) => {
+    firebase.firestore().collection("users")
+      .doc(id)
+      .set({
+        accountType: data.type,
+        bio: '',
+        company: data.company || '',
+        email: data.email,
+        favorites: [],
+        followers: [],
+        following: [],
+        google: '',
+        id: id,
+        instagram: '',
+        isAdmin: isAdmin,
+        isCertified: false,
+        name: data.name,
+        phone: data.phone || '',
+        twitter: '',
+        website: ''
+      })
   }
 
   // Compare the password and confirm password fields
-  const checkPasswordIntegrity = (password, confirm) => {
-    if (confirm !== password) {
-      setError("Passwords do not match")
-    }
-    setLoading(false);
+  const isPasswordIdentical = (password, confirm) => {
+    return confirm === password ? true : false
   }
 
-  const checkIsEmailVerified = () => {
+  // test if user's email is verified
+  const isEmailVerified = () => {
     return firebase.auth().currentUser.emailVerified ? true : false
   }
 
-  const isAlreadyLoggedIn = () => {
-    return firebase.auth().currentUser ? true : false
+  const sendPasswordResetEmail = (email) => {
+    firebase.auth().sendPasswordResetEmail(email)
   }
-  
+
   const updateUser = (userData) => {
     const userRef = firebase.firestore().collection("users");
 
     if (user) {
-      return userRef
-        .doc(user.id)
-        .update(userData)
-        .then(() => console.log("successfully updated user"));
+      userRef.doc(user.id).update(userData);
     }
   }
 
   const uploadImageToStorage = (image) => {
     const imageRef = firebase.storage().ref().child(`${user.id}/images/${image.name}`)
 
-    return imageRef
-      .put(image)
-      .then((snapshot) => {
-        if (snapshot.state === 'success') {
-          return imageRef.getDownloadURL();
-        } else {
-          setError("Upload error: ", snapshot.state);
-        }
+    return imageRef.put(image).then((snapshot) => {
+        return snapshot.state === 'success' ? imageRef.getDownloadURL() : false
       })
   }
 
@@ -179,33 +119,15 @@ function useFirebaseProvider() {
     })
   }
 
-  const sendPasswordResetEmail = (email) => {
-    return firebase
-      .auth()
-      .sendPasswordResetEmail(email)
-      .then(() => true)
-      .catch((e) => setError(e))
-  }
-
-  const confirmPasswordReset = (code, password) => {
-    return firebase
-      .auth()
-      .confirmPasswordReset(code, password)
-      .then(() => true)
-  }
-
   useEffect(() => {
     const userRef = firebase.firestore().collection("users");
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        userRef
-          .doc(user.uid)
-          .get()
-          .then((document) => {
-            const userData = document.data()
-            setUser(userData)
-            setLoading(false)
-          })
+        userRef.doc(user.uid).get().then((document) => {
+          const userData = document.data()
+          setUser(userData)
+          setLoading(false)
+        })
       } else {
         setLoading(false)
         setUser(false)
@@ -216,19 +138,15 @@ function useFirebaseProvider() {
   }, []);
 
   return {
-    user,     // the user object
-    error,    // the error message
-    loading,  // the loading boolean
-    setCurrentUser,
-    signup,
-    signUpAsBusiness,
-    isAlreadyLoggedIn,
+    loading,
+    user,
     updateUser,
+    addUserToFirestore,
+    setCurrentUser,
+    isPasswordIdentical,
+    isEmailVerified,
     uploadImageToStorage,
-    checkPasswordIntegrity,
-    checkIsEmailVerified,
     sendPasswordResetEmail,
-    confirmPasswordReset,
     sendContactEmail,
   };
 }

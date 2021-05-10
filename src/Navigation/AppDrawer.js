@@ -37,12 +37,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AppDrawer({ isOpen, handleDrawer }) {
   const classes = useStyles();
-  const firebaseProvider = useFirebase();
+  const db = useFirebase();
   const history = useHistory();
 
   const onSignOutHandler = () => {
     firebase.auth().signOut().then(() => {
-      firebaseProvider.setCurrentUser(false);
+      db.setCurrentUser(false);
       history.push("/")
     })
   }
@@ -58,15 +58,15 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
         <Grid container className={classes.avatar}>
           <Grid item>
             <IconButton href="/profile">
-              <Avatar src={firebaseProvider.user.picture} />
+              <Avatar src={db.user.picture} />
             </IconButton>
           </Grid>
           <Grid item>
             <Typography variant="h6" className={classes.title}>
-              {firebaseProvider.user.name}
+              {db.user.name}
             </Typography>
             <Typography variant="caption" color="textSecondary" className={classes.title}>
-              {firebaseProvider.user.accountType}
+              {db.user.accountType}
             </Typography>
           </Grid>
         </Grid>
@@ -97,7 +97,7 @@ export default function AppDrawer({ isOpen, handleDrawer }) {
             </ListItem>
           </Link>
           {
-            firebaseProvider.user.isAdmin ? 
+            db.user.isAdmin ? 
               <Link href='/admin' color='inherit'>
                 <ListItem button>
                   <ListItemIcon>

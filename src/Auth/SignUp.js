@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import Copyright from '../Components/Copyright';
+import { useParams, useHistory } from 'react-router-dom';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import { useForm } from 'react-hook-form';
-import Copyright from '../Components/Copyright';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import {
   Typography,
   Grid,
@@ -231,41 +233,47 @@ function BusinessForm({ formProps }) {
 
 export default function SignUp() {
   const classes = useStyles();
-  const firebase = useFirebase();
   const { type } = useParams();
+  const history = useHistory();
+  const db = useFirebase();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [userData, setUserData] = useState({});
+  const [error, setError] = useState(null);
   const formProps = { register, errors, userData, setUserData };
 
   useEffect(() => {
-    setUserData(userData => ({...userData, accountType: type}));
-  }, [type]);
-  
-  if (firebase.loading) {
-    return (
-      <div className={classes.loading}>
-        <CircularProgress color="secondary" />
-      </div>
-    )
+    if (db.user) {
+      history.push("/");
+    }
+  });
+
+  const handleUserCreation = (email, password, isAdmin) => {
+    if (!db.isPasswordIdentical(userData.password, userData.confirm)) {
+      setError("Passwords do not match");
+      return
+    }
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        const submitProps = { ...userData, type }
+        db.addUserToFirestore(response.user.uid, submitProps, isAdmin);
+        db.setCurrentUser(response.user);
+      })
+      .then(() => {
+        firebase.auth().currentUser.sendEmailVerification().then(() => {
+          history.push("/");
+        })
+      })
+      .catch((e) => setError(e.message));
   }
 
   const onSubmitForm = () => {
-    if (firebase.error) {
-      return <span className={classes.error}>{firebase.error}</span>
-    }
-    
-    switch(type) {
-      case "Customer":
-        firebase.signup(userData);
-        break;
-      case "Mixologist":
-        firebase.signup(userData);
-        break;
-      case "Business":
-        firebase.signUpAsBusiness(userData);
-        break;
-      default:
-        return <div></div>
+    if (type === "Business") {
+      handleUserCreation(userData.email, userData.password, true);
+    } else {
+      handleUserCreation(userData.email, userData.password, false);
     }
   }
 
@@ -277,7 +285,11 @@ export default function SignUp() {
           <Typography className={classes.text} component="h1" variant="h4">
             Join the <span className={classes.jade}>JADE</span> family
           </Typography>
-          { firebase.error ? <span className={classes.error}>{firebase.error}</span> : false }
+          {
+            error
+              ? <Typography className={classes.error}>{error}</Typography>
+              : false
+          }
           <form noValidate onSubmit={handleSubmit(onSubmitForm)}>
             {
               type === 'Business' ?

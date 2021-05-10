@@ -58,6 +58,7 @@ export default function App() {
           <Route path="/message" component={Message} /> 
           <Route path="/contact" component={Contact} />
           <Route path="/about" component={About} />
+              <Route path="/signin" component={SignIn} />
         </Switch>
         {
           firebase.user ? 
@@ -72,7 +73,7 @@ export default function App() {
             </Switch>
           : <Switch>
               <Route path="/" exact component={Start} />
-              <Route path="/signin" component={SignIn} />
+
               <Route path="/register/:type" component={SignUp} />
               <Route path="/forgotpassword" component={ForgotPassword} />
             </Switch>

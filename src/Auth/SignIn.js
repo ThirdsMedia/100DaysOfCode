@@ -59,11 +59,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const firebaseProvider = useFirebase();
+  const db = useFirebase();
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (db.user) {
+      history.push("/");
+    }
+  });
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
@@ -80,10 +86,9 @@ export default function SignIn() {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        firebaseProvider.setCurrentUser(response.user);
+        db.setCurrentUser(response.user);
       })
-      .catch((e) => setError(e))
-      .finally(() => history.push("/"));
+      .catch((e) => setError(e.message))
   }
 
   return (
