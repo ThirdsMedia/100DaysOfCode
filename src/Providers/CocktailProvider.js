@@ -3,7 +3,10 @@ import React, {
   useContext, 
   createContext,
 } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import { useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 
 const CocktailContext = createContext();
 
@@ -16,6 +19,7 @@ function useCocktailProvider() {
   const steps = ['Cocktail Image', 'Basic Information', 'Ingredients', 'Instructions'];
   const [activeStep, setActiveStep] = useState(0);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [isReadyForReview, setIsReadyForReview] = useState(false);
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
@@ -38,6 +42,18 @@ function useCocktailProvider() {
     })
   }
 
+  const submitToFirestore = () => {
+    const cocktailRef = firebase.firestore().collection("cocktails");
+
+    cocktailRef
+      .doc(recipe.id)
+      .set({
+        id: recipe.id,
+        ...recipe
+      })
+      .then(() => console.log("Sucessfully submitted: ", recipe));
+  }
+
   return {
     steps,
     errors,
@@ -49,6 +65,9 @@ function useCocktailProvider() {
     addIngredients, 
     register,
     handleSubmit,
+    submitToFirestore,
+    isReadyForReview,
+    setIsReadyForReview,
   }
 }
 

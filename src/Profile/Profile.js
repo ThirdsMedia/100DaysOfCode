@@ -3,7 +3,6 @@ import { useFirebase } from '../Providers/FirebaseProvider';
 import MainBar from '../Navigation/MainBar';
 import QRCode from '../Components/QRCode';
 import CardList from '../Products/CardList';
-import exampleDatabase from '../static/exampleDatabase';
 import {
   AppBar,
   Avatar, 
@@ -107,7 +106,7 @@ function a11yProps(index) {
 
 export default function Profile() {
   const classes = useStyles();
-  const auth = useFirebase();
+  const db = useFirebase();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -116,30 +115,30 @@ export default function Profile() {
 
   return (
     <div>
-    <MainBar noLogo />
+    <MainBar />
     <Container>
       <Container maxWidth="xl" className={classes.container}>
-        <Avatar src={auth.user.picture} className={classes.profilePic}/>
+        <Avatar src={db.user.picture} className={classes.profilePic}/>
         <Container className={classes.info}>
           <Typography component="h1" variant="h3" style={{fontFamily: 'Nunito'}}>
-            {auth.user.name} <Button variant="outlined" color="primary" href="/settings" className={classes.button}>Edit Profile</Button>
+            {db.user.name} <Button variant="outlined" color="primary" href="/settings" className={classes.button}>Edit Profile</Button>
           </Typography>
-          <span style={{color: '#d0d0d0'}}>{auth.user.accountType}</span>
-          <span style={{color: '#d0d0d0'}}>{auth.user.followers.length} Followers - {auth.user.following.length} Following</span>
+          <span style={{color: '#d0d0d0'}}>{db.user.accountType}</span>
+          <span style={{color: '#d0d0d0'}}>{db.user.followers.length} Followers - {db.user.following.length} Following</span>
           <Breadcrumbs className={classes.breadcrumbs}>
-            <Link rel="noopener" href={auth.user.twitter} className={classes.link}>
+            <Link rel="noopener" href={db.user.twitter} className={classes.link}>
               <TwitterIcon />
             </Link>
-            <Link rel="noopener" href={auth.user.instagram} className={classes.link}>
+            <Link rel="noopener" href={db.user.instagram} className={classes.link}>
               <InstagramIcon />
             </Link>
-            <Link rel="noopener" href={auth.user.website} className={classes.link}>
+            <Link rel="noopener" href={db.user.website} className={classes.link}>
               <LinkIcon />
             </Link>
           </Breadcrumbs>
           <Divider />
           <Typography className={classes.bio}>
-            {auth.user.bio}
+            {db.user.bio}
           </Typography>
         </Container>
         <QRCode />       
@@ -157,14 +156,12 @@ export default function Profile() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <CardList data={exampleDatabase} />
+        <CardList data={db.user.favorites} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <CardList data={exampleDatabase} />
+        <CardList data={db.user.favorites} />
       </TabPanel>
     </Container>
     </div>
   );
 }
-
-

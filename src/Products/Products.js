@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import { useHistory } from 'react-router-dom';
 import MainBar from '../Navigation/MainBar';
 import CardList from './CardList';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import exampleDatabase from '../static/exampleDatabase';
+import 'firebase/firestore';
 
 export default function Products() {
   const db = useFirebase();
   const history = useHistory();
+  const [cocktailList, setCocktailList] = useState([]);
 
   useEffect(() => {
+    const data = [];
+
     if (!db.isEmailVerified()) {
       firebase.auth().signOut()
       history.push(
@@ -19,12 +22,22 @@ export default function Products() {
         { message: "You must verify your email before loggin in!" }
       );
     }
-  });
+
+    // Get all the cocktails from the database
+    firebase.firestore().collection("cocktails")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          data.push(doc.data());
+        })
+        setCocktailList(data);
+      })
+  }, [db, history]);
 
   return (
     <div>
       <MainBar />
-      <CardList data={exampleDatabase} />
+      <CardList data={cocktailList} />
     </div>
   );
 }

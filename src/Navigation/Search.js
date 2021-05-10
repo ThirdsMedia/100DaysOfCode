@@ -9,8 +9,16 @@ import SearchIcon from '@material-ui/icons/Search';
 import { fade, withStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  searchBox: {
+    //backgroundColor: fade(theme.palette.common.white, 0.25),
+    display: 'flex',
+    borderRadius: 16,
+  },
   search: {
+    marginTop: 8,
+    marginBottom: 8,
     position: 'relative',
+    color: 'white',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -40,7 +48,6 @@ const useStyles = makeStyles(theme => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -62,6 +69,7 @@ const BootstrapInput = withStyles((theme) => ({
   input: {
     borderRadius: 4,
     position: 'relative',
+    color: 'white',
     backgroundColor: fade(theme.palette.common.white, 0.15),
     fontSize: 16,
     padding: '8px 24px 8px 10px',
@@ -97,10 +105,10 @@ export default function SearchInput() {
 
   return (
     <Grid container justify="center" alignItems="center">
-      <Grid item>
+      <div className={classes.searchBox}>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
-          <SearchIcon />
+          <SearchIcon style={{color: 'white'}}/>
         </div>
         <InputBase
           placeholder="Search…"
@@ -111,8 +119,6 @@ export default function SearchInput() {
           inputProps={{ 'aria-label': 'search' }}
         />
       </div>
-      </Grid>
-      <Grid item>
       <FormControl className={classes.margin}>
         <NativeSelect
           id="filter"
@@ -126,7 +132,7 @@ export default function SearchInput() {
           <option value={"Companies"}>Companies</option>
         </NativeSelect>
       </FormControl>
-      </Grid>
+      </div>
     </Grid>
   );
 }

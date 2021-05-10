@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import QRCode from './QRCode';
+import { useParams } from 'react-router-dom';
+import { useFirebase } from '../Providers/FirebaseProvider';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import {
   Box,
   Container,
@@ -77,42 +81,50 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ItemSheet({ item, isPreview }) {
+export default function Cocktail() {
   const classes = useStyles();
+  const db = useFirebase();
   const [showQRCode, setShowQRCode] = useState(false);
+  const params = useParams();
+  const [cocktail, setCocktail] = useState(false);
+  const [ingredients, setIngredients] = useState([]);
+
+  useLayoutEffect(() => {
+    firebase.firestore().collection("cocktails")
+      .doc(params.id)
+      .get()
+      .then((doc) => {
+        setCocktail(doc.data());
+        setIngredients(doc.data().ingredients);
+      })
+  }, []);
 
   const handleQRCode = () => {
     setShowQRCode(!showQRCode);
   }
 
+  const onAddToFavorites = () => {
+    db.updateUser({
+      favorites: [
+        ...db.user.favorites, 
+        {name: cocktail.name, id: cocktail.id}
+      ]
+    });
+  }
+
   return (
     <div>
       <div className={classes.header} id='drink-image'>
-        {
-          !isPreview
-          ? <Scroll to='drink-info' smooth='true'>
-              <IconButton>
-                <ExpandMoreIcon className={classes.scrollButton} />
-              </IconButton>
-            </Scroll>
-          : <div> 
-              <input 
-                type="file" 
-                accept="image/*" 
-                hidden 
-              />
-              <label htmlFor="contained-button-file">
-                <IconButton>
-                  <AddAPhotoOutlinedIcon className={classes.scrollButton} />
-                </IconButton>
-              </label>
-            </div>
-        }
+        <Scroll to='drink-info' smooth='true'>
+          <IconButton>
+            <ExpandMoreIcon className={classes.scrollButton} />
+          </IconButton>
+        </Scroll>
       </div>
       <div id="drink-info" className={classes.info}>
         <AppBar position='sticky' className={classes.appBar}>
           <Toolbar>
-            <IconButton color="secondary">
+            <IconButton onClick={onAddToFavorites} color="secondary">
               <FavoriteIcon />
             </IconButton>
             <IconButton onClick={handleQRCode} color="primary">
@@ -130,43 +142,25 @@ export default function ItemSheet({ item, isPreview }) {
         </Container>
         <Container style={{textAlign: 'center'}}>
           <Typography component="h1" variant="h2" className={classes.title}>
-            {item.name}
+            {cocktail.name}
           </Typography>
           <Typography color="textSecondary">
-            {item.creator}, {item.location}, {item.date}
+            {cocktail.creator}, {cocktail.location}, {cocktail.date}
           </Typography>
           <Divider variant="middle" className={classes.divider} />
           <Typography color="textSecondary">
-            {item.description}
+            {cocktail.description}
           </Typography>
         </Container>
         <Box className={classes.infoBox} boxShadow={5}>
           {
-            item.ingredients.map((ingredient) => {
+            ingredients.map((ingredient) => {
               return <Typography>{ingredient.amount} {ingredient.unit} {ingredient.name}</Typography>
             })
           }
-          {
-            item.miscellaneous.map((item) => {
-              return <Typography>{item}</Typography>
-            })
-          }
           <Divider variant="middle" className={classes.divider} />
-          <Typography>{item.instructions}</Typography>
+          <Typography>{cocktail.instructions}</Typography>
         </Box>
-        <div className={classes.buttonDiv}>
-        {
-          isPreview
-          ? <Button
-              className={classes.button}
-              variant="outlined"
-              color="primary"
-            >
-              Publish
-            </Button>
-          : false
-        }
-        </div>
       </div>
     </div>
   );

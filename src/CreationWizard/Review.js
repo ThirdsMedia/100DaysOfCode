@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useCocktail } from '../Providers/CocktailProvider';
 import {
   Avatar,
   Box,
@@ -14,7 +14,6 @@ import {
 import { Link as Scroll } from 'react-scroll';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
 
 const useStyles = makeStyles(theme => ({
   header: {
@@ -65,16 +64,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function Review() {
   const classes = useStyles();
-  const location = useLocation();
-//  const [isPictureSelected, setIsPictureSelected] = useState(false);
-//  const [imagePath, setImagePath] = useState('');
+  const cocktail = useCocktail();
 
-  //const handlePictureSelect = () => setIsPictureSelected(true)
+  console.log("recipe: ", cocktail.recipe);
 
   return (
     <div>
       <div className={classes.header} id='drink-image'>
-        <Avatar src={location.data.picture} />
+        <Avatar src={cocktail.recipe.picture} />
       </div>
       <div id="drink-info" className={classes.info}>
         <AppBar position='sticky' className={classes.appBar}>
@@ -88,36 +85,44 @@ export default function Review() {
         </AppBar>
         <Container style={{textAlign: 'center'}}>
           <Typography component="h1" variant="h2" className={classes.title}>
-            {location.data.name}
+            {cocktail.recipe.name}
           </Typography>
           <Typography color="textSecondary">
-            {location.data.creator}, {location.data.location}, {location.data.date}
+            {cocktail.recipe.creator}, {cocktail.recipe.location}, {cocktail.recipe.date}
           </Typography>
           <Divider variant="middle" className={classes.divider} />
           <Typography color="textSecondary">
-            {location.data.description}
+            {cocktail.recipe.description}
           </Typography>
         </Container>
         <Box className={classes.infoBox} boxShadow={5}>
           {
-            location.data.ingredients.map((ingredient) => {
-              return <Typography>{ingredient.amount} {ingredient.unit} {ingredient.name}</Typography>
+            cocktail.recipe.ingredients.map((ingredient) => {
+              return (
+                <Typography key={cocktail.recipe.id}>
+                  {ingredient.amount} {ingredient.unit} {ingredient.name}
+                </Typography>
+              );
             })
-          }
-          {/*
-            location.data.miscellaneous.map((item) => {
-              return <Typography>{item}</Typography>
-            })
-            */
           }
           <Divider variant="middle" className={classes.divider} />
-          <Typography>{location.data.instructions}</Typography>
+          <Typography>{cocktail.recipe.instructions}</Typography>
         </Box>
         <div className={classes.buttonDiv}>
           <Button
-//            className={classes.button}
             variant="outlined"
             color="primary"
+            onClick={() => {
+              cocktail.setActiveStep(0);
+              cocktail.setIsReadyForReview(false)
+            }}
+          >
+            Edit 
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => cocktail.submitToFirestore()}
           >
             Publish
           </Button>

@@ -22,7 +22,7 @@ export default function MainBar() {
       <Toolbar>
         <ThirdsMediaLogo />
         <IconButton onClick={onOpenDrawer}>
-          <SortIcon />
+          <SortIcon style={{color: 'white'}}/>
         </IconButton>
         <Search />
         <AppDrawer isOpen={isOpen} handleDrawer={onOpenDrawer} />
