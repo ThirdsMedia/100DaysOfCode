@@ -1,8 +1,10 @@
-import React, { useState }  from 'react';
+import React, { useState, useLayoutEffect }  from 'react';
 import { useFirebase } from '../Providers/FirebaseProvider';
 import MainBar from '../Navigation/MainBar';
 import QRCode from '../Components/QRCode';
 import CardList from '../Products/CardList';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import {
   AppBar,
   Avatar, 
@@ -107,11 +109,35 @@ function a11yProps(index) {
 export default function Profile() {
   const classes = useStyles();
   const db = useFirebase();
-  const [value, setValue] = useState(0);
+  const [tabNum, setTabNum] = useState(0);
+  const [favorites, setFavorites] = useState([]);
+  const [creations, setCreations] = useState([]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
+  useLayoutEffect(() => {
+    const favs = [];
+    const creates = [];
+    const cocktailRef = firebase.firestore().collection("cocktails");
+
+    // get all favorited cocktails
+    db.user.favorites.forEach(favorite => {
+      cocktailRef.doc(favorite.id).get().then((doc) => {
+        favs.push(doc.data());
+      });
+      setFavorites(favs);
+    });
+
+    // Get all cocktails created by you
+    cocktailRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().userID === db.user.id) {
+          creates.push(doc.data());
+        } 
+      });
+      setCreations(creates);
+    });
+  }, [db]);
+
+  const handleTabChange = (event, newValue) => setTabNum(newValue)
 
   return (
     <div>
@@ -145,9 +171,9 @@ export default function Profile() {
       </Container>
       <AppBar position="static" className={classes.navBar}>
         <Tabs 
-          value={value}
+          value={tabNum}
           indicatorColor="primary"
-          onChange={handleChange} 
+          onChange={handleTabChange} 
           variant="fullWidth" 
           aria-label="simple tabs example"
         >
@@ -155,11 +181,11 @@ export default function Profile() {
           <Tab disableRipple label="Favorites" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <CardList data={db.user.favorites} />
+      <TabPanel value={tabNum} index={0}>
+        <CardList data={creations} />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <CardList data={db.user.favorites} />
+      <TabPanel value={tabNum} index={1}>
+        <CardList data={favorites} />
       </TabPanel>
     </Container>
     </div>

@@ -44,12 +44,16 @@ function useCocktailProvider() {
 
   const submitToFirestore = () => {
     const cocktailRef = firebase.firestore().collection("cocktails");
+    const cocktailID = uuidv4();
+    const date = new Date();
 
+    console.log(recipe);
     cocktailRef
-      .doc(recipe.id)
+      .doc(cocktailID)
       .set({
-        id: recipe.id,
-        ...recipe
+        id: cocktailID,
+        ...recipe,
+        timestamp: date.toGMTString(),
       })
       .then(() => console.log("Sucessfully submitted: ", recipe));
   }

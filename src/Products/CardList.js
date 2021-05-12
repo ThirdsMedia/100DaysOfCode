@@ -42,16 +42,16 @@ export default function CardList({ data }) {
       <Grid container spacing={3} className={classes.root}>
       {
         data.map((card) => {
-          return (
-            <Grid key={card.id} item>
-              <Link href={`/cocktail/${card.id}`}>
-                <Card raised className={classes.card}>
-                  <CardActionArea>
-                    <CardMedia
-                      style={{height: sizes[Math.floor(Math.random() * 4)]}}
-                      image={card.picture}
-                    />
-                    <CardContent>
+          return ( 
+            <Grid key={card.id} item> 
+              <Link href={`/cocktail/${card.id}`}> 
+                <Card raised className={classes.card}> 
+                  <CardActionArea> 
+                    <CardMedia 
+                      style={{height: sizes[Math.floor(Math.random() * 4)]}} 
+                      image={card.picture} 
+                    /> 
+                    <CardContent> 
                       <Typography 
                         gutterBottom 
                         variant="h5" 
@@ -62,7 +62,7 @@ export default function CardList({ data }) {
                       </Typography>
                       <Grid container className={classes.content} justify='center'>
                         {
-                          card.ingredients.map((item) => {
+                          [].forEach((item) => {
                             return (
                               <Typography 
                                 key={item.id}

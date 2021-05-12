@@ -13,9 +13,9 @@ import {
   IconButton,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MessageIcon from '@material-ui/icons/Message';
 import { Link as Scroll } from 'react-scroll';
 import { makeStyles } from '@material-ui/core/styles';
-
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -63,6 +63,15 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
     fontSize: '4rem',
   },
+  nav: {
+    position: 'fixed',
+    backgroundColor: theme.palette.secondary.main,
+    padding: 20,
+    margin: 20,
+    borderRadius: 50,
+    bottom: 0,
+    right: 0,
+  },
 }));
 
 
@@ -103,6 +112,18 @@ function NavCard({title, navigate}) {
         </Card>
       </Link>
     </Collapse>
+  );
+}
+
+const ContactUs = () => {
+  const classes = useStyles();
+
+  return (
+    <Link href="/contact" color="inherit">
+      <IconButton className={classes.nav}>
+        <MessageIcon />  
+      </IconButton>
+    </Link>
   );
 }
 
@@ -147,6 +168,7 @@ export default function Start() {
           <NavCard title={"Business"} navigate={() => onNavigate("Business")} />
         </div>
       </div>
+      <ContactUs />
     </main>
   );
 }

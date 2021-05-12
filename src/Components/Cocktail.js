@@ -8,7 +8,6 @@ import {
   Box,
   Container,
   IconButton,
-  Button,
   AppBar,
   Toolbar,
   Typography,
@@ -22,8 +21,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CropFreeIcon from '@material-ui/icons/CropFree';
-import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
-
 
 const useStyles = makeStyles(theme => ({
   header: {
@@ -97,7 +94,7 @@ export default function Cocktail() {
         setCocktail(doc.data());
         setIngredients(doc.data().ingredients);
       })
-  }, []);
+  }, [params]);
 
   const handleQRCode = () => {
     setShowQRCode(!showQRCode);

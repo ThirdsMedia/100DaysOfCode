@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
+import { useFirebase } from '../Providers/FirebaseProvider';
 import {
   TextField,
   Grid,
@@ -32,9 +33,10 @@ const useStyles = makeStyles(theme => ({
 export default function BasicInfo() {
   const classes = useStyles();
   const cocktail = useCocktail();
+  const db = useFirebase();
 
   const onSubmit = (data) => {
-    cocktail.buildFromInput(data);
+    cocktail.buildFromInput({...data, userID: db.user.id});
     cocktail.handleNext();
   }
 

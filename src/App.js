@@ -59,7 +59,7 @@ export default function App() {
               <Route path="/profile" component={Profile} />
               <Route path="/settings" component={Settings} />
               <Route path="/create" component={Wizard} />
-              <Route path="/cocktail/:id" render={() => <Cocktail />} />
+              <Route path="/cocktail/:id" component={Cocktail} />
               { firebase.user.isAdmin ? <Route path="/admin" component={Panel} /> : false }
             </Switch>
           : <Switch>

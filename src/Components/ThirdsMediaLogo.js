@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 export default function ThirdsMediaLogo() {
   return (
-    <IconButton href="/" edge="start"> 
+    <IconButton href="/"> 
       <Avatar src={'../assets/ThirdsMediaSmall.png'} />
     </IconButton>
   );
