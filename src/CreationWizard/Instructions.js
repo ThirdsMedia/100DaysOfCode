@@ -72,7 +72,7 @@ export default function Instructions() {
         <Select
           native
           {...cocktail.register('method', { required: true })}
-          value={cocktail.recipe.method}
+          defaultValue={cocktail.recipe.method}
           inputProps={{
             name: 'method',
             id: 'method-native',
@@ -92,7 +92,7 @@ export default function Instructions() {
         <Select
           native
           {...cocktail.register('glass', { required: true })}
-          value={cocktail.recipe.glass}
+          defaultValue={cocktail.recipe.glass}
         >
           <option aria-label="None" value="" />
           {
@@ -106,7 +106,7 @@ export default function Instructions() {
       <TextField 
         id='instructions'
         {...cocktail.register('instructions', { required: true })}
-        value={cocktail.recipe.instructions}
+        defaultValue={cocktail.recipe.instructions}
         label='Instructions'
         variant='outlined'
         margin='normal'

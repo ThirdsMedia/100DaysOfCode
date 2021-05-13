@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { useCocktail } from '../Providers/CocktailProvider';
+import { useHistory } from 'react-router-dom';
 import {
   Avatar,
   Box,
@@ -65,11 +66,19 @@ const useStyles = makeStyles(theme => ({
 export default function Review() {
   const classes = useStyles();
   const cocktail = useCocktail();
+  const history = useHistory();
+  const [error, setError] = useState(null);
 
-  console.log("recipe: ", cocktail.recipe);
+  const onSubmitCocktail = () => {
+    cocktail.submitToFirestore()
+    history.push(
+      "/message",
+      {message: "Thanks for submitting! We will review your cocktail shortly", nav: "/home"},
+    );
+  }
 
   return (
-    <div>
+    <main>
       <div className={classes.header} id='drink-image'>
         <Avatar src={cocktail.recipe.picture} />
       </div>
@@ -108,6 +117,7 @@ export default function Review() {
           <Divider variant="middle" className={classes.divider} />
           <Typography>{cocktail.recipe.instructions}</Typography>
         </Box>
+        { error ? <span className={classes.error}>{error}</span> : false }
         <div className={classes.buttonDiv}>
           <Button
             variant="outlined"
@@ -122,12 +132,12 @@ export default function Review() {
           <Button
             variant="outlined"
             color="primary"
-            onClick={() => cocktail.submitToFirestore()}
+            onClick={onSubmitCocktail}
           >
             Publish
           </Button>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

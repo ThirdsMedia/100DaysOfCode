@@ -58,11 +58,6 @@ function RenderStep(step) {
   }
 }
 
-/* 
- * I don't know why I didn't think about this before, but I'll need to add the user's id to this cocktail object too
- * Date of submission aside from just the creation date
- */
-
 export default function Wizard() {
   return (
     <CocktailProvider>

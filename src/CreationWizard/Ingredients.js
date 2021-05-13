@@ -20,7 +20,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
-display: 'flex',
+    display: 'flex',
     flexDirection: 'column',
     textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0.3)',
@@ -143,7 +143,7 @@ export default function Ingredients() {
   const [name, setName] = useState('');
   const [type, setType] = useState(types[0]);
   const [amount, setAmount] = useState(1);
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState(cocktail.recipe.ingredients);
   const [isVisible, setIsVisible] = useState(false);
 
   const onAddIngredient = () => {

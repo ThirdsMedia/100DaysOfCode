@@ -33,7 +33,7 @@ export default function PictureSelector() {
   const classes = useStyles();
   const cocktail = useCocktail();
   const firebase = useFirebase();
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(cocktail.recipe.picture);
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);

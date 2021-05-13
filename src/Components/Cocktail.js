@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
+import MainBar from '../Navigation/MainBar';
 import QRCode from './QRCode';
 import { useParams } from 'react-router-dom';
 import { useFirebase } from '../Providers/FirebaseProvider';
@@ -111,6 +112,7 @@ export default function Cocktail() {
 
   return (
     <div>
+      <MainBar />
       <div className={classes.header} id='drink-image'>
         <Scroll to='drink-info' smooth='true'>
           <IconButton>

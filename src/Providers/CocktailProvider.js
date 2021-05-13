@@ -15,7 +15,10 @@ export const useCocktail = () => {
 }
 
 function useCocktailProvider() {
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState({
+    picture: '',
+    ingredients: []
+  });
   const steps = ['Cocktail Image', 'Basic Information', 'Ingredients', 'Instructions'];
   const [activeStep, setActiveStep] = useState(0);
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -47,7 +50,6 @@ function useCocktailProvider() {
     const cocktailID = uuidv4();
     const date = new Date();
 
-    console.log(recipe);
     cocktailRef
       .doc(cocktailID)
       .set({
@@ -55,8 +57,10 @@ function useCocktailProvider() {
         ...recipe,
         timestamp: date.toGMTString(),
       })
-      .then(() => console.log("Sucessfully submitted: ", recipe));
   }
+
+  //const navigation = { handleBack, handleNext, steps, activeStep, setActiveStep, isReadyForReview, setIsReadyForReview }
+  //const form = { register, handleSubmit, errors }
 
   return {
     steps,
@@ -65,6 +69,7 @@ function useCocktailProvider() {
     handleBack,
     handleNext,
     activeStep,
+    setActiveStep,
     buildFromInput, 
     addIngredients, 
     register,

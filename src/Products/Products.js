@@ -65,14 +65,13 @@ export default function Products() {
   useEffect(() => {
     const data = [];
 
-   // if (!db.isEmailVerified()) {
-   //   firebase.auth().signOut()
-/*      history.push(
+    if (!db.isEmailVerified()) {
+      firebase.auth().signOut()
+      history.push(
         "/message",
         { message: "You must verify your email before loggin in!" }
       );
-      */
-   // }
+    }
 
     firebase.firestore().collection("cocktails")
       .get()
