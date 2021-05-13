@@ -3749,3 +3749,61 @@ This challenge is part of a larger challenge taken on by ThirdsMedia as a whole.
 **Solutions:** Code for 101 days
 
 **Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/blob/day98/src)
+
+### Day 100: May 13, 2021 - Thursday
+
+**Today's Progress**: Finished implementing navigation in CreationWizard. Finished making the edit functionality work. 
+
+**Thoughts:** Well, I didn't quite accomplish exactly everything I wanted to, but this project kept growing as I built it. Regardless, it's a great feeling to have succeeded at coding for 100 days and to have the making of a great product. I'll merge everything to the main branch (and delete the branches?), and then start a new repository with the project's name where I will conduct all further development. From now on I'll run this project like an actual company development project, creating branches as needed for new pieces such as an inventory feature etc. This journey is just beginning. 
+
+**Backend To Do:**
+- [x] Loading screen between switching components in the Router, and between authentication changes of any kind
+- [x] User Authentication (Firestore auth)
+	- [x] Finish the AuthProvider
+	- [x] Implement authentication functionality throughout the application
+	- [x] ForgotPassword
+	- [x] CircularProgress between logging in and out. 
+	- [x] Added Firestore user database for Profile data
+	- [x] Fix error handling on login and signup
+	- [x] Enforce input of Display Name field 
+	- [x] Add an option to select Mixologist or Customer user role when signing up, and make the changes in App to display the appropriate components based on role
+	- [x] and throw error if unsuccessful
+	- [x] Navigate to Success component upon successfully signing up 
+	- [x] Send a verification email before allowing them to log in. (there's an emailVerified field in the firebase user object which is false by default). Check that upon attempting to log in. 
+- [x] Cocktail Data Entry (Adding complex objects to firestore)
+	- [x] Successfully console.log() a full cocktail object
+	- [x] Make sure that it updates appropriately if you backtrack the form
+	- [x] Implement useForm on the ingredients component
+	- [x] Complete the Miscellaneous component
+	- [x] Add input checking so you can't move on without filling out the name, type, and amount 
+	- [x] Figure out the best way to delete objects from the array using the MinusButton (and make it work)
+	- [x] Implement the Cocktail picture selector
+	- [x] Fix workflow so that there is no BaseSpirit component, and instead add a Selector just like you specified above
+	- [x] Figure out how to save values from Ingredients so if you have to go back they will still be there. 
+	- [x] Push object to Firebase
+	- [x] Leave an edit button on Review so you can go back to the form (and still have all the data there...)
+- [ ] Contact Form (Sending emails)
+	- [ ] Send an email to the main company email containing the Contact form data
+	- [x] Console.log the full object of data inputted into the Contact form
+	- [x] Successfully store the contact form data in firestore
+	- [x] Error and success handling
+- [ ] QR Code Generation (Node.js qr code generator)
+	- [ ] QR Code generator in node.js
+	- [ ] Have it render upon page load
+- [x] User Profile (Updating firestore)
+	- [x] Successfully update the user profile on Firebase and display
+	- [x] Pull profile data from Firebase
+	- [x] Make changes update immediately so that you don't have to manually refresh Profile
+	- [x] File input on user Avatar
+	- [x] Successfully upload selected picture to firebase.storage()
+	- [x] Reference the uploaded file
+	- [x] Adding favorites
+	- [x] Separate the EditProfile component from the Profile component
+- [ ] Search function
+	- [ ] Use GraphQL to be able to search by Cocktail, User, or Business
+
+**Issues:** Didn't complete an enterprise grade paid-for application in 100 days. 
+
+**Solutions:** Code for 101 days
+
+**Link to work:** [App](https://github.com/ThirdsMedia/100DaysOfCode/blob/day100/src)
